@@ -1,0 +1,512 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f7;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    font-size: 42px;
+    margin: 20px 0;
+    text-align: center;
+    color: #388E3C;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+td {
+    color: #2c3e50;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.editar {
+    background-color: #27ae60;
+    color: #fff;
+}
+
+button.editar:hover {
+    background-color: #2ecc71;
+}
+
+button.vermelho {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+button.vermelho:hover {
+    background-color: #c0392b;
+}
+
+button.amarelo {
+    background-color: #f1c40f;
+    color: #fff;
+}
+
+button.amarelo:hover {
+    background-color: #f39c12;
+}
+
+button.azul {
+    background-color: #0f71f1;
+    color: #fff;
+}
+
+button.azul:hover {
+    background-color: #123bf3;
+}
+
+/* Estilo do popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 90%;
+    max-width: 500px;
+}
+
+.popup h2 {
+    font-size: 24px;
+    color: #27ae60;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.popup label {
+    font-size: 16px;
+    color: #34495e;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.popup input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #34495e;
+}
+
+/* Botões pequenos no popup */
+.popup button {
+    display: block;
+    margin: 10px auto 0;
+    background-color: #388E3C;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.popup button:hover {
+    background-color: #274E13;
+}
+
+.popup button.close {
+    background-color: #ff6f61;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.popup button.close:hover {
+    background-color: #e65c5c;
+}
+
+/* Fundo escurecido */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.blur {
+    filter: blur(5px);
+}
+
+/* CSS Anterior */
+.container form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 5px lightblue;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+.dia-semana {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dia-semana > div {
+    flex: 1;
+    margin-right: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type=button], input[type=submit] {
+    background-color: #388E3C;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100px;
+}
+
+input[type=button] {
+    background-color: var(--salmon);
+    color: white;
+    width: 150px;
+}
+
+input[type='submit']:hover { 
+    background-color: #2E7D32; 
+}
+
+input[type=button]:hover { 
+    background-color: rgb(241, 100, 85); 
+}
+
+input[type='submit'] {
+    width: fit-content;
+}
+
+.botao-container {
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.right {
+    margin-left: auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px;
+    box-shadow: 5px 5px 10px lightblue;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #388E3C;
+    color: #fff;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 20px 0;
+    text-align: center;
+    color: #388E3C;
+}
+
+.image2 {
+    margin-bottom: -46px;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+button.editar {
+    padding: 10px 20px;
+    background-color: var(--light-green);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+button.editar:hover { 
+    background-color: var(--dark-green); 
+}
+
+.vermelho, .amarelo, .azul {
+    padding: 10px 20px;
+    width: 25px;
+    height: 25px; 
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.amarelo {
+    background-color: #cdf100;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vermelho {
+    background-color: #f75252;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.azul {
+    background-color: #0f71f1;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao-container img {
+    width: 100%;
+    height: auto;
+}
+
+h1.texto {
+    margin: 0;
+    margin-top: 50px;
+}
+
+.notification-icon {
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.notification-icon img {
+    width: 100%;
+    height: auto;
+}
+
+.popup p {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 500px;
+    width: 90%;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.notification {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #27ae60; /* Cor padrão para sucesso */
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    text-align: center;
+    z-index: 2000;
+    max-width: 90%; /* Ajuste para telas menores */
+    word-wrap: break-word; /* Quebra o texto se necessário */
+    animation: fadeInOut 5s ease-in-out forwards;
+}
+
+.notification.success {
+    background-color: #388E3C;
+}
+
+.notification.error {
+    background-color: #e74c3c;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+    .notification {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+        width: 100%;
+        table-layout: fixed;
+        overflow-x: hidden;
+        display: block;
+    }
+
+    th, td {
+        padding: 6px;
+        word-wrap: break-word;
+    }
+
+    .button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+/* Responsividade para dispositivos ainda menores */
+@media (max-width: 430px) {
+    .notification {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    table {
+        font-size: 12px;
+        width: 100%;
+        table-layout: fixed;
+        overflow-x: hidden;
+        display: block;
+    }
+
+    th, td {
+        padding: 4px;
+    }
+
+    .button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}

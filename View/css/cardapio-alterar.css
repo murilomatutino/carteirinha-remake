@@ -1,0 +1,126 @@
+@import url(style.css);
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f7;
+    margin: 0;
+    padding: 0;
+}
+
+.container2 {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #388E3C;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #388E3C;
+    text-align: center; /* Centraliza os dias da semana */
+}
+
+input[type="date"],
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Centraliza os dias da semana */
+.dia-semana {
+    display: flex;
+    justify-content: center; /* Centraliza os dias no container */
+    flex-wrap: wrap; /* Faz com que os itens se movam para a linha seguinte, se necessário */
+    margin-bottom: 20px;
+}
+
+.dia-semana label {
+    flex: 0 0 13%; /* Ajusta o tamanho de cada label para caber 7 elementos por linha */
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .dia-semana {
+        grid-template-columns: repeat(3, 1fr); /* Garante que os dias fiquem em 3 colunas */
+    }
+
+    .dia-semana label {
+        margin-bottom: 5px; /* Ajusta o espaçamento entre o label e o input */
+    }
+
+    .dia-semana input {
+        font-size: 16px; /* Aumenta a fonte dos inputs */
+    }
+    
+    .img-logo {
+        width: 100%;
+    }
+
+    .container2 {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    input[type="date"],
+    input {
+        font-size: 14px;
+    }
+
+    .dia-semana {
+        flex-direction: column;
+    }
+
+    .dia-semana > div {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .botao-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .validar, .cancelar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    input[type="date"],
+    input {
+        font-size: 12px;
+    }
+
+    .validar, .cancelar {
+        font-size: 14px;
+    }
+}

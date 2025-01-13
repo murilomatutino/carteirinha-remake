@@ -1,0 +1,97 @@
+@import url(style.css);
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 20px 0;
+    text-align: center;
+    color: #388E3C;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+/* Estilos para os botões */
+.button-adm, .button.blue {
+    padding: 10px 20px;
+    width: 250px; /* Largura fixa para os botões */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.button-adm {
+    background-color: #4CAF50; /* Verde */
+}
+
+.button-adm:hover {
+    background-color: var(--medium-green); /* Tom mais escuro do verde ao passar o mouse */
+}
+
+.button.blue {
+    background-color: #2196F3; /* Azul */
+}
+
+.button.blue:hover {
+    background-color: #1e87da; /* Tom mais escuro do azul ao passar o mouse */
+}
+
+/* Responsividade - Para dispositivos com largura até 768px */
+@media (max-width: 768px) {
+    .img-logo {
+        width: 100%; /* Garantindo que a logo ocupe toda a largura disponível */
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .button-adm, .button.blue {
+        width: 250px; /* Largura fixa para os botões, mesmo no mobile */
+    }
+
+    .container form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px; /* Espaçamento entre os botões */
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}
+
+/* Responsividade - Para dispositivos com largura até 430px */
+@media (max-width: 430px) {
+    .img-logo {
+        width: 100%; /* Garantindo que a logo ocupe toda a largura disponível */
+    }
+
+    .button-adm, .button.blue {
+        width: 250px; /* Largura fixa para os botões, mesmo no mobile */
+    }
+
+    .container form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}

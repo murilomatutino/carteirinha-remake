@@ -1,0 +1,141 @@
+@import url(style.css);
+
+.container form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 5px lightblue;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+.dia-semana {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dia-semana > div {
+    flex: 1;
+    margin-right: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type=button], input[type=submit] {
+    background-color: #388E3C;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100px;
+}
+
+input[type=button] {
+    background-color: var(--salmon);
+    color: white;
+    width: 150px;
+}
+
+ input[type='submit']:hover { background-color: #2E7D32; }
+
+input[type=button]:hover { background-color: rgb(241, 100, 85); }
+
+input[type='submit'] {
+    width: fit-content;
+}
+
+.botao-container {
+    display: none;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.right {
+    margin-left: auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px;
+    box-shadow: 5px 5px 10px lightblue;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #388E3C;
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 20px 0;
+    text-align: center;
+    color: #388E3C;
+}
+
+.image2 {
+    margin-bottom: -46px;
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.cancelar, .validar {
+    padding: 10px 20px; /* Reduz o preenchimento interno do botão */
+    width: 60px; /* Define a largura do botão */
+    height: 60px; /* Define a altura do botão */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.cancelar {
+    background-color: #f75252;
+    color: #fff;
+}
+
+.validar {
+    background-color: #388E3C;
+    color: #fff;
+}
+.botao-container img {
+    width: 100%; /* Ajusta a largura da imagem para preencher o botão */
+    height: auto; /* Mantém a proporção da imagem */
+}

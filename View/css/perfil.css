@@ -1,0 +1,266 @@
+@import url(style.css);
+
+/* Estilos gerais */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* Impede rolagem horizontal */
+}
+
+/* Reduzir a margem de elementos e garantir que o body ocupe a tela inteira */
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Impede rolagem vertical e horizontal */
+}
+
+.session-1 {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.img-logo {
+    width: 100%;
+    height: auto;
+}
+
+.perfil-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 15px 15px 60px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 90%;
+}
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--light-green);
+    margin-bottom: 20px;
+}
+
+.perfil-container h2 {
+    color: var(--dark-green);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.perfil-container p {
+    font-size: 18px;
+    color: var(--gray);
+    margin-bottom: 10px;
+}
+
+.alterar-senha-2, .btn-logout {
+    padding: 12px 20px;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.alterar-senha-2 {
+    background-color: var(--light-green);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.alterar-senha-2:hover {
+    background-color: var(--dark-green);
+}
+
+.btn-logout {
+    background-color: red;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.btn-logout:hover {
+    background-color: darkred;
+}
+
+/* Popup de Alterar Senha */
+.popup-2 {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content-2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.popup-2 h3 {
+    color: #388E3C;
+    margin-bottom: 20px;
+}
+
+.popup-2 form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.popup-2 form button {
+    padding: 10px 20px;
+    background-color: #388E3C;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-2 form button:hover {
+    background-color: #2E7D32;
+}
+
+/* Estilos para a notificação */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1000;
+    width: 300px;
+    font-size: 16px;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+#error, #error-2 {
+    margin-bottom: 15px;
+    color: var(--salmon);
+    font-weight: bold;
+}
+
+/* Media Query para telas de 768px ou menores */
+@media (max-width: 768px) {
+    /* Corrige o vazamento branco e garante que o layout ocupe 100% da tela */
+    body, html {
+        height: 100%;
+        width: 100%;
+    }
+
+    .perfil-container {
+        margin: 20px;
+        width: 95%;
+    }
+
+    .foto-perfil {
+        width: 120px;
+        height: 120px;
+    }
+
+    .perfil-container h2 {
+        font-size: 22px;
+    }
+
+    .perfil-container p {
+        font-size: 16px;
+    }
+
+    .alterar-senha-2, .btn-logout {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .popup-content-2 {
+        max-width: 90%;
+    }
+
+    .img-logo {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Media Query para telas de 430px ou menores */
+@media (max-width: 430px) {
+    /* Corrige o vazamento branco e adapta a página para telas menores */
+    body, html {
+        height: 100%;
+        width: 100%;
+    }
+
+    .perfil-container {
+        margin: 10px;
+        padding: 15px;
+        width: 100%;
+    }
+
+    .foto-perfil {
+        width: 100px;
+        height: 100px;
+    }
+
+    .perfil-container h2 {
+        font-size: 18px;
+    }
+
+    .perfil-container p {
+        font-size: 14px;
+    }
+
+    .alterar-senha-2, .btn-logout {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .popup-content-2 {
+        max-width: 80%;
+    }
+
+    .img-logo {
+        width: 100%;
+        height: auto;
+    }
+}

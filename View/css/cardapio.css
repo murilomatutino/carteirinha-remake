@@ -1,0 +1,233 @@
+/* Estilo geral */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* template {
+    display: none;
+} */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    position: relative; /* Necessário para que o botão seja posicionado dentro da tabela */
+}
+
+.titulo {
+    font-weight: bolder;
+    color: #388E3C;
+    font-size: 50px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.img-logo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image2 {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-top: -10px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 5px 5px 10px lightblue;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    table-layout: fixed;
+    margin-top: 0;
+    position: relative; /* Adiciona o contexto para o botão */
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+th {
+    background-color: #388E3C;
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.agendado {
+    background-color: #3891ac !important;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Botões gerais */
+.button-imprimir {
+    background-color: #388E3C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    z-index: 10; /* Garante que o botão fique acima da tabela */
+}
+
+.button-imprimir:hover {
+    background-color: #2c6f2d;
+}
+
+/* Botão Editar */
+.button-editar {
+    background-color: #388E3C; /* Cor verde original */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button-editar:hover {
+    background-color: #2c6f2d;
+}
+
+/* Botão Excluir */
+.button-excluir {
+    background-color: #f44336; /* Cor vermelha original */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button-excluir:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsividade para dispositivos com largura de até 768px */
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 2em;
+    }
+
+    .image2 {
+        max-width: 150px;
+    }
+
+    .img-logo {
+        width: 100%;
+    }
+
+    table {
+        font-size: 14px;
+        width: 0%;
+    }
+
+    .button {
+        padding: 8px 16px;
+        font-size: 14px;
+        margin-right: 8px;
+    }
+
+    .button-excluir, .button-editar {
+        padding: 8px 16px;
+        font-size: 14px;
+        margin-right: 8px;
+    }
+
+    .button-imprimir {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Responsividade para dispositivos com largura de até 430px */
+@media (max-width: 430px) {
+    .titulo {
+        font-size: 1.5em;
+    }
+
+    .image2 {
+        max-width: 120px;
+    }
+
+    .img-logo {
+        width: 100%;
+    }
+
+    table {
+        font-size: 12px;
+        width: 80%;
+    }
+
+    .button {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+
+    .button-excluir, .button-editar {
+        padding: 6px 12px;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+
+    .button-imprimir {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media print {
+    body * {
+        display: none !important; /* Oculta tudo */
+    }
+
+    .print-only, 
+    .print-only * {
+        display: block !important; /* Exibe a div e todos os seus elementos filhos */
+    }
+
+    .print-only table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .print-only th, .print-only td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+}

@@ -1,0 +1,252 @@
+@import url(style.css);
+
+/* Estilos Gerais */
+.center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    font-weight: bolder;
+    color: #388E3C; /* Verde */
+    font-size: 50px;
+    margin-bottom: 20px; /* Ajuste da margem inferior */
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+    width: 100%;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+.input-container label {
+    font-size: 18px;
+    color: #388E3C;
+    margin-right: 10px;
+}
+
+input[type="date"] {
+    width: 40%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 5%;
+    text-align: center;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 10px;
+    overflow-x: hidden;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px;
+    box-shadow: 5px 5px 10px lightblue;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center; /* Alinha o conteúdo da tabela no centro */
+}
+
+th, td {
+    padding: 15px;
+    text-align: center; /* Centraliza o texto nas células */
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #388E3C; /* Cor verde */
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f4f4f4;
+}
+
+.button-voltar {
+    padding: 10px 15px;
+    border: none;
+    background-color: #388E3C;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.button-voltar:hover {
+    background-color: #4CAF50;
+}
+
+.popup-historico {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1999; /* Garante que a overlay fique abaixo do conteúdo do popup */
+}
+
+.popup-historico.show {
+    display: flex;
+}
+
+.popup-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo dentro do popup */
+    z-index: 2000; /* Popup aparece acima da overlay */
+}
+
+.popup-content .titulo {
+    color: #388E3C; /* Verde */
+    font-size: 36px; /* Ajusta o tamanho do título */
+    margin-bottom: 20px;
+}
+
+.btn-close {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 2001; /* Botão no topo */
+}
+
+.btn-close:hover {
+    background-color: #e53935;
+}
+
+
+.popup-content table {
+    width: 100%;
+}
+
+/* Para dispositivos com largura até 768px */
+@media (max-width: 768px) {
+    .img-logo {
+        width: 100%;
+    }
+
+    .titulo {
+        font-size: 30px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    input[type="date"] {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .table-container {
+        padding: 0 5px;
+    }
+
+    table {
+        width: 100%;
+        margin: 0;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .button-voltar {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .popup-content {
+        width: 90%;
+    }
+}
+
+/* Para dispositivos com largura até 430px */
+@media (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+
+    .titulo {
+        font-size: 24px;
+    }
+
+    .input-container {
+        width: 100%;
+    }
+
+    input[type="date"] {
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .button-voltar {
+        padding: 10px;
+    }
+
+    .btn-close {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+/* Corrigir a questão da parte branca ao arrastar para a direita */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}

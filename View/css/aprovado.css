@@ -1,0 +1,23 @@
+@import url(style.css);
+
+/* Adicione ao final do seu CSS existente */
+.approved-image {
+    max-width: 25%; /* Garante que a imagem não exceda a largura da tela */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block;
+    margin: 0 auto; /* Centraliza a imagem */
+    margin-bottom: 20px; /* Espaçamento abaixo da imagem */
+}
+
+.confirmation-message {
+    background-color: rgba(170, 170, 170, 0.8); /* Cor cinza clara com pouca opacidade */
+    padding: 20px;
+    width: 80%; /* Define uma largura relativa */
+    max-width: 500px; /* Largura máxima */
+    text-align: center; /* Centraliza o texto */
+    border-radius: 10px; /* Cantos arredondados */
+    margin: 0 auto; /* Centraliza o retângulo */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    font-weight: bold; /* Deixa o texto em negrito */
+    margin-bottom: 50px;
+}

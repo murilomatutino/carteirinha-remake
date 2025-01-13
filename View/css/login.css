@@ -1,0 +1,151 @@
+@import url(style.css);
+
+div.center {
+    width: 100%;
+    height: fit-content;
+}
+
+.main-login {
+    width: 100%;
+}
+
+form {
+    width: 100%;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="password"] {
+    margin-bottom: 5px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: var(--gray);
+    transition: all 0.4s ease;
+}
+
+input[type="submit"].enabled {
+    background-color: var(--medium-green);
+    cursor: pointer;
+}
+
+input[type="submit"].enabled:hover {
+    background-color: var(--dark-green);
+
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.title-login {
+    color: #5ab15e;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+
+.img-login{
+    width: 50px; /* Largura desejada */
+    height: 65px; /* Altura desejada */
+}
+
+.enabled {
+    background-color: var(--dark-green);   
+}
+
+
+/* LOADING BAR LOGIN */
+
+.result {
+    width: fit-content;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    opacity: 0;
+    display: none;
+    transition: all 0.4s ease;
+
+}
+
+.result .content {
+    color: var(--medium-green);
+}
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #3498db;
+    border-radius: 50%;
+    border-top: 3px solid transparent;
+    animation: spin 1s cubic-bezier(0.22, 0.61, 0.36, 1) infinite, pulse 1s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg) scale(0.75); }
+    50% { transform: rotate(180deg) scale(0.6); }
+    100% { transform: rotate(360deg) scale(0.75); }
+}
+  
+@keyframes pulse {
+    0%, 100% { border-color: var(--dark-green); }
+    50% { border-color: var(--light-green); }
+}
+
+
+/* FORM SETUP  */
+
+form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd; 
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+.notification {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.error {
+    background-color: var(--salmon); 
+    color: white;
+}

@@ -1,0 +1,51 @@
+@import url(style.css);
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 20px 0;
+    text-align: center;
+    color: #388E3C;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input[type=text],
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.botao-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelar {
+    background-color: #f75252;
+    color: #fff;
+}
+
+.validar {
+    background-color: #388E3C;
+    color: #fff;
+}
+
+.cancelar:hover,
+.validar:hover {
+    filter: brightness(0.9);
+}

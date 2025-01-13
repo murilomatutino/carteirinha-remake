@@ -1,0 +1,75 @@
+@import url(style.css);
+
+/* Garantindo que a página ocupe 100% da largura */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Ajustando o logo para ocupar 100% da largura disponível */
+.img-logo {
+    width: 100%;
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Centralizando o conteúdo e ajustando o layout para preencher 100% */
+.center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box; /* Para garantir que o padding não cause overflow */
+}
+
+/* Título da página */
+.center h1 {
+    color: green;
+    margin-bottom: 20px;
+    font-size: 24px; /* Tamanho de fonte ajustado para telas pequenas */
+}
+
+/* Estilo dos botões */
+.buttons button {
+    padding: 10px;
+    font-size: 14px; /* Ajuste de tamanho de fonte para dispositivos menores */
+    margin: 5px; /* Espaçamento entre os botões */
+    width: auto;
+}
+
+/* Botão voltar com a cor personalizada */
+.voltar {
+    background-color: var(--salmon) !important;
+}
+
+/* Responsividade para telas de 768px */
+@media only screen and (max-width: 768px) {
+    /* Ajustes no título */
+    .center h1 {
+        font-size: 20px; /* Font menor para telas médias */
+    }
+
+    /* Ajuste nos botões */
+    .buttons button {
+        width: 100%; /* Botões ocupam 100% da largura */
+        padding: 12px;
+    }
+}
+
+/* Responsividade para telas de 430px */
+@media only screen and (max-width: 430px) {
+    /* Ajuste no tamanho do título */
+    .center h1 {
+        font-size: 18px; /* Font menor para telas muito pequenas */
+    }
+
+    /* Ajuste nos botões */
+    .buttons button {
+        width: 100%; /* Botões ocupam 100% da largura */
+        padding: 15px;
+    }
+}

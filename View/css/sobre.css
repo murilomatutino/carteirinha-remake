@@ -1,0 +1,166 @@
+/* Container para a sessão de pessoas */
+.container-sphere {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    flex-direction: column; /* Para dispositivos móveis, manter a coluna */
+    flex-wrap: wrap; /* Permite que os itens se ajustem em várias linhas, se necessário */
+    text-align: center; /* Centraliza o texto dentro de cada "person" */
+    width: 100%; /* Garante que o container ocupe toda a largura */
+}
+
+/* Definindo os itens de pessoa */
+.person {
+    text-align: center;
+    margin: 20px; /* Espaçamento maior entre as pessoas */
+    display: flex;
+    justify-content: center; /* Garante que os itens dentro de .person fiquem centralizados */
+    align-items: center; /* Alinha os itens no centro vertical */
+}
+
+/* Estilo para a semi-esfera */
+.semi-sphere {
+    width: 350px;
+    height: 420px;
+    background-color: transparent;
+    border-radius: 10%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    border: 2px solid #388E3C;
+    box-shadow: 10px 10px 5px lightblue;
+}
+
+/* Estilo da imagem */
+.img-sobre {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+.person h2,
+.person p {
+    margin: 5px 0;
+}
+
+.person h2 {
+    color: #388E3C;
+}
+
+hr {
+    border: 0;
+    height: 5px;
+    background-color: #388E3C;
+    margin: 50px 0;
+}
+
+.contact-form {
+    text-align: center;
+    margin: 20px 0;
+    flex-grow: 1;
+}
+
+.contact-title {
+    font-size: 24px;
+    color: #388E3C;
+    margin-bottom: 20px;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #388E3C;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #2E7D32;
+}
+
+/* Responsividade para dispositivos móveis */
+@media only screen and (max-width: 768px) {
+    .container-sphere {
+        flex-direction: column; /* Coluna para telas pequenas */
+        justify-content: center; /* Centraliza o conteúdo na vertical */
+        align-items: center; /* Centraliza os itens na horizontal */
+    }
+
+    .person {
+        flex: 1 1 100%; /* Ocupa toda a largura da tela */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Para telas maiores, horizontalmente */
+@media only screen and (min-width: 769px) {
+    .container-sphere {
+        flex-direction: row; /* Alinha as pessoas horizontalmente */
+        justify-content: center; /* Centraliza as pessoas na horizontal */
+        align-items: center; /* Garante o alinhamento no centro verticalmente */
+    }
+
+    .person {
+        flex: 1 1 30%; /* As pessoas ocupam 30% da largura, mas você pode ajustar conforme necessário */
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+
+    .container-sphere {
+        flex-direction: column; /* Em dispositivos muito pequenos, manter a direção em coluna */
+        align-items: center; /* Centralizando os itens */
+    }
+
+    .semi-sphere {
+        width: 90%; /* Reduzindo a largura para dispositivos pequenos */
+        height: auto; /* Ajuste da altura */
+    }
+
+    .img-sobre {
+        width: 100px; /* Largura reduzida da imagem */
+        height: 100px; /* Altura reduzida da imagem */
+    }
+
+    .contact-title {
+        font-size: 20px;
+    }
+
+    form input,
+    form textarea {
+        padding: 8px;
+    }
+
+    form button {
+        width: 100%;
+    }
+}
+
+

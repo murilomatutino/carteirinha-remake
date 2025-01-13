@@ -1,0 +1,79 @@
+/* Garantindo largura e altura completas */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Centralizando o conteúdo */
+#print-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* Altura da viewport */
+    background-color: #ffffff; /* Fundo branco */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Imagem do QR Code */
+#print-content img {
+    width: 100%; /* O QR Code ocupará toda a largura disponível */
+    height: auto; /* Mantém a proporção da imagem */
+    max-width: 100%; /* Evita ultrapassar os limites da folha */
+}
+
+/* Título */
+#print-content h1 {
+    font-size: 24px;
+    color: green;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+    #print-content h1 {
+        font-size: 20px; /* Reduzindo o tamanho do título */
+    }
+    #print-content img {
+        max-width: 250px; /* Ajuste na largura máxima */
+    }
+}
+
+@media (max-width: 430px) {
+    #print-content h1 {
+        font-size: 18px;
+    }
+    #print-content img {
+        max-width: 200px;
+    }
+}
+
+/* Estilo para impressão */
+@media print {
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: none; /* Remove fundo adicional */
+    }
+    #print-content {
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+    #print-content img {
+        width: 100%; /* Preenche a largura completa da folha */
+        height: auto; /* Mantém a proporção */
+        max-width: 100%; /* Garante que o QR Code não ultrapasse os limites */
+        max-height: 100vh; /* Limita à altura da folha */
+    }
+}
