@@ -1,5 +1,6 @@
 <?php
-    require_once '../Model/model.php';
+    require_once __DIR__ . '/../Model/model.php';
+
 
     class CardapioController {
         public $model;

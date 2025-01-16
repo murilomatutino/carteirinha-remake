@@ -13,5 +13,10 @@
             $hasNotification = $this->model->hasNotification($userId);
             return $hasNotification;
         }
+
+        public function getAssunto($userId) {
+            $assunto = $this->model->getAssunto($userId);
+            return $assunto;
+        }
     }
 ?>

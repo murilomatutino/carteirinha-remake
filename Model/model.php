@@ -116,5 +116,26 @@
         
             return $num > 0;
         }
+
+        public function getAssunto(int $userId) {
+            $sql = "SELECT assunto FROM notificacao WHERE id_destinatario = ?";
+            $stmt = $this->conn->prepare($sql);
+            
+            if ($stmt === false) {
+                throw new Exception('Erro ao preparar a consulta: ' . $this->conn->error);
+            }
+            
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $stmt->bind_result($assunto);
+            
+            $assuntos = [];
+            while ($stmt->fetch()) {
+                $assuntos[] = $assunto;
+            }
+            
+            $stmt->close();
+            return $assuntos;
+        }
     }
 ?>

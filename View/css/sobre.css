@@ -1,3 +1,5 @@
+@import url(style.css);
+
 /* Container para a sessão de pessoas */
 .container-sphere {
     flex-grow: 1;

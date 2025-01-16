@@ -27,7 +27,7 @@
     <main class="session-2">
         <div>
             <img class="texto" src="assets/9e42d98494cc4cb687bf1f0012b58c06.png" alt="BEM-VINDO! EXPLORE E APROVEITE TODOS OS RECURSOS." draggable="false">
-            <a href="View/cardapio.php">
+            <a href="cardapio.php">
                 <button class="custom-button">CARDÁPIO</button>
             </a>
         </div>

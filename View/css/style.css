@@ -529,13 +529,13 @@ a {
 .cancelar {
   background-color: #f75252;
   color: #fff;
-  background-image: url('../../assets/cancelar-100px.png');
+  background-image: url('../assets/cancelar-100px.png');
 }
 
 .validar {
   background-color: #388E3C;
   color: #fff;
-  background-image: url('../../assets/validar-100px.png');
+  background-image: url('../assets/validar-100px.png');
 }
 
 .cancelar:hover,
