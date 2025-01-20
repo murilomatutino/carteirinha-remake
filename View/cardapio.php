@@ -1,4 +1,8 @@
 <?php session_start();
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     require_once "../Controller/CardapioController.php";
     date_default_timezone_set('America/Sao_Paulo');
 
@@ -97,6 +101,7 @@
         <div class="info"></div>
     </div>
     <script>
+        const diaDaSemana = (new Date()).getDay();
         const category = <?= json_encode($_SESSION['category']) ?>;
         const cardapio = <?= json_encode($cardapio) ?>;
         const current_time = <?= json_encode($current_time) ?>;
@@ -110,6 +115,8 @@
         } else if (category !== "adm" && cardapio.length > 0 && cardapio[0]['dia'] !== '') {
             if (hasRefeicao !== null && hasRefeicao) {
                 showTemplate(3);
+            } else if (diaDaSemana === 0 || diaDaSemana === 6) {
+                showTemplate(4);
             } else if (current_time >= horario_padrao) {
                 showTemplate(4);
             } else if (current_time <= horario_padrao) {

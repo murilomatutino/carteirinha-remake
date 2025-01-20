@@ -1,16 +1,10 @@
 <?php session_start();
-    // require("../Controller/controller.php");
-    // $controller = new LoginController();
-    // $cardapio = $controller->getCardapio();
-
     require '../Controller/CardapioController.php';
     $cardapio = (new CardapioController)->getCardapio();
-
     date_default_timezone_set('America/Sao_Paulo');
     $dataAtual = date('Y-m-d'); // Pode ser qualquer data no formato Y-M-D (por exemplo, '2021-12-08')
     $diaDaSemana = date('l', strtotime($dataAtual));
     $diaNumero = 0;
-
 
     switch ($diaDaSemana) {
         case "Monday": $diaDaSemana = "segunda"; break;
@@ -23,11 +17,12 @@
 
     $cardapio = $cardapio[$diaNumero];
 
-    $_SESSION['diaSemana'] = $diaDaSemana;
+    // $_SESSION['diaSemana'] = $diaDaSemana;
+    // echo $diaDaSemana; exit();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +36,10 @@
 
     <div class="container">
         <h1>RESERVAR ALMOÇO</h1>
-        <form action="process-justificativa.php" method="POST">
+        <form action="../Controller/CardapioController.php" method="POST">
+            <input type="text" name="diaDaSemana" id="diaDaSemana" value="<?= htmlspecialchars($diaDaSemana) ?>" hidden>
+            <input type="text" name="idUser" id="idUser" value="<?= htmlspecialchars($_SESSION['id']) ?>" hidden>
+
             <table>
                 <tr><th colspan="2"><?php echo ucfirst($diaDaSemana) . '-feira' ?></th></tr>
                 <tr><td>Proteína</td><td><?php echo $cardapio['principal']; ?></td></tr>
@@ -69,15 +67,5 @@
     </div>
 
     <?php include 'footer.php'; ?>
-    <script>
-        
-
-        // function toggleOutroMotivo() {
-        //     let select = document.getElementById("justificativa");
-        //     let outroMotivo = document.getElementById("outro");
-
-        //     outroMotivo.disabled = select.value !== "outro";
-        // }
-    </script>
 </body>
 </html>
