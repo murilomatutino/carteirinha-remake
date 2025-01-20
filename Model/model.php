@@ -137,5 +137,24 @@
             $stmt->close();
             return $assuntos;
         }
+
+        public function getIdCardapio($diaDaSemana) {
+            $sql = "SELECT id FROM cardapio WHERE dia = '$diaDaSemana' AND ind_excluido = 0";
+            $result = $this->conn->query($sql);
+            $row = $result->fetch_assoc();
+            return $row['id'];
+        }
+
+        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa) {
+            $justificativa = $justificativa ?: null; // Define como null se estiver vazia
+        
+            $sql = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, hora_solicitacao, outra_justificativa)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("iiissss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
+        
+            return $stmt->execute() ? true : false;
+        }
     }
 ?>

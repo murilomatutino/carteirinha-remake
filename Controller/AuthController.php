@@ -13,7 +13,7 @@
 
                 $authController->login($matricula, $pass);
             } else {
-                $authController = new AuthController();
+                // $authController = new AuthController();
                 $authController->logout();
             }      
         }  
