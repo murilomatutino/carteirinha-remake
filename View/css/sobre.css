@@ -15,10 +15,15 @@
 /* Definindo os itens de pessoa */
 .person {
     text-align: center;
-    margin: 20px; /* Espaçamento maior entre as pessoas */
+    margin: 20px;
     display: flex;
-    justify-content: center; /* Garante que os itens dentro de .person fiquem centralizados */
-    align-items: center; /* Alinha os itens no centro vertical */
+    justify-content: center;
+    align-items: center; 
+    transition: all 0.3s ease;
+}
+
+.person:hover {
+    transform: scale(1.1);
 }
 
 /* Estilo para a semi-esfera */
@@ -116,6 +121,7 @@ form button:hover {
         justify-content: center;
         align-items: center;
     }
+    
 }
 
 /* Para telas maiores, horizontalmente */
