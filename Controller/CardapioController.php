@@ -1,8 +1,4 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
     require_once __DIR__ . '/../Model/model.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -10,8 +6,6 @@
         $justificativa = $_POST['justificativa'];
         $idUser = $_POST['idUser'];
         $diaDaSemana = $_POST['diaDaSemana'];
-
-        echo $diaDaSemana; exit();
 
         if ($justificativa == "outro") {
             $idJustificativa = 4;
@@ -48,6 +42,7 @@
         }
 
         public function processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana) {
+            date_default_timezone_set('America/Sao_Paulo');
             $idCardapio = $this->model->getIdCardapio($diaDaSemana);
             $statusRef = 1;
             $dataSolicitacao = date("Y-m-d");
@@ -55,13 +50,10 @@
 
             $result = $this->model->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
 
-            if ($result) {
-                header("Location: cardapio.php?reserva=confirmada"); exit();
-            } else {
-                // echo $result; exit();
-                header("Location: cardapio.php?reserva=erro"); exit();
-                // Precisa identificar e armazenar o erro
-            }
+            $reserva = "confirmada";
+            if (!$result) { $reserva = "erro"; }
+
+            header("Location: ../View/cardapio.php?reserva={$reserva}"); exit();
         }
     }
 ?>

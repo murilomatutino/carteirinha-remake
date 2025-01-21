@@ -21,6 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cardapio.css">
+    <script type="module" src="js/index.js"></script>
     <title>Cardapio Semanal</title>
 </head>
 <body>
@@ -98,6 +99,19 @@
             <a href='cardapio-reserva.php'><button class='button'>Quero almoçar!</button></a>
         </template>
 
+        <div class="overlay" id="overlay"></div>
+        <div class="popup" id="popup">
+            <h2>Reserva Confirmada!</h2>
+            <p>Sua reserva foi confirmada com sucesso.</p>
+            <!-- Campo de Feedback -->
+            <div class="feedback-container">
+                <h3>Deixe seu feedback:</h3>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Digite seu feedback aqui..."></textarea>
+                <button id="btn-submit-feedback">Enviar Feedback</button>
+            </div>
+            <button class="close">Fechar</button>
+        </div>
+
         <div class="info"></div>
     </div>
     <script>
@@ -136,5 +150,6 @@
             }
         }
     </script>
+    <?php require_once "footer.php"; ?>
 </body>
 </html>

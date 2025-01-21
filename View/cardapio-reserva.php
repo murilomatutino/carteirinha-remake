@@ -2,7 +2,7 @@
     require '../Controller/CardapioController.php';
     $cardapio = (new CardapioController)->getCardapio();
     date_default_timezone_set('America/Sao_Paulo');
-    $dataAtual = date('Y-m-d'); // Pode ser qualquer data no formato Y-M-D (por exemplo, '2021-12-08')
+    $dataAtual = date('Y-m-d');
     $diaDaSemana = date('l', strtotime($dataAtual));
     $diaNumero = 0;
 
@@ -16,9 +16,6 @@
     }
 
     $cardapio = $cardapio[$diaNumero];
-
-    // $_SESSION['diaSemana'] = $diaDaSemana;
-    // echo $diaDaSemana; exit();
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +57,7 @@
             <input type="text" id="outro" name="outro" placeholder="Digite outro motivo..." disabled required><br>
 
             <div class="botao-container">
-                <button class="cancelar" type="button" onclick="cancelarCardapio()"></button>
+                <button class="cancelar" type="button"></button>
                 <button class="validar" type="submit"></button>
             </div>
         </form>

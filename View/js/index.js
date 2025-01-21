@@ -50,6 +50,19 @@ if (page === 'cardapio-reserva.php') {
             outroInput.disabled = true;
         }
     });
+
+    document.querySelector('.cancelar').addEventListener('click', function() {
+        window.location.href = "cardapio.php";
+    });
+}
+
+if (page === 'cardapio.php') {
+    const params = new URLSearchParams(window.location.search);
+    const reserva = params.get('reserva');
+    if (reserva === 'confirmada') {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
 }
 
 // Funções de notificações no footer
@@ -61,6 +74,8 @@ if (closePopup) {
     closePopup.addEventListener('click', function() {
         document.querySelector('#notificationPopup').style.display = 'none';
         document.querySelector('#notificationOverlay').style.display = 'none';
+        document.querySelector('#overlay').style.display = 'none';
+        document.querySelector('#popup').style.display = 'none';
         if (closeReload) { location.reload(); }
     });
 }
