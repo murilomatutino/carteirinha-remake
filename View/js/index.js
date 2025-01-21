@@ -38,6 +38,7 @@ if (page === "login.php") {
     });
 }
 
+// CARDAPIO RESERVA
 if (page === 'cardapio-reserva.php') {
     document.querySelector('#justificativa').addEventListener('change', function() {
         const outroInput = document.querySelector('#outro');
@@ -56,6 +57,7 @@ if (page === 'cardapio-reserva.php') {
     });
 }
 
+// CARDAPIO
 if (page === 'cardapio.php') {
     const params = new URLSearchParams(window.location.search);
     const reserva = params.get('reserva');
@@ -63,6 +65,13 @@ if (page === 'cardapio.php') {
         document.getElementById('popup').style.display = 'block';
         document.getElementById('overlay').style.display = 'block';
     }
+}
+
+// AGENDADOS 
+if (page === 'agendados.php') {
+    document.querySelector('#voltar').addEventListener('click', function() {
+        window.location.href = "cardapio.php";
+    });
 }
 
 // Funções de notificações no footer
