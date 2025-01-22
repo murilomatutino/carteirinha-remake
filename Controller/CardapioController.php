@@ -55,5 +55,13 @@
 
             header("Location: ../View/cardapio.php?reserva={$reserva}"); exit();
         }
+
+        public function cancelarReserva($idUser) {
+
+        }
+
+        public function transferirReserva($idUser, $matriculaAlvo) {
+            
+        }
     }
 ?>

@@ -11,6 +11,9 @@
     <header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img class="img-logo" src='assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
     <?php require_once "navbar.php"; showNav("default"); ?>
     
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup"></div>
+
     <div class="container">
         <h1>AGENDADOS</h1>
         <img src="assets/cozinheira.png" alt="Imagem do Boneco" class="image2" draggable="false">
@@ -62,10 +65,10 @@
                     echo "<td>{$cardapioData['sobremesa']}</td>";
                     echo "<td>";
                     // echo "<a href='cardapio-cancelar.php'>";
-                    echo "<button class='vermelho' onclick='agendadosPopup(1);'><img src='assets/cancelar.png' alt='none'></button>";
+                    echo "<button class='vermelho' id='action'><img src='assets/cancelar.png' alt='none'></button>";
                     echo "</a>";
                     // echo "<a href='cardapio-disponibilizar.php'>";
-                    echo "<button class='amarelo' onclick='agendadosPopup(2);'><img src='assets/transferir.png' alt='none'></button>";
+                    echo "<button class='amarelo' id='action'><img src='assets/transferir.png' alt='none'></button>";
                     echo "</a>";
                     // echo "<button class='azul' onclick='window.location.href=\"qr-code.php\";'><img src='assets/qrcode.png' alt='none'></button>";
                     echo "</a>";

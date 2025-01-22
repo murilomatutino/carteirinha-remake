@@ -1,6 +1,7 @@
 import * as events from './events.js';
 import * as animations from './animations.js';
 import * as functions from './functions.js';
+import * as ajax from './ajax.js';
 
 // LOGIN
 // Área onde é feita a verificação dos campos de login
@@ -72,7 +73,232 @@ if (page === 'agendados.php') {
     document.querySelector('#voltar').addEventListener('click', function() {
         window.location.href = "cardapio.php";
     });
+
+    const buttons = document.querySelectorAll('#action');
+    for (let item of buttons) {
+        item.addEventListener('click', doAction);
+    }
+
+
+    function doAction() {
+        const popup = document.querySelector("#popup");
+        const overlay = document.querySelector("#overlay");
+        const type = this.classList.contains('vermelho') ? 1 : 2;
+        popup.innerHTML = ""; 
+
+        const h2 = document.createElement("h2");
+        const inputMotivo = document.createElement("input");
+        const divButtons = document.createElement("div");
+        const btnConfirm = document.createElement("button");
+        const btnCancel = document.createElement("button");
+        const labelMotivo = document.createElement("label");
+
+        inputMotivo.setAttribute("id", "outro");
+        inputMotivo.setAttribute("name", "outro");
+        inputMotivo.setAttribute("placeholder", "Digite o motivo...");
+
+        divButtons.classList.add("botao-container");
+        btnConfirm.setAttribute("type", "submit");
+        btnConfirm.setAttribute("id", "confirmar");
+        btnConfirm.classList.add("validar");
+        btnCancel.classList.add("cancelar");
+
+        divButtons.appendChild(btnCancel);
+        divButtons.appendChild(btnConfirm);
+
+        function closeAgendadosPopup() {
+            const popup = document.querySelector("#popup");
+            const overlay = document.querySelector("#overlay");
+            popup.style.display = "none";
+            overlay.style.display = "none";
+            document.querySelector('.container').classList.remove("blur");
+        }
+
+        btnCancel.addEventListener("click", closeAgendadosPopup);
+        if (type === 1) { btnConfirm.addEventListener("click", async function() {
+            try {
+                const data = {
+                    motivo: document.querySelector("#outro").value
+                };
+                const result = await ajax.cancelarReserva(data);
+                window.location.href = 'cardapio.php?id=0';
+            } catch (error) {
+                console.error('Erro ao cancelar reserva:', error);
+            }
+        }); }
+
+        labelMotivo.textContent = "MOTIVO:";
+        h2.textContent = type === 1 ? "CANCELAR RESERVA" : "DISPONIBILIZAR RESERVA";
+
+        popup.appendChild(h2);
+        popup.appendChild(labelMotivo);
+        popup.appendChild(inputMotivo);
+
+        if (type !== 1) {
+            const labelMatricula = document.createElement("label");
+            const inputMatricula = document.createElement("input");
+
+            inputMatricula.setAttribute("id", "matricula");
+            inputMatricula.setAttribute("name", "matricula");
+            inputMatricula.setAttribute("placeholder", "Matrícula alvo");
+
+            labelMatricula.textContent = "MATRÍCULA";
+
+            popup.appendChild(labelMatricula);
+            popup.appendChild(inputMatricula);
+
+            btnConfirm.addEventListener('click', () => {
+                const motivo = document.querySelector('#outro').value;
+                const matricula = document.querySelector('#matricula').value;
+
+                let dados = {
+                    motivo: motivo,
+                    matricula: matricula
+                };
+                
+                // FAZER AJAX AQUI 
+                ajax.transferirReserva(dados)
+                    .then(([result, extraData]) => {
+                        if (extraData.type === 'sucess') {
+                            events.showNotification(extraData.text, 'sucess');
+                        } else {
+                            events.showNotification(extraData.text, 'error');
+                        }
+                        window.location.href = 'cardapio.php?id=0';
+                    })
+                    .catch(error => {
+                        events.showNotification('Ocorreu um erro inesperado ao transferir a reserva. Tente novamente mais tarde.', 'error');
+                    });
+            });
+
+            // function showNotification(message, type) {
+            //     const notification = document.createElement("div");
+            //     notification.classList.add("notification", type);
+            //     notification.innerText = message;
+
+            //     document.body.appendChild(notification);
+
+            //     setTimeout(() => {
+            //         notification.remove();
+            //     }, 5000);
+            // }
+        }
+
+        popup.appendChild(divButtons);
+        popup.style.display = "block";
+        overlay.style.display = "block";
+
+        document.querySelector('.container').classList.add("blur");
+    }
 }
+
+// function agendadosPopup(type) {
+//     const popup = document.querySelector("#popup");
+//     const overlay = document.querySelector("#overlay");
+//     popup.innerHTML = ""; 
+
+//     const h2 = document.createElement("h2");
+//     const inputMotivo = document.createElement("input");
+//     const divButtons = document.createElement("div");
+//     const btnConfirm = document.createElement("button");
+//     const btnCancel = document.createElement("button");
+//     const labelMotivo = document.createElement("label");
+
+//     inputMotivo.setAttribute("id", "outro");
+//     inputMotivo.setAttribute("name", "outro");
+//     inputMotivo.setAttribute("placeholder", "Digite o motivo...");
+
+//     divButtons.classList.add("botao-container");
+//     btnConfirm.setAttribute("type", "submit");
+//     btnConfirm.setAttribute("id", "confirmar");
+//     btnConfirm.classList.add("validar");
+//     btnCancel.classList.add("cancelar");
+
+//     divButtons.appendChild(btnCancel);
+//     divButtons.appendChild(btnConfirm);
+
+//     btnCancel.addEventListener("click", closeAgendadosPopup);
+//     if (type === 1) { btnConfirm.addEventListener("click", funcaoReserva); }
+
+//     labelMotivo.textContent = "MOTIVO:";
+//     h2.textContent = type === 1 ? "CANCELAR RESERVA" : "DISPONIBILIZAR RESERVA";
+
+//     popup.appendChild(h2);
+//     popup.appendChild(labelMotivo);
+//     popup.appendChild(inputMotivo);
+
+//     if (type !== 1) {
+//         const labelMatricula = document.createElement("label");
+//         const inputMatricula = document.createElement("input");
+
+//         inputMatricula.setAttribute("id", "matricula");
+//         inputMatricula.setAttribute("name", "matricula");
+//         inputMatricula.setAttribute("placeholder", "Matrícula alvo");
+
+//         labelMatricula.textContent = "MATRÍCULA";
+
+//         popup.appendChild(labelMatricula);
+//         popup.appendChild(inputMatricula);
+
+//         btnConfirm.addEventListener('click', () => {
+//             const motivo = document.querySelector('#outro').value;
+//             const matricula = document.querySelector('#matricula').value;
+
+//             let dados = {
+//                 motivo: motivo,
+//                 matricula: matricula
+//             };
+
+//             fetch('process/transferir-reserva.php', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/x-www-form-urlencoded'
+//                 },
+//                 body: new URLSearchParams(dados).toString()
+//             })
+//             .then(response => response.json())
+//             .then(result => {
+//                 if (result.status === "sucesso") {
+//                     showNotification(
+//                         `Reserva transferida com sucesso para o usuário de matrícula ${result.matriculaDestino}!`,
+//                         "success"
+//                     );
+//                 } else {
+//                     showNotification(
+//                         `Erro ao transferir a reserva: ${result.mensagem || "Tente novamente mais tarde."}`,
+//                         "error"
+//                     );
+//                 }
+//                 closeAgendadosPopup();
+//             })
+//             .catch(error => {
+//                 console.error('Erro:', error);
+//                 showNotification(
+//                     "Ocorreu um erro inesperado ao transferir a reserva. Tente novamente mais tarde.",
+//                     "error"
+//                 );
+//             });
+//         });
+
+//         function showNotification(message, type) {
+//             const notification = document.createElement("div");
+//             notification.classList.add("notification", type);
+//             notification.innerText = message;
+
+//             document.body.appendChild(notification);
+
+//             setTimeout(() => {
+//                 notification.remove();
+//             }, 5000);
+//         }
+//     }
+
+//     popup.appendChild(divButtons);
+//     popup.style.display = "block";
+//     overlay.style.display = "block";
+
+//     document.querySelector('.container').classList.add("blur");
+// }
 
 // Funções de notificações no footer
 const closePopup = document.querySelector('.close');
