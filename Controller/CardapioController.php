@@ -2,24 +2,33 @@
     require_once __DIR__ . '/../Model/model.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $idJustificativa = 0;
-        $justificativa = $_POST['justificativa'];
-        $idUser = $_POST['idUser'];
-        $diaDaSemana = $_POST['diaDaSemana'];
+        if (isset($_POST['operacao'])) {
+            if ($_POST['operacao'] === 'cancelarReserva') {
+                $idUser = $_POST['idUser'];
+                $motivo = $_POST['motivo'];
 
-        if ($justificativa == "outro") {
-            $idJustificativa = 4;
-            $justificativa = $_POST["outro"];
-        } else {
-            switch ($justificativa) {
-                case "contra-turno": $idJustificativa = 1; break;
-                case "transporte": $idJustificativa = 2; break;
-                case "projeto": $idJustificativa = 3; break;
+                (new CardapioController)->cancelarReserva($idUser, $motivo);
             }
-            $justificativa = null;
+        } else {
+            $idJustificativa = 0;
+            $justificativa = $_POST['justificativa'];
+            $idUser = $_POST['idUser'];
+            $diaDaSemana = $_POST['diaDaSemana'];
+
+            if ($justificativa == "outro") {
+                $idJustificativa = 4;
+                $justificativa = $_POST["outro"];
+            } else {
+                switch ($justificativa) {
+                    case "contra-turno": $idJustificativa = 1; break;
+                    case "transporte": $idJustificativa = 2; break;
+                    case "projeto": $idJustificativa = 3; break;
+                }
+                $justificativa = null;
+            }
+            
+            (new CardapioController)->processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana);
         }
-        
-        (new CardapioController)->processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana);
     }
 
     class CardapioController {
@@ -56,9 +65,19 @@
             header("Location: ../View/cardapio.php?reserva={$reserva}"); exit();
         }
 
-        public function cancelarReserva($idUser) {
-
+        public function cancelarReserva($idUser, $motivo) {
+            // Primeiramente, verificamos se a reserva existe e está ativa
+            if ($this->model->isActive($idUser)) {
+                if ($this->model->cancelarReserva($idUser, $motivo)) {
+                    echo json_encode(['status' => 'success', 'message' => 'Reserva cancelada com sucesso']); exit();
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Falha ao cancelar a reserva']); exit();
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Reserva não encontrada ou já foi cancelada']); exit();
+            }
         }
+        
 
         public function transferirReserva($idUser, $matriculaAlvo) {
             

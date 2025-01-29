@@ -43,7 +43,6 @@ if (page === "login.php") {
 if (page === 'cardapio-reserva.php') {
     document.querySelector('#justificativa').addEventListener('change', function() {
         const outroInput = document.querySelector('#outro');
-        console.log("mudou")
 
         if (this.value === 'outro') {
             outroInput.disabled = false;
@@ -78,7 +77,6 @@ if (page === 'agendados.php') {
     for (let item of buttons) {
         item.addEventListener('click', doAction);
     }
-
 
     function doAction() {
         const popup = document.querySelector("#popup");
@@ -115,17 +113,32 @@ if (page === 'agendados.php') {
         }
 
         btnCancel.addEventListener("click", closeAgendadosPopup);
-        if (type === 1) { btnConfirm.addEventListener("click", async function() {
-            try {
-                const data = {
-                    motivo: document.querySelector("#outro").value
-                };
-                const result = await ajax.cancelarReserva(data);
-                window.location.href = 'cardapio.php?id=0';
-            } catch (error) {
-                console.error('Erro ao cancelar reserva:', error);
-            }
-        }); }
+        if (type === 1) {
+            btnConfirm.addEventListener("click", function() {      
+                ajax.getUserId().then(idUser => {
+                    if (!idUser) {
+                        console.error('ID do usuário não encontrado');
+                        return;
+                    }
+        
+                    const data = {
+                        operacao: "cancelarReserva",
+                        motivo: document.querySelector("#outro").value,
+                        idUser: idUser
+                    };
+        
+                    ajax.cancelarReserva(data)
+                        .then(result => {
+                            window.location.href = "cardapio.php?reserva=cancelada";
+                        })
+                        .catch(error => {
+                            window.location.href = "cardapio.php?reserva=erro"
+                        });
+                }).catch(error => {
+                    console.error('Erro ao pegar ID do usuário:', error);
+                });
+            });
+        }
 
         labelMotivo.textContent = "MOTIVO:";
         h2.textContent = type === 1 ? "CANCELAR RESERVA" : "DISPONIBILIZAR RESERVA";

@@ -156,5 +156,37 @@
         
             return $stmt->execute() ? true : false;
         }
+
+        public function isActive($idUser) {
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+        
+            if ($stmt) {
+                $stmt->bind_param('i', $idUser);
+                $stmt->execute();
+                $stmt->bind_result($quantidade);
+                $stmt->fetch();
+                $stmt->close();
+        
+                return $quantidade > 0;  
+            } else {
+                return false;
+            }
+        }
+
+        public function cancelarReserva($idUser, $motivo) {
+            $sql = "UPDATE refeicao SET motivo_cancelamento = ? WHERE id_usuario = ? AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('si', $motivo, $idUser);
+
+            if ($stmt->execute()) {
+                if ($stmt->affected_rows > 0) {
+                    return true;                    
+                }
+                return false;
+            } else {
+                return false;
+            }
+        }
     }
 ?>
