@@ -20,6 +20,7 @@
 
         <table>
             <?php 
+                require_once "../Controller/CardapioController.php";
                 $idUser = $_SESSION['id'];
                 
                 $sql = "SELECT * FROM refeicao WHERE id_usuario = '$idUser'";
@@ -64,14 +65,19 @@
                     echo "<td>{$cardapioData['acompanhamento']}</td>";
                     echo "<td>{$cardapioData['sobremesa']}</td>";
                     echo "<td>";
+
+                    if ((new CardapioController)->hasTransferencia($_SESSION['id'])) {
+                        echo "<h3>Transferência em andamento...</h3>";
+                    } else {
+                        echo "<button class='vermelho' id='action'><img src='assets/cancelar.png' alt='none'></button>";
+                        echo "<button class='amarelo' id='action'><img src='assets/transferir.png' alt='none'></button>";
+                    }
                     // echo "<a href='cardapio-cancelar.php'>";
-                    echo "<button class='vermelho' id='action'><img src='assets/cancelar.png' alt='none'></button>";
-                    echo "</a>";
+                    // echo "</a>";
                     // echo "<a href='cardapio-disponibilizar.php'>";
-                    echo "<button class='amarelo' id='action'><img src='assets/transferir.png' alt='none'></button>";
-                    echo "</a>";
+                    // echo "</a>";
                     // echo "<button class='azul' onclick='window.location.href=\"qr-code.php\";'><img src='assets/qrcode.png' alt='none'></button>";
-                    echo "</a>";
+                    // echo "</a>";
                     echo "</td>";
                     echo "</tr>";
                     echo "</tbody>";

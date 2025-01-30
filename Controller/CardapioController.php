@@ -59,6 +59,10 @@
             return $this->model->hasRefeicao($idUser, $current_day);
         }
 
+        public function hasTransferencia($idUser) {
+            return $this->model->transferenciaIsActive($idUser);
+        }
+
         public function processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana) {
             date_default_timezone_set('America/Sao_Paulo');
             $idCardapio = $this->model->getIdCardapio($diaDaSemana);
