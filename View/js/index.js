@@ -161,26 +161,27 @@ if (page === 'agendados.php') {
             popup.appendChild(inputMatricula);
 
             btnConfirm.addEventListener('click', () => {
-                const motivo = document.querySelector('#outro').value;
-                const matricula = document.querySelector('#matricula').value;
+                ajax.getUserId().then(idUser => {
+                    if (!idUser) {
+                        console.error('ID do usuário não encontrado');
+                        return;
+                    }
 
-                let dados = {
-                    motivo: motivo,
-                    matricula: matricula
-                };
-                
-                // FAZER AJAX AQUI 
-                ajax.transferirReserva(dados)
-                    .then(([result, extraData]) => {
-                        if (extraData.type === 'sucess') {
-                            events.showNotification(extraData.text, 'sucess');
-                        } else {
-                            events.showNotification(extraData.text, 'error');
-                        }
-                        window.location.href = 'cardapio.php?id=0';
-                    })
-                    .catch(error => {
-                        events.showNotification('Ocorreu um erro inesperado ao transferir a reserva. Tente novamente mais tarde.', 'error');
+                    let dados = {
+                        operacao: "transferirReserva",
+                        motivo: document.querySelector('#outro').value,
+                        matriculaAlvo: document.querySelector('#matricula').value,
+                        idUser: idUser
+                    };
+                    
+                    // FAZER AJAX AQUI 
+                    ajax.transferirReserva(dados)
+                        .then(result => {
+                            window.location.href = "cardapio.php?reserva=transferida";
+                        })
+                        .catch(error => {
+                            window.location.href = "cardapio.php?reserva=erro";
+                        });
                     });
             });
 

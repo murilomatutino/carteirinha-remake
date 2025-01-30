@@ -1,45 +1,4 @@
 // ajax agendados
-
-export async function transferirReserva(dados) {
-    fetch('../Controller/CardapioController.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams(dados).toString()
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.status === "sucesso") {
-            return {
-                type: 'sucess',
-                text: `Reserva transferida com sucesso para o usuário de matrícula ${result.matriculaDestino}!`
-            }
-            // showNotification(
-            //     `Reserva transferida com sucesso para o usuário de matrícula ${result.matriculaDestino}!`,
-            //     "success"
-            // );
-        } else {
-            return {
-                type: 'error',
-                text: `Erro ao transferir a reserva: ${result.mensagem || "Tente novamente mais tarde."}`
-            }
-            // showNotification(
-            //     `Erro ao transferir a reserva: ${result.mensagem || "Tente novamente mais tarde."}`,
-            //     "error"
-            // );
-        }
-        // closeAgendadosPopup();
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        // showNotification(
-        //     "Ocorreu um erro inesperado ao transferir a reserva. Tente novamente mais tarde.",
-        //     "error"
-        // );
-    });
-}
-
 export async function getUserId() {
     try {
         const response = await fetch('idUser.php');
@@ -82,3 +41,34 @@ export async function cancelarReserva(data) {
         return null;  
     }
 }
+
+export async function transferirReserva(dados) {
+    try {
+        const response = await fetch('../Controller/CardapioController.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(dados).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao transferir reserva, status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            console.log(result.message);
+        } else {
+            console.error('Erro ao iniciar solicitação de transferência de reserva:', result.message);
+        }
+
+        return result;
+
+    } catch (error) {
+        console.error('Erro:', error.message || error);
+        return null;
+    }
+}
+

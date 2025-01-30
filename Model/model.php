@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
     class Model {
         public $conn;
         public function __construct() {
@@ -157,6 +159,32 @@
             return $stmt->execute() ? true : false;
         }
 
+        private function getUserDataForTransfer($matriculaAlvo, $idRemetente) {
+            $sql = "
+                (SELECT id, nome, matricula, 'remetente' AS tipo FROM usuario WHERE id = ?)
+                UNION ALL
+                (SELECT id, nome, matricula, 'destinatario' AS tipo FROM usuario WHERE matricula = ?)
+            ";
+            
+            $stmt = $this->conn->prepare($sql);
+        
+            if ($stmt) {
+                $stmt->bind_param('is', $idRemetente, $matriculaAlvo);
+                $stmt->execute();
+                $result = $stmt->get_result();
+        
+                $usersData = [];
+                while ($row = $result->fetch_assoc()) {
+                    $usersData[$row['tipo']] = [$row['id'], $row['nome'], $row['matricula']];
+                }
+        
+                $stmt->close();
+                return $usersData; exit();
+            }
+        
+            return [];
+        }        
+
         public function isActive($idUser) {
             $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
             $stmt = $this->conn->prepare($sql);
@@ -188,5 +216,40 @@
                 return false;
             }
         }
+
+        public function transferirReserva($idUser, $motivo, $matriculaAlvo) {
+            // Obter dados do remetente e destinatário
+            $usersData = $this->getUserDataForTransfer($matriculaAlvo, $idUser);
+        
+            if (!isset($usersData['remetente']) || !isset($usersData['destinatario'])) {
+                return ['success' => false, 'message' => 'Usuários não encontrados.']; exit();
+            }
+        
+            $idRemetente = $usersData['remetente'][0];
+            $nomeRemetente = ucfirst($usersData['remetente'][1]);
+        
+            $idDestinatario = $usersData['destinatario'][0];
+            $nomeDestinatario = ucfirst($usersData['destinatario'][1]);
+        
+            $assunto = "Transferência de Almoço";
+            $mensagem = "Saudações $nomeDestinatario, o estudante $nomeRemetente fez a você uma solicitação de transferência de almoço!\n\nMotivo: $motivo";
+            $sql = "INSERT INTO notificacao (id_remetente, id_destinatario, assunto, mensagem, transferencia) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+        
+            if ($stmt) {
+                $transferencia = 1;
+                $stmt->bind_param('iissi', $idRemetente, $idDestinatario, $assunto, $mensagem, $transferencia);
+                
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    return ['success' => true, 'message' => 'Notificação enviada com sucesso!']; exit();
+                } else {
+                    $stmt->close();
+                    return ['success' => false, 'message' => 'Erro ao enviar a notificação.']; exit();
+                }
+            } else {
+                return ['success' => false, 'message' => 'Erro ao preparar a consulta.']; exit();
+            }
+        }      
     }
 ?>

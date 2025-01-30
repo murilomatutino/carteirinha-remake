@@ -23,7 +23,6 @@ export function enviarFormulario() {
         return response.text(); 
     })
     .then(data => {
-        console.log(data);
         if (data === "logged") {
             const resultDiv = document.querySelector(".result");
             resultDiv.style.display = "flex";

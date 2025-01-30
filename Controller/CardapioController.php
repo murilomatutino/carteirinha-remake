@@ -1,4 +1,7 @@
 <?php
+    // error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
+
     require_once __DIR__ . '/../Model/model.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,6 +11,12 @@
                 $motivo = $_POST['motivo'];
 
                 (new CardapioController)->cancelarReserva($idUser, $motivo);
+            } else if ($_POST['operacao'] === 'transferirReserva') {
+                $idUser = $_POST['idUser'];
+                $motivo = $_POST['motivo'];
+                $matricula = $_POST['matriculaAlvo'];
+
+                (new CardapioController)->transferirReserva($idUser, $motivo, $matricula);
             }
         } else {
             $idJustificativa = 0;
@@ -79,8 +88,16 @@
         }
         
 
-        public function transferirReserva($idUser, $matriculaAlvo) {
-            
+        public function transferirReserva($idUser, $motivo, $matriculaAlvo) {
+            if ($this->model->isActive($idUser)) {
+                if ($this->model->transferirReserva($idUser, $motivo, $matriculaAlvo)['success']) {
+                    echo json_encode(['status' => 'success', 'message' => 'Reserva transferida com sucesso']); exit();
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Falha ao transferir reserva']); exit();
+                }
+            } else {
+                echo json_encode(['status' => 'error', message => 'Reserva não encontrada!']); exit();
+            }
         }
     }
 ?>
