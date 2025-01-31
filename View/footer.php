@@ -12,12 +12,12 @@
     <div class="popup" id="notificationPopup"></div>
 
 
-    <div class="overlay2" id="overlay2"></div>
+    <!-- <div class="overlay2" id="overlay2"></div>
     <div class="popup2" id="popup2">
         <h2>Detalhes da Notificação</h2>
         <p id="popupContent">Aqui vai o conteúdo do popup.</p>
         <button class="close-btn-2">Fechar</button>
-    </div>
+    </div> -->
 
     <template id="show">
         <h2>Notificações</h2>

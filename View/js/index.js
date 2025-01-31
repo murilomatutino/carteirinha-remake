@@ -206,118 +206,30 @@ if (page === 'agendados.php') {
     }
 }
 
-// function agendadosPopup(type) {
-//     const popup = document.querySelector("#popup");
-//     const overlay = document.querySelector("#overlay");
-//     popup.innerHTML = ""; 
-
-//     const h2 = document.createElement("h2");
-//     const inputMotivo = document.createElement("input");
-//     const divButtons = document.createElement("div");
-//     const btnConfirm = document.createElement("button");
-//     const btnCancel = document.createElement("button");
-//     const labelMotivo = document.createElement("label");
-
-//     inputMotivo.setAttribute("id", "outro");
-//     inputMotivo.setAttribute("name", "outro");
-//     inputMotivo.setAttribute("placeholder", "Digite o motivo...");
-
-//     divButtons.classList.add("botao-container");
-//     btnConfirm.setAttribute("type", "submit");
-//     btnConfirm.setAttribute("id", "confirmar");
-//     btnConfirm.classList.add("validar");
-//     btnCancel.classList.add("cancelar");
-
-//     divButtons.appendChild(btnCancel);
-//     divButtons.appendChild(btnConfirm);
-
-//     btnCancel.addEventListener("click", closeAgendadosPopup);
-//     if (type === 1) { btnConfirm.addEventListener("click", funcaoReserva); }
-
-//     labelMotivo.textContent = "MOTIVO:";
-//     h2.textContent = type === 1 ? "CANCELAR RESERVA" : "DISPONIBILIZAR RESERVA";
-
-//     popup.appendChild(h2);
-//     popup.appendChild(labelMotivo);
-//     popup.appendChild(inputMotivo);
-
-//     if (type !== 1) {
-//         const labelMatricula = document.createElement("label");
-//         const inputMatricula = document.createElement("input");
-
-//         inputMatricula.setAttribute("id", "matricula");
-//         inputMatricula.setAttribute("name", "matricula");
-//         inputMatricula.setAttribute("placeholder", "Matrícula alvo");
-
-//         labelMatricula.textContent = "MATRÍCULA";
-
-//         popup.appendChild(labelMatricula);
-//         popup.appendChild(inputMatricula);
-
-//         btnConfirm.addEventListener('click', () => {
-//             const motivo = document.querySelector('#outro').value;
-//             const matricula = document.querySelector('#matricula').value;
-
-//             let dados = {
-//                 motivo: motivo,
-//                 matricula: matricula
-//             };
-
-//             fetch('process/transferir-reserva.php', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/x-www-form-urlencoded'
-//                 },
-//                 body: new URLSearchParams(dados).toString()
-//             })
-//             .then(response => response.json())
-//             .then(result => {
-//                 if (result.status === "sucesso") {
-//                     showNotification(
-//                         `Reserva transferida com sucesso para o usuário de matrícula ${result.matriculaDestino}!`,
-//                         "success"
-//                     );
-//                 } else {
-//                     showNotification(
-//                         `Erro ao transferir a reserva: ${result.mensagem || "Tente novamente mais tarde."}`,
-//                         "error"
-//                     );
-//                 }
-//                 closeAgendadosPopup();
-//             })
-//             .catch(error => {
-//                 console.error('Erro:', error);
-//                 showNotification(
-//                     "Ocorreu um erro inesperado ao transferir a reserva. Tente novamente mais tarde.",
-//                     "error"
-//                 );
-//             });
-//         });
-
-//         function showNotification(message, type) {
-//             const notification = document.createElement("div");
-//             notification.classList.add("notification", type);
-//             notification.innerText = message;
-
-//             document.body.appendChild(notification);
-
-//             setTimeout(() => {
-//                 notification.remove();
-//             }, 5000);
-//         }
-//     }
-
-//     popup.appendChild(divButtons);
-//     popup.style.display = "block";
-//     overlay.style.display = "block";
-
-//     document.querySelector('.container').classList.add("blur");
-// }
 
 // Funções de notificações no footer
 const closePopup = document.querySelector('.close');
-const closePopup2 = document.querySelector('.close-btn-2');
 const closeReload = document.querySelector('#reload');
+const notificationNavbar = document.querySelector('#navbar-notification');
+
+if (notificationNavbar) {
+    notificationNavbar.addEventListener('click', function() {
+        const overlay2 = document.querySelector('#overlay2');
+        const popup2 = document.querySelector('#popup2');
+        const notificationDefault = document.querySelector('#default');
+
+        animations.showNavbarNotification(popup2, overlay2, document.body);
+        popup2.innerHTML = notificationDefault.innerHTML;
+
+        const closePopup2 = document.querySelector('.close-btn-2');
+
+        if (closePopup2) {
+            closePopup2.addEventListener('click', function() {
+                animations.closeNavbarNotification(popup2, overlay2, document.body);
+            });
+        }
+    });
+}
 
 if (closePopup) {
     closePopup.addEventListener('click', function() {
@@ -329,9 +241,3 @@ if (closePopup) {
     });
 }
 
-if (closePopup2) {
-    closePopup2.addEventListener('click', function() {
-        document.querySelector('#overlay2').style.display = 'none';
-        document.querySelector('#popup2').style.display = 'none';
-    });
-}

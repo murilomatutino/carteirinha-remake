@@ -10,11 +10,80 @@ nav {
   z-index: 1;
 }
 
+img.notification-icon {
+  width: 30px;
+  height: 30px;
+}
+
+#content {
+  min-height: 150px;
+}
+
+.overlay2 {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000; /* Garantir que o fundo fique acima de outros elementos */
+}
+
+.popup2 {
+  min-width: 500px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001; /* Garantir que o popup fique acima do fundo */
+  display: none;
+
+  position: fixed;
+  top: 25%;
+  left: 33%;
+  transform: translate(-50%, -50%);
+}
+
+footer {
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay2 {
+  backdrop-filter: blur(10px);
+}
+
+.active {
+  overflow: hidden;
+}
+
+/* ANIMAÇÃO DO POPUP DE NOTIFICAÇÃO */
+.open {
+  animation: fadeExpandIn 0.3s ease-out forwards;
+}
+
+.closed {
+  animation: fadeExpandOut 0.3s ease-in forwards;
+}
+
+.close-btn-2 {
+  width: 150px;
+}
+
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+h1 {
+  color: #388E3C;
 }
 
 /* Lista de navegação */
@@ -71,7 +140,7 @@ nav {
   background-color: #e65c5c;
 }
 
-.right a {
+.right span {
   color: white;
   text-decoration: none;
   font-size: 14px;
@@ -205,7 +274,7 @@ nav {
     padding: 4px 8px;
   }
 
-  .right a {
+  .right span {
     font-size: 12px;
   }
 }
@@ -227,5 +296,27 @@ nav {
 
   .nav-list li {
     margin: 0 15px;
+  }
+}
+
+/* KEYFRAMES */
+
+@keyframes fadeExpandIn {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  } to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeExpandOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  } to {
+    opacity: 0;
+    transform: scale(0.2);
   }
 }

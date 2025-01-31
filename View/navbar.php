@@ -33,7 +33,7 @@
         $qrcodeEstudanteLink = WPATH . "/View/qr-code-estudante.php";
         $profilePic = WPATH . "/View/assets/Victor Hugo.jpg";
         $notification_icon_path = notificationIcon(WPATH);
-        $notification_icon = "<a href='#' class='notification-icon' title='Notificações'><img src='$notification_icon_path' alt='Notificações'></a>";
+        $notification_icon = "<img src='$notification_icon_path' alt='Notificações' id='navbar-notification' class='notification-icon' title='Notificações'>";
 
         if (isset($_SESSION['logged_in'])) {
             if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
@@ -99,3 +99,21 @@
         }
     }
 ?>
+
+<link rel="stylesheet" href="css/navbar.css">
+<!-- NOTIFICAÇÃO DA NAVBAR -->
+<div class="overlay2" id="overlay2"></div>
+<div class="popup2" id="popup2">
+</div>
+
+<template class="notification" id="default">
+    <header>
+        <h1>Notificações</h1>
+    </header>
+
+    <main id="content"></main>
+
+    <footer>
+        <button class="close-btn-2">Fechar</button>
+    </footer>
+</template>
