@@ -6,12 +6,13 @@ Remake do projeto carteirinha IFBA
 - Nas notificações, criar função de aceitar transferencia de reserva(no alvo);
 
 ### Prioridade média:
-- Criar popup padrão de notificações;
+- Criar Funcionamento dos popups da navbar;
 - Criar popup de Alerta e Sucesso personalizado para funções;
 - Criar Servidor para testes locais;
 - Arrumar problema com a camera dos celulares;
 - Ajustar questões de responsividade;
 - Horário limite provavelmente contem bugs;
+- Mover todas as popups do footer para a navbar;
   
 ### Pode esperar:
 - Criar refactor do CardapioController;
