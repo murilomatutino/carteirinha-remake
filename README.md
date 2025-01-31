@@ -11,6 +11,7 @@ Remake do projeto carteirinha IFBA
 - Criar Servidor para testes locais;
 - Arrumar problema com a camera dos celulares;
 - Ajustar questões de responsividade;
+- Horário limite provavelmente contem bugs;
   
 ### Pode esperar:
 - Criar refactor do CardapioController;
