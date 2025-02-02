@@ -207,44 +207,86 @@ if (page === 'agendados.php') {
 }
 
 
-// Funções de notificações no footer
+// Funções de notificações na navbar
 const closePopup = document.querySelector('.close');
 const closeReload = document.querySelector('#reload');
 const notificationNavbar = document.querySelector('#navbar-notification');
+
+function botaoFechar() {
+    const overlay2 = document.querySelector('#overlay2');
+    const popup2 = document.querySelector('#popup2');
+    const closePopup2 = document.querySelector('.close-btn-2');
+    if (closePopup2) {
+        closePopup2.addEventListener('click', function() {
+            animations.closeNavbarNotification(popup2, overlay2, document.body);
+            popup2.classList.remove('expanded');
+        });
+    }
+}
+
+function adicionarConteudo() {
+    const notificationItems = document.querySelectorAll('.notification-item');
+    const notificationContent = document.querySelector('#content');
+    notificationItems.forEach((item, index) => {
+        let clone = item.cloneNode(true)
+        clone.style.animationDelay = `${index * 0.2}s`;
+        notificationContent.appendChild(clone);
+        
+        setTimeout(() => {
+            clone.classList.add('visible');
+        }, index * 200);
+    });
+}
+
+function exibirConteudo() {
+    const popup2 = document.querySelector('#popup2');
+    const notificationItems = document.querySelectorAll('#content .notification-item');
+    const notificationDefault = document.querySelector('#default');
+
+    notificationItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (item.classList.contains('visible')) {
+                popup2.innerHTML = '';
+                popup2.classList.remove('open');
+                popup2.classList.add('expanded');
+                console.log(item.id);
+
+                setTimeout(() => {
+                    const notificationOpen = document.querySelector('#open');
+                    popup2.innerHTML = notificationOpen.innerHTML;
+
+                    // Adicionar evento de voltar
+                    document.querySelector('#back').addEventListener('click', function() {
+                        popup2.innerHTML = notificationDefault.innerHTML;
+                        popup2.classList.remove('expanded');
+                        popup2.classList.add('open');
+
+                        adicionarConteudo();
+                        exibirConteudo();
+                        botaoFechar();
+                    });
+                }, 500);
+            }
+        });
+    });
+}
 
 if (notificationNavbar) {
     notificationNavbar.addEventListener('click', function() {
         const overlay2 = document.querySelector('#overlay2');
         const popup2 = document.querySelector('#popup2');
         const notificationDefault = document.querySelector('#default');
-
+        
         animations.showNavbarNotification(popup2, overlay2, document.body);
+        popup2.innerHTML = '';
         popup2.innerHTML = notificationDefault.innerHTML;
 
-        const notificationContent = document.querySelector('#content');
-        const notificationItems = document.querySelectorAll('.notification-item');
-
-        setTimeout(() => {
-            notificationItems.forEach((item, index) => {
-                let clonedItem = item.cloneNode(true);
-                notificationContent.appendChild(clonedItem);
-                clonedItem.style.animationDelay = `${index * 0.2}s`;
-
-                setTimeout(() => {
-                    clonedItem.classList.add('visible');
-                }, index * 200); 
-            });
-        }, 300);
-
-        const closePopup2 = document.querySelector('.close-btn-2');
-
-        if (closePopup2) {
-            closePopup2.addEventListener('click', function() {
-                animations.closeNavbarNotification(popup2, overlay2, document.body);
-            });
-        }
+        botaoFechar();
+        adicionarConteudo();
+        exibirConteudo();
     });
 }
+
 
 if (closePopup) {
     closePopup.addEventListener('click', function() {

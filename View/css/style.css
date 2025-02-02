@@ -19,7 +19,8 @@
 }
 
 template {
-  display: none !important;
+  visibility: hidden;
+  position: absolute;
 }
 
 body{

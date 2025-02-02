@@ -16,7 +16,7 @@ img.notification-icon {
 }
 
 #content {
-  min-height: 150px;
+  min-width: 150px !important;
 }
 
 .overlay2 {
@@ -31,7 +31,8 @@ img.notification-icon {
 }
 
 .popup2 {
-  min-width: 500px;
+  max-width: 500px;
+  width: 100%;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -73,10 +74,6 @@ footer {
 
 .closed {
   animation: fadeExpandOut 0.3s ease-in forwards;
-}
-
-.close-btn-2 {
-  width: 150px;
 }
 
 .nav-container {
@@ -253,6 +250,48 @@ h1 {
   transform: translateX(0);
 }
 
+.notification-item.visible .notification-content {
+  cursor: pointer;
+}
+
+.popup2 footer button {
+  background-color: #ff4747;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+
+.popup2.expanded header h2 {
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+}
+
+.expanded {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: expandNotification 0.5s forwards;
+  height: fit-content;
+}
+
+.popup2.expanded * {
+  /* opacity: 0; */
+  animation: fadeIn 0.7s forwards;
+  opacity: 1;
+}
+
+.popup2.expanded #content {
+  padding: 10px;
+  padding-top: 20px;
+  height: 80%;
+}
+
 @keyframes fadeInFromLeft {
   from {
     opacity: 0;
@@ -260,6 +299,22 @@ h1 {
   } to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes expandNotification {
+  from {
+    height: 258px;
+  } to {
+    height: 400px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
   }
 }
 

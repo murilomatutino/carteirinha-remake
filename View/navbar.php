@@ -118,17 +118,32 @@
     </footer>
 </template>
 
-<div class="notification-item">
+<template class="notification" id="open">
+    <header>
+        <h2 class="title">Transferencia de reserva</h2>
+    </header>
+
+    <main id="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt dolorum molestiae iste nulla non cum praesentium pariatur ex itaque, voluptate facilis repudiandae temporibus! Quisquam deserunt nam dolor ipsum ipsa accusamus!</p>
+    </main>
+
+    <footer>
+        <button id="back">Voltar</button>
+    </footer>
+</template>
+
+<div class="notification-item" id="transfer">
     <img src="assets/alert.png" alt="icone de alerta">
-    <div>
+    <div class="notification-content">
         <h2 class="title">Transferencia de reserva</h2>
         <p id="notification-text">Requisição de transferencia de reserva</p>
     </div>
+    <button class="validar"></button>
 </div>
 
-<div class="notification-item">
+<div class="notification-item" id="update">
     <img src="assets/alert.png" alt="icone de alerta">
-    <div>
+    <div class="notification-content">
         <h2 class="title">Atualização</h2>
         <p id="notification-text">Detalhes da Atualização</p>
     </div>
