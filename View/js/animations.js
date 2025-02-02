@@ -16,6 +16,28 @@ export function closeNavbarNotification(popup2, overlay2, body) {
     }, 500);
 }
 
+export function addContent(notificationItems, notificationContent) {
+    notificationItems.forEach((item, index) => {
+        let clone = item.cloneNode(true)
+        clone.style.animationDelay = `${index * 0.2}s`;
+        notificationContent.appendChild(clone);
+        
+        setTimeout(() => {
+            clone.classList.add('visible');
+        }, index * 200);
+    });
+}
+
+export function showContent(popup2) {
+    popup2.classList.remove('open');
+    popup2.classList.add('expanded');
+}
+
+export function backContent(popup2) {
+    popup2.classList.remove('expanded');
+    popup2.classList.add('open');
+}
+
 // const openPopup = document.querySelector('#open-popup');
 // const popup2 = document.querySelector('#popup2');
 

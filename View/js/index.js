@@ -227,28 +227,51 @@ function botaoFechar() {
 function adicionarConteudo() {
     const notificationItems = document.querySelectorAll('.notification-item');
     const notificationContent = document.querySelector('#content');
-    notificationItems.forEach((item, index) => {
-        let clone = item.cloneNode(true)
-        clone.style.animationDelay = `${index * 0.2}s`;
-        notificationContent.appendChild(clone);
-        
-        setTimeout(() => {
-            clone.classList.add('visible');
-        }, index * 200);
-    });
+    const confirmBtn = document.querySelector('.validar');
+
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function() {
+            // aqui vai o popup de confirmação de ação
+            ajax.getUserId().then(idUser => {
+                if (!idUser) {
+                    console.error('ID do usuário não encontrado');
+                    return;
+                }
+
+                const data = {
+                    operacao: "aceitarRefeicao",
+                    idUser: idUser
+                };
+
+                ajax.cancelarReserva(data)
+                    .then(result => {
+                        // window.location.href = "cardapio.php?reserva=cancelada";
+                        console.log(result);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        // window.location.href = "cardapio.php?reserva=erro"
+                    });
+            }).catch(error => {
+                console.error('Erro ao pegar ID do usuário:', error);
+            });
+        });
+    }
+
+    animations.addContent(notificationItems, notificationContent);
 }
 
 function exibirConteudo() {
     const popup2 = document.querySelector('#popup2');
     const notificationItems = document.querySelectorAll('#content .notification-item');
+    const notificationContent = document.querySelectorAll('#content .notification-content');
     const notificationDefault = document.querySelector('#default');
 
-    notificationItems.forEach(item => {
+    notificationContent.forEach((item, index) => {
         item.addEventListener('click', function() {
-            if (item.classList.contains('visible')) {
+            if (notificationItems[index].classList.contains('visible')) {
                 popup2.innerHTML = '';
-                popup2.classList.remove('open');
-                popup2.classList.add('expanded');
+                animations.showContent(popup2);
                 console.log(item.id);
 
                 setTimeout(() => {
@@ -258,14 +281,12 @@ function exibirConteudo() {
                     // Adicionar evento de voltar
                     document.querySelector('#back').addEventListener('click', function() {
                         popup2.innerHTML = notificationDefault.innerHTML;
-                        popup2.classList.remove('expanded');
-                        popup2.classList.add('open');
-
+                        animations.backContent(popup2);
                         adicionarConteudo();
                         exibirConteudo();
                         botaoFechar();
                     });
-                }, 500);
+                }, 400);
             }
         });
     });

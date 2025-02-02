@@ -5,39 +5,24 @@
     require_once __DIR__ . '/../Model/model.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['operacao'])) {
-            if ($_POST['operacao'] === 'cancelarReserva') {
-                $idUser = $_POST['idUser'];
-                $motivo = $_POST['motivo'];
+        $idJustificativa = 0;
+        $justificativa = $_POST['justificativa'];
+        $idUser = $_POST['idUser'];
+        $diaDaSemana = $_POST['diaDaSemana'];
 
-                (new CardapioController)->cancelarReserva($idUser, $motivo);
-            } else if ($_POST['operacao'] === 'transferirReserva') {
-                $idUser = $_POST['idUser'];
-                $motivo = $_POST['motivo'];
-                $matricula = $_POST['matriculaAlvo'];
-
-                (new CardapioController)->transferirReserva($idUser, $motivo, $matricula);
-            }
+        if ($justificativa == "outro") {
+            $idJustificativa = 4;
+            $justificativa = $_POST["outro"];
         } else {
-            $idJustificativa = 0;
-            $justificativa = $_POST['justificativa'];
-            $idUser = $_POST['idUser'];
-            $diaDaSemana = $_POST['diaDaSemana'];
-
-            if ($justificativa == "outro") {
-                $idJustificativa = 4;
-                $justificativa = $_POST["outro"];
-            } else {
-                switch ($justificativa) {
-                    case "contra-turno": $idJustificativa = 1; break;
-                    case "transporte": $idJustificativa = 2; break;
-                    case "projeto": $idJustificativa = 3; break;
-                }
-                $justificativa = null;
-            }
-            
-            (new CardapioController)->processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana);
+            $idJustificativa = match ($justificativa) {
+                "contra-turno" => 1,
+                "transporte"   => 2,
+                "projeto"      => 3,
+                default        => null,
+            };
         }
+        
+        (new CardapioController)->processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana);
     }
 
     class CardapioController {
@@ -91,7 +76,6 @@
             }
         }
         
-
         public function transferirReserva($idUser, $motivo, $matriculaAlvo) {
             if ($this->model->isActive($idUser)) {
                 if ($this->model->transferirReserva($idUser, $motivo, $matriculaAlvo)['success']) {
@@ -100,7 +84,7 @@
                     echo json_encode(['status' => 'error', 'message' => 'Falha ao transferir reserva']); exit();
                 }
             } else {
-                echo json_encode(['status' => 'error', message => 'Reserva não encontrada!']); exit();
+                echo json_encode(['status' => 'error', 'message' => 'Reserva não encontrada!']); exit();
             }
         }
     }

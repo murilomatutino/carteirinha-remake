@@ -179,7 +179,7 @@ ini_set('display_errors', 1);
                 }
         
                 $stmt->close();
-                return $usersData; exit();
+                return $usersData;
             }
         
             return [];
@@ -239,7 +239,7 @@ ini_set('display_errors', 1);
             $usersData = $this->getUserDataForTransfer($matriculaAlvo, $idUser);
         
             if (!isset($usersData['remetente']) || !isset($usersData['destinatario'])) {
-                return ['success' => false, 'message' => 'Usuários não encontrados.']; exit();
+                return ['success' => false, 'message' => 'Usuários não encontrados.'];
             }
         
             $idRemetente = $usersData['remetente'][0];
@@ -259,14 +259,18 @@ ini_set('display_errors', 1);
                 
                 if ($stmt->execute()) {
                     $stmt->close();
-                    return ['success' => true, 'message' => 'Notificação enviada com sucesso!']; exit();
+                    return ['success' => true, 'message' => 'Notificação enviada com sucesso!'];
                 } else {
                     $stmt->close();
-                    return ['success' => false, 'message' => 'Erro ao enviar a notificação.']; exit();
+                    return ['success' => false, 'message' => 'Erro ao enviar a notificação.'];
                 }
             } else {
-                return ['success' => false, 'message' => 'Erro ao preparar a consulta.']; exit();
+                return ['success' => false, 'message' => 'Erro ao preparar a consulta.'];
             }
-        }      
+        }   
+        
+        public function aceitarRefeicao($id) {
+            
+        }
     }
 ?>

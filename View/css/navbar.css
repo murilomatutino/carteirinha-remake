@@ -1,4 +1,11 @@
 /* Estilo geral */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -39,11 +46,11 @@ img.notification-icon {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   z-index: 1001; /* Garantir que o popup fique acima do fundo */
   display: none;
+  max-height: 258px;
 
   position: fixed;
-  top: 25%;
-  left: 33%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
 }
 
 .popup2 h1 {
@@ -69,6 +76,10 @@ footer {
 
 /* ANIMAÇÃO DO POPUP DE NOTIFICAÇÃO */
 .open {
+  /* position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); */
   animation: fadeExpandIn 0.3s ease-out forwards;
 }
 
@@ -272,17 +283,13 @@ h1 {
 }
 
 .expanded {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  max-height: 400px;
   animation: expandNotification 0.5s forwards;
-  height: fit-content;
 }
 
 .popup2.expanded * {
   /* opacity: 0; */
-  animation: fadeIn 0.7s forwards;
+  animation: fadeIn 0.35s forwards;
   opacity: 1;
 }
 

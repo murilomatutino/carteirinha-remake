@@ -17,5 +17,17 @@
             $assunto = $this->model->getAssunto($userId);
             return $assunto;
         }
+
+        public function aceitarRefeicao($idUser) {
+            if ($this->model->isActive($idUser)) {
+                if ($this->model->aceitarRefeicao($idUser)) {
+                    echo json_encode(['status'=> 'success', 'message' => 'Refeição aceita com sucesso']); exit();
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Falha ao aceitar refeição']); exit();
+                }
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Reserva não encontrada!']); exit();
+            }
+        }
     }
 ?>
