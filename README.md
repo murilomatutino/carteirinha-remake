@@ -4,6 +4,7 @@ Remake do projeto carteirinha IFBA
 ## Tasks to do:
 ### Prioridade atual:
 - Nas notificações, criar função de aceitar transferencia de reserva(no alvo);
+- Corrigir alinhamento do popup de notificação;
 
 ### Prioridade média:
 - Criar Funcionamento dos popups da navbar;
