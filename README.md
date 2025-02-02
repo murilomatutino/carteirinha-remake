@@ -3,11 +3,9 @@ Remake do projeto carteirinha IFBA
 
 ## Tasks to do:
 ### Prioridade atual:
-- Nas notificações, criar função de aceitar transferencia de reserva(no alvo);
-- Corrigir alinhamento do popup de notificação;
+- Em processo de criação da função de aceitar refeição, falta model;
 
 ### Prioridade média:
-- Criar Funcionamento dos popups da navbar;
 - Criar popup de Alerta e Sucesso personalizado para funções;
 - Criar Servidor para testes locais;
 - Arrumar problema com a camera dos celulares;
@@ -16,7 +14,6 @@ Remake do projeto carteirinha IFBA
 - Mover todas as popups do footer para a navbar;
   
 ### Pode esperar:
-- Criar refactor do CardapioController;
 - Criar redirecionador para aproveitar apenas um QR Code tanto para agendar reserva quanto para almoçar;
 - Esconder formulário de contato no Sobre.
 
