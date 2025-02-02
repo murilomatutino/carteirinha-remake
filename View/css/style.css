@@ -18,6 +18,10 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+template {
+  display: none !important;
+}
+
 body{
   background-color: white;
   height: 100%;
@@ -601,11 +605,6 @@ form {
   margin-bottom: 20px;
 }
 
-.notification-item {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
 .notification-item:last-child {
   border-bottom: none;
 }
@@ -726,32 +725,6 @@ form {
 
 .popup h2 {
   text-align: center;
-}
-
-/* Estilo básico para a lista de notificações */
-.notification-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  font-size: 16px;
-}
-
-/* Estilo do botão Exibir Detalhes */
-.notification-item .button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-/* Hover do botão Exibir Detalhes */
-.notification-item .button:hover {
-  background-color: #45a049;
 }
 
 .popup {

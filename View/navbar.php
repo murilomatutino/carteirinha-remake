@@ -5,15 +5,15 @@
 ?>
 
 <?php
-    function notificationIcon() {
+    function notificationIcon($path) {
         if (isset($_SESSION['logged_in'])) {
             $notController = new NotificationController();
             $result = $notController->hasNotification($_SESSION['id']);
 
             if ($result == 0) {
-                return WPATH . "/View/assets/notification2.png";
+                return (string) $path . "/View/assets/notification2.png";
             } else {
-                return WPATH . "/View/assets/notification.png";
+                return (string) $path . "/View/assets/notification.png";
             }
         }
     }
@@ -117,3 +117,19 @@
         <button class="close-btn-2">Fechar</button>
     </footer>
 </template>
+
+<div class="notification-item">
+    <img src="assets/alert.png" alt="icone de alerta">
+    <div>
+        <h2 class="title">Transferencia de reserva</h2>
+        <p id="notification-text">Requisição de transferencia de reserva</p>
+    </div>
+</div>
+
+<div class="notification-item">
+    <img src="assets/alert.png" alt="icone de alerta">
+    <div>
+        <h2 class="title">Atualização</h2>
+        <p id="notification-text">Detalhes da Atualização</p>
+    </div>
+</div>

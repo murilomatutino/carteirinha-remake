@@ -8,8 +8,7 @@
             $this->model = new Model();
         }
 
-        public function hasNotification() {
-            $userId = $_SESSION['id'];
+        public function hasNotification($userId) {
             $hasNotification = $this->model->hasNotification($userId);
             return $hasNotification;
         }

@@ -221,6 +221,21 @@ if (notificationNavbar) {
         animations.showNavbarNotification(popup2, overlay2, document.body);
         popup2.innerHTML = notificationDefault.innerHTML;
 
+        const notificationContent = document.querySelector('#content');
+        const notificationItems = document.querySelectorAll('.notification-item');
+
+        setTimeout(() => {
+            notificationItems.forEach((item, index) => {
+                let clonedItem = item.cloneNode(true);
+                notificationContent.appendChild(clonedItem);
+                clonedItem.style.animationDelay = `${index * 0.2}s`;
+
+                setTimeout(() => {
+                    clonedItem.classList.add('visible');
+                }, index * 200); 
+            });
+        }, 300);
+
         const closePopup2 = document.querySelector('.close-btn-2');
 
         if (closePopup2) {

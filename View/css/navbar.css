@@ -45,6 +45,10 @@ img.notification-icon {
   transform: translate(-50%, -50%);
 }
 
+.popup2 h1 {
+  text-align: center;
+}
+
 footer {
   width: 100%;
   height: 40px;
@@ -209,6 +213,56 @@ h1 {
 .profile-dropdown:hover .dropdown-menu {
   display: block;
 }
+
+.notification-item {
+  visibility: hidden;
+  position: absolute;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #5c5858;
+  opacity: 0 !important;
+  transform: translateX(-50%);
+  animation: fadeInFromLeft 0.5s forwards;
+}
+
+.notification-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.notification-item h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.notification-item p {
+  font-size: 16px;
+  margin: 0;
+  color: #5c5858;
+  margin-left: 5px;
+}
+
+.notification-item.visible {
+  visibility: visible;
+  position: relative;
+  display: flex;
+  opacity: 1 !important;
+  transform: translateX(0);
+}
+
+@keyframes fadeInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50%);
+  } to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 
 /* Responsividade - Ajustes para telas pequenas */
 @media (max-width: 768px) {
