@@ -186,7 +186,7 @@ ini_set('display_errors', 1);
         }        
 
         public function isActive($idUser) {
-            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND id_status_ref = 1 AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
             $stmt = $this->conn->prepare($sql);
         
             if ($stmt) {
@@ -268,9 +268,28 @@ ini_set('display_errors', 1);
                 return ['success' => false, 'message' => 'Erro ao preparar a consulta.'];
             }
         }   
+
+        public function getTransferenciaData($idUser) {
+            $sql = 'SELECT id_remetente, id_destinatario FROM notificacao WHERE id_destinatario = ? AND transferencia = 1';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('i', $idUser);
+            $stmt->execute();
+            $stmt->bind_result($idRemetente, $idDestinatario);
+            $stmt->fetch();
+            $stmt->close();
+            return $idRemetente;
+        }
         
-        public function aceitarRefeicao($id) {
-            
+        public function aceitarRefeicao($idDestinatario, $idRemetente) {
+            $sql = "UPDATE refeicao SET id_usuario = ? WHERE id_usuario = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ii", $idDestinatario, $idRemetente);
+
+            if ($stmt->execute()) {
+                return ["status" => true, "message" => "Reserva transferida com sucesso!"];
+            } else {
+                return ["status" => false, "message" => "Erro ao atualizar a reserva: " . $this->conn->error];
+            }
         }
     }
 ?>

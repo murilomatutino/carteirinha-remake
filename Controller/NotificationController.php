@@ -18,15 +18,20 @@
             return $assunto;
         }
 
-        public function aceitarRefeicao($idUser) {
-            if ($this->model->isActive($idUser)) {
-                if ($this->model->aceitarRefeicao($idUser)) {
-                    echo json_encode(['status'=> 'success', 'message' => 'Refeição aceita com sucesso']); exit();
+        private function getIdRemetente($idDestinatario) {
+            return $this->model->getTransferenciaData($idDestinatario);
+        }
+
+        public function aceitarRefeicao($idDestinatario) {
+            $idRemetente = $this->getIdRemetente($idDestinatario);
+            if (!$this->model->isActive($idDestinatario) && $this->model->isActive($idRemetente)) {
+                if ($this->model->aceitarRefeicao($idDestinatario, $idRemetente)['status']) {
+                    return ['status' => true, 'message' => 'Refeição aceita com sucesso'];
                 } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Falha ao aceitar refeição']); exit();
+                    return ['status' => false, 'message' => 'Falha ao aceitar refeição'];
                 }
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Reserva não encontrada!']); exit();
+                return ['status' => false, 'message' => 'Já existe reserva ativa no id do destinatário ou do remetente'];
             }
         }
     }

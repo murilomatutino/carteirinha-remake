@@ -138,7 +138,7 @@
         <h2 class="title">Transferencia de reserva</h2>
         <p id="notification-text">Requisição de transferencia de reserva</p>
     </div>
-    <button class="validar"></button>
+    <button class="validar" id="validar-transferencia"></button>
 </div>
 
 <div class="notification-item" id="update">

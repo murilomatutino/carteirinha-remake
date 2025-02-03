@@ -227,11 +227,12 @@ function botaoFechar() {
 function adicionarConteudo() {
     const notificationItems = document.querySelectorAll('.notification-item');
     const notificationContent = document.querySelector('#content');
-    const confirmBtn = document.querySelector('.validar');
+    animations.addContent(notificationItems, notificationContent);
+    const confirmBtn = document.querySelector('#validar-transferencia');
+
 
     if (confirmBtn) {
         confirmBtn.addEventListener('click', function() {
-            // aqui vai o popup de confirmação de ação
             ajax.getUserId().then(idUser => {
                 if (!idUser) {
                     console.error('ID do usuário não encontrado');
@@ -240,25 +241,21 @@ function adicionarConteudo() {
 
                 const data = {
                     operacao: "aceitarRefeicao",
-                    idUser: idUser
+                    idDestinatario: idUser
                 };
 
-                ajax.cancelarReserva(data)
+                ajax.acceptTransferencia(data)
                     .then(result => {
-                        // window.location.href = "cardapio.php?reserva=cancelada";
                         console.log(result);
                     })
                     .catch(error => {
                         console.log(error);
-                        // window.location.href = "cardapio.php?reserva=erro"
                     });
             }).catch(error => {
                 console.error('Erro ao pegar ID do usuário:', error);
             });
         });
     }
-
-    animations.addContent(notificationItems, notificationContent);
 }
 
 function exibirConteudo() {
