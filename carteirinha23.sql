@@ -1,0 +1,390 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Tempo de geração: 03/02/2025 às 02:54
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.0.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `carteirinha23`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `cardapio`
+--
+
+CREATE TABLE `cardapio` (
+  `id` int(11) NOT NULL,
+  `data_refeicao` date NOT NULL,
+  `dia` varchar(255) NOT NULL,
+  `principal` varchar(255) NOT NULL,
+  `acompanhamento` varchar(255) NOT NULL,
+  `sobremesa` varchar(255) NOT NULL,
+  `ind_excluido` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Despejando dados para a tabela `cardapio`
+--
+
+INSERT INTO `cardapio` (`id`, `data_refeicao`, `dia`, `principal`, `acompanhamento`, `sobremesa`, `ind_excluido`) VALUES
+(47, '2024-10-21', 'segunda', 'Carne cozida', 'Arroz e feijão', 'Maçã', 0),
+(48, '2024-10-22', 'terca', 'Calabresa assada', 'Alface', 'Laranja', 0),
+(49, '2024-10-23', 'quarta', 'Farofa de ovo', 'Salada', 'Banana', 0),
+(50, '2024-10-24', 'quinta', 'Feijoada', 'Farofa', 'a', 0),
+(51, '2024-10-25', 'sexta', 'Macarrão', 'Batata palha', 'Abacaxi', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `horario_padrao`
+--
+
+CREATE TABLE `horario_padrao` (
+  `id` int(11) NOT NULL,
+  `inicio_vig` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fim_vig` timestamp NULL DEFAULT NULL,
+  `horario` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Despejando dados para a tabela `horario_padrao`
+--
+
+INSERT INTO `horario_padrao` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
+(1, '2024-07-17 07:10:38', '2024-07-18 07:11:14', '16:10:00'),
+(2, '2024-07-18 07:11:14', '2024-07-19 07:14:12', '22:11:00'),
+(3, '2024-07-19 07:14:12', '2024-07-19 07:14:33', '04:14:00'),
+(4, '2024-07-19 07:14:33', '2024-07-26 12:19:36', '09:00:00'),
+(5, '2024-07-26 12:19:36', '2024-09-16 19:26:52', '10:19:00'),
+(6, '2024-09-16 19:26:52', NULL, '21:26:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `justificativa`
+--
+
+CREATE TABLE `justificativa` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Despejando dados para a tabela `justificativa`
+--
+
+INSERT INTO `justificativa` (`id`, `descricao`) VALUES
+(1, 'Aula no contra turno'),
+(2, 'Transporte'),
+(3, 'Projeto/TCC/Estágio'),
+(4, 'Outro');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `notificacao`
+--
+
+CREATE TABLE `notificacao` (
+  `id` int(11) NOT NULL,
+  `id_remetente` int(11) NOT NULL,
+  `id_destinatario` int(11) NOT NULL,
+  `data_hora` datetime NOT NULL DEFAULT current_timestamp(),
+  `assunto` text NOT NULL,
+  `mensagem` text NOT NULL,
+  `lida` tinyint(1) NOT NULL DEFAULT 0,
+  `transferencia` tinyint(1) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `notificacao`
+--
+
+INSERT INTO `notificacao` (`id`, `id_remetente`, `id_destinatario`, `data_hora`, `assunto`, `mensagem`, `lida`, `transferencia`, `status`) VALUES
+(4, 2, 3, '2025-02-02 21:46:56', 'Transferencia de Almoço', 'Saudações Botteste, o estudante Vitor fez a você uma solicitação de transferência de almoço!', 0, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `refeicao`
+--
+
+CREATE TABLE `refeicao` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_cardapio` int(11) NOT NULL,
+  `id_status_ref` int(11) NOT NULL,
+  `id_justificativa` int(11) DEFAULT NULL,
+  `data_solicitacao` date NOT NULL,
+  `hora_solicitacao` time NOT NULL,
+  `outra_justificativa` varchar(100) DEFAULT NULL,
+  `motivo_cancelamento` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Despejando dados para a tabela `refeicao`
+--
+
+INSERT INTO `refeicao` (`id`, `id_usuario`, `id_cardapio`, `id_status_ref`, `id_justificativa`, `data_solicitacao`, `hora_solicitacao`, `outra_justificativa`, `motivo_cancelamento`) VALUES
+(17, 3, 47, 1, 1, '2024-12-02', '17:20:02', NULL, NULL);
+
+--
+-- Acionadores `refeicao`
+--
+DELIMITER $$
+CREATE TRIGGER `trg01_refeicao` BEFORE INSERT ON `refeicao` FOR EACH ROW SET NEW.id_status_ref = 1
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg02_refeicao` BEFORE INSERT ON `refeicao` FOR EACH ROW SET NEW.data_solicitacao = CONVERT_TZ(NOW(),'+00:00', '+00:00')
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `status_msg`
+--
+
+CREATE TABLE `status_msg` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `status_msg`
+--
+
+INSERT INTO `status_msg` (`id`, `descricao`) VALUES
+(1, 'Lida'),
+(2, 'Não Lida');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `status_notification`
+--
+
+CREATE TABLE `status_notification` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `status_notification`
+--
+
+INSERT INTO `status_notification` (`id`, `descricao`) VALUES
+(1, 'Transferida'),
+(2, 'Cancelada'),
+(3, 'Cancelada por tempo');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `status_ref`
+--
+
+CREATE TABLE `status_ref` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Despejando dados para a tabela `status_ref`
+--
+
+INSERT INTO `status_ref` (`id`, `descricao`) VALUES
+(1, 'Agendada'),
+(2, 'Cancelada'),
+(3, 'Confirmada'),
+(4, 'Não compareceu');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `matricula` varchar(255) NOT NULL,
+  `senha` varchar(60) NOT NULL,
+  `categoria` varchar(255) NOT NULL,
+  `telefone` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nome`, `email`, `matricula`, `senha`, `categoria`, `telefone`) VALUES
+(1, 'root', 'root@gmail.com', '20201180041', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00'),
+(2, 'vitor', 'vitor@gmail.com', '20201180046', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00'),
+(3, 'botteste', 'botteste@gmail.com', '20201180011', '202cb962ac59075b964b07152d234b70', 'estudante', '75982777354');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `cardapio`
+--
+ALTER TABLE `cardapio`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `horario_padrao`
+--
+ALTER TABLE `horario_padrao`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `justificativa`
+--
+ALTER TABLE `justificativa`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `notificacao`
+--
+ALTER TABLE `notificacao`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_remetente` (`id_remetente`),
+  ADD KEY `fk_destinatario` (`id_destinatario`);
+
+--
+-- Índices de tabela `refeicao`
+--
+ALTER TABLE `refeicao`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_cardapio` (`id_cardapio`),
+  ADD KEY `id_status` (`id_status_ref`),
+  ADD KEY `id_justificativa` (`id_justificativa`);
+
+--
+-- Índices de tabela `status_msg`
+--
+ALTER TABLE `status_msg`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `status_notification`
+--
+ALTER TABLE `status_notification`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `status_ref`
+--
+ALTER TABLE `status_ref`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `cardapio`
+--
+ALTER TABLE `cardapio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT de tabela `horario_padrao`
+--
+ALTER TABLE `horario_padrao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `justificativa`
+--
+ALTER TABLE `justificativa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `notificacao`
+--
+ALTER TABLE `notificacao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `refeicao`
+--
+ALTER TABLE `refeicao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de tabela `status_msg`
+--
+ALTER TABLE `status_msg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `status_notification`
+--
+ALTER TABLE `status_notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `status_ref`
+--
+ALTER TABLE `status_ref`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `notificacao`
+--
+ALTER TABLE `notificacao`
+  ADD CONSTRAINT `fk_destinatario` FOREIGN KEY (`id_destinatario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_remetente` FOREIGN KEY (`id_remetente`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `refeicao`
+--
+ALTER TABLE `refeicao`
+  ADD CONSTRAINT `refeicao_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `refeicao_ibfk_2` FOREIGN KEY (`id_cardapio`) REFERENCES `cardapio` (`id`),
+  ADD CONSTRAINT `refeicao_ibfk_3` FOREIGN KEY (`id_status_ref`) REFERENCES `status_ref` (`id`),
+  ADD CONSTRAINT `refeicao_ibfk_4` FOREIGN KEY (`id_justificativa`) REFERENCES `justificativa` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
