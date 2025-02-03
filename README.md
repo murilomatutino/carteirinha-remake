@@ -3,7 +3,8 @@ Remake do projeto carteirinha IFBA
 
 ## Tasks to do:
 ### Prioridade atual:
-- Em processo de criação da função de aceitar refeição, falta model;
+- Em processo de criação da função de aceitar refeição - feito;
+- Task acima falta: notificação de confirmação, alteração da notificação de solicitação
 
 ### Prioridade média:
 - Criar popup de Alerta e Sucesso personalizado para funções;
