@@ -232,7 +232,6 @@ function adicionarConteudo() {
     animations.addContent(notificationItems, notificationContent);
     const confirmBtn = document.querySelector('#validar-transferencia');
 
-
     if (confirmBtn) {
         confirmBtn.addEventListener('click', function() {
             ajax.getUserId().then(idUser => {
@@ -266,18 +265,39 @@ function exibirConteudo() {
     const popup2 = document.querySelector('#popup2');
     const notificationItems = document.querySelectorAll('#content .notification-item');
     const notificationContent = document.querySelectorAll('#content .notification-content');
-    const notificationDefault = document.querySelector('#default');
+    const notificationDefault = document.querySelector('#default-template');
 
     notificationContent.forEach((item, index) => {
         item.addEventListener('click', function() {
             if (notificationItems[index].classList.contains('visible')) {
                 popup2.innerHTML = '';
                 animations.showContent(popup2);
-                console.log(item.id);
 
                 setTimeout(() => {
-                    const notificationOpen = document.querySelector('#open');
+                    const notificationOpen = document.querySelector('#open-template');
                     popup2.innerHTML = notificationOpen.innerHTML;
+
+                    ajax.getUserId().then(idUser => {
+                        if (!idUser) {
+                            console.error('ID do usuário não encontrado');
+                            return;
+                        }
+
+                        const dados = {
+                            operacao: "getNotification",
+                            idUser: idUser,
+                            idNotificacao: this.id,
+                        }
+
+                        ajax.getNotification(dados).then(notifications => {
+                            popup2.querySelector('.title').textContent = notifications.assunto;
+                            popup2.querySelector('#content').textContent = notifications.mensagem;
+                        }).catch(error => {
+                            console.error('Erro ao pegar notificação:', error);
+                        });
+                    }).catch(error => {
+                        console.error('Erro ao pegar ID do usuário:', error);
+                    });
 
                     // Adicionar evento de voltar
                     document.querySelector('#back').addEventListener('click', function() {
@@ -297,7 +317,7 @@ if (notificationNavbar) {
     notificationNavbar.addEventListener('click', function() {
         const overlay2 = document.querySelector('#overlay2');
         const popup2 = document.querySelector('#popup2');
-        const notificationDefault = document.querySelector('#default');
+        const notificationDefault = document.querySelector('#default-template');
         
         animations.showNavbarNotification(popup2, overlay2, document.body);
         popup2.innerHTML = '';

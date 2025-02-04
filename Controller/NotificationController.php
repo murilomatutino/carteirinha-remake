@@ -18,8 +18,8 @@
             return $assunto;
         }
 
-        public function getNotification($userId) {
-            return $this->model->getNotification($userId);
+        public function getNotification($userId, $idNotification = null){
+            return $this->model->getNotification($userId, $idNotification);
         }
 
         private function getIdRemetente($idDestinatario): int {

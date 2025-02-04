@@ -101,3 +101,33 @@ export async function acceptTransferencia(dados) {
         return null;
     }
 }
+
+export async function getNotification(dados) {
+    try {
+        const response = await fetch('../Controller/refactor.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(dados).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao encontrar notificações: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            return result.array[0];
+        } else {
+            console.error('Erro ao encontrar notificações 2:', result.message);
+        }
+
+        return result;
+
+    } catch (error) {
+        console.error('Erro:', error.message || error);
+        return null;
+    }
+}

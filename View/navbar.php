@@ -106,9 +106,9 @@
 <div class="popup2" id="popup2">
 </div>
 
-<template class="notification" id="default">
+<template class="notification" id="default-template">
     <header>
-        <h1>Notificações</h1>
+        <h1 class="title"></h1>
     </header>
 
     <main id="content"></main>
@@ -118,14 +118,12 @@
     </footer>
 </template>
 
-<template class="notification" id="open">
+<template class="notification" id="open-template">
     <header>
-        <h2 class="title">Transferencia de reserva</h2>
+        <h2 class="title"></h2>
     </header>
 
-    <main id="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt dolorum molestiae iste nulla non cum praesentium pariatur ex itaque, voluptate facilis repudiandae temporibus! Quisquam deserunt nam dolor ipsum ipsa accusamus!</p>
-    </main>
+    <main id="content"><p></p></main>
 
     <footer>
         <button id="back">Voltar</button>
@@ -147,9 +145,9 @@
                 $read = $value['lida'] == 0 ? '' : 'lida';
                 $mensagem = (strlen($value['mensagem']) > 100) ? substr($value['mensagem'], 0, 40) . "..." : $value['mensagem'];
 
-                echo "<div class='notification-item {$type} {$read} id='{$value['id']}'>";
+                echo "<div class='notification-item {$type} {$read}'>";
                 echo "<img src='assets/alert.png' alt='icone de alerta'>";
-                echo "<div class='notification-content'>";
+                echo "<div class='notification-content' id='{$value['id']}'>";
                 echo "<div class='assunto {$read}'><h2 class='title'>{$value['assunto']}</h2><span>Lida</span></div>";
                 echo "<p id='notification-text'>{$mensagem}</p>";
                 echo "</div>";

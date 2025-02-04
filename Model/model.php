@@ -63,16 +63,24 @@ ini_set('display_errors', 1);
             }            
         }
 
-        public function getNotification(int $userId) {
-            $sql = "SELECT * FROM notificacao WHERE id_destinatario = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("i", $userId);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
-            
-            $notificacoes = $resultado->fetch_all(MYSQLI_ASSOC);
-            
-            return $notificacoes;
+        public function getNotification(int $userId, $idNotification) {
+            if ($idNotification !== null) { 
+                $sql = "SELECT * FROM notificacao WHERE id_destinatario = ? AND id = ?"; 
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ii", $userId, $idNotification);
+            } else { 
+                $sql = "SELECT * FROM notificacao WHERE id_destinatario = ?"; 
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("i", $userId);
+            }
+
+            if ($stmt->execute()) {
+                $resultado = $stmt->get_result();
+                $notificacoes = $resultado->fetch_all(MYSQLI_ASSOC);
+                return $notificacoes;
+            }
+
+            return null;            
         }
 
         public function getCardapio() {
