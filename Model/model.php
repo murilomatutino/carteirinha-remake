@@ -211,27 +211,28 @@ ini_set('display_errors', 1);
         }        
 
         public function isActive($idUser) {
+            date_default_timezone_set('America/Sao_Paulo');
             $dataAtual = date("Y-m-d");
-            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND id_status_ref = 1 AND data_solicitacao = ? AND motivo_cancelamento IS NULL";
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND data_solicitacao = ? AND id_status_ref = 1 AND motivo_cancelamento IS NULL";
             $stmt = $this->conn->prepare($sql);
-        
-            if ($stmt) {
-                $stmt->bind_param('is', $idUser,  $dataAtual);
-                $stmt->execute();
+            $stmt->bind_param('is', $idUser,  $dataAtual);
+            
+            if ($stmt->execute()) {
                 $stmt->bind_result($quantidade);
                 $stmt->fetch();
                 $stmt->close();
         
                 return $quantidade > 0;  
-            } else {
-                return false;
             }
+
+            return false;
         }
 
         public function transferenciaIsActive($idUser) {
+            date_default_timezone_set('America/Sao_Paulo');
+            $dataAtual = date("Y-m-d");
             $sql = "SELECT COUNT(*) FROM notificacao WHERE id_remetente = ? AND data = ? AND transferencia = 1";
             $stmt = $this->conn->prepare($sql);
-            $dataAtual = date("Y-m-d");
 
             if ($stmt) {
                 $stmt->bind_param('is', $idUser, $dataAtual);

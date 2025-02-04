@@ -151,7 +151,7 @@
                 echo "<div class='assunto {$read}'><h2 class='title'>{$value['assunto']}</h2><span>Lida</span></div>";
                 echo "<p id='notification-text'>{$mensagem}</p>";
                 echo "</div>";
-                if ($value['transferencia'] == 1) echo "<button class='validar' id='validar-transferencia'>Confirmar</button>";
+                if ($value['transferencia'] == 1) echo "<button class='validar' id='validar-transferencia'></button>";
                 echo "</div>";
             }
         } else {

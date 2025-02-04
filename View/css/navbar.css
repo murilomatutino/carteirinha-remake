@@ -289,7 +289,6 @@ h1 {
 }
 
 .popup2 footer button {
-  background-color: #ff4747;
   color: #fff;
   border: none;
   padding: 10px;
@@ -297,6 +296,10 @@ h1 {
   border-radius: 5px;
   cursor: pointer;
   width: 150px;
+}
+
+.popup2 footer button#back {
+  background-color: #ff4747;
 }
 
 .popup2.expanded header h2 {

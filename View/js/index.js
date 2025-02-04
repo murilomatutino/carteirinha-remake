@@ -91,14 +91,18 @@ if (page === 'agendados.php') {
         const btnCancel = document.createElement("button");
         const labelMotivo = document.createElement("label");
 
-        inputMotivo.setAttribute("id", "outro");
-        inputMotivo.setAttribute("name", "outro");
-        inputMotivo.setAttribute("placeholder", "Digite o motivo...");
+        Object.assign(inputMotivo, { id: "outro", name: "outro", placeholder: "Digite o motivo..." });
+        // inputMotivo.setAttribute("id", "outro");
+        // inputMotivo.setAttribute("name", "outro");
+        // inputMotivo.setAttribute("placeholder", "Digite o motivo...");
 
         divButtons.classList.add("botao-container");
-        btnConfirm.setAttribute("type", "submit");
-        btnConfirm.setAttribute("id", "confirmar");
-        btnConfirm.classList.add("validar");
+
+        Object.assign(btnConfirm, { type: "submit", id: "confirmar", classList: "validar" });
+
+        // btnConfirm.setAttribute("type", "submit");
+        // btnConfirm.setAttribute("id", "confirmar");
+        // btnConfirm.classList.add("validar");
         btnCancel.classList.add("cancelar");
 
         divButtons.appendChild(btnCancel);
@@ -153,9 +157,11 @@ if (page === 'agendados.php') {
             const labelMatricula = document.createElement("label");
             const inputMatricula = document.createElement("input");
 
-            inputMatricula.setAttribute("id", "matricula");
-            inputMatricula.setAttribute("name", "matricula");
-            inputMatricula.setAttribute("placeholder", "Matrícula alvo");
+            Object.assign(inputMatricula, { id: "matricula", name: "matricula", placeholder: "Matrícula alvo" });
+
+            // inputMatricula.setAttribute("id", "matricula");
+            // inputMatricula.setAttribute("name", "matricula");
+            // inputMatricula.setAttribute("placeholder", "Matrícula alvo");
 
             labelMatricula.textContent = "MATRÍCULA";
 
@@ -226,39 +232,39 @@ function botaoFechar() {
     }
 }
 
+function botaoConfirmar(button) {
+    button.addEventListener('click', function() {
+        ajax.getUserId().then(idUser => {
+            if (!idUser) {
+                console.error('ID do usuário não encontrado');
+                return;
+            }
+
+            const data = {
+                operacao: "aceitarRefeicao",
+                idDestinatario: idUser
+            };
+
+            ajax.acceptTransferencia(data)
+                .then(result => {
+                    window.location.href = "cardapio.php?transferencia=success";
+                })
+                .catch(error => {
+                    window.location.href = "cardapio.php?transferencia=error";
+                });
+        }).catch(error => {
+            console.error('Erro ao pegar ID do usuário:', error);
+        });
+    });
+}
+
 function adicionarConteudo() {
     const notificationItems = document.querySelectorAll('.notification-item');
     const notificationContent = document.querySelector('#content');
     animations.addContent(notificationItems, notificationContent);
     const confirmBtn = document.querySelector('#validar-transferencia');
 
-    if (confirmBtn) {
-        confirmBtn.addEventListener('click', function() {
-            ajax.getUserId().then(idUser => {
-                if (!idUser) {
-                    console.error('ID do usuário não encontrado');
-                    return;
-                }
-
-                const data = {
-                    operacao: "aceitarRefeicao",
-                    idDestinatario: idUser
-                };
-
-                ajax.acceptTransferencia(data)
-                    .then(result => {
-                        // console.log(result);
-                        window.location.href = "cardapio.php?transferencia=success";
-                    })
-                    .catch(error => {
-                        // console.log(error);
-                        window.location.href = "cardapio.php?transferencia=error";
-                    });
-            }).catch(error => {
-                console.error('Erro ao pegar ID do usuário:', error);
-            });
-        });
-    }
+    if (confirmBtn) botaoConfirmar(confirmBtn); 
 }
 
 function exibirConteudo() {
@@ -275,6 +281,9 @@ function exibirConteudo() {
 
                 setTimeout(() => {
                     const notificationOpen = document.querySelector('#open-template');
+                    const confirmBtn = document.createElement('button');
+
+                    Object.assign(confirmBtn, { id: 'validar-transferencia-in', classList: 'validar' });
                     popup2.innerHTML = notificationOpen.innerHTML;
 
                     ajax.getUserId().then(idUser => {
@@ -290,6 +299,12 @@ function exibirConteudo() {
                         }
 
                         ajax.getNotification(dados).then(notifications => {
+                            if (notifications.transferencia === 1) {
+                                popup2.querySelector('footer').appendChild(confirmBtn);
+                                if (confirmBtn) botaoConfirmar(confirmBtn); 
+                            }
+                    
+
                             popup2.querySelector('.title').textContent = notifications.assunto;
                             popup2.querySelector('#content').textContent = notifications.mensagem;
                         }).catch(error => {

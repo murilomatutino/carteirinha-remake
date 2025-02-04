@@ -6,8 +6,7 @@ Remake do projeto carteirinha IFBA
 
 ### Prioridade atual:
 
-- Adicionar botão de confirmar transferencia dentro da notificação;
-- Após confirmar transferencia, remover o botão e adicionar status: "em transferencia, aguardando aceite" para evitar bugs;
+- Adicionar status: "Recebida, voce tem até $horario para aceitar" para evitar bugs;
 - Adicionar icone no lugar de "lida" na notificação;
 
 ### Prioridade média:
@@ -33,5 +32,7 @@ Remake do projeto carteirinha IFBA
 
 ### Feito recentemente:
 
+- Após confirmar transferencia, remover o botão
+- Adicionar botão de confirmar transferencia dentro da notificação;
 - Mostrar notificações reais(do banco de dados) na lista de notificações;
 - Exibir dados reais ao abrir notificação(banco de dados);
