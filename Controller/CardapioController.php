@@ -1,29 +1,7 @@
 <?php
     // error_reporting(E_ALL);
     // ini_set('display_errors', 1);
-
     require_once __DIR__ . '/../Model/model.php';
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $idJustificativa = 0;
-        $justificativa = $_POST['justificativa'];
-        $idUser = $_POST['idUser'];
-        $diaDaSemana = $_POST['diaDaSemana'];
-
-        if ($justificativa == "outro") {
-            $idJustificativa = 4;
-            $justificativa = $_POST["outro"];
-        } else {
-            $idJustificativa = match ($justificativa) {
-                "contra-turno" => 1,
-                "transporte"   => 2,
-                "projeto"      => 3,
-                default        => null,
-            };
-        }
-        
-        (new CardapioController)->processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana);
-    }
 
     class CardapioController {
         public $model;
@@ -57,34 +35,35 @@
 
             $result = $this->model->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
 
-            $reserva = "confirmada";
-            if (!$result) { $reserva = "erro"; }
-
-            header("Location: ../View/cardapio.php?reserva={$reserva}"); exit();
+            if ($result['status']) {
+                return ['status' => true, 'message' => $result['message']];
+            } else {
+                return ['status'=> false, 'message'=> $result['message']];
+            }
         }
 
         public function cancelarReserva($idUser, $motivo) {
             // Primeiramente, verificamos se a reserva existe e está ativa
             if ($this->model->isActive($idUser)) {
                 if ($this->model->cancelarReserva($idUser, $motivo)) {
-                    echo json_encode(['status' => 'success', 'message' => 'Reserva cancelada com sucesso']); exit();
+                    return ['status' => true, 'message' => 'Reserva cancelada com sucesso'];
                 } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Falha ao cancelar a reserva']); exit();
+                    return ['status' => false, 'message' => 'Falha ao cancelar a reserva'];
                 }
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Reserva não encontrada ou já foi cancelada']); exit();
+                return ['status' => false, 'message' => 'Reserva não encontrada ou já foi cancelada'];
             }
         }
         
         public function transferirReserva($idUser, $motivo, $matriculaAlvo) {
             if ($this->model->isActive($idUser)) {
                 if ($this->model->transferirReserva($idUser, $motivo, $matriculaAlvo)['success']) {
-                    echo json_encode(['status' => 'success', 'message' => 'Reserva transferida com sucesso']); exit();
+                    return ['status' => true, 'message' => 'Reserva transferida com sucesso'];
                 } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Falha ao transferir reserva']); exit();
+                    return ['status' => false, 'message' => 'Falha ao transferir reserva'];
                 }
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Reserva não encontrada!']); exit();
+                return ['status' => false, 'message' => 'Reserva não encontrada!'];
             }
         }
     }

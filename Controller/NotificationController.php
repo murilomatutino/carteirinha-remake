@@ -18,7 +18,7 @@
             return $assunto;
         }
 
-        private function getIdRemetente($idDestinatario) {
+        private function getIdRemetente($idDestinatario): int {
             return $this->model->getTransferenciaData($idDestinatario);
         }
 

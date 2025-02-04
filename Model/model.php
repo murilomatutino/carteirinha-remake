@@ -155,8 +155,12 @@ ini_set('display_errors', 1);
         
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("iiissss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
-        
-            return $stmt->execute() ? true : false;
+            
+            if ($stmt->execute()) {
+                return ['status' => true, 'message' => 'success'];
+            } else {
+                return ['status'=> false,'message'=> 'error'];
+            }
         }
 
         private function getUserDataForTransfer($matriculaAlvo, $idRemetente) {
@@ -186,11 +190,12 @@ ini_set('display_errors', 1);
         }        
 
         public function isActive($idUser) {
-            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND id_status_ref = 1 AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
+            $dataAtual = date("Y-m-d");
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND id_status_ref = 1 AND data_solicitacao = ? AND motivo_cancelamento IS NULL";
             $stmt = $this->conn->prepare($sql);
         
             if ($stmt) {
-                $stmt->bind_param('i', $idUser);
+                $stmt->bind_param('is', $idUser,  $dataAtual);
                 $stmt->execute();
                 $stmt->bind_result($quantidade);
                 $stmt->fetch();
@@ -203,11 +208,12 @@ ini_set('display_errors', 1);
         }
 
         public function transferenciaIsActive($idUser) {
-            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_remetente = ?";
+            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_remetente = ? AND data = ? AND transferencia = 1";
             $stmt = $this->conn->prepare($sql);
+            $dataAtual = date("Y-m-d");
 
             if ($stmt) {
-                $stmt->bind_param('i', $idUser);
+                $stmt->bind_param('is', $idUser, $dataAtual);
                 $stmt->execute();
                 $stmt->bind_result($quantidade);
                 $stmt->fetch();
@@ -281,12 +287,22 @@ ini_set('display_errors', 1);
         }
         
         public function aceitarRefeicao($idDestinatario, $idRemetente) {
-            $sql = "UPDATE refeicao SET id_usuario = ? WHERE id_usuario = ?";
+            $dataAtual = date("Y-m-d");
+            $sql = "UPDATE refeicao SET id_usuario = ? WHERE id_usuario = ? AND data_solicitacao = ?";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("ii", $idDestinatario, $idRemetente);
+            $stmt->bind_param("iis", $idDestinatario, $idRemetente, $dataAtual);
 
             if ($stmt->execute()) {
-                return ["status" => true, "message" => "Reserva transferida com sucesso!"];
+                $sqlNoti = "UPDATE notificacao SET lida = 1, transferencia = 2 WHERE id_destinatario = ? AND id_remetente = ? AND transferencia = 1 AND data = ?";
+
+                $stmtNoti = $this->conn->prepare($sqlNoti);
+                $stmtNoti->bind_param("iis", $idDestinatario, $idRemetente, $dataAtual);
+
+                if ($stmtNoti->execute()) {
+                    return ["status" => true, "message" => "Reserva transferida com sucesso!"];
+                } else {
+                    return ["status" => false, "message" => "Erro ao atualizar a notificação: " . $this->conn->error]; 
+                }
             } else {
                 return ["status" => false, "message" => "Erro ao atualizar a reserva: " . $this->conn->error];
             }

@@ -126,13 +126,15 @@ if (page === 'agendados.php') {
                         motivo: document.querySelector("#outro").value,
                         idUser: idUser
                     };
+
+                    console.log(document.querySelector("#outro").value);
         
                     ajax.cancelarReserva(data)
                         .then(result => {
-                            window.location.href = "cardapio.php?reserva=cancelada";
+                            window.location.href = "cardapio.php?reserva=success";
                         })
                         .catch(error => {
-                            window.location.href = "cardapio.php?reserva=erro"
+                            window.location.href = "cardapio.php?reserva=error"
                         });
                 }).catch(error => {
                     console.error('Erro ao pegar ID do usuário:', error);
@@ -177,10 +179,10 @@ if (page === 'agendados.php') {
                     // FAZER AJAX AQUI 
                     ajax.transferirReserva(dados)
                         .then(result => {
-                            window.location.href = "cardapio.php?reserva=transferida";
+                            window.location.href = "cardapio.php?solicitacao=success";
                         })
                         .catch(error => {
-                            window.location.href = "cardapio.php?reserva=erro";
+                            window.location.href = "cardapio.php?solicitacao=error";
                         });
                     });
             });
@@ -246,10 +248,12 @@ function adicionarConteudo() {
 
                 ajax.acceptTransferencia(data)
                     .then(result => {
-                        console.log(result);
+                        // console.log(result);
+                        window.location.href = "cardapio.php?transferencia=success";
                     })
                     .catch(error => {
-                        console.log(error);
+                        // console.log(error);
+                        window.location.href = "cardapio.php?transferencia=error";
                     });
             }).catch(error => {
                 console.error('Erro ao pegar ID do usuário:', error);

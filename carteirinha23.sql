@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 03/02/2025 às 02:54
+-- Tempo de geração: 04/02/2025 às 20:44
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -104,20 +104,20 @@ CREATE TABLE `notificacao` (
   `id` int(11) NOT NULL,
   `id_remetente` int(11) NOT NULL,
   `id_destinatario` int(11) NOT NULL,
-  `data_hora` datetime NOT NULL DEFAULT current_timestamp(),
+  `data` date NOT NULL DEFAULT current_timestamp(),
+  `hora` time NOT NULL DEFAULT current_timestamp(),
   `assunto` text NOT NULL,
   `mensagem` text NOT NULL,
   `lida` tinyint(1) NOT NULL DEFAULT 0,
-  `transferencia` tinyint(1) NOT NULL DEFAULT 0,
-  `status` int(11) NOT NULL DEFAULT 0
+  `transferencia` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `notificacao`
 --
 
-INSERT INTO `notificacao` (`id`, `id_remetente`, `id_destinatario`, `data_hora`, `assunto`, `mensagem`, `lida`, `transferencia`, `status`) VALUES
-(4, 2, 3, '2025-02-02 21:46:56', 'Transferencia de Almoço', 'Saudações Botteste, o estudante Vitor fez a você uma solicitação de transferência de almoço!', 0, 1, 0);
+INSERT INTO `notificacao` (`id`, `id_remetente`, `id_destinatario`, `data`, `hora`, `assunto`, `mensagem`, `lida`, `transferencia`) VALUES
+(8, 3, 2, '2025-02-04', '16:09:28', 'Transferência de Almoço', 'Saudações Vitor, o estudante Botteste fez a você uma solicitação de transferência de almoço!\n\nMotivo: nao quero mais', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,9 @@ CREATE TABLE `refeicao` (
 --
 
 INSERT INTO `refeicao` (`id`, `id_usuario`, `id_cardapio`, `id_status_ref`, `id_justificativa`, `data_solicitacao`, `hora_solicitacao`, `outra_justificativa`, `motivo_cancelamento`) VALUES
-(17, 3, 47, 1, 1, '2024-12-02', '17:20:02', NULL, NULL);
+(18, 2, 47, 1, 3, '2025-02-03', '16:40:39', 'projeto', 'nao quero mais'),
+(19, 2, 47, 1, 2, '2025-02-03', '17:18:25', 'transporte', NULL),
+(20, 2, 48, 1, 1, '2025-02-04', '15:45:15', 'contra-turno', NULL);
 
 --
 -- Acionadores `refeicao`
@@ -191,9 +193,11 @@ CREATE TABLE `status_notification` (
 --
 
 INSERT INTO `status_notification` (`id`, `descricao`) VALUES
-(1, 'Transferida'),
-(2, 'Cancelada'),
-(3, 'Cancelada por tempo');
+(0, 'Sem transferência'),
+(1, 'Em processo\r\n'),
+(2, 'Transferida'),
+(3, 'Cancelada'),
+(5, 'Cancelada por tempo');
 
 -- --------------------------------------------------------
 
@@ -269,7 +273,8 @@ ALTER TABLE `justificativa`
 ALTER TABLE `notificacao`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_remetente` (`id_remetente`),
-  ADD KEY `fk_destinatario` (`id_destinatario`);
+  ADD KEY `fk_destinatario` (`id_destinatario`),
+  ADD KEY `fk_transferencia_notification` (`transferencia`);
 
 --
 -- Índices de tabela `refeicao`
@@ -332,13 +337,13 @@ ALTER TABLE `justificativa`
 -- AUTO_INCREMENT de tabela `notificacao`
 --
 ALTER TABLE `notificacao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `refeicao`
 --
 ALTER TABLE `refeicao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `status_msg`
@@ -350,7 +355,7 @@ ALTER TABLE `status_msg`
 -- AUTO_INCREMENT de tabela `status_notification`
 --
 ALTER TABLE `status_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `status_ref`
@@ -373,7 +378,8 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `notificacao`
   ADD CONSTRAINT `fk_destinatario` FOREIGN KEY (`id_destinatario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_remetente` FOREIGN KEY (`id_remetente`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_remetente` FOREIGN KEY (`id_remetente`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_transferencia_notification` FOREIGN KEY (`transferencia`) REFERENCES `status_notification` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Restrições para tabelas `refeicao`

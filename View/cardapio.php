@@ -64,16 +64,16 @@
             ?>
         </table>
 
-        <template class='null-adm'>
+        <template class='null-adm' id="cardapio-template">
             <h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>
             <a href='cardapio-criar.php'><button class='button'>Adicionar cardápio</button></a>
         </template>
 
-        <template class='null-user'>
+        <template class='null-user' id="cardapio-template">
             <h3 class='null'>O cardápio ainda está vazio. Aguarde por atualizações.</h3>
         </template>
 
-        <template class='adm-template'>
+        <template class='adm-template' id="cardapio-template">
             <div class='separador'>
                 <div class='button-group'>
                     <button class='button-excluir' onclick='cardapio_popup()'>Excluir</button>
@@ -83,15 +83,15 @@
             </div>
         </template>
 
-        <template class='user-template-agendado'>
+        <template class='user-template-agendado' id="cardapio-template">
             <a href='agendados.php'><button class='button agendado'>Minha Reserva</button></a>
         </template>
 
-        <template class='user-template-out-time'>
+        <template class='user-template-out-time' id="cardapio-template">
             <span class='horario-limite'>Horário limite atingido!</span>
         </template>
 
-        <template class='user-template-in-time'>
+        <template class='user-template-in-time' id="cardapio-template">
             <a href='cardapio-reserva.php'><button class='button'>Quero almoçar!</button></a>
         </template>
 
@@ -118,26 +118,16 @@
         const horario_padrao = <?= json_encode($horario_padrao) ?>;
         const hasRefeicao = <?= json_encode($hasRefeicao) ?>;
 
-        if (category === "adm" && cardapio.length > 0 && cardapio[0]['dia'] !== '') {
-            showTemplate(2);
-        } else if (category === "adm" && (cardapio.length === 0 || cardapio[0]['dia'] === '')) {
-            showTemplate(0);
-        } else if (category !== "adm" && cardapio.length > 0 && cardapio[0]['dia'] !== '') {
-            if (hasRefeicao !== null && hasRefeicao) {
-                showTemplate(3);
-            } else if (diaDaSemana === 0 || diaDaSemana === 6) {
-                showTemplate(4);
-            } else if (current_time >= horario_padrao) {
-                showTemplate(4);
-            } else if (current_time <= horario_padrao) {
-                showTemplate(5);
-            } 
-        } else if (category !== "adm" && (cardapio.length === 0 || cardapio[0]['dia'] === '')) {
-            showTemplate(1);
+        if (category === 'adm' && cardapio.length > 0 && cardapio[0] !== '') { showTemplate(2); } 
+        else if (category === 'adm' && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(0); } 
+        else if (category !== "adm" && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(1); } 
+        else {
+            if (current_time >= horario_padrao || (diaDaSemana === 0 || diaDaSemana === 6)) { showTemplate(4); } 
+            else { !hasRefeicao ? showTemplate(5) : showTemplate(3); }
         }
 
         function showTemplate(template) {
-            const templates = document.querySelectorAll('template');
+            const templates = document.querySelectorAll('#cardapio-template');
             const div = document.querySelector('.info');
             if (templates[template]) {
                 div.innerHTML = templates[template].innerHTML;

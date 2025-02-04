@@ -33,7 +33,7 @@
 
     <div class="container">
         <h1>RESERVAR ALMOÇO</h1>
-        <form action="../Controller/CardapioController.php" method="POST">
+        <form action="../Controller/refactor.php" method="POST">
             <input type="text" name="diaDaSemana" id="diaDaSemana" value="<?= htmlspecialchars($diaDaSemana) ?>" hidden>
             <input type="text" name="idUser" id="idUser" value="<?= htmlspecialchars($_SESSION['id']) ?>" hidden>
 
