@@ -3,7 +3,8 @@ Remake do projeto carteirinha IFBA
 
 ## Tasks to do:
 ### Prioridade atual:
-- Mostrar notificações reais(do banco de dados) na lista de notificações;
+- Exibir dados reais ao abrir notificação(banco de dados);
+- Adicionar icone no lugar de "lida" na notificação;
 
 ### Prioridade média:
 - Criar popup de Alerta e Sucesso personalizado para funções;
@@ -22,4 +23,5 @@ Remake do projeto carteirinha IFBA
 - Fazer um teste de compatibilidade com usuários de IOS;
 - Fazer um teste com o pessoal da sala para verificar casos de uso ou possiveis bugs ou necessidades;
 
-
+### Feito recentemente:
+- Mostrar notificações reais(do banco de dados) na lista de notificações;

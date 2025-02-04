@@ -18,6 +18,10 @@
             return $assunto;
         }
 
+        public function getNotification($userId) {
+            return $this->model->getNotification($userId);
+        }
+
         private function getIdRemetente($idDestinatario): int {
             return $this->model->getTransferenciaData($idDestinatario);
         }

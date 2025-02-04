@@ -261,6 +261,29 @@ h1 {
   transform: translateX(0);
 }
 
+.notification-item.visible span {
+  display: none;
+}
+
+.notification-item.visible.lida {
+  background-color: #d3d3d3;
+}
+
+.assunto {
+  display: flex;
+  align-items: center
+}
+
+.notification-item.visible .assunto.lida span {
+  display: block;
+  color: #388E3C;
+  font-size: 12px;
+  margin-left: 5px;
+  border: 1px solid #388E3C;
+  border-radius: 50%;
+  padding: 2px;
+}
+
 .notification-item.visible .notification-content {
   cursor: pointer;
 }

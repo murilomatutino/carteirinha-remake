@@ -50,16 +50,29 @@ ini_set('display_errors', 1);
         }
         
         public function hasNotification(int $userId) {
-            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = ? AND lida = 0";
+            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = ?";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("i", $userId);
+            if ($stmt->execute()) {
+                $stmt->bind_result($count); // A variável $count vai armazenar o resultado da contagem
+                $stmt->fetch(); // Recupera o valor da contagem
+                return $count > 0;
+            } else {
+                return false;
+            }            
+        }
+
+        public function getNotification(int $userId) {
+            $sql = "SELECT * FROM notificacao WHERE id_destinatario = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $userId);
             $stmt->execute();
-            
             $resultado = $stmt->get_result();
-            $num = $resultado->fetch_row()[0];
-        
-            return $num > 0;
+            
+            $notificacoes = $resultado->fetch_all(MYSQLI_ASSOC);
+            
+            return $notificacoes;
         }
 
         public function getCardapio() {

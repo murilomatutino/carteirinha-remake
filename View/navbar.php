@@ -132,7 +132,37 @@
     </footer>
 </template>
 
-<div class="notification-item" id="transfer">
+<?php 
+    $notController = new NotificationController();
+
+    if (isset($_SESSION['logged_in'])) {
+        if ($notController->hasNotification($_SESSION['id'])) {
+            $response = $notController->getNotification($_SESSION['id']);
+            usort($response, function($a, $b) {
+                return ($a['lida'] == 0 && $b['lida'] == 1) ? -1 : (($a['lida'] == 1 && $b['lida'] == 0) ? 1 : 0);
+            });
+
+            foreach ($response as $key => $value) {
+                $type = $value['transferencia'] != 0 ? 'transfer' : 'default'; 
+                $read = $value['lida'] == 0 ? '' : 'lida';
+                $mensagem = (strlen($value['mensagem']) > 100) ? substr($value['mensagem'], 0, 40) . "..." : $value['mensagem'];
+
+                echo "<div class='notification-item {$type} {$read} id='{$value['id']}'>";
+                echo "<img src='assets/alert.png' alt='icone de alerta'>";
+                echo "<div class='notification-content'>";
+                echo "<div class='assunto {$read}'><h2 class='title'>{$value['assunto']}</h2><span>Lida</span></div>";
+                echo "<p id='notification-text'>{$mensagem}</p>";
+                echo "</div>";
+                if ($value['transferencia'] == 1) echo "<button class='validar' id='validar-transferencia'>Confirmar</button>";
+                echo "</div>";
+            }
+        } else {
+            echo "<h1>Sem notificações</h1>"; 
+        } 
+    }
+?>
+
+<!-- <div class="notification-item transfer">
     <img src="assets/alert.png" alt="icone de alerta">
     <div class="notification-content">
         <h2 class="title">Transferencia de reserva</h2>
@@ -141,10 +171,10 @@
     <button class="validar" id="validar-transferencia"></button>
 </div>
 
-<div class="notification-item" id="update">
+<div class="notification-item default">
     <img src="assets/alert.png" alt="icone de alerta">
     <div class="notification-content">
         <h2 class="title">Atualização</h2>
         <p id="notification-text">Detalhes da Atualização</p>
     </div>
-</div>
+</div> -->
