@@ -7,6 +7,7 @@ Remake do projeto carteirinha IFBA
 - Adicionar icone no lugar de "lida" na notificação;
 
 ### Prioridade média:
+- Mudar estado de lida ao abrir notificação;
 - Criar popup de Alerta e Sucesso personalizado para funções;
 - Criar Servidor para testes locais;
 - Arrumar problema com a camera dos celulares;
