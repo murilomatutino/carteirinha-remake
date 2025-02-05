@@ -8,7 +8,7 @@
     function notificationIcon($path) {
         if (isset($_SESSION['logged_in'])) {
             $notController = new NotificationController();
-            $result = $notController->hasNotification($_SESSION['id']);
+            $result = $notController->hasNewNotification($_SESSION['id']);
 
             if ($result == 0) {
                 return (string) $path . "/View/assets/notification2.png";

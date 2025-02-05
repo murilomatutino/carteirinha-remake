@@ -63,6 +63,20 @@ ini_set('display_errors', 1);
             }            
         }
 
+        public function hasNewNotification(int $userId) {
+            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = ? AND lida = 0";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $userId);
+            if ($stmt->execute()) {
+                $stmt->bind_result($count); // A variável $count vai armazenar o resultado da contagem
+                $stmt->fetch(); // Recupera o valor da contagem
+                return $count > 0;
+            } else {
+                return false;
+            }            
+        }
+
         public function getNotification(int $userId, $idNotification) {
             if ($idNotification !== null) { 
                 $sql = "SELECT * FROM notificacao WHERE id_destinatario = ? AND id = ?"; 
