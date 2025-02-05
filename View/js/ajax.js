@@ -150,10 +150,7 @@ export async function readNotification(dados) {
 
         if (result.status === 'success') {
             return true;
-        } else {
-            console.error('Erro ao encontrar notificações 2:', result.message);
-            return null;
-        }
+        } 
     } catch (error) {
         console.error('Erro 2:', error.message || error);
         return null;

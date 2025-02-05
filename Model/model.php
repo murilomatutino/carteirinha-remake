@@ -91,6 +91,8 @@ ini_set('display_errors', 1);
             if ($stmt->execute()) {
                 if ($stmt->affected_rows > 0) {
                     return true;                    
+                } else {
+                    return true;
                 }
             } 
 

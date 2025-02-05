@@ -23,7 +23,10 @@ img.notification-icon {
 }
 
 #content {
-  min-height: 175px !important;
+  max-height: 160px !important;
+  width: 100%;
+  overflow-y: auto;
+  border-radius: 10px;
 }
 
 .overlay2 {
@@ -64,6 +67,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .overlay2 {

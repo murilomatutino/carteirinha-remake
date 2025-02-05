@@ -314,9 +314,7 @@ function exibirConteudo() {
                             }
 
                             ajax.readNotification(dadosNoti).then(response => {
-                                if (response != null && response) {
-                                    console.log('Mensagem lida!');
-                                }
+
                             }).catch(error => {
                                 console.log('Erro ao ler a notificação', error);
                             });

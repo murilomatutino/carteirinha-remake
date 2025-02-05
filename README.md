@@ -8,7 +8,6 @@ Remake do projeto carteirinha IFBA
 - Criar popup de Alerta e Sucesso personalizado para funções;
 
 ### Prioridade média:
-- Adicionar scroll na lista de notificações;
 
 ### Prioridade média porém incapacitado:
 
@@ -47,3 +46,4 @@ Remake do projeto carteirinha IFBA
 - Mostrar notificações reais(do banco de dados) na lista de notificações;
 - Exibir dados reais ao abrir notificação(banco de dados);
 - Mudar estado de lida ao abrir notificação;
+- Adicionar scroll na lista de notificações;
