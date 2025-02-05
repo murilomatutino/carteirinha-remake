@@ -4,7 +4,6 @@ import * as functions from './functions.js';
 import * as ajax from './ajax.js';
 
 // LOGIN
-// Área onde é feita a verificação dos campos de login
 const page = window.location.pathname.split('/').pop();
 if (page === "login.php") {
     const loginSubmit = document.querySelector("#form");
@@ -92,17 +91,11 @@ if (page === 'agendados.php') {
         const labelMotivo = document.createElement("label");
 
         Object.assign(inputMotivo, { id: "outro", name: "outro", placeholder: "Digite o motivo..." });
-        // inputMotivo.setAttribute("id", "outro");
-        // inputMotivo.setAttribute("name", "outro");
-        // inputMotivo.setAttribute("placeholder", "Digite o motivo...");
 
         divButtons.classList.add("botao-container");
 
         Object.assign(btnConfirm, { type: "submit", id: "confirmar", classList: "validar" });
 
-        // btnConfirm.setAttribute("type", "submit");
-        // btnConfirm.setAttribute("id", "confirmar");
-        // btnConfirm.classList.add("validar");
         btnCancel.classList.add("cancelar");
 
         divButtons.appendChild(btnCancel);
@@ -159,10 +152,6 @@ if (page === 'agendados.php') {
 
             Object.assign(inputMatricula, { id: "matricula", name: "matricula", placeholder: "Matrícula alvo" });
 
-            // inputMatricula.setAttribute("id", "matricula");
-            // inputMatricula.setAttribute("name", "matricula");
-            // inputMatricula.setAttribute("placeholder", "Matrícula alvo");
-
             labelMatricula.textContent = "MATRÍCULA";
 
             popup.appendChild(labelMatricula);
@@ -182,7 +171,6 @@ if (page === 'agendados.php') {
                         idUser: idUser
                     };
                     
-                    // FAZER AJAX AQUI 
                     ajax.transferirReserva(dados)
                         .then(result => {
                             window.location.href = "cardapio.php?solicitacao=success";
@@ -354,7 +342,6 @@ if (notificationNavbar) {
         exibirConteudo();
     });
 }
-
 
 if (closePopup) {
     closePopup.addEventListener('click', function() {

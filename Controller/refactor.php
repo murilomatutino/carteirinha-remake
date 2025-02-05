@@ -1,61 +1,64 @@
 <?php 
     require_once 'CardapioController.php';
     require_once 'NotificationController.php';
+
+    function cancelarReserva($idUser, $motivo) {
+        $response = (new CardapioController)->cancelarReserva($idUser, $motivo);
+
+        if ($response['status']) {
+            echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
+        }
+    }
+
+    function transferirReserva($idUser, $motivo, $matriculaAlvo) {
+        $response = (new CardapioController)->transferirReserva($idUser, $motivo, $matriculaAlvo);
+
+        if ($response['status']) {
+            echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
+        }
+    }
+
+    function aceitarRefeicao($idDestinatario) {
+        $response = (new NotificationController)->aceitarRefeicao($idDestinatario);
+
+        if ($response['status']) {
+            echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
+        }
+    }
+
+    function getNotification($idUser, $idNotification) {
+        $response = (new NotificationController)->getNotification($idUser, $idNotification);
+
+        if ($response !== null) {
+            echo json_encode(['status'=> 'success', 'array' => $response]); exit();
+        } else {
+            echo json_encode(['status'=> 'error', 'message' => 'Nenhuma notificação encontrada']); exit();
+        }
+    }
+
+    function readNotification($idDestinatario, $idNotification) {
+        $response = (new NotificationController)->readNotification($idDestinatario, $idNotification);
+
+        if ($response['status']) {
+            echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
+        }
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
-        if ($_POST['operacao'] === 'cancelarReserva') {
-            $idUser = $_POST['idUser'];
-            $motivo = $_POST['motivo'];
-
-            $response = (new CardapioController)->cancelarReserva($idUser, $motivo);
-
-            if ($response['status']) {
-                echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
-            } else {
-                echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
-            }
-        } else if ($_POST['operacao'] === 'transferirReserva') {
-            require_once 'CardapioController.php';
-            $idUser = $_POST['idUser'];
-            $motivo = $_POST['motivo'];
-            $matricula = $_POST['matriculaAlvo'];
-
-            $response = (new CardapioController)->transferirReserva($idUser, $motivo, $matricula);
-
-            if ($response['status']) {
-                echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
-            } else {
-                echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
-            }
-        } else if ($_POST['operacao'] === 'aceitarRefeicao') {
-            $idDestinatario = $_POST['idDestinatario'];
-            $response = (new NotificationController)->aceitarRefeicao($idDestinatario);
-
-            if ($response['status']) {
-                echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
-            } else {
-                echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
-            }
-        } else if ($_POST['operacao'] === 'getNotification') {
-            $idUser = $_POST['idUser'];
-            $idNotification = $_POST['idNotificacao'];
-            $response = (new NotificationController)->getNotification($idUser, $idNotification);
-
-            if ($response !== null) {
-                echo json_encode(['status'=> 'success', 'array' => $response]); exit();
-            } else {
-                echo json_encode(['status'=> 'error', 'message' => 'Nenhuma notificação encontrada']); exit();
-            }
-        } else if ($_POST['operacao'] === 'readNotification') {
-            $idDestinatario = $_POST['idDestinatario'];
-            $idNotification = $_POST['idNotificacao'];
-
-            $response = (new NotificationController)->readNotification($idDestinatario, $idNotification);
-
-            if ($response['status']) {
-                echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
-            } else {
-                echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
-            }
+        switch ($_POST['operacao']) {
+            case 'cancelarReserva': cancelarReserva($_POST['idUser'], $_POST['motivo']); break;
+            case 'transferirReserva': transferirReserva($_POST['idUser'], $_POST['motivo'], $_POST['matriculaAlvo']); break;
+            case 'aceitarRefeicao': aceitarRefeicao($_POST['idDestinatario']); break;
+            case 'getNotification': getNotification($_POST['idUser'], $_POST['idNotificacao']); break;
+            case 'readNotification': readNotification($_POST['idDestinatario'], $_POST['idNotificacao']); break;
         }
     } else {
         $idJustificativa = 0;
