@@ -83,6 +83,20 @@ ini_set('display_errors', 1);
             return null;            
         }
 
+        public function readNotification(int $idDestinatario, int $idNotification) {
+            $sql = "UPDATE notificacao SET lida = 1 WHERE id_destinatario = ? AND id = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ii", $idDestinatario, $idNotification);
+
+            if ($stmt->execute()) {
+                if ($stmt->affected_rows > 0) {
+                    return true;                    
+                }
+            } 
+
+            return false;
+        }
+
         public function getCardapio() {
             $sql = "SELECT dia, data_refeicao, principal, acompanhamento, sobremesa FROM cardapio WHERE ind_excluido = 0 ORDER BY data_refeicao";
             $result = $this->conn->query($sql);

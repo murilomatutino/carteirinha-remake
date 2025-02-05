@@ -45,6 +45,17 @@
             } else {
                 echo json_encode(['status'=> 'error', 'message' => 'Nenhuma notificação encontrada']); exit();
             }
+        } else if ($_POST['operacao'] === 'readNotification') {
+            $idDestinatario = $_POST['idDestinatario'];
+            $idNotification = $_POST['idNotificacao'];
+
+            $response = (new NotificationController)->readNotification($idDestinatario, $idNotification);
+
+            if ($response['status']) {
+                echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
+            } else {
+                echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
+            }
         }
     } else {
         $idJustificativa = 0;

@@ -304,9 +304,22 @@ function exibirConteudo() {
                                 if (confirmBtn) botaoConfirmar(confirmBtn); 
                             }
                     
-
                             popup2.querySelector('.title').textContent = notifications.assunto;
                             popup2.querySelector('#content').textContent = notifications.mensagem;
+
+                            const dadosNoti = {
+                                operacao: "readNotification",
+                                idDestinatario: idUser,
+                                idNotificacao: this.id,
+                            }
+
+                            ajax.readNotification(dadosNoti).then(response => {
+                                if (response != null && response) {
+                                    console.log('Mensagem lida!');
+                                }
+                            }).catch(error => {
+                                console.log('Erro ao ler a notificação', error);
+                            });
                         }).catch(error => {
                             console.error('Erro ao pegar notificação:', error);
                         });

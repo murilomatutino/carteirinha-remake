@@ -38,5 +38,13 @@
                 return ['status' => false, 'message' => 'Já existe reserva ativa no id do destinatário ou do remetente'];
             }
         }
+
+        public function readNotification($idDestinatario, $idNotification) {
+            if ($this->model->readNotification($idDestinatario, $idNotification)) {
+                return ['status'=> true, 'message'=> 'Notificação lida'];
+            } else {
+                return ['status'=> false, 'message'=> 'Erro ao ler notificação'];
+            }
+        }
     }
 ?>
