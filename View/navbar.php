@@ -101,10 +101,19 @@
 ?>
 
 <link rel="stylesheet" href="css/navbar.css">
+
+<!-- NOTIFICAÇÃO DE ALERTAS -->
+<div class="overlay"></div>
+  <div class="popup">
+    <header><h1 class="title"></h1></header>
+    <main><p class="desc"></p></main>
+    <footer><button id="close">Entendido</button></footer>
+  </div>
+</div>
+
 <!-- NOTIFICAÇÃO DA NAVBAR -->
 <div class="overlay2" id="overlay2"></div>
-<div class="popup2" id="popup2">
-</div>
+<div class="popup2" id="popup2"></div>
 
 <template class="notification" id="default-template">
     <header>

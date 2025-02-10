@@ -466,32 +466,6 @@ a {
   text-decoration: none;
 }
 
-.popup-index {
-  position: fixed;
-  top: 0;
-  left: 17.2%;
-  width: 65%;
-  height: 80px;
-  background-color: #CCCCCC;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  animation: showPopup 0.7s backwards;
-}
-
-.hide-popup-index {
-  animation: hidePopup 0.7s backwards;
-}
-
-.popup-index-title {
-  font-size: 1.5vw;
-  margin-top: 0;
-  color: #666666;
-}
-
 .button {
   padding: 10px 20px;
   background-color: var(--light-green);
@@ -577,146 +551,11 @@ form {
 }
 
 /* Estilo para o pop-up de notificações */
-.popup p {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.popup, .transformPopup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  max-width: 500px;
-  width: 90%;
-}
-
-.popup h2, .transformPopup h2 {
-  color: #388E3C;
-  text-align: center;
-}
-
-.popup #notificationList {
-  margin-bottom: 20px;
-}
-
-.notification-item:last-child {
-  border-bottom: none;
-}
-
-.popup textarea, .transformPopup textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.popup input, .transformPopup input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.popup button, .transformPopup button {
-  display: block;
-  margin: 10px auto 0;
-  background-color: #388E3C;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.popup button:hover, .transformPopup button:hover {
-  background-color: #274E13;
-}
-
-.popup .buttons, .transformPopup .buttons {
-  display: flex;
-}
-
-.popup button.close, .popup button.send, .transformPopup button.close, .transformPopup button.send {
-  background-color: #ff6f61;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-.popup button.close:hover, .transformPopup button.close:hover {
-  background-color: #e65c5c;
-}
-
-.popup button.send, .transformPopup button.send {
-  background-color: #337A30;
-}
-
 .notification-item.null {
   text-align: center;
 }
 
 /* Fundo escurecido */
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}
-
-#notificationvList {
-  width: 100%; 
-  max-height: 300px;
-  overflow-y: auto; 
-}
-
-#notificationvList::-webkit-scrollbar {
-  width: 12px;
-}
-
-#notificationvList::-webkit-scrollbar-track {
-  background: #f0f0f0;
-}
-
-#notificationvList::-webkit-scrollbar-thumb {
-  background: #888; 
-  border-radius: 50%;
-}
-
-#notificationvList::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
-#notificationvList {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f0f0f0;
-}
-
-.transformPopup {
-  width: 500px;
-  height: 395px;
-  animation: extendPopup 1s backwards;
-}
 
 .enviado {
   width: 350px;
@@ -724,65 +563,6 @@ form {
   animation: sendMsg 0.5s backwards;
 }
 
-.popup h2 {
-  text-align: center;
-}
-
-.popup {
-  position: fixed; /* Tornar o popup fixo na tela */
-  top: 50%; /* Posiciona no meio da tela verticalmente */
-  left: 50%; /* Posiciona no meio da tela horizontalmente */
-  transform: translate(-50%, -50%); /* Ajusta o popup para centralizar exatamente */
-  background-color: white; /* Defina a cor de fundo do popup */
-  padding: 20px; /* Adicione um pouco de espaço interno */
-  border-radius: 8px; /* Cantos arredondados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-  z-index: 1000; /* Garante que o popup fique acima de outros elementos */
-  display: none; /* Inicialmente invisível */
-}
-
-.popup h2 {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-  display: none; /* Inicialmente invisível */
-  z-index: 999; /* Coloca atrás do popup */
-}
-
-/* Botão de fechar */
-.popup .close {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-/* Botão de enviar no popup */
-.popup .send {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.popup .send:hover {
-  background-color: #45a049;
-}
 
 /* Fundo escurecido */
 
@@ -803,7 +583,7 @@ form {
 
 
 /* ANIMAÇÕES */
-@keyframes showPopup {
+/* @keyframes showPopup {
   0% {
     opacity: 0;
     transform: translateY(-100%);
@@ -839,7 +619,7 @@ form {
     height: 150px;
     width: 350px;
   }
-}
+} */
 
 @media only screen and (max-width: 768px) {
   .img-logo {
@@ -870,14 +650,6 @@ form {
 
   nav a {
     margin: 10px 0;
-  }
-
-  .popup-index-title {
-    font-size: 5vw !important;
-  } 
-
-  .popup-index {
-    height: 70px !important;
   }
 
   .notification-icon {
@@ -924,14 +696,6 @@ form {
 
   nav a {
     margin: 5px 0;
-  }
-
-  .popup-index-title {
-    font-size: 4vw !important;
-  } 
-
-  .popup-index {
-    height: 60px !important;
   }
   
   .notification-icon {

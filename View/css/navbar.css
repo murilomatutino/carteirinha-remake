@@ -329,6 +329,79 @@ h1 {
   height: 80%;
 }
 
+/* [ SECTION ] Configurações notificações de alerta */
+
+.popup {
+  width: 500px;
+  height: fit-content;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+  position: fixed;
+  inset: 0;
+  margin: auto;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.popup.active {
+  animation: fadeExpandIn ease-out 0.5s forwards;
+  display: block;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.popup.close {
+  display: block;
+  animation: fadeExpandOut ease-in 0.5s forwards;
+}
+
+.popup header, .popup main, .popup footer {
+  text-align: center;
+}
+
+.popup main {
+  min-height: 70px;
+}
+
+.popup footer button {
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  color: white;
+  background-color: #388E3C;
+  transition: all 0.3s ease;
+}
+
+.popup footer button:hover {
+  background-color: green;
+}
+
+.popup header h1 {
+  color: #388E3C;
+  font-size: 25px;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
 @keyframes fadeInFromLeft {
   from {
     opacity: 0;

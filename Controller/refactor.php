@@ -81,9 +81,9 @@
         $response = (new CardapioController)->processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana);
 
         if ($response['status']) {
-            header("Location: ../View/cardapio.php?reserva=success"); exit();
+            header("Location: ../View/cardapio.php?agendamento=success"); exit();
         } else {
-            header("Location: ../View/cardapio.php?reserva=error"); exit();
+            header("Location: ../View/cardapio.php?agendamento=error"); exit();
         }
     }
 ?>

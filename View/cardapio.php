@@ -17,14 +17,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cardapio.css">
-    <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/index.js" defer></script>
     <title>Cardapio Semanal</title>
 </head>
 <body>
     <header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img class="img-logo" src='assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
     <?php include_once("navbar.php"); showNav("default"); ?>
     
-
     <div class="container">
         <h1 class="titulo">CARDÁPIO SEMANAL</h1>
         <img src="assets/cozinheira.png" alt="Imagem do Boneco" class="image2" draggable="false">
@@ -134,6 +133,42 @@
             } else {
                 console.log("Template não encontrado!");
             }
+        }
+    </script>
+    <script type="module">
+        import { showNotification } from './js/index.js';
+
+        const params = new URLSearchParams(window.location.search);
+        let response;
+        let titulo;
+        let desc;
+
+        switch (true) {
+            case params.has('agendamento'):
+                response = {type: 'agendamento', data: params.get('agendamento') }; break;
+            case params.has('cancelamento'):
+                response = {type: 'cancelamento', data: params.get('cancelamento') }; break;
+            case params.has('solicitacao'):
+                response = {type: 'solicitacao', data: params.get('solicitacao') }; break
+            default:
+                response = { type: 'nenhum', data: null };
+        }
+
+        if (response.type === 'agendamento') {
+            if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!'}
+            else { titulo = 'Problema na solicitação'; desc = 'Houve algum problema solicitação de agendamento do seu almoço. Por favor tente novamente mais tarde!' }
+
+            showNotification(titulo, desc);
+        } else if (response.type === 'solicitacao') {
+            if (response.data === 'success') { titulo = 'Sucesso na Solicitação', desc = 'Sua solicitação de transferência de reserva foi enviada ao estudante!' }
+            else { titulo = 'Problema na solicitação'; desc = 'Houve um problema com a solicitação, que tal tentar novamente mais tarde?'}
+
+            showNotification(titulo, desc);
+        } else if (response.type === 'cancelamento') {
+            if (response.data === 'success') { titulo = 'Sucesso no Cancelamento', desc = 'O cancelamento da sua refeição foi concluído!' }
+            else { titulo = 'Problema no Cancelamento', desc = 'Houve um problema no cancelamento da sua refeição. Por favor, tente novamente mais tarde!' }
+
+            showNotification(titulo, desc);
         }
     </script>
     <?php require_once "footer.php"; ?>

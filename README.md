@@ -5,7 +5,7 @@ Remake do projeto carteirinha IFBA
 ## Tasks to do:
 
 ### Prioridade atual:
-- Criar popup de Alerta e Sucesso personalizado para funções;
+- Criar popup de Alerta e Sucesso personalizado para funções (criado, mantido por possibilidade de haver problemas ou necessidade de ajustes);
 
 ### Prioridade média:
 
@@ -15,7 +15,7 @@ Remake do projeto carteirinha IFBA
 
 ### Bugs:
 - Horário limite provavelmente contem bugs;
-
+- Notificações em popups antigas precisam ser reajustadas;
 
 ### Otimizações:
 - Mover todas as popups do footer para a navbar;
@@ -50,3 +50,4 @@ Versão do ADM:
 - Adicionar scroll na lista de notificações;
 - Utilizar switch no refactor ao invés de vários ifs e armazenar seus códigos em funções;
 - Remover getAssunto;
+- Criar popup de Alerta e Sucesso personalizado para funções;

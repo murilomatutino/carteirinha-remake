@@ -128,10 +128,10 @@ if (page === 'agendados.php') {
         
                     ajax.cancelarReserva(data)
                         .then(result => {
-                            window.location.href = "cardapio.php?reserva=success";
+                            window.location.href = "cardapio.php?cancelamento=success";
                         })
                         .catch(error => {
-                            window.location.href = "cardapio.php?reserva=error"
+                            window.location.href = "cardapio.php?cancelamento=error"
                         });
                 }).catch(error => {
                     console.error('Erro ao pegar ID do usuário:', error);
@@ -180,6 +180,7 @@ if (page === 'agendados.php') {
                         });
                     });
             });
+
 
             // function showNotification(message, type) {
             //     const notification = document.createElement("div");
@@ -353,3 +354,6 @@ if (closePopup) {
     });
 }
 
+// Notificações
+
+export function showNotification(titulo, descricao) { animations.showNotification(titulo, descricao); }
