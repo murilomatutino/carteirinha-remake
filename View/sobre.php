@@ -41,8 +41,13 @@
         </div>
     </div>
 
-    <div class="contact-form">
-        <h1 class="contact-title">Entre em Contato</h1>
+    <div class="contact-animation">
+        <h1>Fale com a gente</h1>
+        <div class="contact-form"></div>
+        <button id="open-form"><img src="assets/arrow-icon.png" alt=""></button>
+    </div>
+
+    <template id="form-template">
         <form action="process/contact_form.php" method="post">
             <label for="name">Nome:</label><br>
             <input type="text" id="name" name="name" required><br><br>
@@ -55,7 +60,7 @@
 
             <button type="submit">Enviar</button>
         </form>
-    </div>
+    </template>
 
     <?php include 'footer.php'; ?>
 </body>

@@ -91,21 +91,6 @@ button.azul:hover {
     background-color: #123bf3;
 }
 
-/* Estilo do popup */
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    width: 90%;
-    max-width: 500px;
-}
 
 .popup h2 {
     font-size: 24px;
@@ -163,18 +148,6 @@ button.azul:hover {
 
 .popup button.close:hover {
     background-color: #e65c5c;
-}
-
-/* Fundo escurecido */
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
 }
 
 .blur {
@@ -372,32 +345,6 @@ h1.texto {
 .popup p {
     text-align: center;
     margin-bottom: 15px;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    max-width: 500px;
-    width: 90%;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
 }
 
 .notification {

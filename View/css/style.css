@@ -563,6 +563,13 @@ form {
   animation: sendMsg 0.5s backwards;
 }
 
+#popup {
+
+  position: fixed;
+  inset: 0;
+  margin: auto;
+}
+
 
 /* Fundo escurecido */
 

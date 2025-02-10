@@ -101,12 +101,15 @@ if (page === 'agendados.php') {
         divButtons.appendChild(btnCancel);
         divButtons.appendChild(btnConfirm);
 
+        document.body.classList.add('active');
+
         function closeAgendadosPopup() {
             const popup = document.querySelector("#popup");
             const overlay = document.querySelector("#overlay");
             popup.style.display = "none";
             overlay.style.display = "none";
             document.querySelector('.container').classList.remove("blur");
+            document.body.classList.remove('active');
         }
 
         btnCancel.addEventListener("click", closeAgendadosPopup);
@@ -354,6 +357,32 @@ if (closePopup) {
     });
 }
 
-// Notificações
+if (page === "sobre.php") {
+    const button = document.querySelector('#open-form'); 
+    const contactForm = document.querySelector('.contact-form');
+    const contactAnimation = document.querySelector('.contact-animation');
 
+    button.addEventListener('click', function() {
+        contactAnimation.classList.toggle('expanded');
+        contactForm.classList.toggle('show');            
+
+        if (contactAnimation.classList.contains('expanded')) {
+            setTimeout(() => {
+                window.scrollTo({
+                    top: contactAnimation.getBoundingClientRect().top + window.scrollY,
+                    behavior: "smooth"
+                });
+            }, 400);
+
+            setTimeout(() => {
+                contactForm.innerHTML = document.querySelector('#form-template').innerHTML;
+                button.querySelector('img').classList.toggle('rotated');
+            }, 800);
+        } else {
+            contactForm.innerHTML = '';
+        }
+    });
+}
+
+// Notificações
 export function showNotification(titulo, descricao) { animations.showNotification(titulo, descricao); }

@@ -1,5 +1,9 @@
 @import url(style.css);
 
+html {
+    scroll-behavior: smooth; /* Aplica rolagem suave na página */
+}
+
 /* Container para a sessão de pessoas */
 .container-sphere {
     flex-grow: 1;
@@ -68,9 +72,16 @@ hr {
 }
 
 .contact-form {
+    /* height: 600px; */
     text-align: center;
     margin: 20px 0;
     flex-grow: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.contact-form.show {
+    opacity: 1;
 }
 
 .contact-title {
@@ -95,7 +106,7 @@ form textarea {
 
 form button {
     padding: 10px 20px;
-    background-color: #388E3C;
+    background-color: #388E3C !important;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -105,6 +116,43 @@ form button {
 
 form button:hover {
     background-color: #2E7D32;
+}
+
+.contact-animation {
+    width: 100%;
+    min-height: 80px;
+    margin: 20px 0;
+    text-align: center;
+    transition: min-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+} 
+/* to 600px */
+
+.contact-animation.expanded {
+    /* animation: expand 0.5s ease forwards; */
+    min-height: 700px;
+}
+
+.contact-animation button {
+    width: 100%;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+img {
+    transition: transform 0.3s ease-in-out; /* Suaviza a rotação */
+}
+
+.rotated {
+    transform: rotate(180deg); /* Rotaciona a seta */
+}
+
+@keyframes expand {
+    from {
+        transform: scaleY(0);
+    } to {
+        transform: scaleY();
+    }
 }
 
 /* Responsividade para dispositivos móveis */
