@@ -163,9 +163,9 @@
 
             foreach ($response as $key => $value) {
                 $type = $value['transferencia'] != 0 ? 'transfer' : 'default'; 
-                $read = $value['lida'] == 1 ? true : false;
+                $read = $value['lida'] === 1;
                 $mensagem = (strlen($value['mensagem']) > 100) ? substr($value['mensagem'], 0, 40) . "..." : $value['mensagem'];
-                $readimg = 'assets/envelope-open.svg';
+                $readImg = 'assets/envelope-open.svg';
 
                 if ($read) { echo "<div class='notification-item {$type} lida'>"; }
                 else { echo "<div class='notification-item {$type}'>"; }
@@ -176,7 +176,7 @@
                 echo "<p id='notification-text'>{$mensagem}</p>";
                 echo "</div>";
                 if ($value['transferencia'] == 1) echo "<button class='validar' id='validar-transferencia'></button>";
-                if ($read) echo " <img class='mark-as-read' src='{$readimg}'>";
+                if (!$read) echo " <img class='mark-as-read' src='{$readImg}'>";
 
                 echo "</div>";
             }

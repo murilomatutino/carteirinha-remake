@@ -170,6 +170,9 @@
             else { titulo = 'Problema no Cancelamento', desc = 'Houve um problema no cancelamento da sua refeição. Por favor, tente novamente mais tarde!' }
 
             showNotification(titulo, desc);
+        } else if (response.type === 'feedback') {
+            if (response.data === 'success') { titulo = 'Sucesso no feedback!', desc = 'Seu feedback foi enviaddo com sucesso para a nossa equipe!' }
+            else { titulo = 'Problema no feedback!', desc = 'Houve um problema no envio do seu feedback. Por favor, tente novamente mais tarde!' }
         }
     </script>
     <?php require_once "footer.php"; ?>

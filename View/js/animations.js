@@ -45,49 +45,49 @@ export function showNotification(titulo, descricao, feedback) {
     const desc = document.querySelector('.desc');
     const feedbackTemplate = document.querySelector('#feedback');
     const closeBtn = popup.querySelector('#close');
-    const sendBtn = document.querySelector('feedback-btn');
 
     overlay.classList.add('active');
     popup.classList.add('active');
     closeBtn.classList.remove('close-btn-2')
     closeBtn.textContent = 'Entendido';
 
-    if (feedback) {
-        const section = document.createElement('section');
+    // if (feedback) {
+    //     const section = document.createElement('section');
 
-        closeBtn.classList.add('close-btn-2');
-        closeBtn.textContent = 'Fechar';
-        section.classList.add('feedback');
-        section.innerHTML = feedbackTemplate.innerHTML;
-        popup.querySelector('main').appendChild(section);
+    //     closeBtn.classList.add('close-btn-2');
+    //     closeBtn.textContent = 'Fechar';
+    //     section.classList.add('feedback');
+    //     section.innerHTML = feedbackTemplate.innerHTML;
+    //     popup.querySelector('main').appendChild(section);
 
-        const stars = section.querySelectorAll('.estrela');
-        let selectedRating = 0;
+    //     const stars = section.querySelectorAll('.estrela');
+    //     let selectedRating = 0;
     
-        if (stars.length > 0) {
-            stars.forEach((star, index) => {
-                star.addEventListener('mouseover', () => {
-                  updateStars(index + 1);
-                });
+    //     if (stars.length > 0) {
+    //         stars.forEach((star, index) => {
+    //             star.addEventListener('mouseover', () => {
+    //               updateStars(index + 1);
+    //             });
           
-                star.addEventListener('click', () => {
-                  selectedRating = index + 1;
-                  updateStars(selectedRating);
-                  console.log(`Avaliação selecionada: ${selectedRating}`);
-                });
+    //             star.addEventListener('click', () => {
+    //               selectedRating = index + 1;
+    //               updateStars(selectedRating);
+    //               sendFeedback(selectedRating);
+    //             //   console.log(`Avaliação selecionada: ${selectedRating}`);
+    //             });
           
-                star.addEventListener('mouseout', () => {
-                  updateStars(selectedRating);
-                });
-              });
+    //             star.addEventListener('mouseout', () => {
+    //               updateStars(selectedRating);
+    //             });
+    //           });
           
-            function updateStars(rating) {
-                stars.forEach((star, index) => {
-                    star.classList.toggle('filled', index < rating);
-                });
-            }
-        }
-    }
+    //         function updateStars(rating) {
+    //             stars.forEach((star, index) => {
+    //                 star.classList.toggle('filled', index < rating);
+    //             });
+    //         }
+    //     }
+    // }
 
     title.textContent = titulo;
     desc.textContent = descricao;

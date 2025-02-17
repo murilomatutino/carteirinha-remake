@@ -54,6 +54,11 @@ if (page === 'login.php') {
     });
 }
 
+
+// CARDAPIO
+
+
+
 // CARDAPIO RESERVA
 if (page === 'cardapio-reserva.php') {
     document.querySelector('#justificativa').addEventListener('change', function() {
@@ -178,14 +183,12 @@ if (page === 'agendados.php') {
                         idUser: idUser
                     };
                     
-                    ajax.transferirReserva(dados)
-                        .then(result => {
-                            window.location.href = 'cardapio.php?solicitacao=success';
-                        })
-                        .catch(error => {
-                            window.location.href = 'cardapio.php?solicitacao=error';
-                        });
+                    ajax.transferirReserva(dados).then(result => {
+                        window.location.href = 'cardapio.php?solicitacao=success';
+                    }).catch(error => {
+                        window.location.href = 'cardapio.php?solicitacao=error';
                     });
+                });
             });
         }
 
@@ -375,5 +378,73 @@ if (page === 'sobre.php') {
     });
 }
 
+function sendFeedback(nota) {
+    ajax.getUserId().then(idUser => {
+        if (!idUser) {
+            console.error('ID do usuário não encontrado');
+            return;
+        }
+
+        let dados = {
+            operacao: 'enviarFeedback',
+            nota: nota,
+            idUser: idUser
+        };
+        
+        ajax.enviarFeedback(dados).then(result => {
+            window.location.href = 'cardapio.php?feedback=success';
+        }).catch(error => {
+            window.location.href = 'cardapio.php?feedback=error';
+        });
+    });
+}
+
 // Notificações
-export function showNotification(titulo, descricao, feedback = false) { animations.showNotification(titulo, descricao, feedback); }
+export function showNotification(titulo, descricao, feedback = false) { 
+    if (feedback) {
+        const section = document.createElement('section');
+        const popup = document.querySelector('.popup');
+        const closeBtn = popup.querySelector('#close');
+        const stars = section.querySelectorAll('.estrela');
+        const sendBtn = document.querySelector('feedback-btn');
+        let selectedRating = 0;
+
+        closeBtn.classList.add('close-btn-2');
+        closeBtn.textContent = 'Fechar';
+        section.classList.add('feedback');
+        section.innerHTML = feedbackTemplate.innerHTML;
+        popup.querySelector('main').appendChild(section);
+
+        if (stars.length > 0) {
+            stars.forEach((star, index) => {
+                star.addEventListener('mouseover', () => {
+                  updateStars(index + 1);
+                });
+          
+                star.addEventListener('click', () => {
+                  selectedRating = index + 1;
+                  updateStars(selectedRating);
+                //   console.log(`Avaliação selecionada: ${selectedRating}`);
+                });
+          
+                star.addEventListener('mouseout', () => {
+                  updateStars(selectedRating);
+                });
+              });
+
+            //   sendBtn.addEventListener('click', () => {
+            //     sendFeedback(selectedRating);
+            //   })
+
+            console.log(selectedRating);
+          
+            function updateStars(rating) {
+                stars.forEach((star, index) => {
+                    star.classList.toggle('filled', index < rating);
+                });
+            }
+        }
+    }
+
+    animations.showNotification(titulo, descricao, feedback); 
+}

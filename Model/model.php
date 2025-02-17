@@ -338,5 +338,24 @@ ini_set('display_errors', 1);
                 return ["status" => false, "message" => "Erro ao atualizar a reserva: " . $this->conn->error];
             }
         }
+
+        public function adicionarFeedback($nota, $idUser) {
+            $sql = "INSERT INTO feedback (id_user, nota) VALUES (?, ?)";
+            $stmt = $this->conn->prepare($sql);
+        
+            if ($stmt) {
+                $stmt->bind_param('ii', $idUser, $nota);
+                
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    return ['success' => true, 'message' => 'Feedback enviado com sucesso!'];
+                } else {
+                    $stmt->close();
+                    return ['success' => false, 'message' => "Erro ao inserir feedback: " . $this->conn->error];
+                }
+            } else {
+                return ['success' => false, 'message' => 'Erro ao preparar a consulta.'];
+            }
+        } 
     }
 ?>

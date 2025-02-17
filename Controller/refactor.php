@@ -2,6 +2,7 @@
     require_once 'CardapioController.php';
     require_once 'NotificationController.php';
     require_once 'AuthController.php';
+    require_once 'FeedbackController.php';
 
     function cancelarReserva($idUser, $motivo) {
         $response = (new CardapioController)->cancelarReserva($idUser, $motivo);
@@ -63,6 +64,16 @@
         }
     }
 
+    function sendFeedback($nota, $idUser) {
+        $response = (new FeedbackController)->sendFeedback($nota, $idUser);
+
+        if ($response !== null && $response['sucess']) {
+            echo json_encode(['status'=> 'success', 'array' => $response['message']]); exit();
+        } else {
+            echo json_encode(['status'=> 'error', 'message' => $response['message']]); exit();
+        }
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
         switch ($_POST['operacao']) {
             case 'cancelarReserva': cancelarReserva($_POST['idUser'], $_POST['motivo']); break;
@@ -70,6 +81,7 @@
             case 'aceitarRefeicao': aceitarRefeicao($_POST['idDestinatario']); break;
             case 'getNotification': getNotification($_POST['idUser'], $_POST['idNotificacao']); break;
             case 'readNotification': readNotification($_POST['idDestinatario'], $_POST['idNotificacao']); break;
+            case 'enviarFeedback': sendFeedback($_POST['nota'], $_POST['idUser']); break;
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] === 'login') {
