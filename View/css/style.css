@@ -575,7 +575,7 @@ form {
 
 /* Estilo do botão de fechar */
 .close-btn-2 {
-  background-color: #ff4747;
+  background-color: #ff4747 !important;
   color: #fff;
   border: none;
   padding: 10px;
@@ -585,7 +585,7 @@ form {
 }
 
 .close-btn-2:hover {
-  background-color: #ff3030;
+  background-color: #ff3030 !important;
 }
 
 

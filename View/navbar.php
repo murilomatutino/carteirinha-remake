@@ -142,13 +142,13 @@
 <template class="notification" id="feedback">
     <h2>Deixe seu feedback!</h2>
     <div class="estrelas" id="starRating">
-    <div class="estrela" data-value="1">&#9733;</div>
-    <div class="estrela" data-value="2">&#9733;</div>
-    <div class="estrela" data-value="3">&#9733;</div>
-    <div class="estrela" data-value="4">&#9733;</div>
-    <div class="estrela" data-value="5">&#9733;</div>
+        <div class="estrela" data-value="1">&#9733;</div>
+        <div class="estrela" data-value="2">&#9733;</div>
+        <div class="estrela" data-value="3">&#9733;</div>
+        <div class="estrela" data-value="4">&#9733;</div>
+        <div class="estrela" data-value="5">&#9733;</div>
     </div>
-    <button id="feedback">Enviar Feedback</button>
+    <button id="feedback-btn">Enviar Feedback</button>
 </template>
 
 <?php 
@@ -163,16 +163,21 @@
 
             foreach ($response as $key => $value) {
                 $type = $value['transferencia'] != 0 ? 'transfer' : 'default'; 
-                $read = $value['lida'] == 0 ? '' : 'lida';
+                $read = $value['lida'] == 1 ? true : false;
                 $mensagem = (strlen($value['mensagem']) > 100) ? substr($value['mensagem'], 0, 40) . "..." : $value['mensagem'];
+                $readimg = 'assets/envelope-open.svg';
 
-                echo "<div class='notification-item {$type} {$read}'>";
+                if ($read) { echo "<div class='notification-item {$type} lida'>"; }
+                else { echo "<div class='notification-item {$type}'>"; }
+                
                 echo "<img src='assets/alert.png' alt='icone de alerta'>";
                 echo "<div class='notification-content' id='{$value['id']}'>";
-                echo "<div class='assunto {$read}'><h2 class='title'>{$value['assunto']}</h2><span>Lida</span></div>";
+                echo "<div class='assunto'><h2 class='title'>{$value['assunto']}</h2><span>Lida</span></div>";
                 echo "<p id='notification-text'>{$mensagem}</p>";
                 echo "</div>";
                 if ($value['transferencia'] == 1) echo "<button class='validar' id='validar-transferencia'></button>";
+                if ($read) echo " <img class='mark-as-read' src='{$readimg}'>";
+
                 echo "</div>";
             }
         } else {

@@ -6,10 +6,9 @@ Remake do projeto carteirinha IFBA
 
 ### Prioridade atual:
 - Implementar tela de feedback backend; 
-- Completar estilização da tela de feedback;
 - Criação de tabela de para os feedbacks recebidos pelos usuários;
-- Opção de marcar notificações como lidas sem precisar abri-las;
 - O usuário/administrador deve ser alertado em todos os casos de resposta do servidor onde possa ser: erro, alerta ou sucesso. Em todos os casos deve ser exibida na tela uma notificação elegante sobre a situação em questão;
+- Marcar como lida (Backend);
 
 
 ### Prioridade média:
@@ -42,6 +41,7 @@ Versão do ADM:
 - Enviar notificação apenas para um estudante com a matricula;
 - Caso seja apenas para um estudante, mostrar tela de confirmação com os dados úteis do mesmo;
 - Enviar notificação para todos os estudantes;
+- Relatório de feedbacks;
 
 ### Futuramente:
 
@@ -54,3 +54,5 @@ Versão do ADM:
 
 - Implementar tela de feedback frontend; 
 - No feedback substituir campo de texto por estrelas;
+- Completar estilização da tela de feedback;
+- Opção de marcar notificações como lidas sem precisar abri-las (Frontend)

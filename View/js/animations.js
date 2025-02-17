@@ -44,12 +44,19 @@ export function showNotification(titulo, descricao, feedback) {
     const title = document.querySelector('.title');
     const desc = document.querySelector('.desc');
     const feedbackTemplate = document.querySelector('#feedback');
+    const closeBtn = popup.querySelector('#close');
+    const sendBtn = document.querySelector('feedback-btn');
 
     overlay.classList.add('active');
     popup.classList.add('active');
+    closeBtn.classList.remove('close-btn-2')
+    closeBtn.textContent = 'Entendido';
 
     if (feedback) {
         const section = document.createElement('section');
+
+        closeBtn.classList.add('close-btn-2');
+        closeBtn.textContent = 'Fechar';
         section.classList.add('feedback');
         section.innerHTML = feedbackTemplate.innerHTML;
         popup.querySelector('main').appendChild(section);
@@ -87,7 +94,7 @@ export function showNotification(titulo, descricao, feedback) {
 
     document.body.classList.add('active');
 
-    popup.querySelector('#close').addEventListener('click', function() {
+    closeBtn.addEventListener('click', function() {
         overlay.classList.remove('active');
         popup.classList.remove('active');
         popup.classList.add('close');
