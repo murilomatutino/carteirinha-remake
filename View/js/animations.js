@@ -45,8 +45,6 @@ export function showNotification(titulo, descricao, feedback) {
     const desc = document.querySelector('.desc');
     const feedbackTemplate = document.querySelector('#feedback');
 
-    console.log(feedback)
-
     overlay.classList.add('active');
     popup.classList.add('active');
 

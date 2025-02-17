@@ -132,8 +132,6 @@ if (page === 'agendados.php') {
                         motivo: document.querySelector('#outro').value,
                         idUser: idUser
                     };
-
-                    console.log(document.querySelector('#outro').value);
         
                     ajax.cancelarReserva(data)
                         .then(result => {
