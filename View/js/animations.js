@@ -38,14 +38,51 @@ export function backContent(popup2) {
     popup2.classList.add('open');
 }
 
-export function showNotification(titulo, descricao) {
+export function showNotification(titulo, descricao, feedback) {
     const overlay = document.querySelector('.overlay'); 
     const popup = document.querySelector('.popup');
     const title = document.querySelector('.title');
     const desc = document.querySelector('.desc');
+    const feedbackTemplate = document.querySelector('#feedback');
+
+    console.log(feedback)
 
     overlay.classList.add('active');
     popup.classList.add('active');
+
+    if (feedback) {
+        const section = document.createElement('section');
+        section.classList.add('feedback');
+        section.innerHTML = feedbackTemplate.innerHTML;
+        popup.querySelector('main').appendChild(section);
+
+        const stars = section.querySelectorAll('.estrela');
+        let selectedRating = 0;
+    
+        if (stars.length > 0) {
+            stars.forEach((star, index) => {
+                star.addEventListener('mouseover', () => {
+                  updateStars(index + 1);
+                });
+          
+                star.addEventListener('click', () => {
+                  selectedRating = index + 1;
+                  updateStars(selectedRating);
+                  console.log(`Avaliação selecionada: ${selectedRating}`);
+                });
+          
+                star.addEventListener('mouseout', () => {
+                  updateStars(selectedRating);
+                });
+              });
+          
+            function updateStars(rating) {
+                stars.forEach((star, index) => {
+                    star.classList.toggle('filled', index < rating);
+                });
+            }
+        }
+    }
 
     title.textContent = titulo;
     desc.textContent = descricao;

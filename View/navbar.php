@@ -139,6 +139,18 @@
     </footer>
 </template>
 
+<template class="notification" id="feedback">
+    <h2>Deixe seu feedback!</h2>
+    <div class="estrelas" id="starRating">
+    <div class="estrela" data-value="1">&#9733;</div>
+    <div class="estrela" data-value="2">&#9733;</div>
+    <div class="estrela" data-value="3">&#9733;</div>
+    <div class="estrela" data-value="4">&#9733;</div>
+    <div class="estrela" data-value="5">&#9733;</div>
+    </div>
+    <button id="feedback">Enviar Feedback</button>
+</template>
+
 <?php 
     $notController = new NotificationController();
 

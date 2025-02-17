@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 04/02/2025 às 20:44
+-- Tempo de geração: 17/02/2025 às 13:23
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -117,7 +117,11 @@ CREATE TABLE `notificacao` (
 --
 
 INSERT INTO `notificacao` (`id`, `id_remetente`, `id_destinatario`, `data`, `hora`, `assunto`, `mensagem`, `lida`, `transferencia`) VALUES
-(8, 3, 2, '2025-02-04', '16:09:28', 'Transferência de Almoço', 'Saudações Vitor, o estudante Botteste fez a você uma solicitação de transferência de almoço!\n\nMotivo: nao quero mais', 1, 2);
+(8, 3, 2, '2025-02-04', '16:09:28', 'Transferência de Almoço', 'Saudações Vitor, o estudante Botteste fez a você uma solicitação de transferência de almoço!\n\nMotivo: nao quero mais', 1, 2),
+(11, 1, 2, '2025-02-04', '17:45:02', 'Testando notificação', 'Teste notificação', 1, 0),
+(15, 2, 3, '2025-02-04', '20:22:21', 'Transferência de Almoço', 'Saudações Botteste, o estudante Vitor fez a você uma solicitação de transferência de almoço!\n\nMotivo: nao quero mais', 1, 2),
+(16, 3, 2, '2025-02-04', '20:40:38', 'Transferência de Almoço', 'Saudações Vitor, o estudante Botteste fez a você uma solicitação de transferência de almoço!\n\nMotivo: Passei mal e tive que ir embora', 1, 2),
+(17, 1, 2, '2025-02-05', '06:23:10', 'Testando novas notificações', 'lorem ipsum.', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -144,7 +148,16 @@ CREATE TABLE `refeicao` (
 INSERT INTO `refeicao` (`id`, `id_usuario`, `id_cardapio`, `id_status_ref`, `id_justificativa`, `data_solicitacao`, `hora_solicitacao`, `outra_justificativa`, `motivo_cancelamento`) VALUES
 (18, 2, 47, 1, 3, '2025-02-03', '16:40:39', 'projeto', 'nao quero mais'),
 (19, 2, 47, 1, 2, '2025-02-03', '17:18:25', 'transporte', NULL),
-(20, 2, 48, 1, 1, '2025-02-04', '15:45:15', 'contra-turno', NULL);
+(20, 2, 48, 1, 1, '2025-02-04', '15:45:15', 'contra-turno', NULL),
+(21, 2, 47, 1, 2, '2025-02-10', '14:43:37', 'transporte', 'nao quero mais'),
+(22, 2, 47, 1, 2, '2025-02-10', '15:14:33', 'transporte', 'nao quero mais'),
+(23, 2, 47, 1, 3, '2025-02-10', '15:15:52', 'projeto', ''),
+(24, 2, 47, 1, 1, '2025-02-10', '15:16:38', 'contra-turno', 'nao quero mais'),
+(25, 2, 47, 1, 2, '2025-02-10', '15:29:06', 'transporte', 'Passei mal e tive que ir embora'),
+(26, 2, 47, 1, 2, '2025-02-10', '15:31:21', 'transporte', 'Passei mal e tive que ir embora'),
+(27, 2, 47, 1, 3, '2025-02-10', '15:32:09', 'projeto', ''),
+(28, 2, 47, 1, 2, '2025-02-10', '16:32:57', 'transporte', 'Passei mal e tive que ir embora'),
+(29, 2, 49, 1, 1, '2025-02-12', '19:16:48', 'contra-turno', NULL);
 
 --
 -- Acionadores `refeicao`
@@ -337,13 +350,13 @@ ALTER TABLE `justificativa`
 -- AUTO_INCREMENT de tabela `notificacao`
 --
 ALTER TABLE `notificacao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `refeicao`
 --
 ALTER TABLE `refeicao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `status_msg`

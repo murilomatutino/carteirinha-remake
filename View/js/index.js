@@ -5,50 +5,50 @@ import * as ajax from './ajax.js';
 
 // LOGIN
 const page = window.location.pathname.split('/').pop();
-if (page === "login.php") {
-    const loginSubmit = document.querySelector("#form");
-    const userCheck = document.querySelector("#matricula");
-    const passwordCheck = document.querySelector("#password");
+if (page === 'login.php') {
+    const loginSubmit = document.querySelector('#form');
+    const userCheck = document.querySelector('#matricula');
+    const passwordCheck = document.querySelector('#password');
 
-    userCheck.addEventListener("input", function() {
+    userCheck.addEventListener('input', function() {
         functions.check();
     });
 
-    passwordCheck.addEventListener("input", function() {
+    passwordCheck.addEventListener('input', function() {
         functions.check();
     });
 
-    loginSubmit.addEventListener("submit", function(event) {
+    loginSubmit.addEventListener('submit', function(event) {
         event.preventDefault();
 
-        const formElement = document.querySelector("#form");
+        const formElement = document.querySelector('#form');
         const formData = new FormData(formElement);
         const data = Object.fromEntries(formData.entries());
 
         ajax.enviarFormulario(data)
         .then(response => {
             if (response) {
-                const resultDiv = document.querySelector(".result");
-                resultDiv.style.display = "flex";
-                resultDiv.style.opacity = "1";
+                const resultDiv = document.querySelector('.result');
+                resultDiv.style.display = 'flex';
+                resultDiv.style.opacity = '1';
                 
                 setTimeout(() => {
                     if (data.action === 'login') {
-                        window.location.href = "landpage.php";
+                        window.location.href = 'landpage.php';
                     } else {
-                        window.location.href = "http://localhost/carteirinha-remake";
+                        window.location.href = 'http://localhost/carteirinha-remake';
                     }
                 }, 2000);
             } else {
-                throw "error001";
+                throw 'error001';
             }
         })
         .catch(error => {
-            if (error === "error001") {
-                events.showNotification("Usuário inexistente ou credenciais inválidas!", "error");
+            if (error === 'error001') {
+                events.showNotification('Usuário inexistente ou credenciais inválidas!', 'error');
                 functions.check();
             } else {
-                console.error("Erro desconhecido:", error);
+                console.error('Erro desconhecido:', error);
             }
         });
     });
@@ -68,24 +68,14 @@ if (page === 'cardapio-reserva.php') {
     });
 
     document.querySelector('.cancelar').addEventListener('click', function() {
-        window.location.href = "cardapio.php";
+        window.location.href = 'cardapio.php';
     });
-}
-
-// CARDAPIO
-if (page === 'cardapio.php') {
-    const params = new URLSearchParams(window.location.search);
-    const reserva = params.get('reserva');
-    if (reserva === 'confirmada') {
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    }
 }
 
 // AGENDADOS 
 if (page === 'agendados.php') {
     document.querySelector('#voltar').addEventListener('click', function() {
-        window.location.href = "cardapio.php";
+        window.location.href = 'cardapio.php';
     });
 
     const buttons = document.querySelectorAll('#action');
@@ -94,25 +84,25 @@ if (page === 'agendados.php') {
     }
 
     function doAction() {
-        const popup = document.querySelector("#popup");
-        const overlay = document.querySelector("#overlay");
+        const popup = document.querySelector('#popup');
+        const overlay = document.querySelector('#overlay');
         const type = this.classList.contains('vermelho') ? 1 : 2;
-        popup.innerHTML = ""; 
+        popup.innerHTML = ''; 
 
-        const h2 = document.createElement("h2");
-        const inputMotivo = document.createElement("input");
-        const divButtons = document.createElement("div");
-        const btnConfirm = document.createElement("button");
-        const btnCancel = document.createElement("button");
-        const labelMotivo = document.createElement("label");
+        const h2 = document.createElement('h2');
+        const inputMotivo = document.createElement('input');
+        const divButtons = document.createElement('div');
+        const btnConfirm = document.createElement('button');
+        const btnCancel = document.createElement('button');
+        const labelMotivo = document.createElement('label');
 
-        Object.assign(inputMotivo, { id: "outro", name: "outro", placeholder: "Digite o motivo..." });
+        Object.assign(inputMotivo, { id: 'outro', name: 'outro', placeholder: 'Digite o motivo...' });
 
-        divButtons.classList.add("botao-container");
+        divButtons.classList.add('botao-container');
 
-        Object.assign(btnConfirm, { type: "submit", id: "confirmar", classList: "validar" });
+        Object.assign(btnConfirm, { type: 'submit', id: 'confirmar', classList: 'validar' });
 
-        btnCancel.classList.add("cancelar");
+        btnCancel.classList.add('cancelar');
 
         divButtons.appendChild(btnCancel);
         divButtons.appendChild(btnConfirm);
@@ -120,17 +110,17 @@ if (page === 'agendados.php') {
         document.body.classList.add('active');
 
         function closeAgendadosPopup() {
-            const popup = document.querySelector("#popup");
-            const overlay = document.querySelector("#overlay");
-            popup.style.display = "none";
-            overlay.style.display = "none";
-            document.querySelector('.container').classList.remove("blur");
+            const popup = document.querySelector('#popup');
+            const overlay = document.querySelector('#overlay');
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+            document.querySelector('.container').classList.remove('blur');
             document.body.classList.remove('active');
         }
 
-        btnCancel.addEventListener("click", closeAgendadosPopup);
+        btnCancel.addEventListener('click', closeAgendadosPopup);
         if (type === 1) {
-            btnConfirm.addEventListener("click", function() {      
+            btnConfirm.addEventListener('click', function() {      
                 ajax.getUserId().then(idUser => {
                     if (!idUser) {
                         console.error('ID do usuário não encontrado');
@@ -138,19 +128,19 @@ if (page === 'agendados.php') {
                     }
         
                     const data = {
-                        operacao: "cancelarReserva",
-                        motivo: document.querySelector("#outro").value,
+                        operacao: 'cancelarReserva',
+                        motivo: document.querySelector('#outro').value,
                         idUser: idUser
                     };
 
-                    console.log(document.querySelector("#outro").value);
+                    console.log(document.querySelector('#outro').value);
         
                     ajax.cancelarReserva(data)
                         .then(result => {
-                            window.location.href = "cardapio.php?cancelamento=success";
+                            window.location.href = 'cardapio.php?cancelamento=success';
                         })
                         .catch(error => {
-                            window.location.href = "cardapio.php?cancelamento=error"
+                            window.location.href = 'cardapio.php?cancelamento=error'
                         });
                 }).catch(error => {
                     console.error('Erro ao pegar ID do usuário:', error);
@@ -158,20 +148,20 @@ if (page === 'agendados.php') {
             });
         }
 
-        labelMotivo.textContent = "MOTIVO:";
-        h2.textContent = type === 1 ? "CANCELAR RESERVA" : "DISPONIBILIZAR RESERVA";
+        labelMotivo.textContent = 'MOTIVO:';
+        h2.textContent = type === 1 ? 'CANCELAR RESERVA' : 'DISPONIBILIZAR RESERVA';
 
         popup.appendChild(h2);
         popup.appendChild(labelMotivo);
         popup.appendChild(inputMotivo);
 
         if (type !== 1) {
-            const labelMatricula = document.createElement("label");
-            const inputMatricula = document.createElement("input");
+            const labelMatricula = document.createElement('label');
+            const inputMatricula = document.createElement('input');
 
-            Object.assign(inputMatricula, { id: "matricula", name: "matricula", placeholder: "Matrícula alvo" });
+            Object.assign(inputMatricula, { id: 'matricula', name: 'matricula', placeholder: 'Matrícula alvo' });
 
-            labelMatricula.textContent = "MATRÍCULA";
+            labelMatricula.textContent = 'MATRÍCULA';
 
             popup.appendChild(labelMatricula);
             popup.appendChild(inputMatricula);
@@ -184,7 +174,7 @@ if (page === 'agendados.php') {
                     }
 
                     let dados = {
-                        operacao: "transferirReserva",
+                        operacao: 'transferirReserva',
                         motivo: document.querySelector('#outro').value,
                         matriculaAlvo: document.querySelector('#matricula').value,
                         idUser: idUser
@@ -192,33 +182,20 @@ if (page === 'agendados.php') {
                     
                     ajax.transferirReserva(dados)
                         .then(result => {
-                            window.location.href = "cardapio.php?solicitacao=success";
+                            window.location.href = 'cardapio.php?solicitacao=success';
                         })
                         .catch(error => {
-                            window.location.href = "cardapio.php?solicitacao=error";
+                            window.location.href = 'cardapio.php?solicitacao=error';
                         });
                     });
             });
-
-
-            // function showNotification(message, type) {
-            //     const notification = document.createElement("div");
-            //     notification.classList.add("notification", type);
-            //     notification.innerText = message;
-
-            //     document.body.appendChild(notification);
-
-            //     setTimeout(() => {
-            //         notification.remove();
-            //     }, 5000);
-            // }
         }
 
         popup.appendChild(divButtons);
-        popup.style.display = "block";
-        overlay.style.display = "block";
+        popup.style.display = 'block';
+        overlay.style.display = 'block';
 
-        document.querySelector('.container').classList.add("blur");
+        document.querySelector('.container').classList.add('blur');
     }
 }
 
@@ -249,16 +226,16 @@ function botaoConfirmar(button) {
             }
 
             const data = {
-                operacao: "aceitarRefeicao",
+                operacao: 'aceitarRefeicao',
                 idDestinatario: idUser
             };
 
             ajax.acceptTransferencia(data)
                 .then(result => {
-                    window.location.href = "cardapio.php?transferencia=success";
+                    window.location.href = 'cardapio.php?transferencia=success';
                 })
                 .catch(error => {
-                    window.location.href = "cardapio.php?transferencia=error";
+                    window.location.href = 'cardapio.php?transferencia=error';
                 });
         }).catch(error => {
             console.error('Erro ao pegar ID do usuário:', error);
@@ -301,7 +278,7 @@ function exibirConteudo() {
                         }
 
                         const dados = {
-                            operacao: "getNotification",
+                            operacao: 'getNotification',
                             idUser: idUser,
                             idNotificacao: this.id,
                         }
@@ -316,7 +293,7 @@ function exibirConteudo() {
                             popup2.querySelector('#content').textContent = notifications.mensagem;
 
                             const dadosNoti = {
-                                operacao: "readNotification",
+                                operacao: 'readNotification',
                                 idDestinatario: idUser,
                                 idNotificacao: this.id,
                             }
@@ -373,7 +350,7 @@ if (closePopup) {
     });
 }
 
-if (page === "sobre.php") {
+if (page === 'sobre.php') {
     const button = document.querySelector('#open-form'); 
     const contactForm = document.querySelector('.contact-form');
     const contactAnimation = document.querySelector('.contact-animation');
@@ -386,7 +363,7 @@ if (page === "sobre.php") {
             setTimeout(() => {
                 window.scrollTo({
                     top: contactAnimation.getBoundingClientRect().top + window.scrollY,
-                    behavior: "smooth"
+                    behavior: 'smooth'
                 });
             }, 400);
 
@@ -401,4 +378,4 @@ if (page === "sobre.php") {
 }
 
 // Notificações
-export function showNotification(titulo, descricao) { animations.showNotification(titulo, descricao); }
+export function showNotification(titulo, descricao, feedback = false) { animations.showNotification(titulo, descricao, feedback); }

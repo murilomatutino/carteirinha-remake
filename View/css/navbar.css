@@ -400,6 +400,25 @@ h1 {
   font-family: 'Courier New', Courier, monospace;
 }
 
+/* [ SECTION ] Configuração da notificação de feedback */
+.estrelas {
+  display: flex;
+  gap: 10px;
+  font-size: 3rem;
+  cursor: pointer;
+  user-select: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.estrela {
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.estrela.filled {
+  color: #f5b301;
+}
 
 @keyframes fadeInFromLeft {
   from {

@@ -155,10 +155,11 @@
         }
 
         if (response.type === 'agendamento') {
-            if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!'}
+            let feedback = false;
+            if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!'; feedback = true }
             else { titulo = 'Problema na solicitação'; desc = 'Houve algum problema solicitação de agendamento do seu almoço. Por favor tente novamente mais tarde!' }
 
-            showNotification(titulo, desc);
+            showNotification(titulo, desc, feedback);
         } else if (response.type === 'solicitacao') {
             if (response.data === 'success') { titulo = 'Sucesso na Solicitação', desc = 'Sua solicitação de transferência de reserva foi enviada ao estudante!' }
             else { titulo = 'Problema na solicitação'; desc = 'Houve um problema com a solicitação, que tal tentar novamente mais tarde?'}

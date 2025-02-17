@@ -5,6 +5,8 @@ Remake do projeto carteirinha IFBA
 ## Tasks to do:
 
 ### Prioridade atual:
+- Implementar tela de feedback backend; 
+- Completar estilização da tela de feedback;
 - Criação de tabela de para os feedbacks recebidos pelos usuários;
 - Opção de marcar notificações como lidas sem precisar abri-las;
 - O usuário/administrador deve ser alertado em todos os casos de resposta do servidor onde possa ser: erro, alerta ou sucesso. Em todos os casos deve ser exibida na tela uma notificação elegante sobre a situação em questão;
@@ -50,8 +52,5 @@ Versão do ADM:
 
 ### Feito recentemente(periodo de 5 dias):
 
-- Criar popup de Alerta e Sucesso personalizado para funções;
-- Mover todas as popups do footer para a navbar;
-- Esconder formulário de contato no Sobre;
-- Notificações em popups antigas precisam ser reajustadas (ajustado);
-- Remover códigos AJAX do topo dos arquivos php e de qualquer outro arquivo. Funções ajax devem ser movidas para o arquivo ajax.js;
+- Implementar tela de feedback frontend; 
+- No feedback substituir campo de texto por estrelas;
