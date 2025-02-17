@@ -33,7 +33,6 @@
                 }
 
                 if (count($refeicaoData) > 0) {
-
                     $cardapioId = $refeicaoData['id_cardapio'];
 
                     $sql = "SELECT data_refeicao, dia, principal, acompanhamento, sobremesa FROM cardapio WHERE id = $cardapioId";

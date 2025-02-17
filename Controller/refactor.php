@@ -1,6 +1,7 @@
 <?php 
     require_once 'CardapioController.php';
     require_once 'NotificationController.php';
+    require_once 'AuthController.php';
 
     function cancelarReserva($idUser, $motivo) {
         $response = (new CardapioController)->cancelarReserva($idUser, $motivo);
@@ -52,6 +53,16 @@
         }
     }
 
+    function login($matricula, $pass) {
+        $response = (new AuthController())->login($matricula, $pass);
+
+        if ($response['status']) {
+            echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
+        }
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
         switch ($_POST['operacao']) {
             case 'cancelarReserva': cancelarReserva($_POST['idUser'], $_POST['motivo']); break;
@@ -59,6 +70,15 @@
             case 'aceitarRefeicao': aceitarRefeicao($_POST['idDestinatario']); break;
             case 'getNotification': getNotification($_POST['idUser'], $_POST['idNotificacao']); break;
             case 'readNotification': readNotification($_POST['idDestinatario'], $_POST['idNotificacao']); break;
+        }
+    } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+        if ($_POST['action'] === 'login') {
+            $matricula = $_POST['matricula'];
+            $pass = $_POST['password'];
+
+            login($matricula, $pass);
+        } else {
+            (new AuthController())->logout();
         }
     } else {
         $idJustificativa = 0;

@@ -1,23 +1,9 @@
 <?php session_start();
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     require_once 'HomeController.php';
     require_once 'config.php';
     require_once __DIR__ . '/../Model/model.php';
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['action'])) {
-            $authController = new AuthController();
-
-            if ($_POST['action'] == 'login') {
-                $matricula = $_POST['matricula'];
-                $pass = $_POST['password'];
-
-                $authController->login($matricula, $pass);
-            } else {
-                // $authController = new AuthController();
-                $authController->logout();
-            }      
-        }  
-    }   
 ?>
 
 <?php
@@ -59,18 +45,18 @@
                         $_SESSION['enrollment'] = $data['matricula'];
                         $_SESSION['category'] = $data['categoria'];
                         $_SESSION['logged_in'] = true;
-                        echo "logged"; exit();
+                        return ['status' => true, 'message' => 'sucesso']; 
                     }  
                 } else {
-                    echo "error"; exit();
+                    return ['status' => false, 'message' => 'Credenciais inválidas'];
                 }
             }
         }
 
         // Ação de logout
         public function logout() {
-            session_destroy();
-            header(PATH); exit();
+            session_destroy(); 
+            header(PATH);
         }
     }
 ?>

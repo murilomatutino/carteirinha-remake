@@ -21,11 +21,27 @@ if (page === "login.php") {
     loginSubmit.addEventListener("submit", function(event) {
         event.preventDefault();
 
-        functions.enviarFormulario()
-        .then(data => {
-            setTimeout(() => {
-                window.location.href = "landpage.php";
-            }, 2000);
+        const formElement = document.querySelector("#form");
+        const formData = new FormData(formElement);
+        const data = Object.fromEntries(formData.entries());
+
+        ajax.enviarFormulario(data)
+        .then(response => {
+            if (response) {
+                const resultDiv = document.querySelector(".result");
+                resultDiv.style.display = "flex";
+                resultDiv.style.opacity = "1";
+                
+                setTimeout(() => {
+                    if (data.action === 'login') {
+                        window.location.href = "landpage.php";
+                    } else {
+                        window.location.href = "http://localhost/carteirinha-remake";
+                    }
+                }, 2000);
+            } else {
+                throw "error001";
+            }
         })
         .catch(error => {
             if (error === "error001") {
