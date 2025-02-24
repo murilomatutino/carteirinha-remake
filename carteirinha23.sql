@@ -233,6 +233,13 @@ INSERT INTO `status_ref` (`id`, `descricao`) VALUES
 (3, 'Confirmada'),
 (4, 'Não compareceu');
 
+INSERT INTO `status_feedback` (`id`, `descricao`) VALUES
+(1, 'Muito Ruim'),
+(2, 'Ruim'),
+(3, 'Neutro'),
+(4, 'Bom'),
+(5, 'Muito bom');
+
 -- --------------------------------------------------------
 
 --
@@ -249,6 +256,18 @@ CREATE TABLE `usuario` (
   `telefone` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
+
+CREATE TABLE `status_feedback` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `descricao` tinyint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
+  `nota` tinyint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 --
 -- Despejando dados para a tabela `usuario`
 --
@@ -403,6 +422,10 @@ ALTER TABLE `refeicao`
   ADD CONSTRAINT `refeicao_ibfk_3` FOREIGN KEY (`id_status_ref`) REFERENCES `status_ref` (`id`),
   ADD CONSTRAINT `refeicao_ibfk_4` FOREIGN KEY (`id_justificativa`) REFERENCES `justificativa` (`id`);
 COMMIT;
+
+ALTER TABLE `feedback`
+  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_nota` FOREIGN KEY (`nota`) REFERENCES `status_feedback` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
