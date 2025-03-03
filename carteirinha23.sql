@@ -201,6 +201,12 @@ CREATE TABLE `status_notification` (
   `descricao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+CREATE TABLE `status_feedback` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
 --
 -- Despejando dados para a tabela `status_notification`
 --
@@ -257,16 +263,10 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 
-CREATE TABLE `status_feedback` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `descricao` tinyint(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
-
 CREATE TABLE `feedback` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `id_usuario` int(11) NOT NULL,
-  `nota` tinyint(6) NOT NULL
+  `nota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 --
 -- Despejando dados para a tabela `usuario`
