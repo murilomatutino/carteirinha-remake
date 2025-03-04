@@ -35,10 +35,10 @@
 
             $result = $this->model->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
 
-            if ($result['status']) {
-                return ['status' => true, 'message' => $result['message']];
+            if ($result) {
+                return ['status' => true, 'message' => 'Refeição agendada com sucesso!'];
             } else {
-                return ['status'=> false, 'message'=> $result['message']];
+                return ['status'=> false, 'message'=> 'Houve um problema ao agendar a sua refeição. Por favor, tente novamente mais tarde!'];
             }
         }
 
