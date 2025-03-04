@@ -5,8 +5,6 @@ Remake do projeto carteirinha IFBA
 ## Tasks to do:
 
 ### Prioridade atual:
-- Implementar tela de feedback backend (feito, necessita testes); 
-- Criação de tabela de para os feedbacks recebidos pelos usuários;
 - O usuário/administrador deve ser alertado em todos os casos de resposta do servidor onde possa ser: erro, alerta ou sucesso. Em todos os casos deve ser exibida na tela uma notificação elegante sobre a situação em questão;
 - Marcar como lida (Backend);
 
@@ -52,7 +50,5 @@ Versão do ADM:
 
 ### Feito recentemente(periodo de 5 dias):
 
-- Implementar tela de feedback frontend; 
-- No feedback substituir campo de texto por estrelas;
-- Completar estilização da tela de feedback;
-- Opção de marcar notificações como lidas sem precisar abri-las (Frontend)
+- Implementar tela de feedback backend (testes realizados); 
+- Criação de tabela de para os feedbacks recebidos pelos usuários;

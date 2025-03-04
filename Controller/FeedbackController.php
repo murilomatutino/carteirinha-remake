@@ -8,13 +8,13 @@
         }
 
         public function sendFeedback($nota, $idUser) {
-            $response = $this->model->adicionarFeedback($nota, $idUser);
+            return $this->model->adicionarFeedback($nota, $idUser);
 
-            if ($response['status']) {
-                return ['status'=> true, 'message'=> $respone['message']];
-            } else {
-                return ['status'=> false, $respone['message']];
-            }
+            // if ($response['success']) {
+            //     return $response;
+            // } else {
+            //     return $response;
+            // }
         }
     }
 ?>

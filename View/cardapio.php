@@ -99,12 +99,12 @@
             <h2>Reserva Confirmada!</h2>
             <p>Sua reserva foi confirmada com sucesso.</p>
             <!-- Campo de Feedback -->
-            <div class="feedback-container">
+            <!-- <div class="feedback-container">
                 <h3>Deixe seu feedback:</h3>
                 <textarea id="feedback" name="feedback" rows="4" placeholder="Digite seu feedback aqui..."></textarea>
                 <button id="btn-submit-feedback">Enviar Feedback</button>
             </div>
-            <button class="close">Fechar</button>
+            <button class="close">Fechar</button> -->
         </div>
 
         <div class="info"></div>
@@ -149,7 +149,9 @@
             case params.has('cancelamento'):
                 response = {type: 'cancelamento', data: params.get('cancelamento') }; break;
             case params.has('solicitacao'):
-                response = {type: 'solicitacao', data: params.get('solicitacao') }; break
+                response = {type: 'solicitacao', data: params.get('solicitacao') }; break;
+            case params.has('feedback'):
+                response = {type: 'feedback', data: params.get('feedback') }; break;
             default:
                 response = { type: 'nenhum', data: null };
         }
@@ -173,6 +175,8 @@
         } else if (response.type === 'feedback') {
             if (response.data === 'success') { titulo = 'Sucesso no feedback!', desc = 'Seu feedback foi enviaddo com sucesso para a nossa equipe!' }
             else { titulo = 'Problema no feedback!', desc = 'Houve um problema no envio do seu feedback. Por favor, tente novamente mais tarde!' }
+
+            showNotification(titulo, desc);
         }
     </script>
     <?php require_once "footer.php"; ?>

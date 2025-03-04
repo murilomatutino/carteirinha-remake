@@ -67,7 +67,7 @@
     function sendFeedback($nota, $idUser) {
         $response = (new FeedbackController)->sendFeedback($nota, $idUser);
 
-        if ($response !== null && $response['sucess']) {
+        if ($response !== null && $response['success']) {
             echo json_encode(['status'=> 'success', 'array' => $response['message']]); exit();
         } else {
             echo json_encode(['status'=> 'error', 'message' => $response['message']]); exit();

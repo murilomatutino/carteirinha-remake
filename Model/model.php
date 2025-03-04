@@ -340,7 +340,7 @@ ini_set('display_errors', 1);
         }
 
         public function adicionarFeedback($nota, $idUser) {
-            $sql = "INSERT INTO feedback (id_user, nota) VALUES (?, ?)";
+            $sql = "INSERT INTO feedback (id_usuario, nota) VALUES (?, ?)";
             $stmt = $this->conn->prepare($sql);
         
             if ($stmt) {

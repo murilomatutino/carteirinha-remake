@@ -57,8 +57,6 @@ if (page === 'login.php') {
 
 // CARDAPIO
 
-
-
 // CARDAPIO RESERVA
 if (page === 'cardapio-reserva.php') {
     document.querySelector('#justificativa').addEventListener('change', function() {
@@ -403,16 +401,19 @@ function sendFeedback(nota) {
 export function showNotification(titulo, descricao, feedback = false) { 
     if (feedback) {
         const section = document.createElement('section');
+
+        section.classList.add('feedback');
+        section.innerHTML = document.querySelector('#feedback').innerHTML;
+
         const popup = document.querySelector('.popup');
         const closeBtn = popup.querySelector('#close');
         const stars = section.querySelectorAll('.estrela');
-        const sendBtn = document.querySelector('feedback-btn');
+        const sendBtn = document.querySelector('#feedback-btn');
         let selectedRating = 0;
 
         closeBtn.classList.add('close-btn-2');
         closeBtn.textContent = 'Fechar';
-        section.classList.add('feedback');
-        section.innerHTML = feedbackTemplate.innerHTML;
+
         popup.querySelector('main').appendChild(section);
 
         if (stars.length > 0) {
@@ -422,9 +423,14 @@ export function showNotification(titulo, descricao, feedback = false) {
                 });
           
                 star.addEventListener('click', () => {
-                  selectedRating = index + 1;
-                  updateStars(selectedRating);
-                //   console.log(`Avaliação selecionada: ${selectedRating}`);
+                    selectedRating = index + 1;
+                    updateStars(selectedRating);
+                
+                    sendFeedback(selectedRating);
+
+                    // sendBtn.addEventListener('click', () => {
+                    //     console.log(selectedRating);
+                    // });
                 });
           
                 star.addEventListener('mouseout', () => {
@@ -436,7 +442,7 @@ export function showNotification(titulo, descricao, feedback = false) {
             //     sendFeedback(selectedRating);
             //   })
 
-            console.log(selectedRating);
+            // console.log(selectedRating);
           
             function updateStars(rating) {
                 stars.forEach((star, index) => {
@@ -445,6 +451,8 @@ export function showNotification(titulo, descricao, feedback = false) {
             }
         }
     }
+
+    // console.log(selectedRating);
 
     animations.showNotification(titulo, descricao, feedback); 
 }
