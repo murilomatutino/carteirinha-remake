@@ -7,7 +7,7 @@ Remake do projeto carteirinha IFBA
 ### Prioridade atual:
 - O usuário/administrador deve ser alertado em todos os casos de resposta do servidor onde possa ser: erro, alerta ou sucesso. Em todos os casos deve ser exibida na tela uma notificação elegante sobre a situação em questão;
 - Marcar como lida (Backend);
-
+- Entre em contato.
 
 ### Prioridade média:
 - Criar popup de Alerta e Sucesso personalizado para funções (criado, mantido por possibilidade de haver problemas ou necessidade de ajustes);

@@ -41,9 +41,10 @@
                         </thead>
                         <tbody>";
 
+                    
                     foreach ($cardapio as $dia) {
                         if ($dia['principal'] != 'Sem refeição') {
-                            $data = date("d/m", strtotime($dia['data'])); 
+                            $data = date("d/m", strtotime($dia['data_refeicao'])); 
                             $newDia = ucfirst($dia['dia']) . "-feira";
                             echo "<tr>";
                             echo "<td>$newDia ($data)</td>";

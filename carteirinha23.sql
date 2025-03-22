@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cardapio` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `data_refeicao` date NOT NULL,
   `dia` varchar(255) NOT NULL,
   `principal` varchar(255) NOT NULL,
@@ -55,7 +55,7 @@ INSERT INTO `cardapio` (`id`, `data_refeicao`, `dia`, `principal`, `acompanhamen
 --
 
 CREATE TABLE `horario_padrao` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `inicio_vig` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `fim_vig` timestamp NULL DEFAULT NULL,
   `horario` time NOT NULL
@@ -80,7 +80,7 @@ INSERT INTO `horario_padrao` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
 --
 
 CREATE TABLE `justificativa` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descricao` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -101,11 +101,11 @@ INSERT INTO `justificativa` (`id`, `descricao`) VALUES
 --
 
 CREATE TABLE `notificacao` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `id_remetente` int(11) NOT NULL,
   `id_destinatario` int(11) NOT NULL,
-  `data` date NOT NULL DEFAULT current_timestamp(),
-  `hora` time NOT NULL DEFAULT current_timestamp(),
+  `data` date NOT NULL,
+  `hora` time NOT NULL,
   `assunto` text NOT NULL,
   `mensagem` text NOT NULL,
   `lida` tinyint(1) NOT NULL DEFAULT 0,
@@ -130,7 +130,7 @@ INSERT INTO `notificacao` (`id`, `id_remetente`, `id_destinatario`, `data`, `hor
 --
 
 CREATE TABLE `refeicao` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `id_usuario` int(11) NOT NULL,
   `id_cardapio` int(11) NOT NULL,
   `id_status_ref` int(11) NOT NULL,
@@ -178,7 +178,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `status_msg` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descricao` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -197,7 +197,7 @@ INSERT INTO `status_msg` (`id`, `descricao`) VALUES
 --
 
 CREATE TABLE `status_notification` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descricao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -225,7 +225,7 @@ INSERT INTO `status_notification` (`id`, `descricao`) VALUES
 --
 
 CREATE TABLE `status_ref` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descricao` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -253,7 +253,7 @@ INSERT INTO `status_feedback` (`id`, `descricao`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `matricula` varchar(255) NOT NULL,
@@ -282,28 +282,9 @@ INSERT INTO `usuario` (`id`, `nome`, `email`, `matricula`, `senha`, `categoria`,
 --
 
 --
--- Índices de tabela `cardapio`
---
-ALTER TABLE `cardapio`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `horario_padrao`
---
-ALTER TABLE `horario_padrao`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `justificativa`
---
-ALTER TABLE `justificativa`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Índices de tabela `notificacao`
 --
 ALTER TABLE `notificacao`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_remetente` (`id_remetente`),
   ADD KEY `fk_destinatario` (`id_destinatario`),
   ADD KEY `fk_transferencia_notification` (`transferencia`);
@@ -312,94 +293,16 @@ ALTER TABLE `notificacao`
 -- Índices de tabela `refeicao`
 --
 ALTER TABLE `refeicao`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_cardapio` (`id_cardapio`),
   ADD KEY `id_status` (`id_status_ref`),
   ADD KEY `id_justificativa` (`id_justificativa`);
 
 --
--- Índices de tabela `status_msg`
---
-ALTER TABLE `status_msg`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `status_notification`
---
-ALTER TABLE `status_notification`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `status_ref`
---
-ALTER TABLE `status_ref`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT para tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `cardapio`
---
-ALTER TABLE `cardapio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
-
---
--- AUTO_INCREMENT de tabela `horario_padrao`
---
-ALTER TABLE `horario_padrao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de tabela `justificativa`
---
-ALTER TABLE `justificativa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `notificacao`
---
-ALTER TABLE `notificacao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT de tabela `refeicao`
---
-ALTER TABLE `refeicao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT de tabela `status_msg`
---
-ALTER TABLE `status_msg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `status_notification`
---
-ALTER TABLE `status_notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de tabela `status_ref`
---
-ALTER TABLE `status_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restrições para tabelas despejadas
