@@ -180,25 +180,6 @@
 
                 echo "</div>";
             }
-        } else {
-            echo "<h1>Sem notificações</h1>"; 
-        } 
+        }
     }
 ?>
-
-<!-- <div class="notification-item transfer">
-    <img src="assets/alert.png" alt="icone de alerta">
-    <div class="notification-content">
-        <h2 class="title">Transferencia de reserva</h2>
-        <p id="notification-text">Requisição de transferencia de reserva</p>
-    </div>
-    <button class="validar" id="validar-transferencia"></button>
-</div>
-
-<div class="notification-item default">
-    <img src="assets/alert.png" alt="icone de alerta">
-    <div class="notification-content">
-        <h2 class="title">Atualização</h2>
-        <p id="notification-text">Detalhes da Atualização</p>
-    </div>
-</div> -->

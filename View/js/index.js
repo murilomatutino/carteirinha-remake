@@ -33,11 +33,7 @@ if (page === 'login.php') {
                 resultDiv.style.opacity = '1';
                 
                 setTimeout(() => {
-                    if (data.action === 'login') {
-                        window.location.href = 'landpage.php';
-                    } else {
-                        window.location.href = 'http://localhost/carteirinha-remake';
-                    }
+                    window.location.href = 'http://localhost/carteirinha-remake/index.php';
                 }, 2000);
             } else {
                 throw 'error001';

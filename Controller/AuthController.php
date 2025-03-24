@@ -18,10 +18,14 @@
 
         // Verificar se o usuário está logado
         public function isLoggedIn() {
-            if (!isset($_SESSION['user'])) {
+            if (!isset($_SESSION['logged_in'])) {
                 $this->showLogin();
             } else {
-                $this->homeController->index();
+                if ($_SESSION['category'] === 'adm') {
+                    $this->homeController->indexAdm();
+                } else {
+                    $this->homeController->index();
+                }
             }
         }
 

@@ -7,5 +7,9 @@
         public function index() {
             header(PATH . "/View/landpage.php"); exit();
         }
+
+        public function indexAdm() {
+            header(PATH . "/View/painel-administrador.php"); exit();
+        }
     }
 ?>

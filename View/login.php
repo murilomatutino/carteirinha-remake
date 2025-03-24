@@ -22,10 +22,11 @@
     <div class="center">
         <h1 class="title-login">FAÇA LOGIN</h1>
         <div class="main-login">
+            <!-- Dados do formulário interpretados via JS -->
             <form id="form">
                 <input type="hidden" name="action" value="login">
                 <div class="notification" id="notification"></div>
-                <label for="matricula">Nome de Usuário:</label>
+                <label for="matricula">Matrícula do Usuário:</label>
                 <input type="text" name="matricula" id="matricula" placeholder="Matrícula" required autocomplete="off"><br><br>
 
                 <label for="password">Senha:</label>
