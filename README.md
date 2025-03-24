@@ -45,10 +45,6 @@ Versão do ADM:
 
 - Fazer um teste de compatibilidade com usuários de IOS;
 - Fazer um teste com o pessoal da sala para verificar casos de uso ou possiveis bugs ou necessidades;
-- Adicionar feedback ao banco de dados;
 - O usuário deve ter acesso a uma página onde pode acessar os registros de suas reservas com status dos últimos 30 dias;
 
 ### Feito recentemente(periodo de 5 dias):
-
-- Implementar tela de feedback backend (testes realizados); 
-- Criação de tabela de para os feedbacks recebidos pelos usuários;
