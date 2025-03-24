@@ -48,3 +48,4 @@ Versão do ADM:
 - O usuário deve ter acesso a uma página onde pode acessar os registros de suas reservas com status dos últimos 30 dias;
 
 ### Feito recentemente(periodo de 5 dias):
+- Redirecionamento de usuários por categoria;
