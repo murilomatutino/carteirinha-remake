@@ -12,18 +12,36 @@ draggable='false'> </a> </header>
 
 <?php include_once("navbar.php"); showNav("default"); ?>
 
-    <div class="container">
-        <h1>PAINEL ADMINISTRADOR</h1>
+    <h1>PAINEL ADMINISTRADOR</h1>
 
-        <form method="POST">
-            <a href='editar-horario.php'><button class="button-adm" type="button">EDITAR HORÁRIO</button></a>
-            <a href='historico.php'><button class="button blue" type="button">HISTÓRICO DE CARDÁPIOS</button></a>
-            <a href='relatorio-diario.php'><button class="button blue" type="button">RELATÓRIO DIÁRIO</button></a>
-            <a href='relatorio-feedbacks.php'><button class="button blue" type="button">RELATÓRIO FEEDBACKS</button></a>
-            <a href='cardapio.php'><button class="button-adm" type="button">CARDAPIO</button></a>
-        </form>
+    <div class="container">
+        <div class="button-adm"><button class='horario' id='horario'></button></div>
+        <div class="button-adm"><button class='historico' id='historico'></button></div>
+        <div class="button-adm"><button class='diario' id='diario'></button></div>
+        <div class="button-adm"><button class='feedback' id='feedback'></button></div>
+        <div class="button-adm"><button class='cardapio' id='cardapio'></button></div>
     </div>
 
     <?php include 'footer.php'; ?>
+    <script>
+        const buttons = document.querySelectorAll('.container .button-adm button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                switch (button.id) {
+                    case 'horario':
+                        window.location.href = 'editar-horario.php'; break;
+                    case 'historico':
+                        window.location.href = 'historico.php'; break;
+                    case 'diario':
+                        window.location.href = 'relatorio-diario.php'; break;
+                    case 'feedback':
+                        window.location.href = 'relatorio-feedbacks.php'; break;
+                    case 'cardapio':
+                        window.location.href = 'cardapio'; break;
+                }
+            })
+        });
+    </script>
 </body>
 </html>

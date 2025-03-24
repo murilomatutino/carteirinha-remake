@@ -2,10 +2,53 @@
 
 .container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 60px;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.button-adm {
+    max-width: 200px;
+    min-height: 200px;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.button-adm:hover {
+    transform: translateY(-10px);
+}
+
+.horario, .historico, .diario, .feedback, .cardapio {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+.horario {
+    background-image: url(../assets/card-horario.png);
+}
+
+.historico {
+    background-image: url(../assets/card-historico.png);
+}
+
+.diario {
+    background-image: url(../assets/card-diario.png);
+}
+
+.feedback {
+    background-image: url(../assets/card-feedback.png);
+}
+
+.cardapio {
+    background-image: url(../assets/card-cardapio.png);
 }
 
 h1 {
@@ -19,76 +62,25 @@ label {
     margin-bottom: 8px;
 }
 
-/* Estilos para os botões */
-.button-adm, .button.blue {
-    padding: 10px 20px;
-    width: 250px; /* Largura fixa para os botões */
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    font-size: 16px;
-    display: inline-block;
-}
-
-.button-adm {
-    background-color: #4CAF50; /* Verde */
-}
-
-.button-adm:hover {
-    background-color: var(--medium-green); /* Tom mais escuro do verde ao passar o mouse */
-}
-
-.button.blue {
-    background-color: #2196F3; /* Azul */
-}
-
-.button.blue:hover {
-    background-color: #1e87da; /* Tom mais escuro do azul ao passar o mouse */
-}
-
 /* Responsividade - Para dispositivos com largura até 768px */
 @media (max-width: 768px) {
     .img-logo {
-        width: 100%; /* Garantindo que a logo ocupe toda a largura disponível */
+        width: 100%;
     }
 
     .container {
         padding: 10px;
     }
 
-    .button-adm, .button.blue {
-        width: 250px; /* Largura fixa para os botões, mesmo no mobile */
-    }
-
-    .container form {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px; /* Espaçamento entre os botões */
-    }
-
     h1 {
         font-size: 30px;
-    }
+    } 
 }
 
 /* Responsividade - Para dispositivos com largura até 430px */
 @media (max-width: 430px) {
     .img-logo {
-        width: 100%; /* Garantindo que a logo ocupe toda a largura disponível */
-    }
-
-    .button-adm, .button.blue {
-        width: 250px; /* Largura fixa para os botões, mesmo no mobile */
-    }
-
-    .container form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        width: 100%;
     }
 
     h1 {
