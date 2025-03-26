@@ -22,7 +22,7 @@
 
     <header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img class="img-logo" src='assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
 
-    <?php include_once("navbar.php"); showNav("default"); ?>
+    <?php include_once("navbar.php"); ?>
 
     <main class="session-2">
         <div>

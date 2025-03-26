@@ -138,15 +138,18 @@ h1 {
 }
 
 .button-admin {
+  border: none;
   color: white;
   padding: 5px 10px;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
+  background-color: #e65c5c;
+  cursor: pointer;
 }
 
 .button-admin:hover {
-  background-color: #e65c5c;
+  background-color: #c22121;
 }
 
 .right span {

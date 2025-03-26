@@ -52,6 +52,17 @@ if (page === 'login.php') {
 
 
 // CARDAPIO
+if (page === 'cardapio.php') {
+    const btnExcluir = document.querySelector('.button-excluir');
+    const btnEditar = document.querySelector('.button-editar');
+    const btnImprimir = document.querySelector('.button-imprimir');
+
+    if (btnEditar) btnEditar.addEventListener('click', () => window.location.href = 'cardapio-alterar.php');
+    
+}
+{/* <button class='button-excluir' onclick='excluirCardapio()'>Excluir</button>
+<a href='cardapio-alterar.php'><button class='button-editar'>Editar</button></a>
+<button class='button-imprimir' onclick='imprimirCardapio();'>Imprimir Cardápio</button> */}
 
 // CARDAPIO RESERVA
 if (page === 'cardapio-reserva.php') {
