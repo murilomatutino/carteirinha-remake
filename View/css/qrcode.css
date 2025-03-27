@@ -10,12 +10,14 @@
     width: 500px;
 }
 
-body main
-{
+main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+    height: 100%;
+    
+    min-height: 480px;
 }
 
 body

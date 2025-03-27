@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/qrcode-reader.css">
+    <link rel="stylesheet" href="./css/qrcode.css">
     <title>QR code reader</title>
 </head>
 <body>
@@ -18,10 +18,10 @@
     <?php include('navbar.php'); showNav("default");?>
 
     <main>
-        <div id="reader" style="border:0;"></div>
+        <div id="reader"></div>
     </main>
 
-    <script type="text/javascript" src="js/read-qrcode.js"></script>
+    <script type="text/javascript" src="js/qrcode.js"></script>
 
     <?php include('footer.php')?>
 </body>
