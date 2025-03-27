@@ -22,27 +22,11 @@
             <?php 
                 require_once "../Controller/CardapioController.php";
                 $idUser = $_SESSION['id'];
-                
-                $sql = "SELECT * FROM refeicao WHERE id_usuario = '$idUser'";
-                $result = $conn->query($sql);
-
-                $refeicaoData = [];
-
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $refeicaoData = $row;
-                }
+                $refeicaoData = (new CardapioController)->getRefeicaoById($idUser);
 
                 if (count($refeicaoData) > 0) {
                     $cardapioId = $refeicaoData['id_cardapio'];
-
-                    $sql = "SELECT data_refeicao, dia, principal, acompanhamento, sobremesa FROM cardapio WHERE id = $cardapioId";
-                    $result = $conn->query($sql);
-
-                    $cardapioData = [];
-
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $cardapioData = $row;
-                    }
+                    $cardapioData = (new CardapioController)->getCardapioById($cardapioId);
 
                     $dia = ucfirst($cardapioData['dia']) . "-feira";
 

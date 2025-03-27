@@ -210,3 +210,30 @@ export async function enviarFeedback(data) {
         return null;
     }
 }
+
+export async function excluirCardapio() {
+    try {
+        const response = await fetch('../Controller/refactor.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ operacao: 'excluir' }).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro 1: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Erro 2:', error.message || error);
+        return null;
+    }
+}

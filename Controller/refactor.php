@@ -74,6 +74,16 @@
         }
     }
 
+    function excluirCardapio() {
+        $response = (new CardapioController)->excluirCardapio();
+
+        if ($response !== null && $response['success']) {
+            echo json_encode(['status'=> 'success', 'array' => $response['message']]); exit();
+        } else {
+            echo json_encode(['status'=> 'error', 'message' => $response['message']]); exit();
+        }
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
         switch ($_POST['operacao']) {
             case 'cancelarReserva': cancelarReserva($_POST['idUser'], $_POST['motivo']); break;
@@ -82,6 +92,7 @@
             case 'getNotification': getNotification($_POST['idUser'], $_POST['idNotificacao']); break;
             case 'readNotification': readNotification($_POST['idDestinatario'], $_POST['idNotificacao']); break;
             case 'enviarFeedback': sendFeedback($_POST['nota'], $_POST['idUser']); break;
+            case 'excluir': excluirCardapio(); break;
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] === 'login') {

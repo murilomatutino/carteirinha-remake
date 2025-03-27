@@ -51,3 +51,5 @@ Versão do ADM:
 ### Feito recentemente(periodo de 5 dias):
 - Redirecionamento de usuários por categoria;
 - Painel do administrador;
+- Melhoria no código da navbar;
+- Excluir cardápio (necessita correção no popup de resposta);

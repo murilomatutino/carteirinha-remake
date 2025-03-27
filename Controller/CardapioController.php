@@ -26,6 +26,14 @@
             return $this->model->transferenciaIsActive($idUser);
         }
 
+        public function getRefeicaoById($idUser) {
+            return $this->model->getRefeicaoById($idUser);
+        }
+ 
+        public function getCardapioById($idCardapio) {
+            return $this->model->getCardapioById($idCardapio);
+        }
+
         public function processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana) {
             date_default_timezone_set('America/Sao_Paulo');
             $idCardapio = $this->model->getIdCardapio($diaDaSemana);
@@ -64,6 +72,14 @@
                 }
             } else {
                 return ['status' => false, 'message' => 'Reserva não encontrada!'];
+            }
+        }
+
+        public function excluirCardapio() {
+            if ($this->model->excluirCardapio()['success']) {
+                return ['status' => true, 'message' => 'Cardápio excluído com sucesso!'];
+            } else {
+                return ['status' => false, 'message' => 'Falha ao excluir cardápio!'];
             }
         }
     }

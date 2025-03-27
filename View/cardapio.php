@@ -29,7 +29,7 @@
         <img src="assets/cozinheira.png" alt="Imagem do Boneco" class="image2" draggable="false">
         <table class="print-content">
             <?php
-                if ($cardapio[0]['dia'] != '') {
+                if (isset($cardapio[0]) && $cardapio[0]['dia'] != '') {
                     echo "
                         <thead>
                             <tr>
@@ -76,7 +76,9 @@
         <template class='adm-template' id="cardapio-template">
             <div class='separador'>
                 <div class='button-group'>
+                    <button class="button-excluir">Excluir</button>
                     <button class='button-editar'>Editar</button>
+                    <button class="button-imprimir">Imprimir Cardápio</button>
                     <!-- <button class='button-excluir' onclick='excluirCardapio()'>Excluir</button>
                     <button class='button-editar'>Editar</button>
                     <button class='button-imprimir' onclick='imprimirCardapio();'>Imprimir Cardápio</button> -->

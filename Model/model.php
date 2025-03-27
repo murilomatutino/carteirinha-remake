@@ -125,5 +125,30 @@ class Model {
         $result = $this->executeQuery($query, [$idUser, $dataAtual], "is");
         return $result && $result[0]['total'] > 0;
     }
+
+    public function getRefeicaoById($idUser) {
+        $query = "SELECT * FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL";
+        $result = $this->executeQuery($query, [$idUser], 'i');
+
+        return $result[0];
+    }
+    
+    public function getCardapioById($idCardapio) {
+        $query = "SELECT data_refeicao, dia, principal, acompanhamento, sobremesa FROM cardapio WHERE id = ?";
+        $result = $this->executeQuery($query, [$idCardapio], 'i');
+
+        return $result[0];
+    }
+
+    public function excluirCardapio() {
+        $query = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";
+        $result = $this->executeQuery($query);
+
+        if ($result === TRUE) {
+            return ['success' => true];
+        } else {
+            return ['success' => false];
+        }
+    }
 }
 ?>
