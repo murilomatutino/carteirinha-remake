@@ -30,7 +30,7 @@
         $perfil = WPATH . "/View/perfil.php";
         $qrcode = WPATH . "/View/assets/qr-code.png";
         $qrcodeLink = WPATH . "/View/qr-code.php"; 
-        $qrcodeEstudanteLink = WPATH . "/View/qrcode.php";
+        $qrcodeEstudanteLink = WPATH . "/View/qr-code-estudante.php";
         $profilePic = WPATH . "/View/assets/Victor Hugo.jpg";
         $notification_icon_path = notificationIcon(WPATH);
         $notification_icon = "<img src='$notification_icon_path' alt='Notificações' id='navbar-notification' class='notification-icon' title='Notificações'>";
