@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <link rel="stylesheet" href="./css/qrcode.css">
+    <!--<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>-->
     <title>QR code reader</title>
 </head>
 <body>
@@ -15,14 +15,15 @@
         </a>
     </header>
 
-    <?php include('navbar.php'); showNav("default");?>
+    <?php include('navbar.php')?>
 
     <main>
         <div id="reader"></div>
     </main>
 
-    <script type="text/javascript" src="js/qrcode.js"></script>
-
     <?php include('footer.php')?>
+    
+    <script src="js/html5-qrcode.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/qrcode.js"></script>
 </body>
 </html>
