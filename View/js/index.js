@@ -52,6 +52,21 @@ if (page === 'login.php') {
 
 
 // CARDAPIO
+if (page === 'cardapio.php') {
+    const btnExcluir = document.querySelector('.button-excluir');
+    const btnEditar = document.querySelector('.button-editar');
+    const btnImprimir = document.querySelector('.button-imprimir');
+
+    if (btnEditar) btnEditar.addEventListener('click', () => window.location.href = 'cardapio-alterar.php');
+
+    if (btnExcluir) btnExcluir.addEventListener('click', () => animations.showNotification('Alerta', 'Tem certeza que deseja excluir o cardápio?', false, true));
+
+    // if (btnImprimir) btnImprimir.addEventListener('click', );
+    
+}
+{/* <button class='button-excluir' onclick='excluirCardapio()'>Excluir</button>
+<a href='cardapio-alterar.php'><button class='button-editar'>Editar</button></a>
+<button class='button-imprimir' onclick='imprimirCardapio();'>Imprimir Cardápio</button> */}
 
 // CARDAPIO RESERVA
 if (page === 'cardapio-reserva.php') {
@@ -394,61 +409,6 @@ function sendFeedback(nota) {
 }
 
 // Notificações
-export function showNotification(titulo, descricao, feedback = false) { 
-    if (feedback) {
-        const section = document.createElement('section');
-
-        section.classList.add('feedback');
-        section.innerHTML = document.querySelector('#feedback').innerHTML;
-
-        const popup = document.querySelector('.popup');
-        const closeBtn = popup.querySelector('#close');
-        const stars = section.querySelectorAll('.estrela');
-        const sendBtn = document.querySelector('#feedback-btn');
-        let selectedRating = 0;
-
-        closeBtn.classList.add('close-btn-2');
-        closeBtn.textContent = 'Fechar';
-
-        popup.querySelector('main').appendChild(section);
-
-        if (stars.length > 0) {
-            stars.forEach((star, index) => {
-                star.addEventListener('mouseover', () => {
-                  updateStars(index + 1);
-                });
-          
-                star.addEventListener('click', () => {
-                    selectedRating = index + 1;
-                    updateStars(selectedRating);
-                
-                    sendFeedback(selectedRating);
-
-                    // sendBtn.addEventListener('click', () => {
-                    //     console.log(selectedRating);
-                    // });
-                });
-          
-                star.addEventListener('mouseout', () => {
-                  updateStars(selectedRating);
-                });
-              });
-
-            //   sendBtn.addEventListener('click', () => {
-            //     sendFeedback(selectedRating);
-            //   })
-
-            // console.log(selectedRating);
-          
-            function updateStars(rating) {
-                stars.forEach((star, index) => {
-                    star.classList.toggle('filled', index < rating);
-                });
-            }
-        }
-    }
-
-    // console.log(selectedRating);
-
-    animations.showNotification(titulo, descricao, feedback); 
+export function showNotification(titulo, descricao, feedback = false, confirm = false) { 
+    animations.showNotification(titulo, descricao, feedback, confirm); 
 }

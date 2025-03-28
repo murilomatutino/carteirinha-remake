@@ -22,14 +22,14 @@
 </head>
 <body>
     <header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img class="img-logo" src='assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
-    <?php include_once("navbar.php"); showNav("default"); ?>
+    <?php include_once("navbar.php"); ?>
     
     <div class="container">
         <h1 class="titulo">CARDÁPIO SEMANAL</h1>
         <img src="assets/cozinheira.png" alt="Imagem do Boneco" class="image2" draggable="false">
         <table class="print-content">
             <?php
-                if ($cardapio[0]['dia'] != '') {
+                if (isset($cardapio[0]) && $cardapio[0]['dia'] != '') {
                     echo "
                         <thead>
                             <tr>
@@ -76,9 +76,12 @@
         <template class='adm-template' id="cardapio-template">
             <div class='separador'>
                 <div class='button-group'>
-                    <button class='button-excluir' onclick='cardapio_popup()'>Excluir</button>
-                    <a href='cardapio-alterar.php'><button class='button-editar'>Editar</button></a>
-                    <button class='button-imprimir' onclick='imprimirCardapio();'>Imprimir Cardápio</button>
+                    <button class="button-excluir">Excluir</button>
+                    <button class='button-editar'>Editar</button>
+                    <button class="button-imprimir">Imprimir Cardápio</button>
+                    <!-- <button class='button-excluir' onclick='excluirCardapio()'>Excluir</button>
+                    <button class='button-editar'>Editar</button>
+                    <button class='button-imprimir' onclick='imprimirCardapio();'>Imprimir Cardápio</button> -->
                 </div>
             </div>
         </template>
@@ -112,7 +115,7 @@
     </div>
     <script>
         const diaDaSemana = (new Date()).getDay();
-        const category = <?= json_encode($_SESSION['category']) ?>;
+        // const category = <?= json_encode($_SESSION['category']) ?>;  
         const cardapio = <?= json_encode($cardapio) ?>;
         const current_time = <?= json_encode($current_time) ?>;
         const horario_padrao = <?= json_encode($horario_padrao) ?>;
@@ -160,7 +163,7 @@
         if (response.type === 'agendamento') {
             let feedback = false;
             if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!'; feedback = true }
-            else { titulo = 'Problema na solicitação'; desc = 'Houve algum problema solicitação de agendamento do seu almoço. Por favor tente novamente mais tarde!' }
+            else { titulo = 'Problema na solicitação'; desc = 'Houve algum problema solicitação de agendamento do seu almoço. Por favor tente novamente mais tarde!'; }
 
             showNotification(titulo, desc, feedback);
         } else if (response.type === 'solicitacao') {

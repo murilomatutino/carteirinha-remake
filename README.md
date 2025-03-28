@@ -12,6 +12,7 @@ Remake do projeto carteirinha IFBA
 ### Prioridade média:
 - Criar popup de Alerta e Sucesso personalizado para funções (criado, mantido por possibilidade de haver problemas ou necessidade de ajustes);
 - Organizar texto principal das notificações;
+- Problemas com caracteres utf8 no locaweb, exemplo: Macarr�o
 
 ### Prioridade média porém incapacitado:
 
@@ -50,3 +51,5 @@ Versão do ADM:
 ### Feito recentemente(periodo de 5 dias):
 - Redirecionamento de usuários por categoria;
 - Painel do administrador;
+- Melhoria no código da navbar;
+- Excluir cardápio (necessita correção no popup de resposta);

@@ -13,7 +13,7 @@
         </a>
     </header>
 
-    <?php include_once("navbar.php"); showNav("default"); ?>
+    <?php include_once("navbar.php"); ?>
 
     <div class="container-sphere">
         <div class="person">
