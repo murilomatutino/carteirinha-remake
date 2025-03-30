@@ -1,0 +1,26 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#reader
+{
+    width: 500px;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    
+    min-height: 480px;
+}
+
+body
+{
+    height: 100vh;
+}
