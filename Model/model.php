@@ -150,5 +150,13 @@ class Model {
             return ['success' => false];
         }
     }
+
+
+    /* Mudança de senha - métodos necessarios */
+
+    public function changePassword($idUser, $newPassword)
+    {
+
+    }
 }
 ?>

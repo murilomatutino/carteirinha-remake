@@ -1,7 +1,6 @@
 @import url(style.css);
 
-*
-{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -92,6 +91,61 @@ main div
 .transbordamento
 {
     overflow: auto; /* Caso haja um transbordamento será adicionado uma barra de rolagem */
+}
+
+
+
+/* popup */
+
+main #popup-perfil-wrapper
+{
+    width: 100%;
+
+    display: none;
+
+    position: absolute;
+
+    /*background-color: rgba(0, 0, 1, 0.568);*/
+}
+
+main #popup-perfil-wrapper button
+{
+    padding: 10px;
+}
+
+main #popup-perfil-wrapper form 
+{
+    max-width: 500px;
+    position: relative;
+}
+
+main #popup-perfil-wrapper form div
+{
+    padding: 0;
+}
+
+main #popup-perfil-wrapper form button
+{
+    margin-top: 25px;
+    background-color: var(--medium-green);
+    border-radius: 6px;
+    border: none;
+    color: white;
+    font-weight: 600;
+}
+
+main #popup-perfil-wrapper #popup-perfil-close
+{
+    width: auto;
+
+    position: absolute;
+    right: 18px;
+    top: 11px;
+
+    font-weight: 900;
+    color: red;
+
+    cursor: pointer;
 }
 
 /* Media Querys */

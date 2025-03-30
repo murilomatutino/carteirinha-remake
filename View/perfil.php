@@ -16,7 +16,7 @@
     <?php include('navbar.php')?>
 
     <main>
-        <div class="form"> 
+        <div class="form" id="infos"> 
             <h1 class="titulo-principal">Perfil</h1>
             <div>
                 <label>Nome</label>
@@ -38,10 +38,30 @@
                 <div class="input transbordamento"><?php echo $_SESSION['telefone']?></div>
             </div>
 
-            <a href="#">Mudar senha</a>
+            <a href="#" id="link-mudar-senha">Mudar senha</a>
         </div>
+
+        <div id="popup-perfil-wrapper">
+            <form class="form">
+                <div id="popup-perfil-close">X</div>
+                <div>
+                    <label for="">Senha nova</label>
+                    <input type="text" class="input">
+                </div>
+
+                <div>
+                    <label for="">Confirmação</label>
+                    <input type="text" class="input">
+                </div>
+
+                <button>Alterar senha</button>
+            </form>
+        </div>
+        
     </main>
     
     <?php include('footer.php')?>
+
+    <script src="./js/perfil.js" type="text/javascript"></script>
 </body>
 </html>
