@@ -34,16 +34,33 @@ main div
 
 /* classes */
 
+.form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 50px;
+    border: 1px solid #b4b4b4;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+}
 
-.input {
+.form .input {
     width: 210px;
-    padding: 10px;
+    min-height: 41px;
+    max-height: 85px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
     margin: 10px 0;
     border: 1px solid #ddd; 
     border-radius: 4px;
     box-sizing: border-box;
-    height: 41px;
-
 }
 
 .form div 
@@ -72,20 +89,10 @@ main div
     margin-bottom: 20px;
 }
 
-
-.form {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 50px;
-    border: 1px solid #b4b4b4;
-    border-radius: 8px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
-  }
-
+.transbordamento
+{
+    overflow: auto; /* Caso haja um transbordamento será adicionado uma barra de rolagem */
+}
 
 /* Media Querys */
 

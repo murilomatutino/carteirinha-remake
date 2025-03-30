@@ -36,7 +36,7 @@ class Model {
     }
 
     public function getDataByMatricula($matricula) {
-        $query = "SELECT id, nome, email, matricula, categoria FROM usuario WHERE matricula = ?";
+        $query = "SELECT id, nome, email, matricula, categoria, telefone FROM usuario WHERE matricula = ?";
         $result = $this->executeQuery($query, [$matricula], "s");
         return $result ? $result[0] : false;
     }

@@ -20,22 +20,22 @@
             <h1 class="titulo-principal">Perfil</h1>
             <div>
                 <label>Nome</label>
-                <div class="input"></div>
+                <div class="input transbordamento"><?php echo $_SESSION['name']?></div>
             </div> 
 
             <div>
                 <label>Matricula</label>
-                <div class="input"></div>
+                <div class="input transbordamento"><?php echo $_SESSION['enrollment']?></div>
             </div> 
 
             <div>
                 <label>Email</label>
-                <div class="input"></div>
+                <div class="input transbordamento"><?php echo $_SESSION['email']?></div>
             </div> 
 
             <div>
                 <label>Telefone</label>
-                <div class="input"></div>
+                <div class="input transbordamento"><?php echo $_SESSION['telefone']?></div>
             </div>
 
             <a href="#">Mudar senha</a>
