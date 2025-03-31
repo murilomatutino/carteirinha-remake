@@ -15,7 +15,7 @@
 
     <?php include('navbar.php')?>
 
-    <main>
+    <main id="pai">
         <div class="form" id="infos"> 
             <h1 class="titulo-principal">Perfil</h1>
             <div>
@@ -42,21 +42,68 @@
         </div>
 
         <div id="popup-perfil-wrapper">
-            <form class="form">
+            <form class="form"  method="post" action="perfil.php">
                 <div id="popup-perfil-close">X</div>
                 <div>
-                    <label for="">Senha nova</label>
-                    <input type="text" class="input">
+                    <label for="senha">Senha nova</label>
+                    <input type="password" class="input" name="senha" id="senha" minlength="8" required>
                 </div>
 
                 <div>
-                    <label for="">Confirmação</label>
-                    <input type="text" class="input">
+                    <label for="confirmacao">Confirmação</label>
+                    <input type="password" class="input" name="confirmacao" id="confirmacao" minlength="8" required>
                 </div>
 
-                <button>Alterar senha</button>
+                
+                <button type="submit">Alterar senha</button>
+
             </form>
         </div>
+
+        <?php
+            if(isset($_POST['senha']) && isset($_POST['confirmacao']))
+            {
+                if($_POST["senha"] !== $_POST["confirmacao"]) // caso as senhas sejam diferentes será criado um popup
+                {
+                    echo "
+                    <div id='popup-alerta' class='form'>
+                        <div id='popup-alerta-close'>X</div>
+                        <h1>Senhas Diferentes</h1>
+                        <p>Digite as senhas novamente</p>
+                    </div>
+                    ";
+                }
+                else
+                {
+                    include("../Controller/PerfilController.php");
+
+                    $object = new PerfilController();
+
+                    $return = $object->setPassword($_POST["senha"], $_SESSION["id"]);
+
+                    if($return)
+                    {
+                        echo "
+                        <div id='popup-alerta' class='form'>
+                            <div id='popup-alerta-close'>X</div>
+                            <h1>Senha alterada!</h1>
+                            <p>A sua senha foi alterada com sucesso.</p>
+                        </div>
+                        ";
+                    }
+                    else
+                    {
+                        echo "
+                        <div id='popup-alerta' class='form'>
+                            <div id='popup-alerta-close'>X</div>
+                            <h1>Erro!</h1>
+                            <p>Ocorreu um erro ao tentar alterar a sua senha.</p>
+                        </div>
+                        ";
+                    }
+                }
+            }
+        ?>
         
     </main>
     

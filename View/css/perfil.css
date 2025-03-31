@@ -108,10 +108,6 @@ main #popup-perfil-wrapper
     /*background-color: rgba(0, 0, 1, 0.568);*/
 }
 
-main #popup-perfil-wrapper button
-{
-    padding: 10px;
-}
 
 main #popup-perfil-wrapper form 
 {
@@ -132,9 +128,13 @@ main #popup-perfil-wrapper form button
     border: none;
     color: white;
     font-weight: 600;
+
+    padding: 10px;
+
+    cursor: pointer;
 }
 
-main #popup-perfil-wrapper #popup-perfil-close
+main #popup-perfil-wrapper #popup-perfil-close, #popup-alerta-close
 {
     width: auto;
 
@@ -146,6 +146,21 @@ main #popup-perfil-wrapper #popup-perfil-close
     color: red;
 
     cursor: pointer;
+}
+
+#popup-alerta
+{
+    position: relative;
+
+    height: 170px;
+}
+
+#popup-alerta-close
+{
+    top: 5px;
+    right: 15px;
+
+    padding: 0;
 }
 
 /* Media Querys */
