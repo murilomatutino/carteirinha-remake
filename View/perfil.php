@@ -63,7 +63,7 @@
         <?php
             if(isset($_POST['senha']) && isset($_POST['confirmacao']))
             {
-                if($_POST["senha"] !== $_POST["confirmacao"]) // caso as senhas sejam diferentes será criado um popup
+                if($_POST["senha"] !== $_POST["confirmacao"]) // emite um popup de alerta
                 {
                     echo "
                     <div id='popup-alerta' class='form'>
@@ -81,7 +81,7 @@
 
                     $return = $object->setPassword($_POST["senha"], $_SESSION["id"]);
 
-                    if($return)
+                    if($return) // emite um popup de sucesso
                     {
                         echo "
                         <div id='popup-alerta' class='form'>
@@ -91,7 +91,7 @@
                         </div>
                         ";
                     }
-                    else
+                    else // emite um popup de erro
                     {
                         echo "
                         <div id='popup-alerta' class='form'>
