@@ -172,5 +172,44 @@ main #popup-perfil-wrapper #popup-perfil-close, #popup-alerta-close
 
 /* Media Query para telas de 430px ou menores */
 @media (max-width: 430px) {
+
+    .form
+    {
+        max-width: 300px;
+        min-height: 180px;
+        padding: 30px;
+    }
+
+    .form div
+    {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .form .input
+    {
+        width: 160px;
+    }
     
+    main div
+    {
+        width: 300px;
+    }
+
+    main
+    {
+        min-height: 543px;
+    }
+
+    main #popup-perfil-wrapper form
+    {
+        max-width: 300px;
+    }
+
+    main #popup-perfil-wrapper form div
+    {
+        flex-direction: column;
+    }
+
+
 }
