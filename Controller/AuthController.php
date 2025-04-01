@@ -46,6 +46,7 @@
                         $_SESSION['id'] = $data['id'];
                         $_SESSION['name'] = $data['nome'];
                         $_SESSION['email'] = $data['email'];
+                        $_SESSION['telefone'] = $data['telefone'];
                         $_SESSION['enrollment'] = $data['matricula'];
                         $_SESSION['category'] = $data['categoria'];
                         $_SESSION['logged_in'] = true;
