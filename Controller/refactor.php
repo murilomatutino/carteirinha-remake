@@ -3,6 +3,7 @@
     require_once 'NotificationController.php';
     require_once 'AuthController.php';
     require_once 'FeedbackController.php';
+    require_once 'AdmController.php';
 
     function cancelarReserva($idUser, $motivo) {
         $response = (new CardapioController)->cancelarReserva($idUser, $motivo);
@@ -84,6 +85,18 @@
         }
     }
 
+    function editarHorario($hora) {
+        $response = (new AdmController)->editarHorario($hora);
+        $encodedMessage = base64_encode($response['message']);
+
+        if ($response !== null && $response['status']) {
+            header("Location: ../View/painel-administrador.php?status=success&message=" . urlencode($encodedMessage)); exit();
+        } else {
+            header("Location: ../View/editar-horario.php?status=error&message=" . urlencode($encodedMessage)); exit();
+        }
+    }
+
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
         switch ($_POST['operacao']) {
             case 'cancelarReserva': cancelarReserva($_POST['idUser'], $_POST['motivo']); break;
@@ -93,6 +106,7 @@
             case 'readNotification': readNotification($_POST['idDestinatario'], $_POST['idNotificacao']); break;
             case 'enviarFeedback': sendFeedback($_POST['nota'], $_POST['idUser']); break;
             case 'excluir': excluirCardapio(); break;
+            case 'editarHorario': editarHorario($_POST['hora']); break;
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] === 'login') {

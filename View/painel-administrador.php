@@ -23,6 +23,17 @@ draggable='false'> </a> </header>
     </div>
 
     <?php include 'footer.php'; ?>
+
+    <script type="module">
+        import { showNotification } from './js/index.js';
+        const params = new URLSearchParams(window.location.search);
+        const message = decodeURIComponent(escape(atob(params.get('message'))));
+
+        if (params.get('status') === 'success' && [...params.keys()].length > 1) {
+            showNotification('Sucesso', message);
+        }
+    </script>
+
     <script>
         const buttons = document.querySelectorAll('.container .button-adm button');
 

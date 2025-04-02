@@ -14,22 +14,28 @@
     <div class="container">
         <h1>EDITAR HORÁRIO</h1>
 
-        <form method="POST">
-            <label for="data">Data:</label>
-            <input type="date" id="data" name="data" required>
-            <br>
+        <form method="POST" action="../Controller/refactor.php">
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora" required>
             <br>
             <div class="botao-container">
                 <a href='painel-administrador.php'><button class="cancelar" type="button"></button></a>
 
-                <button class="validar" type="submit"></button>
+                <button class="validar" type="submit"  name="operacao" value="editarHorario"></button>
             </div>
         </form>
     </div>
 
-
     <?php include 'footer.php'; ?>
+
+    <script type="module">
+        import { showNotification } from './js/index.js';
+        const params = new URLSearchParams(window.location.search);
+        const message = decodeURIComponent(escape(atob(params.get('message'))));
+
+        if (params.get('status') === 'success' && [...params.keys()].length > 1) {
+            showNotification('Ops, algo deu errado', message);
+        }
+    </script>
 </body>
 </html>
