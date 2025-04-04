@@ -23,7 +23,7 @@
 
     <?php include('footer.php')?>
     
-    <script src="js/html5-qrcode.min.js" type="text/javascript"></script>
+    <script src="../libs/qrcodereader/html5-qrcode.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/qrcode.js"></script>
 </body>
 </html>

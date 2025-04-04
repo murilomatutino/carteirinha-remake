@@ -163,6 +163,7 @@
         if (response.type === 'agendamento') {
             let feedback = false;
             if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!'; feedback = true }
+            else if (response.data === 'emailerror'){titulo = 'Erro ao enviar e-mail'; desc = 'Sua refeição foi agendada com sucesso, mas houve um erro ao enviar um e-mail de confirmação.';}
             else { titulo = 'Problema na solicitação'; desc = 'Houve algum problema solicitação de agendamento do seu almoço. Por favor tente novamente mais tarde!'; }
 
             showNotification(titulo, desc, feedback);
