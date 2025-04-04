@@ -54,9 +54,9 @@
             date_default_timezone_set('America/Sao_Paulo');
             $currente_day = date('d/m/Y');
 
-            $senderEmail = 'refeicao@leds.net.br';
+            $senderEmail = '';
             $senderName = 'Refeição IFBA Seabra';
-            $senderPassword = 'LEDS@ifseabra0';
+            $senderPassword = '';
             $title = 'Indicação de alimentação no campus - IFBA Seabra';
             
             $content = '
