@@ -3,6 +3,7 @@
     require_once 'NotificationController.php';
     require_once 'AuthController.php';
     require_once 'FeedbackController.php';
+    require_once 'EmailController.php';
     require_once 'AdmController.php';
 
     function cancelarReserva($idUser, $motivo) {
@@ -138,6 +139,11 @@
         $response = (new CardapioController)->processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana);
 
         if ($response['status']) {
+            
+            // enviar um e-mail de confirmação
+            $return = (new EmailController())->sendEmailLunch($_SESSION['email'], $_SESSION['name']);
+            if (!$return){header("Location: ../View/cardapio.php?agendamento=emailerror"); exit();}
+
             header("Location: ../View/cardapio.php?agendamento=success"); exit();
         } else {
             header("Location: ../View/cardapio.php?agendamento=error"); exit();
