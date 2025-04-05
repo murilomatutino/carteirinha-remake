@@ -1,3 +1,11 @@
+<?php
+    if(!empty($_POST))
+    {
+        include("../Controller/SobreController.php");
+
+        (new SobreController())->sendEmailContact($_POST['message']);
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -48,12 +56,7 @@
     </div>
 
     <template id="form-template">
-        <form action="process/contact_form.php" method="post">
-            <label for="name">Nome:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-
-            <label for="email">E-mail:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
+        <form method="post">
 
             <label for="message">Mensagem:</label><br>
             <textarea id="message" name="message" required></textarea><br><br>

@@ -1,6 +1,10 @@
 <?php
     // error_reporting(E_ALL);
     // ini_set('display_errors', 1);
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
     require_once __DIR__ . '/../Model/model.php';
 
     class CardapioController {
@@ -80,6 +84,67 @@
                 return ['status' => true, 'message' => 'Cardápio excluído com sucesso!'];
             } else {
                 return ['status' => false, 'message' => 'Falha ao excluir cardápio!'];
+            }
+        }
+
+
+        public function sendEmailLunch($recipientEmail, $recipientName)
+        {
+            require_once("../libs/phpmailer/vendor/autoload.php");
+
+            date_default_timezone_set('America/Sao_Paulo');
+            $currente_day = date('d/m/Y');
+
+            $senderEmail = 'refeicao@leds.net.br';
+            $senderName = 'Refeição IFBA Seabra';
+            $senderPassword = '';
+            $title = 'Indicação de alimentação no campus - IFBA Seabra';
+            $host = 'email-ssl.com.br';
+            
+            $content = '
+            <!DOCTYPE html>
+            <html>
+            <p style="color:black;">
+                Olá,<br><br>
+                Sua confirmação para o almoço no IFBA Campus Seabra para a data de '. $currente_day .' foi realizada com sucesso! <br><br>
+                Em caso de dúvidas ou para relatar algum problema, envie um novo e-mail para este endereço.<br><br>
+                Atenciosamente,<br>
+                Suporte Almoço IFBA Seabra
+            </p>
+            </html>
+            ';
+
+            try
+            {
+                
+                $mail = new PHPMailer();
+
+                // Definindo idioma para o português
+                $mail->setLanguage('pt_br', '../libs/phpmailer/vendor/phpmailer/phpmailer/language/');
+                $mail->CharSet = 'UTF-8'; // definindo o conjunto de caracteres
+
+                $mail->isSMTP(); // protocolo de transferência de e-mail
+                $mail->Host = $host; // servidor de e-mail
+                $mail->SMTPAuth = true;
+                $mail->Port = 465;
+
+                $mail->Username = $senderEmail;  // e-mail do rementente (SMPT)
+                $mail->setFrom($senderEmail, $senderName);
+                $mail->Password = $senderPassword; // senha do e-mail do remetente (SMPT)
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+
+                $mail->addAddress($recipientEmail, $recipientName);
+                $mail->isHTML(true); // é se o formato do e-mail é HTML
+                $mail->Subject = $title; // titulo do e-mail (assunto)
+                $mail->Body = $content; // conteúdo do e-mail
+                
+                $mail->send();
+
+                return true;
+            }
+            catch (Exception $e)
+            {
+                return false;
             }
         }
     }
