@@ -14,7 +14,7 @@
     </header>
 
     <?php include_once("navbar.php"); ?>
-
+    <main>
     <div class="container-sphere">
         <div class="person">
             <div class="semi-sphere">
@@ -48,12 +48,7 @@
     </div>
 
     <template id="form-template">
-        <form action="process/contact_form.php" method="post">
-            <label for="name">Nome:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-
-            <label for="email">E-mail:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
+        <form method="post">
 
             <label for="message">Mensagem:</label><br>
             <textarea id="message" name="message" required></textarea><br><br>
@@ -62,6 +57,35 @@
         </form>
     </template>
 
+    <?php
+        if(!empty($_POST))
+        {
+            include("../Controller/SobreController.php");
+
+            $return = (new SobreController())->sendEmailContact($_POST['message']);
+
+            if ($return)
+            {
+                echo"
+                <div id='popup-alerta'>
+                    <div id='popup-alerta-close'>X</div>
+                    <h1>E-mail enviado com sucesso</h1>
+                    <p>O seu comentario foi enviado.</p>
+                </div>";
+            }
+            else
+            {
+                echo"
+                <div id='popup-alerta'>
+                    <div id='popup-alerta-close'>X</div>
+                    <h1>Erro ao enviar e-mail</h1>
+                    <p>O seu comentario não foi enviado, por favor tente de novamente.</p>
+                </div>";
+            }
+        }
+    ?>
+    </main>
     <?php include 'footer.php'; ?>
+    <script type="text/javascript" src="js/sobre.js"></script>
 </body>
 </html>
