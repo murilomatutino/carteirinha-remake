@@ -13,7 +13,7 @@
         {
             require_once("../libs/phpmailer/vendor/autoload.php");
 
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
             $senderEmail = 'refeicao@leds.net.br';
             $senderPassword = '';

@@ -4,6 +4,11 @@ html {
     scroll-behavior: smooth; /* Aplica rolagem suave na página */
 }
 
+main
+{
+    min-height: 500px;
+}
+
 /* Container para a sessão de pessoas */
 .container-sphere {
     flex-grow: 1;
@@ -15,6 +20,47 @@ html {
     text-align: center; /* Centraliza o texto dentro de cada "person" */
     width: 100%; /* Garante que o container ocupe toda a largura */
 }
+
+/* Estilo do popup de notificação*/
+#popup-alerta
+{
+    position: relative;
+
+    height: auto;
+
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 50px;
+    border: 1px solid #b4b4b4;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+    
+    top: 0px;
+    
+    text-align: center;
+}
+
+#popup-alerta h1
+{
+    margin-bottom: 10px; 
+}
+
+#popup-alerta-close
+{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+
+    padding: 0;
+    color: red;
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
 
 /* Definindo os itens de pessoa */
 .person {
@@ -129,7 +175,7 @@ form button:hover {
 
 .contact-animation.expanded {
     /* animation: expand 0.5s ease forwards; */
-    min-height: 700px;
+    min-height: 500px;
 }
 
 .contact-animation button {
@@ -216,6 +262,22 @@ img {
 
     form button {
         width: 100%;
+    }
+
+    div.contact-form form
+    {
+        max-width: 340px
+    }
+
+    #popup-alerta
+    {
+        max-width: 320px;
+        padding: 30px;
+    }
+
+    main
+    {
+        min-height: 450px;
     }
 }
 
