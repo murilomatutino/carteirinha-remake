@@ -3,11 +3,8 @@
     date_default_timezone_set('America/Sao_Paulo');
 
     $cardapio = (new CardapioController())->getCardapio();
-    $current_time = date("H:m:s");
-    $current_day = date("Y-m-d");
     $horario_padrao = (new CardapioController())->getTime();
-    $idUser = $_SESSION['id'];
-    $hasRefeicao = (new CardapioController())->hasRefeicao($idUser, $current_day);
+    $hasRefeicao = (new CardapioController())->hasRefeicao($_SESSION['id'], date("Y-m-d"));
 ?>
 
 <!DOCTYPE html>
@@ -102,24 +99,24 @@
         <div class="popup" id="popup">
             <h2>Reserva Confirmada!</h2>
             <p>Sua reserva foi confirmada com sucesso.</p>
-            <!-- Campo de Feedback -->
-            <!-- <div class="feedback-container">
-                <h3>Deixe seu feedback:</h3>
-                <textarea id="feedback" name="feedback" rows="4" placeholder="Digite seu feedback aqui..."></textarea>
-                <button id="btn-submit-feedback">Enviar Feedback</button>
-            </div>
-            <button class="close">Fechar</button> -->
         </div>
 
         <div class="info"></div>
     </div>
     <script>
+        const agora = new Date();
+        const horas = agora.getHours();
+        const minutos = agora.getMinutes();
+        const segundos = agora.getSeconds();
+
         const diaDaSemana = (new Date()).getDay();
         // const category = <?= json_encode($_SESSION['category']) ?>;  
         const cardapio = <?= json_encode($cardapio) ?>;
-        const current_time = <?= json_encode($current_time) ?>;
+        const current_time = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
         const horario_padrao = <?= json_encode($horario_padrao) ?>;
         const hasRefeicao = <?= json_encode($hasRefeicao) ?>;
+
+        console.log(current_time);
 
         if (category === 'adm' && cardapio.length > 0 && cardapio[0] !== '') { showTemplate(2); } 
         else if (category === 'adm' && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(0); } 
