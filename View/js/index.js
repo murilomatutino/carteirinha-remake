@@ -61,7 +61,7 @@ if (page === 'cardapio.php') {
 
     if (btnExcluir) btnExcluir.addEventListener('click', () => animations.showNotification('Alerta', 'Tem certeza que deseja excluir o cardápio?', false, true));
 
-    // if (btnImprimir) btnImprimir.addEventListener('click', );
+    if (btnImprimir) btnImprimir.addEventListener('click', () => window.location.href = 'cardapio-imprimir.php' );
     
 }
 {/* <button class='button-excluir' onclick='excluirCardapio()'>Excluir</button>
