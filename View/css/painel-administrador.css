@@ -11,7 +11,7 @@
 }
 
 .button-adm {
-    max-width: 200px;
+    max-width: 250px;
     min-height: 200px;
     width: 100%;
     height: 100%;
@@ -31,24 +31,8 @@
     cursor: pointer;
 }
 
-.horario {
-    background-image: url(../assets/card-horario.png);
-}
-
-.historico {
-    background-image: url(../assets/card-historico.png);
-}
-
-.diario {
-    background-image: url(../assets/card-diario.png);
-}
-
-.feedback {
-    background-image: url(../assets/card-feedback.png);
-}
-
-.cardapio {
-    background-image: url(../assets/card-cardapio.png);
+.horario img, .historico img, .diario img, .feedback img, .cardapio img {
+    width: 100%;
 }
 
 h1 {

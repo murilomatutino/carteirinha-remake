@@ -14,12 +14,23 @@ draggable='false'> </a> </header>
 
     <h1>PAINEL ADMINISTRADOR</h1>
 
+
     <div class="container">
-        <div class="button-adm"><button class='horario' id='horario'></button></div>
-        <div class="button-adm"><button class='historico' id='historico'></button></div>
-        <div class="button-adm"><button class='diario' id='diario'></button></div>
-        <div class="button-adm"><button class='feedback' id='feedback'></button></div>
-        <div class="button-adm"><button class='cardapio' id='cardapio'></button></div>
+        <div class="button-adm"><button class='horario' id='horario'>
+            <img src="assets/card-horario.png" alt="">
+        </button></div>
+        <div class="button-adm"><button class='historico' id='historico'>
+            <img src="assets/card-historico.png" alt="">
+        </button></div>
+        <div class="button-adm"><button class='diario' id='diario'>
+            <img src="assets/card-diario.png" alt="">
+        </button></div>
+        <div class="button-adm"><button class='feedback' id='feedback'>
+            <img src="assets/card-feedback.png" alt="">
+        </button></div>
+        <div class="button-adm"><button class='cardapio' id='cardapio'>
+            <img src="assets/card-cardapio.png" alt="">
+        </button></div>
     </div>
 
     <?php include 'footer.php'; ?>
@@ -27,11 +38,20 @@ draggable='false'> </a> </header>
     <script type="module">
         import { showNotification } from './js/index.js';
         const params = new URLSearchParams(window.location.search);
-        const message = decodeURIComponent(escape(atob(params.get('message'))));
+        let message = '';
 
-        if (params.get('status') === 'success' && [...params.keys()].length > 1) {
-            showNotification('Sucesso', message);
-        }
+        const base64 = params.get('message');
+        if (base64) {
+            try {
+                message = atob(base64);
+                console.log('Mensagem:', message);
+                if (params.get('status') === 'success' && [...params.keys()].length > 1) {
+                    showNotification('Sucesso', message);
+                }
+            } catch (e) {
+                console.error('Erro ao decodificar mensagem:', e);
+            }
+        }        
     </script>
 
     <script>
