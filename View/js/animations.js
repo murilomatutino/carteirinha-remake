@@ -71,6 +71,32 @@ export function showNotification(titulo, descricao, feedback, confirm) {
         const sendBtn = document.querySelector('#feedback-btn');
         let selectedRating = 0;
 
+        sendBtn.addEventListener('click', () => {
+            if (selectedRating !== 0) {
+                ajax.getUserId().then(idUser => {
+                    if (!idUser) {
+                        console.error('ID do usuário não encontrado');
+                        return;
+                    }
+            
+                    let dados = {
+                        operacao: 'enviarFeedback',
+                        nota: selectedRating,
+                        idUser: idUser
+                    };
+                    
+                    ajax.enviarFeedback(dados).then(result => {
+                        window.location.href = 'cardapio.php?feedback=success';
+                    }).catch(error => {
+                        window.location.href = 'cardapio.php?feedback=error';
+                    });
+                });
+
+                return { status: true, nota: selectedRating };
+            }
+
+        });
+
         closeBtn.classList.add('close-btn-2');
         closeBtn.textContent = 'Fechar';
 
@@ -84,7 +110,6 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                 star.addEventListener('click', () => {
                     selectedRating = index + 1;
                     updateStars(selectedRating);
-                    sendFeedback(selectedRating);
                 });
 
                 star.addEventListener('mouseout', () => {
@@ -96,10 +121,6 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                 stars.forEach((star, index) => {
                     star.classList.toggle('filled', index < rating);
                 });
-            }
-
-            function sendFeedback(rating) {
-                console.log(`Feedback enviado com a avaliação: ${rating}`);
             }
         }
 
@@ -123,9 +144,10 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                 ajax.excluirCardapio();
                 popup.classList.remove('close');
                 document.body.classList.remove('active');
-                
             }, 500);
         });
+
+        return { status: true };
     }
 
     // Evento de fechamento do popup
@@ -138,6 +160,8 @@ export function showNotification(titulo, descricao, feedback, confirm) {
             document.body.classList.remove('active');
         }, 500);
     });
+
+    return { status: false };
 }
 
 
