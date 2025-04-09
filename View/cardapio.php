@@ -59,7 +59,6 @@
                     }
 
                     echo "</tbody>";
-                    echo "</table>";
                 }
             ?>
         </table>
