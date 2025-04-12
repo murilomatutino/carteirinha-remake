@@ -46,5 +46,11 @@
                 return ['status'=> false, 'message'=> 'Erro ao ler notificação'];
             }
         }
+
+
+        public function createNotificacao($idRemetente, $idAlvo, $assunto, $mensagem, $tipo)
+        {
+            return $this->model->createNotificacao($idRemetente, $idAlvo, $assunto, $mensagem, $tipo);
+        }
     }
 ?>

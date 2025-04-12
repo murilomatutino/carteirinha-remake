@@ -115,6 +115,8 @@
         const horario_padrao = <?= json_encode($horario_padrao) ?>;
         const hasRefeicao = <?= json_encode($hasRefeicao) ?>;
 
+        console.log(current_time);
+
         if (category === 'adm' && cardapio.length > 0 && cardapio[0] !== '') { showTemplate(2); } 
         else if (category === 'adm' && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(0); } 
         else if (category !== "adm" && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(1); } 

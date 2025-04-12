@@ -96,6 +96,26 @@
         }
     }
 
+    function enviarNotificacao($idUser, $motivo, $matriculaAlvo)
+    {
+
+        $idAlvo = (new CardapioController())->getIdByMatricula($matriculaAlvo);
+
+        $return = (new NotificationController())->createNotificacao($idUser, $idAlvo, 'Transferencia de almoço', "Motivo da transferência: " . $motivo, 1);
+        
+        if ($idAlvo === false){
+            echo json_encode(['status'=> 'error', 'message' => 'Erro ao pegar id por matricula']); exit();
+        }
+        else if ($return === false)
+        {
+            echo json_encode(['status'=> 'error', 'message' => 'Erro ao criar notificação']); exit();
+        }
+        else
+        {
+            echo json_encode(['status'=> 'success', 'array' => 'sucesso ao criar notificação']); exit();
+        }
+    }
+
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
         switch ($_POST['operacao']) {
@@ -107,6 +127,7 @@
             case 'enviarFeedback': sendFeedback($_POST['nota'], $_POST['idUser']); break;
             case 'excluir': excluirCardapio(); break;
             case 'editarHorario': editarHorario($_POST['hora']); break;
+            case 'enviarNotificacao': enviarNotificacao($_POST['idUser'], $_POST['motivo'], $_POST['matriculaAlvo']); break;
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] === 'login') {

@@ -174,5 +174,27 @@ class Model {
     
         return $this->executeUpdate("INSERT INTO horario_padrao (horario, inicio_vig) VALUES (?, ?)", [$hora, $dataHora], "ss");
     }
+
+    /* Transferencia de almoço */
+
+    public function getIdByMatricula($matricula)
+    {
+        $query = "SELECT id FROM usuario WHERE matricula = ?";
+        $result = $this->executeQuery($query, [$matricula], 'i');
+
+        return $result == null ?  false : $result[0]['id'] ;
+    }
+
+    public function createNotificacao($idRemetente, $idAlvo, $assunto, $mensagem, $tipo)
+    {
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $data = date("Y-m-d");
+        $hora = date("H:i:s");
+
+        $query = "INSERT INTO notificacao (id_remetente, id_destinatario, data, hora, assunto, mensagem, lida, transferencia) VALUES (?, ?, ?, ?, ?, ?, DEFAULT, ?)";
+
+        return $this->executeUpdate($query, [$idRemetente, $idAlvo, $data, $hora, $assunto, $mensagem, $tipo], 'iissss');
+    }
 }
 ?>

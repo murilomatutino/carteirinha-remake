@@ -186,13 +186,13 @@ if (page === 'agendados.php') {
                     }
 
                     let dados = {
-                        operacao: 'transferirReserva',
+                        operacao: 'enviarNotificacao',
                         motivo: document.querySelector('#outro').value,
                         matriculaAlvo: document.querySelector('#matricula').value,
                         idUser: idUser
                     };
                     
-                    ajax.transferirReserva(dados).then(result => {
+                    ajax.enviarNotificacao(dados).then(result => {
                         window.location.href = 'cardapio.php?solicitacao=success';
                     }).catch(error => {
                         window.location.href = 'cardapio.php?solicitacao=error';
@@ -384,6 +384,27 @@ if (page === 'sobre.php') {
         } else {
             contactForm.innerHTML = '';
         }
+    });
+}
+
+function sendFeedback(nota) {
+    ajax.getUserId().then(idUser => {
+        if (!idUser) {
+            console.error('ID do usuário não encontrado');
+            return;
+        }
+
+        let dados = {
+            operacao: 'enviarFeedback',
+            nota: nota,
+            idUser: idUser
+        };
+        
+        ajax.enviarFeedback(dados).then(result => {
+            window.location.href = 'cardapio.php?feedback=success';
+        }).catch(error => {
+            window.location.href = 'cardapio.php?feedback=error';
+        });
     });
 }
 

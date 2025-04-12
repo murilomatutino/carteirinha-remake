@@ -72,6 +72,32 @@ export async function transferirReserva(dados) {
     }
 }
 
+export async function enviarNotificacao(dados) { // notificação de transsferencia
+
+    const response = await fetch('../Controller/refactor.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(dados).toString()
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro ao enviar notificação, status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.status === 'success') {
+        console.log(result.message);
+    } else {
+        console.log('Erro ao iniciar envio de notificação:', result.message);
+        throw new Error(`Erro ao enviar notificação (refactor)`);
+    }
+
+    return result;
+}
+
 export async function acceptTransferencia(dados) {
     try {
         const response = await fetch('../Controller/refactor.php', {
