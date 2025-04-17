@@ -80,7 +80,7 @@
                 echo "<div class='assunto'><h2 class='title'>{$value['assunto']}</h2><span>Lida</span></div>";
                 echo "<p id='notification-text'>{$mensagem}</p>";
                 echo "</div>";
-                if ($value['transferencia'] == 1) echo "<button class='validar' id='validar-transferencia'></button>";
+                if ($value['transferencia'] == 1) echo "<button class='validar' id='validar-transferencia'></button><button class='cancelar' id='cancelar-transferencia'></button>";
                 if (!$read) echo "<img class='mark-as-read' src='{$readImg}'>";
                 echo "</div>";
             }

@@ -115,6 +115,15 @@
         }
     }
 
+    function cancelarTransferencia($idDestinatario)
+    {
+        $response = (new NotificationController)->cancelarTransferencia($idDestinatario);
+        if ($response) {
+            echo json_encode(['status' => 'success']); exit();
+        } else {
+            echo json_encode(['status' => 'error']); exit();
+        }
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
         switch ($_POST['operacao']) {
@@ -127,6 +136,7 @@
             case 'excluir': excluirCardapio(); break;
             case 'editarHorario': editarHorario($_POST['hora']); break;
             case 'enviarNotificacao': enviarNotificacao($_POST['idUser'], $_POST['motivo'], $_POST['matriculaAlvo']); break;
+            case 'cancelarTransferencia': cancelarTransferencia($_POST['idDestinatario']); break;
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] === 'login') {

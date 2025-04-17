@@ -253,13 +253,42 @@ function botaoConfirmar(button) {
     });
 }
 
+function botaoCancelar(button) {
+    button.addEventListener('click', function() {
+        ajax.getUserId().then(idUser => {
+            if (!idUser) {
+                console.error('ID do usuário não encontrado');
+                return;
+            }
+
+            const data = {
+                operacao: 'cancelarTransferencia',
+                idDestinatario: idUser
+            };
+
+            ajax.cancelTransferencia(data)
+                .then(result => {
+                    window.location.href = 'cardapio.php?cancelartransferencia=success';
+                })
+                .catch(error => {
+                    window.location.href = 'cardapio.php?cancelartransferencia=error';
+                    console.error('Erro:', error.message || error);
+                });
+        }).catch(error => {
+            console.error('Erro ao pegar ID do usuário:', error);
+        });
+    });
+}
+
 function adicionarConteudo() {
     const notificationItems = document.querySelectorAll('.notification-item');
     const notificationContent = document.querySelector('#content');
     animations.addContent(notificationItems, notificationContent);
     const confirmBtn = document.querySelector('#validar-transferencia');
+    const cancelBtn = document.querySelector('#cancelar-transferencia');
 
     if (confirmBtn) botaoConfirmar(confirmBtn); 
+    if (cancelBtn) botaoCancelar(cancelBtn); 
 }
 
 function exibirConteudo() {
@@ -277,8 +306,11 @@ function exibirConteudo() {
                 setTimeout(() => {
                     const notificationOpen = document.querySelector('#open-template');
                     const confirmBtn = document.createElement('button');
+                    const cancelBtn = document.createElement('button');
 
                     Object.assign(confirmBtn, { id: 'validar-transferencia-in', classList: 'validar' });
+                    Object.assign(cancelBtn, { id: 'cancelar-transferencia-in', classList: 'cancelar' });
+
                     popup2.innerHTML = notificationOpen.innerHTML;
 
                     ajax.getUserId().then(idUser => {
@@ -297,6 +329,9 @@ function exibirConteudo() {
                             if (notifications.transferencia === 1) {
                                 popup2.querySelector('footer').appendChild(confirmBtn);
                                 if (confirmBtn) botaoConfirmar(confirmBtn); 
+
+                                popup2.querySelector('footer').appendChild(cancelBtn);
+                                if (cancelBtn) botaoCancelar(cancelBtn); 
                             }
                     
                             popup2.querySelector('.title').textContent = notifications.assunto;

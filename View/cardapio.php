@@ -154,6 +154,8 @@
                 response = {type: 'feedback', data: params.get('feedback') }; break;
             case params.has('transferencia'):
                 response = {type: 'transferencia', data: params.get('transferencia') }; break;
+            case params.has('cancelartransferencia') :
+                response = {type: 'cancelartransferencia', data: params.get('cancelartransferencia') }; break;
             default:
                 response = { type: 'nenhum', data: null };
         }
@@ -185,6 +187,13 @@
         {
             if (response.data === 'success') { titulo = 'Sucesso ao aceitar refeição!', desc = 'A refeição foi transferida para você'}
             else { titulo = 'Problema ao aceitar refeição!', desc = 'Houve um problema ao tentar aceitar a refeição. Por favor, tente novamente mais tarde!' }
+
+            showNotification(titulo, desc);
+        }
+        else if (response.type === 'cancelartransferencia')
+        {
+            if (response.data === 'success') { titulo = 'Sucesso ao cancelar transferência!', desc = 'A solicitação de transferencia foi cancelada'}
+            else { titulo = 'Problema ao cancelar solicitação de transferência!', desc = 'Houve um problema ao cancelar a solicitação de transferencia. Por favor, tente novamente mais tarde!' }
 
             showNotification(titulo, desc);
         }

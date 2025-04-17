@@ -41,6 +41,15 @@
             }
         }
 
+        public function cancelarTransferencia($idDestinatario)
+        {
+            $idRemetente = $this->getIdRemetente($idDestinatario);
+            if (empty($idRemetente)){return false;}
+
+            return $this->model->changeNotificacaoType($idRemetente);
+
+        }
+
         public function readNotification($idDestinatario, $idNotification) {
             if ($this->model->readNotification($idDestinatario, $idNotification)) {
                 return ['status'=> true, 'message'=> 'Notificação lida'];

@@ -129,6 +129,37 @@ export async function acceptTransferencia(dados) {
     }*/
 }
 
+export async function cancelTransferencia(dados) {
+    //try {
+        const response = await fetch('../Controller/refactor.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(dados).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao cancelar transferência de reserva, status: `);
+        }
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            console.log('sucesso');
+        } else {
+            //console.error('Erro ao aceitar transferência de reserva:', result.message);
+            throw new Error(`Erro ao cancelar transferência de reserva (refactor)`);
+        }
+
+        return result;
+
+    /*} catch (error) {
+        console.error('Erro:', error.message || error);
+        return null;
+    }*/
+}
+
 export async function getNotification(dados) {
     try {
         const response = await fetch('../Controller/refactor.php', {
