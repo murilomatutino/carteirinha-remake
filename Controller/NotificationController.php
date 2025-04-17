@@ -28,8 +28,10 @@
 
         public function aceitarRefeicao($idDestinatario) {
             $idRemetente = $this->getIdRemetente($idDestinatario);
+            if (empty($idRemetente)){return ['status' => false, 'message' => 'Falha ao aceitar refeição'];}
+            
             if (!$this->model->isActive($idDestinatario) && $this->model->isActive($idRemetente)) {
-                if ($this->model->aceitarRefeicao($idDestinatario, $idRemetente)['status']) {
+                if ($this->model->aceitarRefeicao($idDestinatario, $idRemetente)) {
                     return ['status' => true, 'message' => 'Refeição aceita com sucesso'];
                 } else {
                     return ['status' => false, 'message' => 'Falha ao aceitar refeição'];

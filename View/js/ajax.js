@@ -99,7 +99,7 @@ export async function enviarNotificacao(dados) { // notificação de transsferen
 }
 
 export async function acceptTransferencia(dados) {
-    try {
+    //try {
         const response = await fetch('../Controller/refactor.php', {
             method: 'POST',
             headers: {
@@ -117,15 +117,16 @@ export async function acceptTransferencia(dados) {
         if (result.status === 'success') {
             console.log(result.message);
         } else {
-            console.error('Erro ao aceitar transferência de reserva:', result.message);
+            //console.error('Erro ao aceitar transferência de reserva:', result.message);
+            throw new Error(`Erro ao aceitar transferência de reserva (refactor)`);
         }
 
         return result;
 
-    } catch (error) {
+    /*} catch (error) {
         console.error('Erro:', error.message || error);
         return null;
-    }
+    }*/
 }
 
 export async function getNotification(dados) {

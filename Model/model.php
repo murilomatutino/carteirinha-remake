@@ -84,7 +84,7 @@ class Model {
     }
 
     public function hasRefeicao(int $idUser, string $diaAtual) {
-        $query = "SELECT COUNT(*) as total FROM refeicao WHERE id_usuario = ? AND data_solicitacao = ? AND motivo_cancelamento IS NULL";
+        $query = "SELECT COUNT(*) as total FROM refeicao WHERE id_usuario = ? AND data_solicitacao = ? AND motivo_cancelamento IS NULL AND id_status_ref = 1";
         $result = $this->executeQuery($query, [$idUser, $diaAtual], "is");
         return $result && $result[0]['total'] > 0;
     }
@@ -101,7 +101,7 @@ class Model {
     }
 
     public function cancelarReserva($idUser, $motivo) {
-        $query = "UPDATE refeicao SET motivo_cancelamento = ? WHERE id_usuario = ? AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
+        $query = "UPDATE refeicao SET motivo_cancelamento = ?, id_status_ref = 2 WHERE id_usuario = ? AND motivo_cancelamento IS NULL ORDER BY data_solicitacao DESC LIMIT 1";
         return $this->executeUpdate($query, [$motivo, $idUser], "si");
     }
 
@@ -127,10 +127,13 @@ class Model {
     }
 
     public function getRefeicaoById($idUser) {
-        $query = "SELECT * FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL";
-        $result = $this->executeQuery($query, [$idUser], 'i');
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-m-d");
 
-        return $result[0];
+        $query = "SELECT * FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL AND data_solicitacao = ? AND id_status_ref = 1";
+        $result = $this->executeQuery($query, [$idUser, $dataAtual], 'is');
+
+        return empty($result)? [] : $result[0];
     }
     
     public function getCardapioById($idCardapio) {
@@ -194,7 +197,66 @@ class Model {
 
         $query = "INSERT INTO notificacao (id_remetente, id_destinatario, data, hora, assunto, mensagem, lida, transferencia) VALUES (?, ?, ?, ?, ?, ?, DEFAULT, ?)";
 
-        return $this->executeUpdate($query, [$idRemetente, $idAlvo, $data, $hora, $assunto, $mensagem, $tipo], 'iissss');
+        return $this->executeUpdate($query, [$idRemetente, $idAlvo, $data, $hora, $assunto, $mensagem, $tipo], 'iissssi');
+    }
+
+
+    public function aceitarRefeicao($idDestinatario, $idRemetente)
+    {
+        // criar refeição para o destinatario
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataSolicitacao = date("Y-m-d");
+        $horaSolicitacao = date("H:i:s");
+
+        $diaDaSemana = date('l', strtotime($dataSolicitacao));
+
+        switch ($diaDaSemana) {
+            case "Monday": $diaDaSemana = "segunda"; break;
+            case "Tuesday": $diaDaSemana = "terca";  break;
+            case "Wednesday": $diaDaSemana = "quarta";  break;
+            case "Thursday": $diaDaSemana = "quinta";  break;
+            case "Friday": $diaDaSemana = "sexta"; break;
+            default: break;
+        }
+
+        $idCardapio = $this->getIdCardapio($diaDaSemana);
+        if ($idCardapio === null){return false;}
+
+        $result = $this->setMeal($idDestinatario, $idCardapio, 1, 5, $dataSolicitacao, $horaSolicitacao, NULL);
+        if ($result === false){return false;}
+
+        $result = $this->changeNotificacaoType($idRemetente);
+        if ($result === false){return false;}
+
+        // mudar status da refeição do remetente para transferido
+        $query = "UPDATE refeicao set id_status_ref = 5 WHERE id_usuario = ? AND data_solicitacao = ? AND id_status_ref = 1";
+        return $this->executeUpdate($query, [$idRemetente, $dataSolicitacao], 'is');
+
+    }
+
+    public function getTransferenciaData($idDestinatario)
+    {
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-m-d");
+
+        $query = "SELECT id_remetente FROM notificacao WHERE id_destinatario = ? AND data = ? AND transferencia = 1";
+        $result = $this->executeQuery($query, [$idDestinatario, $dataAtual], 'is');
+
+        return empty($result)? [] : $result[0]['id_remetente'];
+    }
+
+    /**
+     * Transforma uma notificação de almoço em um notificação normal
+     * @param mixed $idRemetente
+     * @return bool
+     */
+    public function changeNotificacaoType($idRemetente) 
+    {
+        date_default_timezone_set('America/Sao_Paulo');
+        $dataAtual = date("Y-m-d");
+
+        $query = "UPDATE notificacao set transferencia = 0  WHERE id_remetente = ? AND data = ? AND  transferencia = 1";
+        return $this->executeUpdate($query, [$idRemetente, $dataAtual], 'is');
     }
 }
 ?>

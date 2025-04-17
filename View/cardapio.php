@@ -152,6 +152,8 @@
                 response = {type: 'solicitacao', data: params.get('solicitacao') }; break;
             case params.has('feedback'):
                 response = {type: 'feedback', data: params.get('feedback') }; break;
+            case params.has('transferencia'):
+                response = {type: 'transferencia', data: params.get('transferencia') }; break;
             default:
                 response = { type: 'nenhum', data: null };
         }
@@ -176,6 +178,13 @@
         } else if (response.type === 'feedback') {
             if (response.data === 'success') { titulo = 'Sucesso no feedback!', desc = 'Seu feedback foi enviaddo com sucesso para a nossa equipe!' }
             else { titulo = 'Problema no feedback!', desc = 'Houve um problema no envio do seu feedback. Por favor, tente novamente mais tarde!' }
+
+            showNotification(titulo, desc);
+        }
+        else if (response.type === 'transferencia')
+        {
+            if (response.data === 'success') { titulo = 'Sucesso ao aceitar refeição!', desc = 'A refeição foi transferida para você'}
+            else { titulo = 'Problema ao aceitar refeição!', desc = 'Houve um problema ao tentar aceitar a refeição. Por favor, tente novamente mais tarde!' }
 
             showNotification(titulo, desc);
         }
