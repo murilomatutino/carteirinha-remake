@@ -39,12 +39,6 @@ img.notification-icon {
   z-index: 1000; 
 }
 
-#popup2 footer
-{
-  display: flex;
-  align-items: center;
-}
-
 .popup2 {
   max-width: 500px;
   width: 100%;
