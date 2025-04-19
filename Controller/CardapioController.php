@@ -147,5 +147,10 @@
                 return false;
             }
         }
+
+        public function getIdByMatricula($matricula)
+        {
+            return $this->model->getIdByMatricula($matricula);
+        }
     }
 ?>
