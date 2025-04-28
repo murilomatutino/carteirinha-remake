@@ -27,11 +27,10 @@
 
     function aceitarRefeicao($idDestinatario) {
         $response = (new NotificationController)->aceitarRefeicao($idDestinatario);
-
         if ($response['status']) {
-            echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
+            echo json_encode(['status' => 'success', 'message' => $response["message"]]); exit();
         } else {
-            echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
+            echo json_encode(['status' => 'error', 'message' => $response["message"]]); exit();
         }
     }
 
@@ -68,7 +67,7 @@
     function sendFeedback($nota, $idUser, $idCardapio) {
         $response = (new FeedbackController)->sendFeedback($nota, $idUser, $idCardapio);
 
-        if ($response !== null && $response['success']) {
+        if ($response !== null && $response) {
             echo json_encode(['status'=> 'success', 'array' => $response['message']]); exit();
         } else {
             echo json_encode(['status'=> 'error', 'message' => $response['message']]); exit();
@@ -96,6 +95,35 @@
         }
     }
 
+    function enviarNotificacao($idUser, $motivo, $matriculaAlvo)
+    {
+
+        $idAlvo = (new CardapioController())->getIdByMatricula($matriculaAlvo);
+
+        $return = (new NotificationController())->createNotificacao($idUser, $idAlvo, 'Transferencia de almoço', "Motivo da transferência: " . $motivo, 1);
+        
+        if ($idAlvo === false){
+            echo json_encode(['status'=> 'error', 'message' => 'Erro ao pegar id por matricula']); exit();
+        }
+        else if ($return === false)
+        {
+            echo json_encode(['status'=> 'error', 'message' => 'Erro ao criar notificação']); exit();
+        }
+        else
+        {
+            echo json_encode(['status'=> 'success', 'array' => 'sucesso ao criar notificação']); exit();
+        }
+    }
+
+    function cancelarTransferencia($idDestinatario)
+    {
+        $response = (new NotificationController)->cancelarTransferencia($idDestinatario);
+        if ($response) {
+            echo json_encode(['status' => 'success']); exit();
+        } else {
+            echo json_encode(['status' => 'error']); exit();
+        }
+    }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['operacao'])) {
         switch ($_POST['operacao']) {
@@ -107,6 +135,8 @@
             case 'enviarFeedback': sendFeedback($_POST['nota'], $_POST['idUser'], $_POST['idCardapio']); break;
             case 'excluir': excluirCardapio(); break;
             case 'editarHorario': editarHorario($_POST['hora']); break;
+            case 'enviarNotificacao': enviarNotificacao($_POST['idUser'], $_POST['motivo'], $_POST['matriculaAlvo']); break;
+            case 'cancelarTransferencia': cancelarTransferencia($_POST['idDestinatario']); break;
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] === 'login') {

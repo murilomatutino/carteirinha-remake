@@ -86,8 +86,34 @@ export async function transferirReserva(dados) {
     }
 }
 
+export async function enviarNotificacao(dados) { // notificação de transsferencia
+
+    const response = await fetch('../Controller/refactor.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(dados).toString()
+    });
+
+    if (!response.ok) {
+        throw new Error(`Erro ao enviar notificação, status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.status === 'success') {
+        console.log(result.message);
+    } else {
+        console.log('Erro ao iniciar envio de notificação:', result.message);
+        throw new Error(`Erro ao enviar notificação (refactor)`);
+    }
+
+    return result;
+}
+
 export async function acceptTransferencia(dados) {
-    try {
+    //try {
         const response = await fetch('../Controller/refactor.php', {
             method: 'POST',
             headers: {
@@ -105,15 +131,47 @@ export async function acceptTransferencia(dados) {
         if (result.status === 'success') {
             console.log(result.message);
         } else {
-            console.error('Erro ao aceitar transferência de reserva:', result.message);
+            //console.error('Erro ao aceitar transferência de reserva:', result.message);
+            throw new Error(`Erro ao aceitar transferência de reserva (refactor)`);
         }
 
         return result;
 
-    } catch (error) {
+    /*} catch (error) {
         console.error('Erro:', error.message || error);
         return null;
-    }
+    }*/
+}
+
+export async function cancelTransferencia(dados) {
+    //try {
+        const response = await fetch('../Controller/refactor.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(dados).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao cancelar transferência de reserva, status: `);
+        }
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+            console.log('sucesso');
+        } else {
+            //console.error('Erro ao aceitar transferência de reserva:', result.message);
+            throw new Error(`Erro ao cancelar transferência de reserva (refactor)`);
+        }
+
+        return result;
+
+    /*} catch (error) {
+        console.error('Erro:', error.message || error);
+        return null;
+    }*/
 }
 
 export async function getNotification(dados) {

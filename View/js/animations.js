@@ -99,15 +99,6 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                         console.error('Erro ao buscar o cardápio:', error);
                         return { status: false, nota: none };
                     });
-
-                    // ajax.getCardapioId().then(idCardapio => {
-                    //     if (!idCardapio) {
-                    //         console.error('ID do usuário não encontrado');
-                    //         return;
-                    //     }
-                
-                        
-                    // });
                 });
 
                 return { status: true, nota: selectedRating };
@@ -128,6 +119,7 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                 star.addEventListener('click', () => {
                     selectedRating = index + 1;
                     updateStars(selectedRating);
+                    sendFeedback(selectedRating);
                 });
 
                 star.addEventListener('mouseout', () => {
@@ -139,6 +131,10 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                 stars.forEach((star, index) => {
                     star.classList.toggle('filled', index < rating);
                 });
+            }
+
+            function sendFeedback(rating) {
+                console.log(`Feedback enviado com a avaliação: ${rating}`);
             }
         }
 
@@ -162,10 +158,9 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                 ajax.excluirCardapio();
                 popup.classList.remove('close');
                 document.body.classList.remove('active');
+                
             }, 500);
         });
-
-        return { status: true };
     }
 
     // Evento de fechamento do popup
@@ -178,8 +173,6 @@ export function showNotification(titulo, descricao, feedback, confirm) {
             document.body.classList.remove('active');
         }, 500);
     });
-
-    return { status: false };
 }
 
 

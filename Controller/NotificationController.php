@@ -28,8 +28,10 @@
 
         public function aceitarRefeicao($idDestinatario) {
             $idRemetente = $this->getIdRemetente($idDestinatario);
+            if (empty($idRemetente)){return ['status' => false, 'message' => 'Falha ao aceitar refeição'];}
+            
             if (!$this->model->isActive($idDestinatario) && $this->model->isActive($idRemetente)) {
-                if ($this->model->aceitarRefeicao($idDestinatario, $idRemetente)['status']) {
+                if ($this->model->aceitarRefeicao($idDestinatario, $idRemetente)) {
                     return ['status' => true, 'message' => 'Refeição aceita com sucesso'];
                 } else {
                     return ['status' => false, 'message' => 'Falha ao aceitar refeição'];
@@ -39,12 +41,27 @@
             }
         }
 
+        public function cancelarTransferencia($idDestinatario)
+        {
+            $idRemetente = $this->getIdRemetente($idDestinatario);
+            if (empty($idRemetente)){return false;}
+
+            return $this->model->changeNotificacaoType($idRemetente);
+
+        }
+
         public function readNotification($idDestinatario, $idNotification) {
             if ($this->model->readNotification($idDestinatario, $idNotification)) {
                 return ['status'=> true, 'message'=> 'Notificação lida'];
             } else {
                 return ['status'=> false, 'message'=> 'Erro ao ler notificação'];
             }
+        }
+
+
+        public function createNotificacao($idRemetente, $idAlvo, $assunto, $mensagem, $tipo)
+        {
+            return $this->model->createNotificacao($idRemetente, $idAlvo, $assunto, $mensagem, $tipo);
         }
     }
 ?>

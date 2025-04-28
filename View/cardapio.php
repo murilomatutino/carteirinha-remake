@@ -143,6 +143,8 @@
         const horario_padrao = <?= json_encode($horario_padrao) ?>;
         const hasRefeicao = <?= json_encode($hasRefeicao) ?>;
 
+        console.log(current_time);
+
         if (category === 'adm' && cardapio.length > 0 && cardapio[0] !== '') { showTemplate(2); } 
         else if (category === 'adm' && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(0); } 
         else if (category !== "adm" && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(1); } 
@@ -178,6 +180,10 @@
                 response = {type: 'solicitacao', data: params.get('solicitacao') }; break;
             case params.has('feedback'):
                 response = {type: 'feedback', data: params.get('feedback') }; break;
+            case params.has('transferencia'):
+                response = {type: 'transferencia', data: params.get('transferencia') }; break;
+            case params.has('cancelartransferencia') :
+                response = {type: 'cancelartransferencia', data: params.get('cancelartransferencia') }; break;
             default:
                 response = { type: 'nenhum', data: null };
         }
@@ -202,6 +208,20 @@
         } else if (response.type === 'feedback') {
             if (response.data === 'success') { titulo = 'Sucesso no feedback!', desc = 'Seu feedback foi enviaddo com sucesso para a nossa equipe!' }
             else { titulo = 'Problema no feedback!', desc = 'Houve um problema no envio do seu feedback. Por favor, tente novamente mais tarde!' }
+
+            showNotification(titulo, desc);
+        }
+        else if (response.type === 'transferencia')
+        {
+            if (response.data === 'success') { titulo = 'Sucesso ao aceitar refeição!', desc = 'A refeição foi transferida para você'}
+            else { titulo = 'Problema ao aceitar refeição!', desc = 'Houve um problema ao tentar aceitar a refeição. Por favor, tente novamente mais tarde!' }
+
+            showNotification(titulo, desc);
+        }
+        else if (response.type === 'cancelartransferencia')
+        {
+            if (response.data === 'success') { titulo = 'Sucesso ao cancelar transferência!', desc = 'A solicitação de transferencia foi cancelada'}
+            else { titulo = 'Problema ao cancelar solicitação de transferência!', desc = 'Houve um problema ao cancelar a solicitação de transferencia. Por favor, tente novamente mais tarde!' }
 
             showNotification(titulo, desc);
         }
