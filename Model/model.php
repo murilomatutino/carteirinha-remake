@@ -105,9 +105,9 @@ class Model {
         return $this->executeUpdate($query, [$motivo, $idUser], "si");
     }
 
-    public function adicionarFeedback($nota, $idUser) {
-        $query = "INSERT INTO feedback (id_usuario, nota) VALUES (?, ?)";
-        return $this->executeUpdate($query, [$idUser, $nota], "ii");
+    public function adicionarFeedback($nota, $idUser, $idCardapio) {
+        $query = "INSERT INTO feedback (id_usuario, id_cardapio, id_nota) VALUES (?, ?, ?)";
+        return $this->executeUpdate($query, [$idUser, $idCardapio, $nota], "iii");
     }
 
     public function isActive($idUser) {

@@ -38,6 +38,10 @@
             return $this->model->getCardapioById($idCardapio);
         }
 
+        public function getIdCardapio($diaDaSemana) {
+            return $this->model->getIdCardapio($diaDaSemana);
+        }
+
         public function processarReserva($idUser, $idJustificativa, $justificativa, $diaDaSemana) {
             date_default_timezone_set('America/Sao_Paulo');
             $idCardapio = $this->model->getIdCardapio($diaDaSemana);

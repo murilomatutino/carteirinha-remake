@@ -13,6 +13,20 @@ export async function getUserId() {
     }
 }
 
+export async function getCardapioId() {
+    try {
+        const response = await fetch('idCardapio.php');
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar o ID, status: ${response.status}`);
+        }
+        const idCardapio = await response.text();
+        return idCardapio;
+    } catch (error) {
+        console.error('Erro ao pegar ID:', error);
+        return null;  
+    }
+}
+
 export async function cancelarReserva(data) {
     try {
         const response = await fetch('../Controller/refactor.php', {

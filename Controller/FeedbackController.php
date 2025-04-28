@@ -7,8 +7,8 @@
             $this->model = new Model();
         }
 
-        public function sendFeedback($nota, $idUser) {
-            if($this->model->adicionarFeedback($nota, $idUser)) {
+        public function sendFeedback($nota, $idUser, $idCardapio) {
+            if($this->model->adicionarFeedback($nota, $idUser, $idCardapio)) {
                 return ['success' => true, 'message' => 'sucesso']; 
             } else {
                 return ['success' => false, 'message' => 'erro']; 

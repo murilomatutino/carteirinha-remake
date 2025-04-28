@@ -78,18 +78,36 @@ export function showNotification(titulo, descricao, feedback, confirm) {
                         console.error('ID do usuário não encontrado');
                         return;
                     }
-            
-                    let dados = {
-                        operacao: 'enviarFeedback',
-                        nota: selectedRating,
-                        idUser: idUser
-                    };
-                    
-                    ajax.enviarFeedback(dados).then(result => {
-                        window.location.href = 'cardapio.php?feedback=success';
-                    }).catch(error => {
-                        window.location.href = 'cardapio.php?feedback=error';
+
+                    getCardapioId()
+                    .then(idCardapio => {
+                        console.log('ID do cardápio:', idCardapio);
+                        let dados = {
+                            operacao: 'enviarFeedback',
+                            nota: selectedRating,
+                            idUser: idUser,
+                            idCardapio: idCardapio,
+                        };
+                        
+                        ajax.enviarFeedback(dados).then(result => {
+                            window.location.href = 'cardapio.php?feedback=success';
+                        }).catch(error => {
+                            window.location.href = 'cardapio.php?feedback=error';
+                        });
+                    })  
+                    .catch(error => {
+                        console.error('Erro ao buscar o cardápio:', error);
+                        return { status: false, nota: none };
                     });
+
+                    // ajax.getCardapioId().then(idCardapio => {
+                    //     if (!idCardapio) {
+                    //         console.error('ID do usuário não encontrado');
+                    //         return;
+                    //     }
+                
+                        
+                    // });
                 });
 
                 return { status: true, nota: selectedRating };

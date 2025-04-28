@@ -3,11 +3,11 @@ const diasSemana = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-fei
 const colunas = ['Proteína', 'Principal', 'Sobremesa'];
 
 // Dados que virão do backend
-// const dadosCardapio = {
-//     Proteína: ['Frango', 'Carne', 'Peixe'],
-//     Principal: ['Arroz', 'Macarrão', 'Feijão', 'Purê'],
-//     Sobremesa: ['Fruta', 'Gelatina', 'Bolo', 'Iogurte']
-// };
+const dadosCardapio = {
+    Proteína: ['Frango', 'Carne', 'Peixe'],
+    Principal: ['Arroz', 'Macarrão', 'Feijão', 'Purê'],
+    Sobremesa: ['Fruta', 'Gelatina', 'Bolo', 'Iogurte']
+};
 
 let currentTipoCriacao = null;
 let currentContainer = null;
