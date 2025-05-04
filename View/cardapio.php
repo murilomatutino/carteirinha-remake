@@ -102,6 +102,34 @@
 
         <div class="info"></div>
     </div>
+    <script type='module'>
+        import { excluirCardapio } from './js/ajax.js';
+
+        const cancelButton = document.querySelector('#close');
+        const confirmButton = document.querySelector('.confirm-btn');
+        const overlay = document.querySelector('.overlay');
+        const popup = document.querySelector('.popup');
+
+        if (confirmButton) {
+            confirmButton.addEventListener('click', async () => {
+                const result = await excluirCardapio();
+                if (result === true) {
+                    console.log('Cardápio excluído com sucesso!');
+                } else if (result === false) {
+                    console.log('Falha ao excluir o cardápio.');
+                } else {
+                    console.log('Erro ao tentar excluir o cardápio.');
+                }
+            });
+        }
+
+        if (cancelButton) {
+            cancelButton.addEventListener('click', () => {
+                overlay.classList.remove('active');
+                popup.classList.remove('active');
+            });
+        }
+    </script>
     <script>
         const agora = new Date();
         const horas = agora.getHours();

@@ -71,6 +71,41 @@ export function showNotification(titulo, descricao, feedback, confirm) {
         const sendBtn = document.querySelector('#feedback-btn');
         let selectedRating = 0;
 
+        sendBtn.addEventListener('click', () => {
+            if (selectedRating !== 0) {
+                ajax.getUserId().then(idUser => {
+                    if (!idUser) {
+                        console.error('ID do usuário não encontrado');
+                        return;
+                    }
+
+                    getCardapioId()
+                    .then(idCardapio => {
+                        console.log('ID do cardápio:', idCardapio);
+                        let dados = {
+                            operacao: 'enviarFeedback',
+                            nota: selectedRating,
+                            idUser: idUser,
+                            idCardapio: idCardapio,
+                        };
+                        
+                        ajax.enviarFeedback(dados).then(result => {
+                            window.location.href = 'cardapio.php?feedback=success';
+                        }).catch(error => {
+                            window.location.href = 'cardapio.php?feedback=error';
+                        });
+                    })  
+                    .catch(error => {
+                        console.error('Erro ao buscar o cardápio:', error);
+                        return { status: false, nota: none };
+                    });
+                });
+
+                return { status: true, nota: selectedRating };
+            }
+
+        });
+
         closeBtn.classList.add('close-btn-2');
         closeBtn.textContent = 'Fechar';
 

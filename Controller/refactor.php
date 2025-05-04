@@ -64,10 +64,10 @@
         }
     }
 
-    function sendFeedback($nota, $idUser) {
-        $response = (new FeedbackController)->sendFeedback($nota, $idUser);
+    function sendFeedback($nota, $idUser, $idCardapio) {
+        $response = (new FeedbackController)->sendFeedback($nota, $idUser, $idCardapio);
 
-        if ($response !== null && $response['success']) {
+        if ($response !== null && $response) {
             echo json_encode(['status'=> 'success', 'array' => $response['message']]); exit();
         } else {
             echo json_encode(['status'=> 'error', 'message' => $response['message']]); exit();
@@ -132,7 +132,7 @@
             case 'aceitarRefeicao': aceitarRefeicao($_POST['idDestinatario']); break;
             case 'getNotification': getNotification($_POST['idUser'], $_POST['idNotificacao']); break;
             case 'readNotification': readNotification($_POST['idDestinatario'], $_POST['idNotificacao']); break;
-            case 'enviarFeedback': sendFeedback($_POST['nota'], $_POST['idUser']); break;
+            case 'enviarFeedback': sendFeedback($_POST['nota'], $_POST['idUser'], $_POST['idCardapio']); break;
             case 'excluir': excluirCardapio(); break;
             case 'editarHorario': editarHorario($_POST['hora']); break;
             case 'enviarNotificacao': enviarNotificacao($_POST['idUser'], $_POST['motivo'], $_POST['matriculaAlvo']); break;

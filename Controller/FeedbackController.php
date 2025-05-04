@@ -8,13 +8,7 @@
         }
 
         public function sendFeedback($nota, $idUser) {
-            return $this->model->adicionarFeedback($nota, $idUser);
-
-            // if ($response['success']) {
-            //     return $response;
-            // } else {
-            //     return $response;
-            // }
+            return $this->model->adicionarFeedback($nota, $idUser, $idCardapio);
         }
     }
 ?>

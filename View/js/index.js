@@ -422,26 +422,26 @@ if (page === 'sobre.php') {
     });
 }
 
-function sendFeedback(nota) {
-    ajax.getUserId().then(idUser => {
-        if (!idUser) {
-            console.error('ID do usuário não encontrado');
-            return;
-        }
+// function sendFeedback(nota) {
+//     ajax.getUserId().then(idUser => {
+//         if (!idUser) {
+//             console.error('ID do usuário não encontrado');
+//             return;
+//         }
 
-        let dados = {
-            operacao: 'enviarFeedback',
-            nota: nota,
-            idUser: idUser
-        };
+//         let dados = {
+//             operacao: 'enviarFeedback',
+//             nota: nota,
+//             idUser: idUser
+//         };
         
-        ajax.enviarFeedback(dados).then(result => {
-            window.location.href = 'cardapio.php?feedback=success';
-        }).catch(error => {
-            window.location.href = 'cardapio.php?feedback=error';
-        });
-    });
-}
+//         ajax.enviarFeedback(dados).then(result => {
+//             window.location.href = 'cardapio.php?feedback=success';
+//         }).catch(error => {
+//             window.location.href = 'cardapio.php?feedback=error';
+//         });
+//     });
+// }
 
 // Notificações
 export function showNotification(titulo, descricao, feedback = false, confirm = false) { 

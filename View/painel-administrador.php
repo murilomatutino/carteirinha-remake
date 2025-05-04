@@ -69,7 +69,7 @@ draggable='false'> </a> </header>
                     case 'feedback':
                         window.location.href = 'relatorio-feedbacks.php'; break;
                     case 'cardapio':
-                        window.location.href = 'cardapio'; break;
+                        window.location.href = 'cardapio.php'; break;
                 }
             })
         });
