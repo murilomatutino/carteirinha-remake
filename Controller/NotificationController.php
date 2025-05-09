@@ -19,7 +19,25 @@
         }
 
         public function getNotification($userId, $idNotification = null){
-            return $this->model->getNotification($userId, $idNotification);
+            $notificacoes = $this->model->getNotification($userId, $idNotification);
+
+            $horarioLimiteTransferencia = $this->model->getHorarioLimiteTransferencia();
+            date_default_timezone_set('America/Sao_Paulo');
+            $horaAtual = date("H:i:s");
+
+            if ($horaAtual > $horarioLimiteTransferencia) {
+                $lista = [];
+
+                foreach ($notificacoes as $n)
+                {
+                    $n['transferencia'] = 0;
+                    array_push($lista, $n);
+                }
+
+                return $lista;
+            }
+
+            return $notificacoes;
         }
 
         private function getIdRemetente($idDestinatario): int {
