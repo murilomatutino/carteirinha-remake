@@ -67,7 +67,7 @@ draggable='false'> </a> </header>
                     case 'diario':
                         window.location.href = 'relatorio-diario.php'; break;
                     case 'feedback':
-                        window.location.href = 'relatorio-feedbacks.php'; break;
+                        window.location.href = 'feedbacks.php'; break;
                     case 'cardapio':
                         window.location.href = 'cardapio.php'; break;
                 }
