@@ -271,5 +271,10 @@ class Model {
 
         return $result[0]["ADDTIME(?, '4:00:00')"];
     }
+
+    public function getAllFeedback() {
+        $query = "SELECT * FROM feedback";
+        return $this->executeQuery($query);
+    }
 }
 ?>

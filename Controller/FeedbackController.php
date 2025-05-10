@@ -10,5 +10,9 @@
         public function sendFeedback($nota, $idUser) {
             return $this->model->adicionarFeedback($nota, $idUser, $idCardapio);
         }
+
+        public function getFeedback() {
+            return $this->model->getAllFeedback();
+        }
     }
 ?>
