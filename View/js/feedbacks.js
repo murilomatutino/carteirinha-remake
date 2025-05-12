@@ -53,7 +53,7 @@ Object.entries(agrupado).forEach(([id, dados], index) => {
                 <div class="details">
                     <p>Alunos que almoçaram: 160</p>
                     <p>Alunos que deram feedback: ${total}</p>
-                    <button>Mais detalhes</button>
+                    <button id="menu${id}">Mais detalhes</button>
                 </div>
             </div>
         </div>

@@ -14,5 +14,9 @@
         public function getFeedback() {
             return $this->model->getAllFeedback();
         }
+
+        public function getFeedbackDetails($idCardapio) {
+            return $this->model->getFeedbackDetails($idCardapio);
+        }
     }
 ?>

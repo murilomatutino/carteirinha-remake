@@ -276,5 +276,28 @@ class Model {
         $query = "SELECT * FROM feedback";
         return $this->executeQuery($query);
     }
+
+    public function getFeedbackDetails($idCardapio) {
+        $query = "SELECT 
+            f.id AS id,
+            u.nome AS nome,
+            u.matricula AS matricula,
+            f.id_nota,
+            f.comentario,
+            c.*
+            FROM 
+            feedback f
+            JOIN 
+            cardapio c ON f.id_cardapio = c.id
+            JOIN 
+            usuario u ON f.id_usuario = u.id
+            WHERE 
+            f.id_cardapio = ?;
+            ";
+
+        $result = $this->executeQuery($query, [$idCardapio], 'i');
+        // $result = $this->executeQuery($query);
+        return $result;
+    }
 }
 ?>
