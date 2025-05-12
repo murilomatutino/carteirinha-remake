@@ -53,12 +53,29 @@ Object.entries(agrupado).forEach(([id, dados], index) => {
                 <div class="details">
                     <p>Alunos que almoçaram: 160</p>
                     <p>Alunos que deram feedback: ${total}</p>
-                    <button id="menu${id}">Mais detalhes</button>
+                    <button class="more-details" id="menu${id}">Mais detalhes</button>
                 </div>
             </div>
         </div>
     `;
     container.appendChild(bloco);
+
+    document.querySelectorAll('.more-details').forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.id.replace('menu', '');
+            function xorEncrypt(text, key) {
+                let result = '';
+                for (let i = 0; i < text.length; i++) {
+                    result += String.fromCharCode(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+                }
+                return btoa(result);
+            }
+
+            const key = "ledsifba";
+            const encrypted = xorEncrypt(id, key);
+            window.location.href = `getdata.php?id=${encrypted}`;
+        });
+    });
 
     const ctx = document.getElementById(chartId).getContext('2d');
     new Chart(ctx, {
