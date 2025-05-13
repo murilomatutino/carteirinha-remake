@@ -6,10 +6,10 @@
     require_once 'config.php';
 
     // Ação para exibir a página principal
-    class SobreController {
+    class ContatoController {
         
 
-        public function sendEmailContact($content)
+        public function sendEmailContact($content, $title)
         {
             require_once("../libs/phpmailer/vendor/autoload.php");
 
@@ -17,7 +17,7 @@
 
             $senderEmail = 'refeicao@leds.net.br';
             $senderPassword = '';
-            $title = 'Email de contato';
+            //$title = 'Email de contato';
             $recipientName = 'Refeição IFBA Seabra';
             $senderName = $_SESSION['name'];
             $host = 'email-ssl.com.br';

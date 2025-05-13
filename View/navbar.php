@@ -132,6 +132,7 @@
         <ul class="nav-list" id="nav-list">
             <li><a class='inicio-menu'>Início</a></li>
             <li><a class='cardapio-menu'>Cardápio</a></li>
+            <li><a class="entre-em-contato">Entre em Contato</a></li>
             <li><a class='sobre-menu'>Sobre</a></li>
             <li>
                 <a class="qr-code-menu">
@@ -160,7 +161,8 @@
         'profilePic' => PROFILEPIC,
         'profile' => PROFILE,
         'logout' => LOGOUT,
-        'login' => LOGIN
+        'login' => LOGIN,
+        'contato' => CONTATO
     ]) ?>;
 
     const loggedIn = config.loggedIn;
@@ -172,6 +174,7 @@
     document.querySelector('.inicio-menu').href = category === 'adm' ? config.adminLandpage : config.userLandpage;
     document.querySelector('.cardapio-menu').href = config.menu;
     document.querySelector('.sobre-menu').href = config.about;
+    document.querySelector('.entre-em-contato').href = config.contato;
     document.querySelector('.qr-code-menu').href = category === 'adm' ? config.qrcodeAdm : config.qrcodeEstudante;
     document.querySelector('.qr-code-icon').setAttribute('src', config.qrcodeImg);
 
