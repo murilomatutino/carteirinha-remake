@@ -19,15 +19,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mais detalhes - Feedbacks</title>
+    <link rel="stylesheet" href="css/feedbacks.css">
 </head>
 <body>
-    
+    <h1>Relatório de Refeições</h1>
+    <div class="table-container">
+        <table id="relatorio-table">
+        <thead>
+            <tr>
+            <th>Nome</th>
+            <th>Matrícula</th>
+            <th>Data</th>
+            <th>Dia</th>
+            <th>Principal</th>
+            <th>Acompanhamento</th>
+            <th>Sobremesa</th>
+            <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        </table>
+    </div>
 
     <script>
-        const feedbacks = <?php echo json_encode($data); ?>;
+        const feedbacksAll = <?php echo json_encode($data); ?>;
 
-        console.log(feedbacks);
+        // console.log(feedbacks);
     </script>
+    <script src="js/feedbacks.js"></script>
 </body>
 </html>
