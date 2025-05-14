@@ -23,6 +23,9 @@
     // Caminho absoluto sobre
     define('ABOUT', "http://localhost/carteirinha-remake/View/sobre.php");
 
+    // Caminho absoluto entre em contato
+    define('CONTATO', "http://localhost/carteirinha-remake/View/entre-em-contato.php");
+
     // Caminho absoluto perfil
     define('PROFILE', 'http://localhost/carteirinha-remake/View/perfil.php');
 

@@ -1,0 +1,129 @@
+@import url(style.css);
+
+html {
+    scroll-behavior: smooth; /* Aplica rolagem suave na página */
+}
+
+main
+{
+    min-height: 500px;
+}
+
+/* Estilo do popup de notificação*/
+#popup-alerta
+{
+    position: relative;
+
+    height: auto;
+
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 50px;
+    border: 1px solid #b4b4b4;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+    
+    top: 0px;
+    
+    text-align: center;
+}
+
+#popup-alerta h1
+{
+    margin-bottom: 10px; 
+}
+
+#popup-alerta-close
+{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+
+    padding: 0;
+    color: red;
+    font-weight: 900;
+
+    cursor: pointer;
+}
+/* select */
+main form div
+{
+    display: flex;
+    justify-content: flex-start;
+
+    width: 100%;
+    flex-direction: column;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+main form div select
+{
+    width: 160px;
+    height: 30px;
+
+    padding: 5px;
+}
+
+
+/* formulario */
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+main form 
+{
+    max-width: 600px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea
+{
+    height: 100px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #388E3C !important;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #2E7D32;
+}
+
+button {
+    width: 50%;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+/* resposividade para celular */
+@media (max-width: 480px) {
+    main form 
+    {
+        width: 80%;
+    }
+}
+
+
