@@ -155,10 +155,13 @@ export function showNotification(titulo, descricao, feedback, confirm) {
             popup.classList.remove('active');
             popup.classList.add('close');
             setTimeout(() => {
-                ajax.excluirCardapio();
-                popup.classList.remove('close');
-                document.body.classList.remove('active');
-                
+                if (ajax.excluirCardapio()) {
+                    window.location.href = 'cardapio.php?delete=success';
+                    popup.classList.remove('close');
+                    document.body.classList.remove('active');
+                } else {
+                    window.location.href = 'cardapio.php?delete=error';
+                }
             }, 500);
         });
     }
@@ -174,23 +177,3 @@ export function showNotification(titulo, descricao, feedback, confirm) {
         }, 500);
     });
 }
-
-
-// const openPopup = document.querySelector('#open-popup');
-// const popup2 = document.querySelector('#popup2');
-
-// if (popup2 && openPopup) {
-//     openPopup.addEventListener('click', function() {
-//         popup2.style.display = 'block';
-//         popup2.classList.add('active');
-
-//         document.querySelector('#close').addEventListener('click', function() {
-//             popup2.classList.remove('active');
-//             popup2.classList.add('showOff');
-//             setTimeout(() => {
-//                 popup2.style.display = 'none';
-//                 popup2.classList.remove('showOff')
-//             }, 500);
-//         });
-//     });
-// }

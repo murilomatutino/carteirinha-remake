@@ -84,7 +84,7 @@
         }
 
         public function excluirCardapio() {
-            if ($this->model->excluirCardapio()['success']) {
+            if ($this->model->excluirCardapio()) {
                 return ['status' => true, 'message' => 'Cardápio excluído com sucesso!'];
             } else {
                 return ['status' => false, 'message' => 'Falha ao excluir cardápio!'];

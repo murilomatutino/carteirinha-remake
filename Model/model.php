@@ -12,13 +12,18 @@ class Model {
 
     private function executeQuery($query, $params = [], $types = "") {
         $stmt = $this->conn->prepare($query);
-        if ($params) {
-            $stmt->bind_param($types, ...$params);
+        if ($params) { $stmt->bind_param($types, ...$params); }
+
+        if (!$stmt->execute()) { return false; }
+
+        if (stripos(trim($query), "SELECT") === 0) {
+            $result = $stmt->get_result();
+            return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
         }
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+
+        return $stmt->affected_rows;
     }
+
 
     private function executeUpdate($query, $params = [], $types = "") {
         $stmt = $this->conn->prepare($query);
@@ -147,13 +152,8 @@ class Model {
         $query = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";
         $result = $this->executeQuery($query);
 
-        if ($result === TRUE) {
-            return ['success' => true];
-        } else {
-            return ['success' => false];
-        }
+        return $result !== false;
     }
-
 
     /* Mudança de senha - métodos necessarios */
 

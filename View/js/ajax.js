@@ -299,11 +299,7 @@ export async function excluirCardapio() {
 
         const result = await response.json();
 
-        if (result.status === 'success') {
-            return true;
-        } else {
-            return false;
-        }
+        return result.status === 'success';
     } catch (error) {
         console.error('Erro 2:', error.message || error);
         return null;
