@@ -152,9 +152,14 @@
             }
         }
 
-        public function getIdByMatricula($matricula)
-        {
+        public function getIdByMatricula($matricula){
             return $this->model->getIdByMatricula($matricula);
+        }
+
+        // - Buscar tags de criação do cardapio
+
+        public function getTagsCardapio() {
+            return $this->model->getTagsCardapio();
         }
     }
 ?>

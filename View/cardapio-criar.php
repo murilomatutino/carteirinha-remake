@@ -1,10 +1,41 @@
+<?php 
+    require_once '../Controller/CardapioController.php';
+    $tags = (new CardapioController())->getTagsCardapio();
+
+    foreach ($tags as &$tag) {
+        if ($tag['lactose'] === 1 && $tag['gluten'] === 1) {
+            $tag['restricoes'] = 'gluten_e_lactose';
+        } else if ($tag['lactose'] === 1 && $tag['gluten'] === 0) {
+            $tag['restricoes'] = 'lactose';
+        } else if ($tag['lactose'] === 0 && $tag['gluten'] === 1) {
+            $tag['restricoes'] = 'gluten';
+        } else {
+            $tag['restricoes'] = 'sem_restrições';
+        }
+    }
+
+    function utf8ize($mixed) {
+        if (is_array($mixed)) {
+            foreach ($mixed as $key => $value) {
+                $mixed[$key] = utf8ize($value);
+            }
+        } else if (is_string($mixed)) {
+            return mb_convert_encoding($mixed, 'UTF-8', 'UTF-8');
+        }
+        
+        return $mixed;
+    }
+
+    $tags = utf8ize($tags);
+    $jsonTags = json_encode($tags, JSON_UNESCAPED_UNICODE);
+?>
+
 <!DOCTYPE html>
  <html lang="pt-br">
  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="css/criar-cardapio.css">
-     <script type="module" src="js/criar-cardapio.js" defer></script>
      <title>Criar Cardápio</title>
  </head>
  <body>
@@ -70,5 +101,10 @@
      <button id='save'>Salvar</button>
  
      <?php require_once "footer.php"; ?>
+
+     <script>
+        const tags = <?php echo $jsonTags; ?>;
+     </script>
+     <script type="module" src="js/criar-cardapio.js" defer></script>
  </body>
  </html>

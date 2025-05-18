@@ -2,12 +2,26 @@ const tableBody = document.querySelector('tbody');
 const diasSemana = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'];
 const colunas = ['Proteína', 'Principal', 'Sobremesa'];
 
-// Dados que virão do backend
-const dadosCardapio = {
-    Proteína: ['Frango', 'Carne', 'Peixe'],
-    Principal: ['Arroz', 'Macarrão', 'Feijão', 'Purê'],
-    Sobremesa: ['Fruta', 'Gelatina', 'Bolo', 'Iogurte']
+const dadosCardapio = {};
+
+const mapTipos = {
+    proteina: 'Proteína',
+    principal: 'Principal',
+    sobremesa: 'Sobremesa'
 };
+
+tags.forEach(item => {
+    const tipoNormalizado = mapTipos[item.tipo.toLowerCase()];
+    if (!tipoNormalizado) {
+        console.warn(`Tipo não reconhecido: ${item.tipo}`);
+        return;
+    }
+
+    if (!dadosCardapio[tipoNormalizado]) {
+        dadosCardapio[tipoNormalizado] = [];
+    }
+    dadosCardapio[tipoNormalizado].push(item.nome);
+});
 
 let currentTipoCriacao = null;
 let currentContainer = null;

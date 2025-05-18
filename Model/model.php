@@ -277,6 +277,7 @@ class Model {
         return $this->executeQuery($query);
     }
 
+    // buscar mais detalhes do feedback
     public function getFeedbackDetails($idCardapio) {
         $query = "SELECT 
             f.id AS id,
@@ -298,6 +299,12 @@ class Model {
         $result = $this->executeQuery($query, [$idCardapio], 'i');
         // $result = $this->executeQuery($query);
         return $result;
+    }
+
+    // buscar tags para criação do cardapio
+    public function getTagsCardapio() {
+        $query = "SELECT * FROM tags_cardapio";
+        return $this->executeQuery($query);
     }
 }
 ?>

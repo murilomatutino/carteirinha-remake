@@ -74,7 +74,7 @@ if (window.location.pathname.endsWith("feedbacks.php")) {
 
                 const key = "ledsifba";
                 const encrypted = xorEncrypt(id, key);
-                window.location.href = `getdata.php?id=${encrypted}`;
+                window.location.href = `relatorio-feedbacks.php?id=${encrypted}`;
             });
         });
 
