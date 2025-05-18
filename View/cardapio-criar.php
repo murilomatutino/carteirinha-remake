@@ -4,13 +4,13 @@
 
     foreach ($tags as &$tag) {
         if ($tag['lactose'] === 1 && $tag['gluten'] === 1) {
-            $tag['restricoes'] = 'gluten_e_lactose';
+            $tag['restricoes'] = 'gluten-lactose ';
         } else if ($tag['lactose'] === 1 && $tag['gluten'] === 0) {
             $tag['restricoes'] = 'lactose';
         } else if ($tag['lactose'] === 0 && $tag['gluten'] === 1) {
             $tag['restricoes'] = 'gluten';
         } else {
-            $tag['restricoes'] = 'sem_restrições';
+            $tag['restricoes'] = 'sem-restricoes';
         }
     }
 

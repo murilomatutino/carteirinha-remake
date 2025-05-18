@@ -76,6 +76,12 @@ const criarDropdown = (tipo) => {
                 div.className = 'option';
                 div.textContent = opcao;
                 div.onclick = () => {
+                    const tag_option = tags.find(
+                        tag => tag.nome.toLowerCase() === opcao.toLowerCase()
+                    );
+
+                    container.querySelector('.master-input').classList.add(tag_option.restricoes);
+
                     input.value = opcao;
                     container.classList.remove('opened');
                     document.body.classList.remove('dropdown-opened');
