@@ -305,3 +305,53 @@ export async function excluirCardapio() {
         return null;
     }
 }
+
+// Função para enviar uma nova tag para o BD
+export async function enviarNovaTag(data) {
+    try {
+        const response = await fetch('../Controller/refactor.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+
+        return result.status === 'success';
+    } catch (error) {
+        console.error('Erro ao cadastrar tag:', error.message || error);
+        return null;
+    }
+}
+
+// Função para enviar um novo cardápio para o BD
+export async function enviarCardapio(data) {
+    try {
+        const response = await fetch('../Controller/refactor.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        return result.status === 'success';
+    } catch (error) {
+        console.error('Erro ao cadastrar tag:', error.message || error);
+        return null;
+    }
+}
+

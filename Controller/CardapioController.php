@@ -156,10 +156,19 @@
             return $this->model->getIdByMatricula($matricula);
         }
 
-        // - Buscar tags de criação do cardapio
-
+        // Buscar tags de criação do cardapio
         public function getTagsCardapio() {
             return $this->model->getTagsCardapio();
+        }
+
+        // Cadastrar nova tag no banco de dados
+        public function criarTag($tagName, $restricoes, $gluten, $lactose) {
+            return $this->model->criarTag($tagName, $restricoes, $gluten, $lactose);
+        }
+
+        // Criar cardápio
+        public function salvarCardapioSemana($dados) {
+            return $this->model->salvarCardapioSemana($dados);
         }
     }
 ?>

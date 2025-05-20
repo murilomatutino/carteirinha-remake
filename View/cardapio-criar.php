@@ -63,22 +63,22 @@
          <div class='area-restricoes'>
              <div class='grupo-opcoes'>
              <label class='radio-item'>
-                 <input id='default' type='radio' name='restricao' value='' checked />
+                 <input id='default' type='radio' name='restricao' value='SR' checked />
                  <span>Sem restrições</span>
              </label>
  
              <label class='radio-item'>
-                 <input type='radio' name='restricao' value='Contém glúten' />
+                 <input type='radio' name='restricao' value='G' />
                  <span>Glúten</span>
              </label>
  
              <label class='radio-item'>
-                 <input type='radio' name='restricao' value='Contém lactose' />
+                 <input type='radio' name='restricao' value='L' />
                  <span>Lactose</span>
              </label>
  
              <label class='radio-item'>
-                 <input type='radio' name='restricao' value='Contém glúten e lactose' />
+                 <input type='radio' name='restricao' value='GL' />
                  <span>Glúten e lactose</span>
              </label>
              </div>

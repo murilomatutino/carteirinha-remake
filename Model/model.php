@@ -78,7 +78,7 @@ class Model {
     }
 
     public function getCardapio() {
-        $query = "SELECT dia, data_refeicao, principal, acompanhamento, sobremesa FROM cardapio WHERE ind_excluido = 0 ORDER BY data_refeicao";
+        $query = "SELECT dia, data_hora_cardapio, proteina, principal, sobremesa FROM cardapio WHERE ind_excluido = 0 ORDER BY data_hora_cardapio";
         return $this->executeQuery($query);
     }
 
@@ -142,7 +142,7 @@ class Model {
     }
     
     public function getCardapioById($idCardapio) {
-        $query = "SELECT data_refeicao, dia, principal, acompanhamento, sobremesa FROM cardapio WHERE id = ?";
+        $query = "SELECT data_hora_cardapio, dia, proteina, principal, sobremesa FROM cardapio WHERE id = ?";
         $result = $this->executeQuery($query, [$idCardapio], 'i');
 
         return $result[0];
@@ -305,6 +305,38 @@ class Model {
     public function getTagsCardapio() {
         $query = "SELECT * FROM tags_cardapio";
         return $this->executeQuery($query);
+    }
+
+    // criar tag
+    public function criarTag($nome, $tipo, $gluten, $lactose) {
+        $query = "INSERT INTO tags_cardapio (nome, tipo, gluten, lactose) VALUES (?, ?, ?, ?)";
+        return $this->executeQuery($query, [$nome, $tipo, $gluten, $lactose], 'ssii');
+    }
+
+    // Cadastra cardápio no BD
+    public function criarCardapio($dia, $proteina, $principal, $sobremesa) {
+        $query = "INSERT INTO cardapio (dia, proteina, principal, sobremesa) VALUES (?, ?, ?, ?)";
+        return $this->executeQuery($query, [$dia, $proteina, $principal, $sobremesa], 'ssss');
+    }
+
+    public function salvarCardapioSemana($dados) {
+        $success = [];
+
+        // print_r($dados); exit();
+        // Verifica se o array está vazio   
+
+        foreach ($dados as $linha) {
+            $dia = $linha['dia'] ?? '';
+            $proteina = $linha['Proteína'] ?? '';
+            $principal = $linha['Principal'] ?? '';
+            $sobremesa = $linha['Sobremesa'] ?? '-';
+            
+            $sucesso = $this->criarCardapio($dia, $proteina, $principal, $sobremesa);
+            $sucess[] = $sucesso;
+        }
+
+        // print_r($success); exit();
+        return in_array(false, $sucess, true) ? false : true;
     }
 }
 ?>

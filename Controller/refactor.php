@@ -96,33 +96,50 @@
         }
     }
 
-    function enviarNotificacao($idUser, $motivo, $matriculaAlvo)
-    {
+    function enviarNotificacao($idUser, $motivo, $matriculaAlvo) {
 
         $idAlvo = (new CardapioController())->getIdByMatricula($matriculaAlvo);
 
         $return = (new NotificationController())->createNotificacao($idUser, $idAlvo, 'Transferencia de almoço', "Motivo da transferência: " . $motivo, 1);
         
-        if ($idAlvo === false){
+        if ($idAlvo === false) {
             echo json_encode(['status'=> 'error', 'message' => 'Erro ao pegar id por matricula']); exit();
         }
-        else if ($return === false)
-        {
+        else if ($return === false) {
             echo json_encode(['status'=> 'error', 'message' => 'Erro ao criar notificação']); exit();
         }
-        else
-        {
-            echo json_encode(['status'=> 'success', 'array' => 'sucesso ao criar notificação']); exit();
+        else {
+            echo json_encode(['status'=> 'success', 'message' => 'sucesso ao criar notificação']); exit();
         }
     }
 
-    function cancelarTransferencia($idDestinatario)
-    {
+    function cancelarTransferencia($idDestinatario) {
         $response = (new NotificationController)->cancelarTransferencia($idDestinatario);
         if ($response) {
             echo json_encode(['status' => 'success']); exit();
         } else {
             echo json_encode(['status' => 'error']); exit();
+        }
+    }
+
+    function criarTag($nome, $tipo, $gluten, $lactose) {
+        $response = (new CardapioController())->criarTag($nome, $tipo, $gluten, $lactose);
+
+        if ($response) {
+            echo json_encode(['status' => 'success', 'message' => 'Tag criada com sucesso!']); exit();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Problemas ao criar tag!']); exit();
+        }
+    }
+
+    function criarCardapio($dados) {
+        $cardapio = json_decode($dados, true);
+        $response = (new CardapioController())->salvarCardapioSemana($cardapio);
+
+        if ($response) {
+            echo json_encode(['status' => 'success', 'message' => 'Cardápio criado com sucesso!']); exit();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Problemas ao criar cardápio!']); exit();
         }
     }
 
@@ -138,6 +155,8 @@
             case 'editarHorario': editarHorario($_POST['hora']); break;
             case 'enviarNotificacao': enviarNotificacao($_POST['idUser'], $_POST['motivo'], $_POST['matriculaAlvo']); break;
             case 'cancelarTransferencia': cancelarTransferencia($_POST['idDestinatario']); break;
+            case 'criarTag': criarTag($_POST['nome'], $_POST['tipo'], $_POST['gluten'], $_POST['lactose']); break;
+            case 'criarCardapio': criarCardapio($_POST['cardapio']); break;
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         if ($_POST['action'] === 'login') {
