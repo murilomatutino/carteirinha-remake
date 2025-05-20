@@ -5,6 +5,31 @@
     $cardapio = (new CardapioController())->getCardapio();
     $horario_padrao = (new CardapioController())->getTime();
     $hasRefeicao = (new CardapioController())->hasRefeicao($_SESSION['id'], date("Y-m-d"));
+
+    function formatarFlags($item_json) {
+        if (empty($item_json)) {
+            return '-';
+        }
+        
+        $item = json_decode($item_json, true);
+        if (!$item || !isset($item['nome'])) {
+            return '-';
+        }
+
+        $sufixo = '';
+        $gluten = $item['gluten'] ?? 0;
+        $lactose = $item['lactose'] ?? 0;
+
+        if ($gluten && $lactose) {
+            $sufixo = '+++';
+        } elseif ($gluten) {
+            $sufixo = '+';
+        } elseif ($lactose) {
+            $sufixo = '++';
+        }
+
+        return $item['nome'] . $sufixo;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -41,17 +66,18 @@
                     
                     foreach ($cardapio as $dia) {
                         if ($dia['principal'] != 'Sem refeição') {
-                            $data = date("d/m", strtotime($dia['data_refeicao'])); 
-                            $newDia = ucfirst($dia['dia']) . "-feira";
+                            $data = date("d/m", strtotime($dia['data_hora_cardapio'])); 
+                            $newDia = ucfirst($dia['dia']);
                             echo "<tr>";
                             echo "<td>$newDia ($data)</td>";
                         } else {
                             echo "<tr>";
                             echo "<td>{$dia['dia']}</td>";
                         }
-                        echo "<td>{$dia['principal']}</td>";
-                        echo "<td>{$dia['acompanhamento']}</td>";
-                        echo "<td>{$dia['sobremesa']}</td>";
+
+                        echo "<td>" . formatarFlags($dia['proteina']) . "</td>";
+                        echo "<td>" . formatarFlags($dia['principal']) . "</td>";
+                        echo "<td>" . formatarFlags($dia['sobremesa']) . "</td>";
                         echo "</tr>";
                     }
 

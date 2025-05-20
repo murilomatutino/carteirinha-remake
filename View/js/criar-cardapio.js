@@ -63,7 +63,8 @@ const criarDropdown = (tipo) => {
 
     function atualizarOpcoes(filtro = '') {
         wrapper.innerHTML = '';
-        const opcoesFiltradas = dadosCardapio[tipo].filter(opcao =>
+        const listaOpcoes = dadosCardapio[tipo] || [];
+        const opcoesFiltradas = listaOpcoes.filter(opcao =>
             opcao.toLowerCase().includes(filtro.toLowerCase())
         );
 
@@ -170,7 +171,7 @@ document.querySelector('#confirmCreate').onclick = async () => {
     const nome = input.value.trim();
     if (nome === '') return;
 
-    if (!dadosCardapio[currentTipoCriacao].includes(nome)) {
+    if (!(dadosCardapio[currentTipoCriacao] || []).includes(nome)) {
         const selecionado = document.querySelector("input[name='restricao']:checked");
         const restricao = selecionado ? selecionado.value : null;
 
@@ -208,6 +209,10 @@ document.querySelector('#confirmCreate').onclick = async () => {
                 gluten: gluten,
                 lactose: lactose
             });
+
+            if (!dadosCardapio[currentTipoCriacao]) {
+                dadosCardapio[currentTipoCriacao] = [];
+            }
 
             dadosCardapio[currentTipoCriacao].push(nome);
 

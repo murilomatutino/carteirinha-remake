@@ -78,7 +78,30 @@ class Model {
     }
 
     public function getCardapio() {
-        $query = "SELECT dia, data_hora_cardapio, proteina, principal, sobremesa FROM cardapio WHERE ind_excluido = 0 ORDER BY data_hora_cardapio";
+        $query = "
+            SELECT 
+                dia, 
+                data_hora_cardapio, 
+                (SELECT JSON_OBJECT('nome', t.nome, 'gluten', t.gluten, 'lactose', t.lactose)
+                FROM tags_cardapio t 
+                WHERE t.nome = c.proteina LIMIT 1) AS proteina,
+
+                (SELECT JSON_OBJECT('nome', t.nome, 'gluten', t.gluten, 'lactose', t.lactose)
+                FROM tags_cardapio t 
+                WHERE t.nome = c.principal LIMIT 1) AS principal,
+
+                CASE
+                    WHEN c.sobremesa = '-' THEN NULL
+                    ELSE (SELECT JSON_OBJECT('nome', t.nome, 'gluten', t.gluten, 'lactose', t.lactose)
+                        FROM tags_cardapio t 
+                        WHERE t.nome = c.sobremesa LIMIT 1)
+                END AS sobremesa
+
+            FROM cardapio c
+            WHERE c.ind_excluido = 0
+            ORDER BY c.id
+        ";
+        
         return $this->executeQuery($query);
     }
 
