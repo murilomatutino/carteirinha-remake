@@ -18,7 +18,12 @@
         
         <form method="post">
 
-            <label for="message">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit reiciendis et modi amet vero blanditiis, nisi eaque veritatis totam quidem corrupti distinctio! Recusandae omnis dolorum laudantium eius veniam iste esse!</label><br>
+            <label for="message">
+                Este é um espaço dedicado para você, aluno(a), relatar bugs no site, fazer sugestões 
+                para melhorá-lo, expressar suas reclamações sobre o funcionamento do
+                 site ou do cardápio oferecido. Sinta-se à vontade para compartilhar 
+                 aquilo que você não gosta ou tem uma sugestão para melhorar.
+            </label>
 
             <div>
                 <label for="opcao">Tipo de contato:</label>

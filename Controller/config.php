@@ -39,5 +39,5 @@
     define('QRCODREAD', 'http://localhost/carteirinha-remake/View/qr-code-estudante.php');
 
     // Caminho absoluto profile img
-    define('PROFILEPIC', 'http://localhost/carteirinha-remake/View/assets/Victor Hugo.jpg');
+    define('PROFILEPIC', 'http://localhost/carteirinha-remake/View/assets/perfilPadrao.jpeg');
 ?>
