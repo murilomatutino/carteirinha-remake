@@ -17,7 +17,7 @@
 
     <?php include('navbar.php')?>
 
-    <main>
+    <main id="corpo-pagina">
         <div id="reader"></div>
     </main>
 

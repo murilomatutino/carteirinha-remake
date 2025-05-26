@@ -395,32 +395,6 @@ if (closePopup) {
     });
 }
 
-if (page === 'sobre.php') {
-    const button = document.querySelector('#open-form'); 
-    const contactForm = document.querySelector('.contact-form');
-    const contactAnimation = document.querySelector('.contact-animation');
-
-    button.addEventListener('click', function() {
-        contactAnimation.classList.toggle('expanded');
-        contactForm.classList.toggle('show');            
-
-        if (contactAnimation.classList.contains('expanded')) {
-            setTimeout(() => {
-                window.scrollTo({
-                    top: contactAnimation.getBoundingClientRect().top + window.scrollY,
-                    behavior: 'smooth'
-                });
-            }, 400);
-
-            setTimeout(() => {
-                contactForm.innerHTML = document.querySelector('#form-template').innerHTML;
-                button.querySelector('img').classList.toggle('rotated');
-            }, 800);
-        } else {
-            contactForm.innerHTML = '';
-        }
-    });
-}
 
 // function sendFeedback(nota) {
 //     ajax.getUserId().then(idUser => {
