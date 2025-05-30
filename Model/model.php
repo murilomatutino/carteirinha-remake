@@ -282,19 +282,6 @@ class Model {
         return $this->executeUpdate($query, [$idRemetente, $dataAtual], 'is');
     }
 
-    // retornar horário limite da transferencia de almoço
-    public function getHorarioLimiteTransferencia()
-    {
-        date_default_timezone_set('America/Sao_Paulo');
-
-        $horario_limite = date("Y-m-d") . " " .$this->getTime();
-
-        $query = "SELECT ADDTIME(?, '4:00:00')";
-        $result = $this->executeQuery($query, [$horario_limite], 's');
-
-        return $result[0]["ADDTIME(?, '4:00:00')"];
-    }
-
     public function getAllFeedback() {
         $query = "SELECT * FROM feedback";
         return $this->executeQuery($query);

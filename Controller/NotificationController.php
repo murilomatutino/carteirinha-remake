@@ -21,11 +21,10 @@
         public function getNotification($userId, $idNotification = null){
             $notificacoes = $this->model->getNotification($userId, $idNotification);
 
-            $horarioLimiteTransferencia = $this->model->getHorarioLimiteTransferencia();
             date_default_timezone_set('America/Sao_Paulo');
             $horaAtual = date("H:i:s");
 
-            if ($horaAtual > $horarioLimiteTransferencia) {
+            if ($horaAtual > "12:00:00") {
                 $lista = [];
 
                 foreach ($notificacoes as $n)
