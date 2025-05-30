@@ -21,11 +21,11 @@
         $lactose = $item['lactose'] ?? 0;
 
         if ($gluten && $lactose) {
-            $sufixo = '+++';
+            $sufixo = ' +++';
         } elseif ($gluten) {
-            $sufixo = '+';
+            $sufixo = ' +';
         } elseif ($lactose) {
-            $sufixo = '++';
+            $sufixo = ' ++';
         }
 
         return $item['nome'] . $sufixo;
