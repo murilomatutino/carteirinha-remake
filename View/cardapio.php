@@ -78,6 +78,16 @@
                         echo "<td>" . formatarFlags($dia['proteina']) . "</td>";
                         echo "<td>" . formatarFlags($dia['principal']) . "</td>";
                         echo "<td>" . formatarFlags($dia['sobremesa']) . "</td>";
+                        echo 
+                        "<td> 
+                            <ul id='avaliacao'>
+                                <li class='star-icon' data-avliacao='5'></li>
+                                <li class='star-icon' data-avliacao='4'></li>
+                                <li class='star-icon' data-avliacao='3'></li>
+                                <li class='star-icon' data-avliacao='2'></li>
+                                <li class='star-icon' data-avliacao='1'></li>
+                            </ul>
+                        </td>";
                         echo "</tr>";
                     }
 
@@ -250,6 +260,7 @@
             showNotification(titulo, desc);
         }
     </script>
+    <script src="js/cardapio.js"></script>
     <?php require_once "footer.php"; ?>
 </body>
 </html>

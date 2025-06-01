@@ -231,3 +231,36 @@ h1 {
         text-align: left;
     }
 }
+
+/* Avaliação por estrelas */
+
+:root
+{
+    --amarelo: #ffe500;
+}
+
+#avaliacao
+{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.star-icon
+{
+    list-style: none;
+    cursor: pointer;
+    color: var(--amarelo);
+}
+
+.star-icon::before
+{
+    content: "\2606"; /* estrela vazia */
+    font-size: 2em;
+}
+
+.star-icon:hover::before,
+.star-icon:hover ~.star-icon::before
+{
+    content: "\2605"; /* estrela preenchida */
+}
