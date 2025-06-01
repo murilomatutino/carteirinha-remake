@@ -80,7 +80,7 @@
                         echo "<td>" . formatarFlags($dia['sobremesa']) . "</td>";
                         echo 
                         "<td> 
-                            <ul id='avaliacao'>
+                            <ul class='avaliacao'>
                                 <li class='star-icon' data-avliacao='5'></li>
                                 <li class='star-icon' data-avliacao='4'></li>
                                 <li class='star-icon' data-avliacao='3'></li>

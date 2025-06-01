@@ -239,7 +239,7 @@ h1 {
     --amarelo: #ffe500;
 }
 
-#avaliacao
+.avaliacao
 {
     display: flex;
     flex-direction: row-reverse;
@@ -260,7 +260,13 @@ h1 {
 }
 
 .star-icon:hover::before,
-.star-icon:hover ~.star-icon::before
+.star-icon:hover ~ .star-icon::before
+{
+    content: "\2605"; /* estrela preenchida */
+}
+
+.star-icon.ativo::before,
+.star-icon.ativo ~ .star-icon::before
 {
     content: "\2605"; /* estrela preenchida */
 }
