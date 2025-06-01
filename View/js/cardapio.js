@@ -11,14 +11,14 @@ function f(i)
     // convertendo stars para lsita
     const stars_list = Array.from(stars);
 
-    if (!classStar.contains("ativo"))
+    if (!classStar.contains("ativo") && classStar.contains("star-icon"))
     {
         stars_list.forEach(function(star)
         {
             star.classList.remove("ativo");
         });
 
-        classStar.add("ativo");
+        classStar.add("ativo");    
     }
 })
 }

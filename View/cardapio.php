@@ -1,6 +1,8 @@
 <?php session_start();
     require_once "../Controller/CardapioController.php";
     date_default_timezone_set('America/Sao_Paulo');
+    $data_atual = date("Y-m-d");
+    $hora_atual = date("H:m:i");
 
     $cardapio = (new CardapioController())->getCardapio();
     $horario_padrao = (new CardapioController())->getTime();
@@ -78,16 +80,21 @@
                         echo "<td>" . formatarFlags($dia['proteina']) . "</td>";
                         echo "<td>" . formatarFlags($dia['principal']) . "</td>";
                         echo "<td>" . formatarFlags($dia['sobremesa']) . "</td>";
-                        echo 
-                        "<td> 
-                            <ul class='avaliacao'>
-                                <li class='star-icon' data-avliacao='5'></li>
-                                <li class='star-icon' data-avliacao='4'></li>
-                                <li class='star-icon' data-avliacao='3'></li>
-                                <li class='star-icon' data-avliacao='2'></li>
-                                <li class='star-icon' data-avliacao='1'></li>
-                            </ul>
-                        </td>";
+
+                        $data_refeicao = date("Y-m-d", strtotime($dia['data_hora_cardapio'])); 
+                        if ($data_refeicao < $data_atual || ($data_atual === $data_refeicao && $hora_atual > "12:00:00"))
+                        {
+                            echo 
+                            "<td> 
+                                <ul class='avaliacao'>
+                                    <li class='star-icon' data-avliacao='5'></li>
+                                    <li class='star-icon' data-avliacao='4'></li>
+                                    <li class='star-icon' data-avliacao='3'></li>
+                                    <li class='star-icon' data-avliacao='2'></li>
+                                    <li class='star-icon' data-avliacao='1'></li>
+                                </ul>
+                            </td>";
+                        }
                         echo "</tr>";
                     }
 
