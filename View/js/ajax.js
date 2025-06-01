@@ -13,13 +13,22 @@ export async function getUserId() {
     }
 }
 
-export async function getCardapioId() {
+export async function getCardapioId(data) {
     try {
-        const response = await fetch('idCardapio.php');
+        const response = await fetch('idCardapio.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
         if (!response.ok) {
             throw new Error(`Erro ao buscar o ID, status: ${response.status}`);
         }
+    
         const idCardapio = await response.text();
+        
         return idCardapio;
     } catch (error) {
         console.error('Erro ao pegar ID:', error);

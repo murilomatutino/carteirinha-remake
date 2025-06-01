@@ -231,11 +231,11 @@
 
         if (response.type === 'agendamento') {
             let feedback = false;
-            if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!'; feedback = true }
+            if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!';}
             else if (response.data === 'emailerror'){titulo = 'Erro ao enviar e-mail'; desc = 'Sua refeição foi agendada com sucesso, mas houve um erro ao enviar um e-mail de confirmação.';}
             else { titulo = 'Problema na solicitação'; desc = 'Houve algum problema solicitação de agendamento do seu almoço. Por favor tente novamente mais tarde!'; }
 
-            showNotification(titulo, desc, feedback);
+            showNotification(titulo, desc);
         } else if (response.type === 'solicitacao') {
             if (response.data === 'success') { titulo = 'Sucesso na Solicitação', desc = 'Sua solicitação de transferência de reserva foi enviada ao estudante!' }
             else { titulo = 'Problema na solicitação'; desc = 'Houve um problema com a solicitação, que tal tentar novamente mais tarde?'}
@@ -267,7 +267,7 @@
             showNotification(titulo, desc);
         }
     </script>
-    <script src="js/cardapio.js"></script>
     <?php require_once "footer.php"; ?>
+    <script src="js/cardapio.js" type='module'></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
             $this->model = new Model();
         }
 
-        public function sendFeedback($nota, $idUser) {
+        public function sendFeedback($nota, $idUser, $idCardapio) {
             return $this->model->adicionarFeedback($nota, $idUser, $idCardapio);
         }
 

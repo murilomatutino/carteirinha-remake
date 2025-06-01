@@ -1,7 +1,9 @@
-/* Avaliação por estrelas */
+import * as ajax from './ajax.js';
+
+// Avaliação por estrelas 
 const starBoxs = document.querySelectorAll(".avaliacao");
 
-/* função auxíliar para não repetir código */
+// função auxíliar para não repetir código 
 function f(i)
 {
     starBoxs[i].addEventListener('click', function(e){
@@ -23,7 +25,50 @@ function f(i)
 
     if (classStar.contains("star-icon") && avaliado === false)
     {
-        classStar.add("ativo");    
+        classStar.add("ativo"); 
+
+        // pega o valor da avaliação
+        let rate = e.target.getAttribute("data-avliacao"); 
+
+        // percorre o DOM até retornar o dia associado a linha, ex. de retorno: Quinta-feira (24/05) 
+        let dia_string_num = e.target.parentNode.parentNode.parentNode.children[0].innerHTML; 
+
+        let dia = dia_string_num.split(" ")[0]; // Quinta-feira (24/05) -> Quinta-feira
+
+        let data = {
+            diaSemana: dia
+        };
+        
+        /* --- envia os dados para o php --- */
+        ajax.getUserId().then(idUser => {
+            if (!idUser) {
+                console.error('ID do usuário não encontrado');
+                return;
+            }
+
+            ajax.getCardapioId(data)
+            .then(idCardapio => {
+
+                let dados = {
+                    operacao: 'enviarFeedback',
+                    nota: parseInt(rate),
+                    idUser: parseInt(idUser),
+                    idCardapio: parseInt(idCardapio)
+                };
+
+                console.log(dados);
+                
+                ajax.enviarFeedback(dados).then(result => {
+                    //window.location.href = 'cardapio.php?feedback=success';
+                }).catch(error => {
+                    window.location.href = 'cardapio.php?feedback=error';
+                });
+            })  
+            .catch(error => {
+                console.error('Erro ao buscar o cardápio:', error);
+                return { status: false, nota: none };
+            });
+        });
     }
 })
 }
