@@ -7,17 +7,22 @@ function f(i)
     starBoxs[i].addEventListener('click', function(e){
     const classStar = e.target.classList;
     const stars = starBoxs[i].children;
+    let avaliado = false;
 
     // convertendo stars para lsita
     const stars_list = Array.from(stars);
 
-    if (!classStar.contains("ativo") && classStar.contains("star-icon"))
+    // verifica se o usuario já fez uma avaliação
+    stars_list.forEach(function(star)
     {
-        stars_list.forEach(function(star)
+        if (star.classList.contains("ativo"))
         {
-            star.classList.remove("ativo");
-        });
+            avaliado = true;
+        }
+    });
 
+    if (classStar.contains("star-icon") && avaliado === false)
+    {
         classStar.add("ativo");    
     }
 })
