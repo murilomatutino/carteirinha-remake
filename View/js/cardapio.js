@@ -1,6 +1,6 @@
 import * as ajax from './ajax.js';
 
-// Avaliação por estrelas 
+/* ---------- Avaliação por estrelas -------------------*/
 const starBoxs = document.querySelectorAll(".avaliacao");
 
 // função auxíliar para não repetir código 
@@ -59,7 +59,7 @@ function f(i)
                 console.log(dados);
                 
                 ajax.enviarFeedback(dados).then(result => {
-                    //window.location.href = 'cardapio.php?feedback=success';
+                    window.location.href = 'cardapio.php?feedback=success';
                 }).catch(error => {
                     window.location.href = 'cardapio.php?feedback=error';
                 });
@@ -74,3 +74,48 @@ function f(i)
 }
 
 f(0);f(1);f(2);f(3);f(4);
+
+
+/* ------- pega as avaliações já feitas ------- */
+
+const dia_id = {
+    "Segunda-feira": 0,
+    "Terça-feira": 1,
+    "Quarta-feira": 2,
+    "Quinta-feira": 3,
+    "Sexta-feira": 4
+}
+
+ajax.getUserId().then(idUser => {
+    if (!idUser) {
+        console.error('ID do usuário não encontrado');
+        return;
+    }
+
+    const data = {
+        idUser: idUser
+    }
+
+    ajax.getDadosFeedback(data).then(feedbacks => {
+        
+        let stars;
+
+        feedbacks.forEach(function(feedback){
+
+            console.log(feedback);
+            const data = {
+                idCardapio: feedback["id_cardapio"]
+            }
+            ajax.getDiaByID(data).then(resposta =>{
+                if (resposta !== null)
+                {
+                    const dia = resposta[0]["dia"];
+                    stars = Array.from(starBoxs[dia_id[dia]].children);
+                    stars[5 - feedback["id_nota"]].classList.add("ativo");
+                }
+            })
+
+            
+        });
+    });
+});

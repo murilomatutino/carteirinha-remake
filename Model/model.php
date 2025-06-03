@@ -14,7 +14,7 @@ class Model {
         $stmt = $this->conn->prepare($query);
         if ($params) { $stmt->bind_param($types, ...$params); }
 
-        if (!$stmt->execute()) { return false; }
+        if (!$stmt->execute()) { return false;}
 
         if (stripos(trim($query), "SELECT") === 0) {
             $result = $stmt->get_result();
@@ -285,6 +285,18 @@ class Model {
     public function getAllFeedback() {
         $query = "SELECT * FROM feedback";
         return $this->executeQuery($query);
+    }
+
+    public function getUserFeedback($idUser) {
+        $query = "SELECT * FROM feedback where id_usuario = ?";
+        return $this->executeQuery($query, [$idUser], "i");
+    }
+
+    // retona o dia da semana associado a um determinado cardapio
+    public function getDiaByID($idCardapio)
+    {
+        $query = "SELECT dia FROM cardapio where id = ? AND ind_excluido = 0";
+        return $this->executeQuery($query, [$idCardapio], "i");
     }
 
     // buscar mais detalhes do feedback
