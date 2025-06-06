@@ -4,10 +4,6 @@ html {
     scroll-behavior: smooth; /* Aplica rolagem suave na página */
 }
 
-main
-{
-    min-height: 500px;
-}
 
 /* Estilo do popup de notificação*/
 #popup-alerta

@@ -4,11 +4,6 @@ html {
     scroll-behavior: smooth; /* Aplica rolagem suave na página */
 }
 
-main
-{
-    min-height: 500px;
-}
-
 /* Container para a sessão de pessoas */
 .container-sphere {
     flex-grow: 1;
