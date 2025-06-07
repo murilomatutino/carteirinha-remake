@@ -1,6 +1,6 @@
 <?php session_start();
     require '../Controller/CardapioController.php';
-    $cardapio = (new CardapioController)->getCardapio();
+    $cardapioRaw = (new CardapioController)->getCardapio();
     date_default_timezone_set('America/Sao_Paulo');
     $dataAtual = date('Y-m-d');
     $diaDaSemana = date('l', strtotime($dataAtual));
@@ -15,7 +15,30 @@
         default: break;
     }
 
-    $cardapio = $cardapio[$diaNumero];
+    $cardapioRaw = $cardapioRaw[$diaNumero];
+    $cardapio['dia'] = $cardapioRaw['dia'];  
+    $cardapio['data_hora_cardapio'] = $cardapioRaw['data_hora_cardapio'];
+
+    foreach ($cardapioRaw as $key => $data) {
+        $tempData = json_decode($data, true);
+
+        if (is_array($tempData)) {
+            $sufixo = '';
+            $gluten = $tempData['gluten'] == 1;
+            $lactose = $tempData['lactose'] == 1;
+
+            if ($gluten && $lactose) {
+                $sufixo = ' +++';
+            } elseif ($gluten) {
+                $sufixo = ' +';
+            } elseif ($lactose) {
+                $sufixo = ' ++';
+            }
+
+            $tempData['nome'] = $tempData['nome'] . $sufixo;
+            $cardapio[$key] = $tempData;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +62,9 @@
 
             <table>
                 <tr><th colspan="2"><?php echo ucfirst($diaDaSemana) . '-feira' ?></th></tr>
-                <tr><td>Proteína</td><td><?php echo $cardapio['principal']; ?></td></tr>
-                <tr><td>Acompanhamento</td><td><?php echo $cardapio['acompanhamento']; ?></td></tr>
-                <tr><td>Sobremesa</td><td><?php echo $cardapio['sobremesa']; ?></td></tr>
+                <tr><td>Proteína</td><td><?php echo $cardapio['proteina']['nome']; ?></td></tr>
+                <tr><td>Principal</td><td><?php echo $cardapio['principal']['nome']; ?></td></tr>
+                <tr><td>Sobremesa</td><td><?php echo $cardapio['sobremesa']['nome']; ?></td></tr>
             </table>
 
             <label for="justificativa">Justificativa:</label>
