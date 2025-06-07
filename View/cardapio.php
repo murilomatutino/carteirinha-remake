@@ -61,6 +61,7 @@
                                 <th>Proteína</th>
                                 <th>Acompanhamento</th>
                                 <th>Sobremesa</th>
+                                <th> Avaliação </th>
                             </tr>
                         </thead>
                         <tbody>";

@@ -102,7 +102,6 @@ ajax.getUserId().then(idUser => {
 
         feedbacks.forEach(function(feedback){
 
-            console.log(feedback);
             const data = {
                 idCardapio: feedback["id_cardapio"]
             }
