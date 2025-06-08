@@ -32,7 +32,7 @@
                         <div id='popup-alerta-close'>X</div>
                         <p>Almoço retirado com sucesso!</p>
                     </div>";
-                //$controller->retirarAlmoco($dataAtual, $_SESSION["id"]);
+                $controller->retirarAlmoco($dataAtual, $_SESSION["id"]);
             }
             else
             {
