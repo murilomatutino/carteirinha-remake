@@ -17,30 +17,43 @@
 
     <main>
         <?php
-            include '../Controller/AgendamentoController.php';
-            $controller = new AgendamentoController();
-
             date_default_timezone_set('America/Sao_Paulo');
+            $hora_atual = date('H:m:i');
             $dataAtual = date('Y-m-d');
-            
-            $situacao = $controller->hasAgendamento($dataAtual, $_SESSION["id"]);
+            $diaSemana = date('l', strtotime($dataAtual));
 
-            if ($situacao)
+            if ($hora_atual < "12:00:00" || $hora_atual > "12:50:00" || $diaSemana == "Saturday" || $diaSemana == "Sunday")
             {
                 echo "
-                    <div class='popup-alerta agendado'>
+                    <div class='popup-alerta aviso'>
                         <div id='popup-alerta-close'>X</div>
-                        <p>Almoço retirado com sucesso!</p>
+                        <p>Você só pode retirar o almoço entre 12:00:00 e 12:50:00</p>
                     </div>";
-                $controller->retirarAlmoco($dataAtual, $_SESSION["id"]);
             }
             else
             {
-                echo "
-                    <div class='popup-alerta nao-agendado'>
-                        <div id='popup-alerta-close'>X</div>
-                        <p>Você não tem nenhum almoço agendado para hoje</p>
-                    </div>";
+                include '../Controller/AgendamentoController.php';
+                $controller = new AgendamentoController();
+                
+                $situacao = $controller->hasAgendamento($dataAtual, $_SESSION["id"]);
+
+                if ($situacao)
+                {
+                    echo "
+                        <div class='popup-alerta agendado'>
+                            <div id='popup-alerta-close'>X</div>
+                            <p>Almoço retirado com sucesso!</p>
+                        </div>";
+                    $controller->retirarAlmoco($dataAtual, $_SESSION["id"]);
+                }
+                else
+                {
+                    echo "
+                        <div class='popup-alerta nao-agendado'>
+                            <div id='popup-alerta-close'>X</div>
+                            <p>Você não tem nenhum almoço agendado para hoje</p>
+                        </div>";
+                }
             }
         ?>
     </main>

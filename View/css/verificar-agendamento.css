@@ -40,6 +40,11 @@ main .agendado
     background-color: green;
 }
 
+main .aviso
+{
+    background-color: #d4d402;
+}
+
 main #popup-alerta-close
 {
     position: absolute;
