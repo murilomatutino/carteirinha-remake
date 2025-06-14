@@ -66,6 +66,8 @@ th, td {
     word-wrap: break-word;
 }
 
+td{height: 77px;}
+
 th {
     background-color: #388E3C;
     color: #fff;
