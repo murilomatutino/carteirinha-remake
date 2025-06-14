@@ -2,7 +2,7 @@
     require_once "../Controller/CardapioController.php";
     date_default_timezone_set('America/Sao_Paulo');
     $data_atual = date("Y-m-d");
-    $hora_atual = date("H:m:i");
+    $hora_atual = date("H:i:s");
 
     $cardapio = (new CardapioController())->getCardapio();
     $horario_padrao = (new CardapioController())->getTime();

@@ -18,7 +18,7 @@
     <main>
         <?php
             date_default_timezone_set('America/Sao_Paulo');
-            $hora_atual = date('H:m:i');
+            $hora_atual = date('H:i:s');
             $dataAtual = date('Y-m-d');
             $diaSemana = date('l', strtotime($dataAtual));
 
