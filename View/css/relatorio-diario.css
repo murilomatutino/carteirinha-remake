@@ -8,9 +8,8 @@ main table {
     border-radius: 8px;
     overflow: hidden;
     display: none;
+    width: 60%;
 }
-
-tbody, thead, tr{width: 100%;}
 
 th, td {
     padding: 15px;
@@ -34,8 +33,10 @@ h1
 
 body > main
 {
-    min-height: 500px;
+    height: 700px;
     padding: 30px;
+
+    overflow: auto;
 }
 
 #resultados

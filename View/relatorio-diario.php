@@ -16,7 +16,7 @@
     <?php include('navbar.php')?>
 
     <main>
-        <h1>Relatório de almoços não retirados</h1>
+        <h1>Relatório pessoas que não retiraram o almoço</h1>
         <div id="container-filtro">
             <form>
                 <div>
