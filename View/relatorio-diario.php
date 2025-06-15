@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/relatorio-diario.css">
     <title>Relatório Diário</title>
 </head>
 <body>
@@ -15,8 +16,8 @@
     <?php include('navbar.php')?>
 
     <main>
+        <h1>Relatório de almoços não retirados</h1>
         <div id="container-filtro">
-            <h1>Relatório almoços não retirados</h1>
             <form>
                 <div>
                     <label>Dia</label>

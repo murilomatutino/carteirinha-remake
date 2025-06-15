@@ -7,6 +7,8 @@ btn.addEventListener("click", function(e){
 
     if (date.length !== 0)
     {
+        document.getElementsByTagName("table")[0].style.display = "inline-block"; // deixando tabela visivel
+
         console.log(date);
 
         const data = {
