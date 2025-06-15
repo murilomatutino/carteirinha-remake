@@ -8,7 +8,6 @@ main table {
     border-radius: 8px;
     overflow: hidden;
     display: none;
-    width: 60%;
 }
 
 th, td {
@@ -61,25 +60,6 @@ form #btn-submit
 
 /* Responsividade para telas menores que 768px */
 @media (max-width: 768px) {
-    .titulo {
-        font-size: 35px;
-        margin-bottom: 30px;
-    }
-
-    .container {
-        width: 90%;
-    }
-
-    .input-container input[type="text"] {
-        max-width: 100%;
-        font-size: 14px;
-        padding: 10px 12px;
-    }
-
-    .input-container button {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
 
     table {
         width: 100%;
@@ -97,41 +77,19 @@ form #btn-submit
 
 /* Responsividade para telas menores que 430px */
 @media (max-width: 430px) {
-    .titulo {
-        font-size: 28px;
-        margin-bottom: 20px;
-    }
-
-    .container {
-        width: 95%;
-    }
-
-    .input-container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .input-container input[type="text"] {
-        max-width: 100%;
-        font-size: 12px;
-        padding: 8px 10px;
-    }
-
-    .input-container button {
-        font-size: 12px;
-        padding: 8px 12px;
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
     table {
         width: 100%;
         margin: 10px 0;
     }
 
     th, td {
-        padding: 8px;
-        font-size: 14px;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    h1 
+    {
+        font-size: 1.5em;
     }
 
     .img-logo {
