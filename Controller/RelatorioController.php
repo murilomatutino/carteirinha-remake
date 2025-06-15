@@ -19,5 +19,10 @@
         {
             return $this->model->getNameById($id);
         }
+
+        public function getCardapioByInterval($inicio, $fim)
+        {
+            return $this->model->getCardapioByInterval($inicio, $fim);
+        }
     }
 ?>
