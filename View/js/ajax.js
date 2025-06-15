@@ -410,3 +410,26 @@ export async function getDiaByID(data) {
         return null;  
     }
 }
+
+export async function getRelatorioDiario(data) {
+    try {
+        const response = await fetch('get-relatorio-diario.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar relatorio, status: ${response.status}`);
+        }
+    
+        const relatorio = await response.json();
+        
+        return relatorio;
+    } catch (error) {
+        console.error('Erro ao relatorio diario:', error);
+        return null;  
+    }
+}
