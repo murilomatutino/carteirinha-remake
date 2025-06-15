@@ -1,4 +1,4 @@
-import {getRelatorioDiario} from './ajax.js';
+import {getRelatorioDiario, getNameById} from './ajax.js';
 
 const btn = document.querySelector('#btn-submit');
 
@@ -8,8 +8,6 @@ btn.addEventListener("click", function(e){
     if (date.length !== 0)
     {
         document.getElementsByTagName("table")[0].style.display = "inline-block"; // deixando tabela visivel
-
-        console.log(date);
 
         const data = {
             date: date
@@ -21,14 +19,20 @@ btn.addEventListener("click", function(e){
             container_filtro.style.display = "none"; // tira o filtro
 
             const tablebody = document.getElementById("tablebody");
-            console.log(tablebody);
             result.forEach(element => {
                 const linha = document.createElement('tr');
                 const coluna = document.createElement('td');
                 const coluna2 = document.createElement('td');
-                console.log(result[0]);
-                coluna.innerHTML = result[0]["id_usuario"] ;
-                coluna2.innerHTML = result[0]["hora_solicitacao"];
+                
+                const dados = {
+                    id: element["id_usuario"]
+                };
+
+                getNameById(dados).then(retorno =>{
+                    coluna.innerHTML = retorno["nome"];
+                });
+
+                coluna2.innerHTML = element["hora_solicitacao"];
 
                 linha.appendChild(coluna);
                 linha.appendChild(coluna2);

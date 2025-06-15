@@ -367,5 +367,12 @@ class Model {
         $query = "SELECT id_usuario, hora_solicitacao FROM refeicao where id_status_ref=1 AND data_solicitacao = ?";
         return $this->executeQuery($query, [$day], 's');
     }
+
+    public function getNameById($id)
+    {
+        $query = "SELECT nome FROM usuario WHERE id = ?";
+        $result = $this->executeQuery($query, [$id], 'i');
+        return empty($result)? [] : $result[0];
+    }
 }
 ?>

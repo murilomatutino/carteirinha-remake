@@ -14,5 +14,10 @@
         {
             return $this->model->getRelatorioFaltas($day);
         }
+
+        public function getNameById($id)
+        {
+            return $this->model->getNameById($id);
+        }
     }
 ?>

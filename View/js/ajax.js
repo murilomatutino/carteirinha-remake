@@ -433,3 +433,26 @@ export async function getRelatorioDiario(data) {
         return null;  
     }
 }
+
+export async function getNameById(data) {
+    try {
+        const response = await fetch('getNameById.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar nome pelo id, status: ${response.status}`);
+        }
+    
+        const nome = await response.json();
+        
+        return nome;
+    } catch (error) {
+        console.error('Erro ao buscar nome pelo id:', error);
+        return null;  
+    }
+}
