@@ -14,7 +14,7 @@ class Model {
         $stmt = $this->conn->prepare($query);
         if ($params) { $stmt->bind_param($types, ...$params); }
 
-        if (!$stmt->execute()) { return false; }
+        if (!$stmt->execute()) { return false;}
 
         if (stripos(trim($query), "SELECT") === 0) {
             $result = $stmt->get_result();
@@ -286,6 +286,18 @@ class Model {
         return $this->executeQuery($query);
     }
 
+    public function getUserFeedback($idUser) {
+        $query = "SELECT * FROM feedback where id_usuario = ?";
+        return $this->executeQuery($query, [$idUser], "i");
+    }
+
+    // retona o dia da semana associado a um determinado cardapio
+    public function getDiaByID($idCardapio)
+    {
+        $query = "SELECT dia FROM cardapio where id = ? AND ind_excluido = 0";
+        return $this->executeQuery($query, [$idCardapio], "i");
+    }
+
     // buscar mais detalhes do feedback
     public function getFeedbackDetails($idCardapio) {
         $query = "SELECT 
@@ -348,6 +360,21 @@ class Model {
         return in_array(false, $sucess, true) ? false : true;
     }
 
+    // verificar se o  usuario agendou o almoço
+    public function hasAgendamento($dia, $idUser)
+    {
+        $query = "SELECT COUNT(*) AS total FROM refeicao WHERE id_usuario = ? AND data_solicitacao = ? AND id_status_ref = 1";
+        $resultado = $this->executeQuery($query, [$idUser, $dia], 'is');
+        return $resultado[0]["total"] > 0;
+    }
+
+    // muda o status da refeição para confirmada
+    public function retirarAlmoco($dia, $idUser)
+    {
+        $query = "UPDATE refeicao SET id_status_ref = 3 WHERE id_usuario = ? AND data_solicitacao = ? AND id_status_ref = 1";
+        return $this->executeQuery($query, [$idUser, $dia], 'is');
+      
+    // Busca por refeições confirmadas e totaliza os registros por data
     public function getRefeicoesConfirmadas() {
         $sql = "
         SELECT 

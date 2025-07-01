@@ -1,0 +1,55 @@
+body > main 
+{
+    min-height: 500px;
+}
+
+main 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* popup */
+main .popup-alerta
+{
+    width: 500px;
+    height: 300px;
+
+    color: white;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.3em;
+    padding: 30px;
+
+    box-shadow: 11px 13px 25px rgba(0, 0, 0, 0.4);
+}
+
+main .nao-agendado
+{
+    background-color: rgba(255, 0, 0, 0.781);
+}
+
+main .agendado
+{
+    background-color: green;
+}
+
+main .aviso
+{
+    background-color: #d4d402;
+}
+
+main #popup-alerta-close
+{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    cursor: pointer;
+}

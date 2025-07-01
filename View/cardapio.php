@@ -1,6 +1,8 @@
 <?php session_start();
     require_once "../Controller/CardapioController.php";
     date_default_timezone_set('America/Sao_Paulo');
+    $data_atual = "2025-06-10";//date("Y-m-d");
+    $hora_atual = date("H:i:s");
 
     $cardapio = (new CardapioController())->getCardapio();
     $horario_padrao = (new CardapioController())->getTime();
@@ -59,6 +61,7 @@
                                 <th>Proteína</th>
                                 <th>Acompanhamento</th>
                                 <th>Sobremesa</th>
+                                <th> Avaliação </th>
                             </tr>
                         </thead>
                         <tbody>";
@@ -78,6 +81,25 @@
                         echo "<td>" . formatarFlags($dia['proteina']) . "</td>";
                         echo "<td>" . formatarFlags($dia['principal']) . "</td>";
                         echo "<td>" . formatarFlags($dia['sobremesa']) . "</td>";
+
+                        $data_refeicao = date("Y-m-d", strtotime($dia['data_hora_cardapio'])); 
+                        if ($data_refeicao < $data_atual || ($data_atual === $data_refeicao && $hora_atual > "12:00:00"))
+                        {
+                            echo 
+                            "<td> 
+                                <ul class='avaliacao'>
+                                    <li class='star-icon' data-avliacao='5'></li>
+                                    <li class='star-icon' data-avliacao='4'></li>
+                                    <li class='star-icon' data-avliacao='3'></li>
+                                    <li class='star-icon' data-avliacao='2'></li>
+                                    <li class='star-icon' data-avliacao='1'></li>
+                                </ul>
+                            </td>";
+                        }
+                        else
+                        {
+                            echo "<td></td>";
+                        }
                         echo "</tr>";
                     }
 
@@ -214,11 +236,11 @@
 
         if (response.type === 'agendamento') {
             let feedback = false;
-            if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!'; feedback = true }
+            if (response.data === 'success') { titulo = 'Refeição Agendada'; desc = 'Sua refeição foi agendada com sucesso!';}
             else if (response.data === 'emailerror'){titulo = 'Erro ao enviar e-mail'; desc = 'Sua refeição foi agendada com sucesso, mas houve um erro ao enviar um e-mail de confirmação.';}
             else { titulo = 'Problema na solicitação'; desc = 'Houve algum problema solicitação de agendamento do seu almoço. Por favor tente novamente mais tarde!'; }
 
-            showNotification(titulo, desc, feedback);
+            showNotification(titulo, desc);
         } else if (response.type === 'solicitacao') {
             if (response.data === 'success') { titulo = 'Sucesso na Solicitação', desc = 'Sua solicitação de transferência de reserva foi enviada ao estudante!' }
             else { titulo = 'Problema na solicitação'; desc = 'Houve um problema com a solicitação, que tal tentar novamente mais tarde?'}
@@ -251,5 +273,6 @@
         }
     </script>
     <?php require_once "footer.php"; ?>
+    <script src="js/cardapio.js" type='module'></script>
 </body>
 </html>

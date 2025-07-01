@@ -40,7 +40,7 @@ export function backContent(popup2) {
     popup2.classList.add('open');
 }
 
-export function showNotification(titulo, descricao, feedback, confirm) {
+export function showNotification(titulo, descricao, confirm) {
     const overlay = document.querySelector('.overlay'); 
     const popup = document.querySelector('.popup');
     const title = document.querySelector('.title');
@@ -58,87 +58,7 @@ export function showNotification(titulo, descricao, feedback, confirm) {
 
     document.body.classList.add('active');
 
-    // Lógica para o tipo de popup
-    if (feedback) {
-        // Popup de feedback
-        const section = document.createElement('section');
-        section.classList.add('feedback');
-        section.innerHTML = feedbackTemplate.innerHTML;
-
-        popup.querySelector('main').appendChild(section);
-
-        const stars = section.querySelectorAll('.estrela');
-        const sendBtn = document.querySelector('#feedback-btn');
-        let selectedRating = 0;
-
-        sendBtn.addEventListener('click', () => {
-            if (selectedRating !== 0) {
-                ajax.getUserId().then(idUser => {
-                    if (!idUser) {
-                        console.error('ID do usuário não encontrado');
-                        return;
-                    }
-
-                    getCardapioId()
-                    .then(idCardapio => {
-                        console.log('ID do cardápio:', idCardapio);
-                        let dados = {
-                            operacao: 'enviarFeedback',
-                            nota: selectedRating,
-                            idUser: idUser,
-                            idCardapio: idCardapio,
-                        };
-                        
-                        ajax.enviarFeedback(dados).then(result => {
-                            window.location.href = 'cardapio.php?feedback=success';
-                        }).catch(error => {
-                            window.location.href = 'cardapio.php?feedback=error';
-                        });
-                    })  
-                    .catch(error => {
-                        console.error('Erro ao buscar o cardápio:', error);
-                        return { status: false, nota: none };
-                    });
-                });
-
-                return { status: true, nota: selectedRating };
-            }
-
-        });
-
-        closeBtn.classList.add('close-btn-2');
-        closeBtn.textContent = 'Fechar';
-
-        // Lógica de avaliação com estrelas
-        if (stars.length > 0) {
-            stars.forEach((star, index) => {
-                star.addEventListener('mouseover', () => {
-                    updateStars(index + 1);
-                });
-
-                star.addEventListener('click', () => {
-                    selectedRating = index + 1;
-                    updateStars(selectedRating);
-                    sendFeedback(selectedRating);
-                });
-
-                star.addEventListener('mouseout', () => {
-                    updateStars(selectedRating);
-                });
-            });
-
-            function updateStars(rating) {
-                stars.forEach((star, index) => {
-                    star.classList.toggle('filled', index < rating);
-                });
-            }
-
-            function sendFeedback(rating) {
-                console.log(`Feedback enviado com a avaliação: ${rating}`);
-            }
-        }
-
-    } else if (confirm) {
+    if (confirm) {
         if (document.querySelector('.confirm-btn')) {
             document.querySelector('.confirm-btn').remove();
         }

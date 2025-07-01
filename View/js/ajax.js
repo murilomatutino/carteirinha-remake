@@ -13,13 +13,22 @@ export async function getUserId() {
     }
 }
 
-export async function getCardapioId() {
+export async function getCardapioId(data) {
     try {
-        const response = await fetch('idCardapio.php');
+        const response = await fetch('idCardapio.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
         if (!response.ok) {
             throw new Error(`Erro ao buscar o ID, status: ${response.status}`);
         }
+    
         const idCardapio = await response.text();
+        
         return idCardapio;
     } catch (error) {
         console.error('Erro ao pegar ID:', error);
@@ -355,3 +364,49 @@ export async function enviarCardapio(data) {
     }
 }
 
+export async function getDadosFeedback(data) {
+    try {
+        const response = await fetch('dadosFeedbacks.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar feedcbaks, status: ${response.status}`);
+        }
+    
+        const cardapio = await response.json();
+        
+        return cardapio;
+    } catch (error) {
+        console.error('Erro ao pegar feedbacks:', error);
+        return null;  
+    }
+}
+
+// pega o dia da semana de um cardapio com determinado id
+export async function getDiaByID(data) {
+    try {
+        const response = await fetch('diaCardapio.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar dia do cardapio, status: ${response.status}`);
+        }
+    
+        const dia = await response.json();
+        
+        return dia;
+    } catch (error) {
+        console.error('Erro ao pegardia do cardapio:', error);
+        return null;  
+    }
+}

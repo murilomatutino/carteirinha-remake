@@ -66,6 +66,8 @@ th, td {
     word-wrap: break-word;
 }
 
+td{height: 77px;}
+
 th {
     background-color: #388E3C;
     color: #fff;
@@ -137,6 +139,47 @@ h1 {
     background-color: #d32f2f;
 }
 
+/* -------- Avaliação por estrelas -----------*/
+
+:root
+{
+    --amarelo: #ffe500;
+}
+
+.avaliacao
+{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.star-icon
+{
+    list-style: none;
+    cursor: pointer;
+    color: var(--amarelo);
+}
+
+.star-icon::before
+{
+    content: "\2606"; /* estrela vazia */
+    font-size: 2em;
+}
+
+.star-icon:hover::before,
+.star-icon:hover ~ .star-icon::before
+{
+    content: "\2605"; /* estrela preenchida */
+}
+
+.star-icon.ativo::before,
+.star-icon.ativo ~ .star-icon::before
+{
+    content: "\2605"; /* estrela preenchida */
+}
+
+
+
 /* Responsividade para dispositivos com largura de até 768px */
 @media (max-width: 768px) {
     .titulo {
@@ -172,6 +215,12 @@ h1 {
         padding: 8px 16px;
         font-size: 14px;
     }
+
+    .star-icon::before
+    {
+
+        font-size: 1.7em;
+    }
 }
 
 /* Responsividade para dispositivos com largura de até 430px */
@@ -189,8 +238,8 @@ h1 {
     }
 
     table {
-        font-size: 12px;
-        width: 80%;
+        font-size: 10px;
+        width: 93%;
     }
 
     .button {
@@ -208,6 +257,18 @@ h1 {
     .button-imprimir {
         padding: 6px 12px;
         font-size: 12px;
+    }
+
+    .star-icon::before
+    {
+
+        font-size: 1.7em;
+    }
+
+    th, td
+    {
+        padding-left: 3px;
+        padding-right: 3px;
     }
 }
 
