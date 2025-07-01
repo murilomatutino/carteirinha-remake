@@ -360,6 +360,19 @@ class Model {
         return in_array(false, $sucess, true) ? false : true;
     }
 
+    // retorna as refeições que ainda estão agendadas em um determinado dia
+    public function getRelatorioFaltas($day)
+    {
+        $query = "SELECT id_usuario, hora_solicitacao FROM refeicao where id_status_ref=1 AND data_solicitacao = ?";
+        return $this->executeQuery($query, [$day], 's');
+    }
+
+    public function getNameById($id)
+    {
+        $query = "SELECT nome FROM usuario WHERE id = ?";
+        $result = $this->executeQuery($query, [$id], 'i');
+        return empty($result)? [] : $result[0];
+      
     // verificar se o  usuario agendou o almoço
     public function hasAgendamento($dia, $idUser)
     {
