@@ -456,3 +456,26 @@ export async function getNameById(data) {
         return null;  
     }
 }
+
+export async function getCardapioByInterval(data) {
+    try {
+        const response = await fetch('getCardapioByInterval.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data).toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar cardapio pela dia, status: ${response.status}`);
+        }
+    
+        const cardapio = await response.json();
+        
+        return cardapio;
+    } catch (error) {
+        console.error('Erro ao buscar cardapio pelo dia:', error);
+        return null;  
+    }
+}

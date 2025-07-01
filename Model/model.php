@@ -407,5 +407,13 @@ class Model {
         $result = $this->executeQuery($sql);
         return $result ? $result : [];
     }
+
+    // pega o cardapio em um determinado intervalo
+    public function getCardapioByInterval($inicio, $fim)
+    {
+        $query = "SELECT date(data_hora_cardapio) as data_cardapio, dia, proteina, principal, sobremesa FROM cardapio WHERE  date(data_hora_cardapio) BETWEEN ? AND ?";
+        $result = $this->executeQuery($query, [$inicio, $fim], 'ss');
+        return empty($result)? [] : $result;
+    }
 }
 ?>
