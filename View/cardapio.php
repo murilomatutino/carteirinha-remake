@@ -1,8 +1,8 @@
 <?php session_start();
     require_once "../Controller/CardapioController.php";
     date_default_timezone_set('America/Sao_Paulo');
-    $data_atual = date("Y-m-d");
-    $hora_atual = date("H:m:i");
+    $data_atual = "2025-06-10";//date("Y-m-d");
+    $hora_atual = date("H:i:s");
 
     $cardapio = (new CardapioController())->getCardapio();
     $horario_padrao = (new CardapioController())->getTime();
@@ -95,6 +95,10 @@
                                     <li class='star-icon' data-avliacao='1'></li>
                                 </ul>
                             </td>";
+                        }
+                        else
+                        {
+                            echo "<td></td>";
                         }
                         echo "</tr>";
                     }

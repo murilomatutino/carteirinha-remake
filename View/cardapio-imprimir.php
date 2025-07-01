@@ -8,6 +8,30 @@
 
     $cardapio = (new CardapioController())->getCardapio();
 
+    function formatarFlags($item_json) {
+        if (empty($item_json)) {
+            return '-';
+        }
+        
+        $item = json_decode($item_json, true);
+        if (!$item || !isset($item['nome'])) {
+            return '-';
+        }
+
+        $sufixo = '';
+        $gluten = $item['gluten'] ?? 0;
+        $lactose = $item['lactose'] ?? 0;
+
+        if ($gluten && $lactose) {
+            $sufixo = ' +++';
+        } elseif ($gluten) {
+            $sufixo = ' +';
+        } elseif ($lactose) {
+            $sufixo = ' ++';
+        }
+
+        return $item['nome'] . $sufixo;
+    }
 
     $arquivo ='
     <!DOCTYPE html>
@@ -35,7 +59,7 @@
     
     foreach ($cardapio as $dia) {
         if ($dia['principal'] != 'Sem refeição') {
-            $data = date("d/m", strtotime($dia['data_refeicao'])); 
+            $data = date("d/m", strtotime($dia['data_hora_cardapio'])); 
             $newDia = ucfirst($dia['dia']) . "-feira";
             
             $arquivo .= "<tr>";
@@ -44,9 +68,10 @@
             $arquivo .= "<tr>";
             $arquivo .=  "<td>{$dia['dia']}</td>";
         }
-        $arquivo .= "<td>{$dia['principal']}</td>";
-        $arquivo .= "<td>{$dia['acompanhamento']}</td>";
-        $arquivo .= "<td>{$dia['sobremesa']}</td>";
+        $arquivo .= "<td>" . formatarFlags($dia['proteina']) . "</td>";
+        $arquivo .= "<td>" . formatarFlags($dia['principal']) . "</td>";
+        $arquivo .= "<td>" . formatarFlags($dia['sobremesa']) . "</td>";
+        
         $arquivo .= "</tr>";
     }
 
