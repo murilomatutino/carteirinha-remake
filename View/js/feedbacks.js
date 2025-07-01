@@ -10,8 +10,11 @@ if (window.location.pathname.endsWith("feedbacks.php")) {
                 totalNota: 0,
                 quantidade: 0,
                 notas: { nota5: 0, nota4: 0, nota3: 0, nota2: 0, nota1: 0 },
-                data: item.data_hora
+                data: item.data_hora,
+                registros: item.registros || 0 
             };
+        } else {
+            agrupado[id].registros = Math.max(agrupado[id].registros, item.registros || 0);
         }
 
         agrupado[id].totalNota += nota;
@@ -22,9 +25,11 @@ if (window.location.pathname.endsWith("feedbacks.php")) {
     const cores = ['#2d7754', '#3f9969', '#84c181', '#c6e48b', '#fbd44c'];
     const container = document.getElementById('graficos-container');
 
-    Object.entries(agrupado).forEach(([id, dados], index) => {
+    Object.entries(agrupado).forEach(([id, dados]) => {
         const chartId = `chart${id}`;
         const total = dados.quantidade;
+        const confirmados = dados.registros;
+
         const porcentagens = [
             ((dados.notas.nota5 / total) * 100).toFixed(0),
             ((dados.notas.nota4 / total) * 100).toFixed(0),
@@ -52,7 +57,7 @@ if (window.location.pathname.endsWith("feedbacks.php")) {
                 ${legendaHTML}
                 <div>
                     <div class="details">
-                        <p>Alunos que almoçaram: 160</p>
+                        <p>Alunos que almoçaram: ${confirmados}</p>
                         <p>Alunos que deram feedback: ${total}</p>
                         <button class="more-details" id="menu${id}">Mais detalhes</button>
                     </div>
@@ -117,20 +122,20 @@ if (window.location.pathname.endsWith("feedbacks.php")) {
 } else {
     const tbody = document.querySelector("#relatorio-table tbody");
     feedbacksAll.forEach(item => {
-    const tr = document.createElement("tr");
+        const tr = document.createElement("tr");
 
-    tr.innerHTML = `
-        <td data-label="Nome">${item.nome.charAt(0).toUpperCase() + item.nome.slice(1).toLowerCase()}</td>
-        <td data-label="Matrícula">${item.matricula}</td>
-        <td data-label="Data">${formatarData(item.data_refeicao)}</td>
-        <td data-label="Dia">${item.dia}</td>
-        <td data-label="Principal">${item.principal}</td>
-        <td data-label="Acompanhamento">${item.acompanhamento}</td>
-        <td data-label="Sobremesa">${item.sobremesa || '-'}</td>
-        <td data-label="Nota">${item.id_nota}</td>
-    `;
+        tr.innerHTML = `
+            <td data-label="Nome">${item.nome.charAt(0).toUpperCase() + item.nome.slice(1).toLowerCase()}</td>
+            <td data-label="Matrícula">${item.matricula}</td>
+            <td data-label="Data">${formatarData(item.data_refeicao)}</td>
+            <td data-label="Dia">${item.dia}</td>
+            <td data-label="Principal">${item.principal}</td>
+            <td data-label="Acompanhamento">${item.acompanhamento}</td>
+            <td data-label="Sobremesa">${item.sobremesa || '-'}</td>
+            <td data-label="Nota">${item.id_nota}</td>
+        `;
 
-    tbody.appendChild(tr);
+        tbody.appendChild(tr);
     });
 
     function formatarData(dataISO) {

@@ -1,7 +1,23 @@
 <?php
     require_once '../Controller/FeedbackController.php';
-    $controller = new FeedbackController();
-    $feedbacks = $controller->getFeedback();
+    require_once '../Controller/CardapioController.php';
+
+    $feedbackController = new FeedbackController();
+    $cardapioController = new CardapioController();
+
+    $feedbacks = $feedbackController->getFeedback();
+    $refeicoes_confirmadas = $cardapioController->getRefeicoesConfirmadas();
+
+    $mapaRegistros = [];
+    foreach ($refeicoes_confirmadas as $refeicao) {
+        $mapaRegistros[$refeicao['data']] = $refeicao['registros'];
+    }
+
+    foreach ($feedbacks as &$feedback) {
+        $dataFormatada = date('Y-m-d', strtotime($feedback['data_hora']));
+        $feedback['registros'] = $mapaRegistros[$dataFormatada] ?? 0;
+    }
+    unset($feedback);
 ?>
 
 <!DOCTYPE html>
