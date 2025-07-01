@@ -24,7 +24,6 @@ class Model {
         return $stmt->affected_rows;
     }
 
-
     private function executeUpdate($query, $params = [], $types = "") {
         $stmt = $this->conn->prepare($query);
         if ($params) {
@@ -347,6 +346,26 @@ class Model {
 
         // print_r($success); exit();
         return in_array(false, $sucess, true) ? false : true;
+    }
+
+    public function getRefeicoesConfirmadas() {
+        $sql = "
+        SELECT 
+            DATE(data_solicitacao) AS data,
+            COUNT(*) AS registros
+        FROM 
+            refeicao
+        WHERE 
+            motivo_cancelamento IS NULL
+            AND id_status_ref = 1
+        GROUP BY 
+            DATE(data_solicitacao)
+        ORDER BY 
+            data
+        ";
+
+        $result = $this->executeQuery($sql);
+        return $result ? $result : [];
     }
 }
 ?>

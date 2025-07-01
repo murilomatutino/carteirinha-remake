@@ -170,5 +170,11 @@
         public function salvarCardapioSemana($dados) {
             return $this->model->salvarCardapioSemana($dados);
         }
+
+        // Buscar refeições confirmadas
+        public function getRefeicoesConfirmadas() {
+            $refeicoes = $this->model->getRefeicoesConfirmadas();
+            return $refeicoes;
+        }
     }
 ?>
