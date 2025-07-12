@@ -372,7 +372,7 @@ class Model {
         $query = "SELECT nome FROM usuario WHERE id = ?";
         $result = $this->executeQuery($query, [$id], 'i');
         return empty($result)? [] : $result[0];
-      
+    }
     // verificar se o  usuario agendou o almoço
     public function hasAgendamento($dia, $idUser)
     {
@@ -386,7 +386,7 @@ class Model {
     {
         $query = "UPDATE refeicao SET id_status_ref = 3 WHERE id_usuario = ? AND data_solicitacao = ? AND id_status_ref = 1";
         return $this->executeQuery($query, [$idUser, $dia], 'is');
-      
+    }
     // Busca por refeições confirmadas e totaliza os registros por data
     public function getRefeicoesConfirmadas() {
         $sql = "

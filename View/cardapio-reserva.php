@@ -7,11 +7,11 @@
     $diaNumero = 0;
 
     switch ($diaDaSemana) {
-        case "Monday": $diaDaSemana = "segunda"; break;
-        case "Tuesday": $diaDaSemana = "terca"; $diaNumero = 1; break;
-        case "Wednesday": $diaDaSemana = "quarta"; $diaNumero = 2; break;
-        case "Thursday": $diaDaSemana = "quinta"; $diaNumero = 3; break;
-        case "Friday": $diaDaSemana = "sexta"; $diaNumero = 4; break;
+        case "Monday": $diaDaSemana = "Segunda"; break;
+        case "Tuesday": $diaDaSemana = "Terça"; $diaNumero = 1; break;
+        case "Wednesday": $diaDaSemana = "Quarta"; $diaNumero = 2; break;
+        case "Thursday": $diaDaSemana = "Quinta"; $diaNumero = 3; break;
+        case "Friday": $diaDaSemana = "Sexta"; $diaNumero = 4; break;
         default: break;
     }
 
@@ -57,7 +57,7 @@
     <div class="container">
         <h1>RESERVAR ALMOÇO</h1>
         <form action="../Controller/refactor.php" method="POST">
-            <input type="text" name="diaDaSemana" id="diaDaSemana" value="<?= htmlspecialchars($diaDaSemana) ?>" hidden>
+            <input type="text" name="diaDaSemana" id="diaDaSemana" value="<?= htmlspecialchars($diaDaSemana) . '-feira'?>" hidden>
             <input type="text" name="idUser" id="idUser" value="<?= htmlspecialchars($_SESSION['id']) ?>" hidden>
 
             <table>
