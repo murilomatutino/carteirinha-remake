@@ -1,0 +1,18 @@
+
+main h1 
+{
+    text-align: center;
+}
+
+main
+{
+    padding-top: 30px;
+
+    height: 500px;
+}
+
+main form p 
+{
+    margin-bottom: 10px;
+    margin-top: 20px;
+}

@@ -31,6 +31,9 @@ draggable='false'> </a> </header>
         <div class="button-adm"><button class='cardapio' id='cardapio'>
             <img src="assets/card-cardapio.png" alt="">
         </button></div>
+        <div class="button-adm"><button class='usuarios' id='usuarios'>
+            <img src="assets/card-diario.png" alt="">
+        </button></div>
     </div>
 
     <?php include 'footer.php'; ?>
@@ -70,6 +73,8 @@ draggable='false'> </a> </header>
                         window.location.href = 'feedbacks.php'; break;
                     case 'cardapio':
                         window.location.href = 'cardapio.php'; break;
+                    case 'usuarios':
+                        window.location.href = 'adicionarUsuarios.php'; break;
                 }
             })
         });

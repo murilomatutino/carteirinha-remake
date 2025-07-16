@@ -22,7 +22,7 @@
     transform: translateY(-10px);
 }
 
-.horario, .historico, .diario, .feedback, .cardapio {
+.horario, .historico, .diario, .feedback, .cardapio, .usuarios{
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -31,7 +31,7 @@
     cursor: pointer;
 }
 
-.horario img, .historico img, .diario img, .feedback img, .cardapio img {
+.horario img, .historico img, .diario img, .feedback img, .cardapio img, .usuarios img{
     width: 100%;
 }
 
