@@ -27,8 +27,9 @@
                 if (count($refeicaoData) > 0) {
                     $cardapioId = $refeicaoData['id_cardapio'];
                     $cardapioData = (new CardapioController)->getCardapioById($cardapioId);
+                    $data_refeicao = date("d/m", strtotime($cardapioData['data_refeicao']));
 
-                    $dia = ucfirst($cardapioData['dia']) . "-feira";
+                    $dia = ucfirst($cardapioData['dia']);
 
                     echo "
                         <thead>
@@ -43,9 +44,9 @@
                         <tbody>";
                     
                     echo "<tr>";
-                    echo "<td>{$dia}({$cardapioData['data_refeicao']})</td>";
+                    echo "<td>{$dia}({$data_refeicao})</td>";
+                    echo "<td>{$cardapioData['proteina']}</td>";
                     echo "<td>{$cardapioData['principal']}</td>";
-                    echo "<td>{$cardapioData['acompanhamento']}</td>";
                     echo "<td>{$cardapioData['sobremesa']}</td>";
                     echo "<td>";
 

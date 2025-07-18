@@ -165,7 +165,7 @@ class Model {
     }
     
     public function getCardapioById($idCardapio) {
-        $query = "SELECT data_hora_cardapio, dia, proteina, principal, sobremesa FROM cardapio WHERE id = ?";
+        $query = "SELECT data_hora_cardapio, data_refeicao,dia, proteina, principal, sobremesa FROM cardapio WHERE id = ?";
         $result = $this->executeQuery($query, [$idCardapio], 'i');
 
         return $result[0];
