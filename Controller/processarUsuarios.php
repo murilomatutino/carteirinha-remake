@@ -37,11 +37,13 @@ if (isset($_POST['submit'])) {
                 $nome = $sheetData[$i][2];
                 $nome = $conn->real_escape_string($nome);
 
-                $email = $sheetData[$i][3];
-                $email = $conn->real_escape_string($email);
+                //$email = $sheetData[$i][3];
+                //$email = $conn->real_escape_string($email);
+                $email = "Sem e-mail cadastrado";
 
-                $telefone = $sheetData[$i][4];
-                $telefone = $conn->real_escape_string($telefone);
+                //$telefone = $sheetData[$i][4];
+                //$telefone = $conn->real_escape_string($telefone);
+                $telefone = "Sem telefone cadastrado";
 
                 $sql = sprintf("INSERT INTO usuario (nome, email, matricula, senha, categoria, telefone) VALUES('%s', '%s', '%d', md5('%s'), 'estudante', '%s')", $nome, $email, $matricula, $matricula . "ifba", $telefone);
                 $conn->query($sql);

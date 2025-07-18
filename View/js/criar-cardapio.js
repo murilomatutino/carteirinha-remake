@@ -11,6 +11,20 @@ const mapTipos = {
     sobremesa: 'Sobremesa'
 };
 
+function formatarDataISO(data) {
+  const ano = data.getFullYear();
+  const mes = String(data.getMonth() + 1).padStart(2, '0'); // mês começa em 0
+  const dia = String(data.getDate()).padStart(2, '0');
+  return `${ano}-${mes}-${dia}`;
+}
+
+function obterDiaSemana(value){
+    console.log(value)
+    const result = new Date(value + "T12:00:00")
+    const day = result.getDay()
+    return day
+}
+
 tags.forEach(item => {
     const tipoNormalizado = mapTipos[item.tipo.toLowerCase()];
     if (!tipoNormalizado) {
@@ -245,7 +259,18 @@ document.querySelector('#save').onclick = () => {
 
     linhas.forEach((linha, i) => {
         const celulas = linha.querySelectorAll('td');
-        const registro = { dia: diasSemana[i] };
+        const registro = { dia: diasSemana[i]};
+        const novaData = new Date()
+
+        const dia_atual = obterDiaSemana(formatarDataISO(novaData))
+
+        const quantidade = (i+1)  - dia_atual
+
+        novaData.setDate(novaData.getDate() + quantidade)
+
+        const data_formatada = formatarDataISO(novaData)
+
+        registro["data_refeicao"] = data_formatada
 
         colunas.forEach((coluna, j) => {
             const valor = celulas[j].querySelector('input').value.trim();
@@ -258,6 +283,8 @@ document.querySelector('#save').onclick = () => {
 
         cardapio.push(registro);
     });
+
+    console.log(cardapio)
 
     if (camposFaltando) {
         alert('Preencha todos os campos obrigatórios: Proteína e Principal para todos os dias.');

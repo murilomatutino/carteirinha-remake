@@ -69,7 +69,7 @@
                     
                     foreach ($cardapio as $dia) {
                         if ($dia['principal'] != 'Sem refeição') {
-                            $data = date("d/m", strtotime($dia['data_hora_cardapio'])); 
+                            $data = date("d/m", strtotime($dia['data_refeicao'])); 
                             $newDia = ucfirst($dia['dia']);
                             echo "<tr>";
                             echo "<td>$newDia ($data)</td>";
@@ -82,7 +82,7 @@
                         echo "<td>" . formatarFlags($dia['principal']) . "</td>";
                         echo "<td>" . formatarFlags($dia['sobremesa']) . "</td>";
 
-                        $data_refeicao = date("Y-m-d", strtotime($dia['data_hora_cardapio'])); 
+                        $data_refeicao = date("Y-m-d", strtotime($dia['data_refeicao'])); 
                         if ($data_refeicao < $data_atual || ($data_atual === $data_refeicao && $hora_atual > "12:00:00"))
                         {
                             echo 

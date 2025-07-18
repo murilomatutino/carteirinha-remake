@@ -79,8 +79,9 @@ class Model {
     public function getCardapio() {
         $query = "
             SELECT 
-                dia, 
-                data_hora_cardapio, 
+                dia,
+                data_refeicao,
+                data_hora_cardapio,
                 (SELECT JSON_OBJECT('nome', t.nome, 'gluten', t.gluten, 'lactose', t.lactose)
                 FROM tags_cardapio t 
                 WHERE t.nome = c.proteina LIMIT 1) AS proteina,
@@ -335,9 +336,9 @@ class Model {
     }
 
     // Cadastra cardápio no BD
-    public function criarCardapio($dia, $proteina, $principal, $sobremesa) {
-        $query = "INSERT INTO cardapio (dia, proteina, principal, sobremesa) VALUES (?, ?, ?, ?)";
-        return $this->executeQuery($query, [$dia, $proteina, $principal, $sobremesa], 'ssss');
+    public function criarCardapio($dia, $data_refeicao, $proteina, $principal, $sobremesa) {
+        $query = "INSERT INTO cardapio (dia, data_refeicao, proteina, principal, sobremesa) VALUES (?, ?, ?, ?, ?)";
+        return $this->executeQuery($query, [$dia, $data_refeicao,$proteina, $principal, $sobremesa], 'sssss');
     }
 
     public function salvarCardapioSemana($dados) {
@@ -348,11 +349,12 @@ class Model {
 
         foreach ($dados as $linha) {
             $dia = $linha['dia'] ?? '';
+            $data_refeicao = $linha['data_refeicao'] ?? '';
             $proteina = $linha['Proteína'] ?? '';
             $principal = $linha['Principal'] ?? '';
             $sobremesa = $linha['Sobremesa'] ?? '-';
             
-            $sucesso = $this->criarCardapio($dia, $proteina, $principal, $sobremesa);
+            $sucesso = $this->criarCardapio($dia, $data_refeicao, $proteina, $principal, $sobremesa);
             $sucess[] = $sucesso;
         }
 
