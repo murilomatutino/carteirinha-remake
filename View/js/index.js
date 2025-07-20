@@ -59,7 +59,7 @@ if (page === 'cardapio.php') {
 
     if (btnEditar) btnEditar.addEventListener('click', () => window.location.href = 'cardapio-alterar.php');
 
-    if (btnExcluir) btnExcluir.addEventListener('click', () => animations.showNotification('Alerta', 'Tem certeza que deseja excluir o cardápio?', false, true));
+    if (btnExcluir) btnExcluir.addEventListener('click', () => animations.showNotification('Alerta', 'Tem certeza que deseja excluir o cardápio?',true));
 
     if (btnImprimir) btnImprimir.addEventListener('click', () => window.location.href = 'cardapio-imprimir.php' );
     
