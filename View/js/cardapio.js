@@ -73,8 +73,10 @@ function f(i)
 })
 }
 
-f(0);f(1);f(2);f(3);f(4);
-
+if (starBoxs.length !==0)
+{
+    f(0);f(1);f(2);f(3);f(4);
+}
 
 /* ------- pega as avaliações já feitas ------- */
 
