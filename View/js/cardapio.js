@@ -73,9 +73,18 @@ function f(i)
 })
 }
 
-if (starBoxs.length !==0)
+switch (starBoxs.length)
 {
-    f(0);f(1);f(2);f(3);f(4);
+    case 1:
+    f(0); break;
+    case 2:
+    f(0);f(1); break;
+    case 3:
+    f(0);f(1);f(2); break;
+    case 4:
+    f(0);f(1);f(2);f(3); break;
+    case 5:
+    f(0);f(1);f(2);f(3);f(4); break;
 }
 
 /* ------- pega as avaliações já feitas ------- */
