@@ -18,19 +18,28 @@
             return '-';
         }
 
-        $sufixo = '';
+        //$sufixo = '';
+        $tag = '';
         $gluten = $item['gluten'] ?? 0;
         $lactose = $item['lactose'] ?? 0;
 
         if ($gluten && $lactose) {
-            $sufixo = ' +++';
+            //$sufixo = ' +++';
+            $tag = "<div class='gluten-lactose'>". $item['nome'] . "</div>";
         } elseif ($gluten) {
-            $sufixo = ' +';
+            //$sufixo = ' +';
+            $tag = "<div class='gluten'>". $item['nome'] . "</div>";
         } elseif ($lactose) {
-            $sufixo = ' ++';
+            //$sufixo = ' ++';
+            $tag = "<div class='lactose'>". $item['nome'] . "</div>";
+        }
+        else
+        {
+            $tag = $item['nome'];
         }
 
-        return $item['nome'] . $sufixo;
+        //return $item['nome'] . $sufixo;
+        return $tag;
     }
 ?>
 
@@ -142,6 +151,14 @@
             <a href='cardapio-reserva.php'><button class='button'>Quero almoçar!</button></a>
         </template>
 
+        <template id="cardapio-template">
+            <div class='mensagens-restricoes'>
+                <div class='gluten'>Glúten</div>
+                <div class='lactose'>Lactose</div>
+                <div class='gluten-lactose'>Lactose e glúten</div>
+            </div>
+        </template>
+
         <div class="overlay" id="overlay"></div>
         <div class="popup" id="popup">
             <h2>Reserva Confirmada!</h2>
@@ -191,19 +208,30 @@
         const horario_padrao = <?= json_encode($horario_padrao) ?>;
         const hasRefeicao = <?= json_encode($hasRefeicao) ?>;
 
-        if (category === 'adm' && cardapio.length > 0 && cardapio[0] !== '') { showTemplate(2); } 
+        if (category === 'adm' && cardapio.length > 0 && cardapio[0] !== '') { showTemplate(6); showTemplate(2);} 
         else if (category === 'adm' && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(0); } 
         else if (category !== "adm" && (cardapio.length === 0 || cardapio[0]['dia'] === '')) { showTemplate(1); } 
         else {
-            if (current_time >= horario_padrao || (diaDaSemana === 0 || diaDaSemana === 6)) { showTemplate(4); } 
-            else { !hasRefeicao ? showTemplate(5) : showTemplate(3); }
+            if (current_time >= horario_padrao || (diaDaSemana === 0 || diaDaSemana === 6)) { showTemplate(6); showTemplate(4); } 
+            else { 
+                if(!hasRefeicao)
+                {
+                    showTemplate(6);
+                    showTemplate(5);
+                }
+                else
+                {
+                    showTemplate(6);
+                    showTemplate(3);
+                }
+            }
         }
 
         function showTemplate(template) {
             const templates = document.querySelectorAll('#cardapio-template');
             const div = document.querySelector('.info');
             if (templates[template]) {
-                div.innerHTML = templates[template].innerHTML;
+                div.innerHTML = div.innerHTML + templates[template].innerHTML;
             } else {
                 console.log("Template não encontrado!");
             }
