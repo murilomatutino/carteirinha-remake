@@ -1,5 +1,5 @@
 <?php
-    require_once('../Model/model.php');
+    require_once( __DIR__ . '/../Model/classes/PerfilModel.php');
 
     class PerfilController
     {
@@ -7,7 +7,7 @@
 
         public function __construct()
         {
-            $this->model = new Model();
+            $this->model = new PerfilModel();
         }
 
         public function setPassword($newPassword, $idUser)
