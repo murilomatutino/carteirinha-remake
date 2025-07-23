@@ -1,10 +1,10 @@
 <?php
-    require_once __DIR__ . '/../Model/model.php';
+    require_once( __DIR__ . '/../Model/classes/FeedbackModel.php');
 
     class FeedbackController {
         public $model;
         public function __construct() {
-            $this->model = new Model();
+            $this->model = new FeedbackModel();
         }
 
         public function sendFeedback($nota, $idUser, $idCardapio) {
