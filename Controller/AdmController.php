@@ -1,10 +1,10 @@
 <?php
-    require_once __DIR__ . '/../Model/model.php';
+    require_once( __DIR__ . '/../Model/classes/AdmModel.php');
 
     class AdmController {
         public $model;
         public function __construct() {
-            $this->model = new Model();
+            $this->model = new AdmModel();
         }
 
         public function editarHorario($hora) {
