@@ -1,5 +1,5 @@
 <?php
-    require_once('../Model/model.php');
+    require_once( __DIR__ . '/../Model/classes/AgendamentoModel.php');
 
     class AgendamentoController
     {
@@ -7,7 +7,7 @@
 
         public function __construct()
         {
-            $this->model = new Model();
+            $this->model = new AgendamentoModel();
         }
 
         public function hasAgendamento($dia, $idUser)
