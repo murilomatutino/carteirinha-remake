@@ -5,13 +5,13 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require_once __DIR__ . '/../Model/model.php';
+    require_once( __DIR__ . '/../Model/classes/CardapioModel.php');
 
     class CardapioController {
         public $model;
 
         public function __construct() {
-            $this->model = new Model();
+            $this->model = new CardapioModel();
         }
 
         public function getCardapio() {
