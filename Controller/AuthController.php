@@ -1,9 +1,9 @@
 <?php session_start();
     // error_reporting(E_ALL);
     // ini_set('display_errors', 1);
-    require_once 'HomeController.php';
-    require_once 'config.php';
-    require_once __DIR__ . '/../Model/model.php';
+    require_once('HomeController.php');
+    require_once('config.php');
+    require_once( __DIR__ . '/../Model/classes/AuthModel.php');
 ?>
 
 <?php
@@ -13,7 +13,7 @@
 
         public function __construct() {
             $this->homeController = new HomeController();
-            $this->model = new Model();
+            $this->model = new AuthModel();
         }
 
         // Verificar se o usuário está logado
