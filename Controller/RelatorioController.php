@@ -1,5 +1,5 @@
 <?php
-    require_once('../Model/model.php');
+    require_once( __DIR__ . '/../Model/classes/RelatorioModel.php');
 
     class RelatorioController
     {
@@ -7,7 +7,7 @@
 
         public function __construct()
         {
-            $this->model = new Model();
+            $this->model = new RelatorioModel();
         }
 
         public function getRelatorioFaltas($day)
