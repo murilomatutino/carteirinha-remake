@@ -215,7 +215,7 @@ export async function getNotification(dados) {
 
 export async function readNotification(dados) {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/readNotification.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
