@@ -267,7 +267,7 @@ export async function enviarFormulario(data) {
 
 export async function enviarFeedback(data) {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/enviarFeedback.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
