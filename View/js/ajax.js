@@ -38,7 +38,7 @@ export async function getCardapioId(data) {
 
 export async function cancelarReserva(data) {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/cancelarReserva.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
