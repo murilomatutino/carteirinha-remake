@@ -14,7 +14,7 @@
     <div class="container">
         <h1>EDITAR HORÁRIO</h1>
 
-        <form method="POST" action="../Controller/refactor.php">
+        <form method="POST" action="../Controller/middle/editarHorario.php">
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora" required>
             <br>
