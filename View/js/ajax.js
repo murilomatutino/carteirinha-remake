@@ -343,7 +343,7 @@ export async function enviarNovaTag(data) {
 // Função para enviar um novo cardápio para o BD
 export async function enviarCardapio(data) {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/criarCardapio.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
