@@ -294,7 +294,7 @@ export async function enviarFeedback(data) {
 
 export async function excluirCardapio() {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/excluirCardapio.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
