@@ -1,11 +1,11 @@
 <?php
-    require_once __DIR__ . '/../Model/model.php';
+    require_once( __DIR__ . '/../Model/classes/NotificationModel.php');
 
     // Ação para exibir a página principal
     class NotificationController {
         public $model;
         public function __construct() {
-            $this->model = new Model();
+            $this->model = new NotificationModel();
         }
 
         public function hasNotification($userId) {
@@ -74,7 +74,6 @@
                 return ['status'=> false, 'message'=> 'Erro ao ler notificação'];
             }
         }
-
 
         public function createNotificacao($idRemetente, $idAlvo, $assunto, $mensagem, $tipo)
         {
