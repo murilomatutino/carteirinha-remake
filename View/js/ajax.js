@@ -97,7 +97,7 @@ export async function transferirReserva(dados) {
 
 export async function enviarNotificacao(dados) { // notificação de transsferencia
 
-    const response = await fetch('../Controller/refactor.php', {
+    const response = await fetch('../Controller/middle/enviarNotificacaoTransferencia.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
