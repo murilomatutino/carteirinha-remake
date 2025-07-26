@@ -185,7 +185,7 @@ export async function cancelTransferencia(dados) {
 
 export async function getNotification(dados) {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/getNotification.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
