@@ -1,6 +1,6 @@
 <?php
 
-class Model1
+class Model
 {
     public $conn;
 

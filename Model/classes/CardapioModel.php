@@ -1,7 +1,7 @@
 <?php
-    require_once(__DIR__ . "/Model1.php");
+    require_once(__DIR__ . "/Model.php");
 
-    class CardapioModel extends Model1
+    class CardapioModel extends Model
     {
         public function getCardapio() {
         $query = "

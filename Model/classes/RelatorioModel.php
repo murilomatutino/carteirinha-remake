@@ -1,7 +1,7 @@
 <?php
-    require_once(__DIR__ . "/Model1.php");
+    require_once(__DIR__ . "/Model.php");
 
-    class RelatorioModel extends Model1
+    class RelatorioModel extends Model
     {
         // retorna as refeições que ainda estão agendadas em um determinado dia
         public function getRelatorioFaltas($day)

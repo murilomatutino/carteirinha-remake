@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . "/Model1.php");
+require_once(__DIR__ . "/Model.php");
 
-class FeedbackModel extends Model1
+class FeedbackModel extends Model
 {
     public function adicionarFeedback($nota, $idUser, $idCardapio) {
         $query = "INSERT INTO feedback (id_usuario, id_cardapio, id_nota) VALUES (?, ?, ?)";

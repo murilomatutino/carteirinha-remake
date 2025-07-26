@@ -1,7 +1,7 @@
 <?php
-    require_once(__DIR__ . "/Model1.php");
+    require_once(__DIR__ . "/Model.php");
 
-    class AuthModel extends Model1
+    class AuthModel extends Model
     {
         public function getDataByMatricula($matricula) {
             $query = "SELECT id, nome, email, matricula, categoria, telefone FROM usuario WHERE matricula = ?";

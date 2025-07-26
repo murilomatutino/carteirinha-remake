@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . "/Model1.php");
+require_once(__DIR__ . "/Model.php");
 
-class AgendamentoModel extends Model1
+class AgendamentoModel extends Model
 {
     // verificar se o  usuario agendou o almoço
     public function hasAgendamento($dia, $idUser)

@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . "/Model1.php");
+require_once(__DIR__ . "/Model.php");
 
-class AdmModel extends Model1
+class AdmModel extends Model
 {
     // Mudança de horário padrão
     public function editarHorario($hora) {

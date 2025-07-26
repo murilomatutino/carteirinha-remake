@@ -1,7 +1,7 @@
 <?php
-    require_once(__DIR__ . "/Model1.php");
+    require_once(__DIR__ . "/Model.php");
 
-    class NotificationModel extends Model1
+    class NotificationModel extends Model
     {
         public function hasNotification(int $userId) {
             $query = "SELECT COUNT(*) as total FROM notificacao WHERE id_destinatario = ?";

@@ -1,7 +1,7 @@
 <?php
-    require_once(__DIR__ . "/Model1.php");
+    require_once(__DIR__ . "/Model.php");
     
-    class PerfilModel extends Model1
+    class PerfilModel extends Model
     {
         public function setPassword($newPassword, $idUser)
         {
