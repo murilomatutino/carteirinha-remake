@@ -318,7 +318,7 @@ export async function excluirCardapio() {
 // Função para enviar uma nova tag para o BD
 export async function enviarNovaTag(data) {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/criarTag.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
