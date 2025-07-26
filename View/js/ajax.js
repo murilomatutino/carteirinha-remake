@@ -154,7 +154,7 @@ export async function acceptTransferencia(dados) {
 
 export async function cancelTransferencia(dados) {
     //try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/cancelarTransferencia.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
