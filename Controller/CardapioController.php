@@ -71,18 +71,6 @@
             }
         }
         
-        public function transferirReserva($idUser, $motivo, $matriculaAlvo) {
-            if ($this->model->isActive($idUser)) {
-                if ($this->model->transferirReserva($idUser, $motivo, $matriculaAlvo)['success']) {
-                    return ['status' => true, 'message' => 'Reserva transferida com sucesso'];
-                } else {
-                    return ['status' => false, 'message' => 'Falha ao transferir reserva'];
-                }
-            } else {
-                return ['status' => false, 'message' => 'Reserva não encontrada!'];
-            }
-        }
-
         public function excluirCardapio() {
             if ($this->model->excluirCardapio()) {
                 return ['status' => true, 'message' => 'Cardápio excluído com sucesso!'];
@@ -90,7 +78,6 @@
                 return ['status' => false, 'message' => 'Falha ao excluir cardápio!'];
             }
         }
-
 
         public function sendEmailLunch($recipientEmail, $recipientName)
         {

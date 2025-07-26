@@ -92,10 +92,6 @@
             return $this->executeUpdate($query, [$motivo, $idUser], "si");
         }
 
-        public function transferirReserva($idUser, $motivo, $matriculaAlvo)
-        {
-            
-        }
 
         public function excluirCardapio() {
             $query = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";

@@ -24,6 +24,7 @@
             date_default_timezone_set('America/Sao_Paulo');
             $horaAtual = date("H:i:s");
 
+            // horario limite para fazer uma trasnferencia de almoço
             if ($horaAtual > "12:00:00") {
                 $lista = [];
 

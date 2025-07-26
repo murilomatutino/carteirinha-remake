@@ -15,16 +15,6 @@
         }
     }
 
-    function transferirReserva($idUser, $motivo, $matriculaAlvo) {
-        $response = (new CardapioController)->transferirReserva($idUser, $motivo, $matriculaAlvo);
-
-        if ($response['status']) {
-            echo json_encode(['status' => 'success', 'message' => $response['message']]); exit();
-        } else {
-            echo json_encode(['status' => 'error', 'message' => $response['message']]); exit();
-        }
-    }
-
     function aceitarRefeicao($idDestinatario) {
         $response = (new NotificationController)->aceitarRefeicao($idDestinatario);
         if ($response['status']) {
