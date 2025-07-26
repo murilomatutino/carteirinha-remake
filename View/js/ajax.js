@@ -123,7 +123,7 @@ export async function enviarNotificacao(dados) { // notificação de transsferen
 
 export async function acceptTransferencia(dados) {
     //try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/aceitarRefeicao.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
