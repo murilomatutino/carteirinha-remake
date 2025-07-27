@@ -1,5 +1,5 @@
 <?php
-require_once "../Controller/CardapioController.php";
+require_once "../CardapioController.php";
 
 $dia = $_POST['diaSemana'];
 

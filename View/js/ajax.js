@@ -1,7 +1,7 @@
 // ajax agendados
 export async function getUserId() {
     try {
-        const response = await fetch('idUser.php');
+        const response = await fetch('../Controller/middle/idUser.php');
         if (!response.ok) {
             throw new Error(`Erro ao buscar o ID, status: ${response.status}`);
         }
@@ -15,7 +15,7 @@ export async function getUserId() {
 
 export async function getCardapioId(data) {
     try {
-        const response = await fetch('idCardapio.php',{
+        const response = await fetch('../Controller/middle/idCardapio.php',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -366,7 +366,7 @@ export async function enviarCardapio(data) {
 
 export async function getDadosFeedback(data) {
     try {
-        const response = await fetch('dadosFeedbacks.php',{
+        const response = await fetch('../Controller/middle/dadosFeedbacks.php',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -390,7 +390,7 @@ export async function getDadosFeedback(data) {
 // pega o dia da semana de um cardapio com determinado id
 export async function getDiaByID(data) {
     try {
-        const response = await fetch('diaCardapio.php',{
+        const response = await fetch('../Controller/middle/diaCardapio.php',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -413,7 +413,7 @@ export async function getDiaByID(data) {
 
 export async function getRelatorioDiario(data) {
     try {
-        const response = await fetch('get-relatorio-diario.php',{
+        const response = await fetch('../Controller/middle/get-relatorio-diario.php',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -436,7 +436,7 @@ export async function getRelatorioDiario(data) {
 
 export async function getNameById(data) {
     try {
-        const response = await fetch('getNameById.php',{
+        const response = await fetch('../Controller/middle/getNameById.php',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -459,7 +459,7 @@ export async function getNameById(data) {
 
 export async function getCardapioByInterval(data) {
     try {
-        const response = await fetch('getCardapioByInterval.php',{
+        const response = await fetch('../Controller/middle/getCardapioByInterval.php',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

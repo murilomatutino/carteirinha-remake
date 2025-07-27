@@ -1,5 +1,5 @@
 <?php
-    require_once('CardapioController.php');
+    require_once('../CardapioController.php');
 
     $idJustificativa = 0;
     $justificativa = $_POST['justificativa'];

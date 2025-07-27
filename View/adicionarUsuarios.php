@@ -12,7 +12,7 @@
     </header>
 	<main>
 		<h1>Adicionar usuarios através de planilha</h1>
-		<form method="POST" action="../Controller/processarUsuarios.php" enctype="multipart/form-data">
+		<form method="POST" action="../Controller/middle/processarUsuarios.php" enctype="multipart/form-data">
 			<div>
 				<label>Arquivo</label>
 				<input type="file" name="file" id="file">

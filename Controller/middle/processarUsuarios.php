@@ -1,9 +1,9 @@
 <?php
-require_once '../Model/connect.php';
+require_once '../../Model/connect.php';
 
 // importando código para manipular as planilhas
-require_once '../libs/planilhas/vendor/autoload.php';
-require_once 'config.php';
+require_once '../../libs/planilhas/vendor/autoload.php';
+require_once '../config.php';
   
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
