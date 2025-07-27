@@ -75,13 +75,13 @@ export function showNotification(titulo, descricao, confirm) {
             popup.classList.remove('active');
             popup.classList.add('close');
             setTimeout(() => {
-                if (ajax.excluirCardapio()) {
+                ajax.excluirCardapio().then(response =>{
                     window.location.href = 'cardapio.php?delete=success';
                     popup.classList.remove('close');
                     document.body.classList.remove('active');
-                } else {
+                }).catch(errot =>{
                     window.location.href = 'cardapio.php?delete=error';
-                }
+                })
             }, 500);
         });
     }
