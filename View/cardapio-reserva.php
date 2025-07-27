@@ -56,7 +56,7 @@
 
     <div class="container">
         <h1>RESERVAR ALMOÇO</h1>
-        <form action="../Controller/refactor.php" method="POST">
+        <form action="../Controller/middle/agendarAlmoco.php" method="POST">
             <input type="text" name="diaDaSemana" id="diaDaSemana" value="<?= htmlspecialchars($diaDaSemana) . '-feira'?>" hidden>
             <input type="text" name="idUser" id="idUser" value="<?= htmlspecialchars($_SESSION['id']) ?>" hidden>
 
