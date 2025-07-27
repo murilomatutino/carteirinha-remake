@@ -240,7 +240,7 @@ export async function readNotification(dados) {
 
 export async function enviarFormulario(data) {
     try {
-        const response = await fetch('../Controller/refactor.php', {
+        const response = await fetch('../Controller/middle/login.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
