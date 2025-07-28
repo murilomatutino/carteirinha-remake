@@ -24,11 +24,11 @@
         
         // enviar um e-mail de confirmação
         $return = (new CardapioController())->sendEmailLunch($_SESSION['email'], $_SESSION['name']);
-        if (!$return){header("Location: ../View/cardapio.php?agendamento=emailerror"); exit();}
+        if (!$return){header("Location: ../../View/cardapio.php?agendamento=emailerror"); exit();}
 
-        header("Location: ../View/cardapio.php?agendamento=success"); exit();
+        header("Location: ../../View/cardapio.php?agendamento=success"); exit();
     } else {
-        header("Location: ../View/cardapio.php?agendamento=error"); exit();
+        header("Location: ../../View/cardapio.php?agendamento=error"); exit();
     }
 
 ?>

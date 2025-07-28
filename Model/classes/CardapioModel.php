@@ -160,5 +160,11 @@
             $result = $this->executeQuery($sql);
             return $result ? $result : [];
         }
+
+        // Cadastra cardápio no BD
+        public function criarCardapio($dia, $data_refeicao, $proteina, $principal, $sobremesa) {
+            $query = "INSERT INTO cardapio (dia, data_refeicao, proteina, principal, sobremesa) VALUES (?, ?, ?, ?, ?)";
+            return $this->executeQuery($query, [$dia, $data_refeicao,$proteina, $principal, $sobremesa], 'sssss');
+        }
     }
 ?>
