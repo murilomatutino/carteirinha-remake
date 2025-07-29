@@ -19,7 +19,7 @@
         <form method="post">
 
             <label for="message">
-                Este é um espaço dedicado para você, aluno(a), relatar bugs no site, fazer sugestões 
+                Este é um espaço dedicado para você, estudante, relatar bugs no site, fazer sugestões 
                 para melhorá-lo, expressar suas reclamações sobre o funcionamento do
                  site ou do cardápio oferecido. Sinta-se à vontade para compartilhar 
                  aquilo que você não gosta ou tem uma sugestão para melhorar.

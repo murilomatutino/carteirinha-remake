@@ -10,6 +10,7 @@
             <img class="img-logo" src='assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'>
         </a>
     </header>
+	<?php require_once "navbar.php"; ?>
 	<main>
 		<h1>Adicionar usuarios através de planilha</h1>
 		<form method="POST" action="../Controller/middle/processarUsuarios.php" enctype="multipart/form-data">

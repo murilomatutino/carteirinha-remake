@@ -25,7 +25,7 @@
             $horaAtual = date("H:i:s");
 
             // horario limite para fazer uma trasnferencia de almoço
-            if ($horaAtual > "12:00:00") {
+            /*if ($horaAtual > "12:00:00") {
                 $lista = [];
 
                 foreach ($notificacoes as $n)
@@ -35,7 +35,7 @@
                 }
 
                 return $lista;
-            }
+            }*/
 
             return $notificacoes;
         }

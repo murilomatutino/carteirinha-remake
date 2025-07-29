@@ -58,18 +58,18 @@
             $diaDaSemana = date('l', strtotime($dataSolicitacao));
 
             switch ($diaDaSemana) {
-                case "Monday": $diaDaSemana = "segunda"; break;
-                case "Tuesday": $diaDaSemana = "terca";  break;
-                case "Wednesday": $diaDaSemana = "quarta";  break;
-                case "Thursday": $diaDaSemana = "quinta";  break;
-                case "Friday": $diaDaSemana = "sexta"; break;
+                case "Monday": $diaDaSemana = "Segunda-feira"; break;
+                case "Tuesday": $diaDaSemana = "Terça-feira";  break;
+                case "Wednesday": $diaDaSemana = "Quarta-feira";  break;
+                case "Thursday": $diaDaSemana = "Quinta-feira";  break;
+                case "Friday": $diaDaSemana = "Sexta-feira"; break;
                 default: break;
             }
 
             $idCardapio = $this->getIdCardapio($diaDaSemana);
             if ($idCardapio === null){return false;}
 
-            $result = $this->setMeal($idDestinatario, $idCardapio, 1, 5, $dataSolicitacao, $horaSolicitacao, NULL);
+            $result = $this->setMeal($idDestinatario, $idCardapio, 1, NULL, $dataSolicitacao, $horaSolicitacao, NULL);
             if ($result === false){return false;}
 
             $result = $this->changeNotificacaoType($idRemetente);
@@ -105,6 +105,17 @@
             $query = "INSERT INTO notificacao (id_remetente, id_destinatario, data, hora, assunto, mensagem, lida, transferencia) VALUES (?, ?, ?, ?, ?, ?, DEFAULT, ?)";
 
             return $this->executeUpdate($query, [$idRemetente, $idAlvo, $data, $hora, $assunto, $mensagem, $tipo], 'iissssi');
+        }
+
+        public function getIdCardapio($diaDaSemana) {
+            $query = "SELECT id FROM cardapio WHERE dia = ? AND ind_excluido = 0";
+            $result = $this->executeQuery($query, [$diaDaSemana], "s");
+            return $result ? $result[0]['id'] : null;
+        }
+
+        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa) {
+            $query = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, hora_solicitacao, outra_justificativa) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            return $this->executeUpdate($query, [$idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa], "iiiisss");
         }
 
     }
