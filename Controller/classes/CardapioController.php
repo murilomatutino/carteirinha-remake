@@ -5,7 +5,7 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require_once( __DIR__ . '/../Model/classes/CardapioModel.php');
+    require_once( __DIR__ . '/../../Model/classes/CardapioModel.php');
 
     class CardapioController {
         public $model;
@@ -81,7 +81,7 @@
 
         public function sendEmailLunch($recipientEmail, $recipientName)
         {
-            require_once( __DIR__ . "/../libs/phpmailer/vendor/autoload.php");
+            require_once( __DIR__ . "/../../libs/phpmailer/vendor/autoload.php");
 
             date_default_timezone_set('America/Sao_Paulo');
             $currente_day = date('d/m/Y');

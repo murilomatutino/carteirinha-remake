@@ -1,5 +1,5 @@
 <?php
-    require_once('../CardapioController.php');
+    require_once(__DIR__ . '/../classes/CardapioController.php');
 
     $response = (new CardapioController())->criarTag($_POST['nome'], $_POST['tipo'], $_POST['gluten'], $_POST['lactose']);
 

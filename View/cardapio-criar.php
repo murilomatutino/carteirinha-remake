@@ -1,5 +1,5 @@
 <?php 
-    require_once '../Controller/CardapioController.php';
+    require_once(__DIR__ . '/../Controller/classes/CardapioController.php');
     $tags = (new CardapioController())->getTagsCardapio();
 
     foreach ($tags as &$tag) {

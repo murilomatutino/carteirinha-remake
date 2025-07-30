@@ -44,7 +44,7 @@
         <?php
         if(!empty($_POST))
         {
-            include("../Controller/ContatoController.php");
+            include(__DIR__ . "/../Controller/classes/ContatoController.php");
 
             $return = (new ContatoController())->sendEmailContact($_POST['message'], $_POST['opcao']);
 

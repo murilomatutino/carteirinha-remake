@@ -1,5 +1,5 @@
 <?php
-    require_once( __DIR__ . '/../Model/classes/FeedbackModel.php');
+    require_once( __DIR__ . '/../../Model/classes/FeedbackModel.php');
 
     class FeedbackController {
         public $model;

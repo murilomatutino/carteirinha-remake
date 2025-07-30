@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once('../CardapioController.php');
+    require_once(__DIR__ . '/../classes/CardapioController.php');
 
     $idJustificativa = 0;
     $justificativa = $_POST['justificativa'];

@@ -1,5 +1,5 @@
 <?php
-    require_once( __DIR__ . '/../Model/classes/AdmModel.php');
+    require_once( __DIR__ . '/../../Model/classes/AdmModel.php');
 
     class AdmController {
         public $model;

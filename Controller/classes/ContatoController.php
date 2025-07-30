@@ -3,7 +3,7 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require_once 'config.php';
+    require_once('../config.php');
 
     // Ação para exibir a página principal
     class ContatoController {
@@ -11,7 +11,7 @@
 
         public function sendEmailContact($content, $title)
         {
-            require_once("../libs/phpmailer/vendor/autoload.php");
+            require_once(__DIR__ . "/../../libs/phpmailer/vendor/autoload.php");
 
             if (session_status() === PHP_SESSION_NONE) { session_start(); }
 

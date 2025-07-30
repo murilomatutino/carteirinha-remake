@@ -1,5 +1,5 @@
 <?php
-    require_once('../AdmController.php');
+    require_once(__DIR__ . '/../classes/AdmController.php');
 
     $response = (new AdmController)->editarHorario($_POST['hora']);
     $encodedMessage = base64_encode($response['message']);

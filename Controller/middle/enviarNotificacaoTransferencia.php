@@ -1,6 +1,6 @@
 <?php
-    require_once('../CardapioController.php');
-    require_once('../NotificationController.php');
+    require_once(__DIR__ . '/../classes/CardapioController.php');
+    require_once(__DIR__ . '/../classes/NotificationController.php');
     
     $idAlvo = (new CardapioController())->getIdByMatricula($_POST['matriculaAlvo']);
 

@@ -1,5 +1,5 @@
 <?php
-    require_once('../CardapioController.php');
+    require_once(__DIR__ . '/../classes/CardapioController.php');
 
     $cardapio = json_decode($_POST['cardapio'], true);
     $response = (new CardapioController())->salvarCardapioSemana($cardapio);

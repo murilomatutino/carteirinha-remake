@@ -32,7 +32,7 @@
             }
             else
             {
-                include '../Controller/AgendamentoController.php';
+                include '../Controller/classes/AgendamentoController.php';
                 $controller = new AgendamentoController();
                 
                 $situacao = $controller->hasAgendamento($dataAtual, $_SESSION["id"]);

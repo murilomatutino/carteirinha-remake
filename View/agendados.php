@@ -20,7 +20,7 @@
 
         <table>
             <?php 
-                require_once "../Controller/CardapioController.php";
+                require_once(__DIR__ . "/../Controller/classes/CardapioController.php");
                 $idUser = $_SESSION['id'];
                 $refeicaoData = (new CardapioController)->getRefeicaoById($idUser);
 

@@ -1,5 +1,5 @@
 <?php session_start();
-    require_once "../Controller/CardapioController.php";
+    require_once(__DIR__ . "/../Controller/classes/CardapioController.php");
     date_default_timezone_set('America/Sao_Paulo');
     $data_atual = date("Y-m-d");
     $hora_atual = date("H:i:s");

@@ -10,7 +10,7 @@
 
     $id = isset($_GET['id']) ? xorDecrypt($_GET['id'], 'ledsifba') : '';
 
-    require_once '../Controller/FeedbackController.php';
+    require_once(__DIR__ . '/../Controller/classes/FeedbackController.php');
     $data = (new FeedbackController())->getFeedbackDetails($id);
 ?>
 

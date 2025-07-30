@@ -1,5 +1,5 @@
 <?php
-    require_once('../FeedbackController.php');
+    require_once(__DIR__ . '/../classes/FeedbackController.php');
 
     $response = (new FeedbackController)->sendFeedback($_POST['nota'], $_POST['idUser'], $_POST['idCardapio']);
 

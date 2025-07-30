@@ -2,8 +2,8 @@
     session_start();
     if ($_SESSION['category'] !== 'adm'){exit();} // evita imprimir o cardapio caso o usuario não seja um adm
 
-    require_once '../libs/dompdf/vendor/autoload.php';
-    require_once "../Controller/CardapioController.php";
+    require_once('../libs/dompdf/vendor/autoload.php');
+    require_once(__DIR__ . "/../Controller/classes/CardapioController.php");
 
 
     $cardapio = (new CardapioController())->getCardapio();

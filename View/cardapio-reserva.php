@@ -1,5 +1,5 @@
 <?php session_start();
-    require '../Controller/CardapioController.php';
+    require(__DIR__ . '/../Controller/classes/CardapioController.php');
     $cardapioRaw = (new CardapioController)->getCardapio();
     date_default_timezone_set('America/Sao_Paulo');
     $dataAtual = date('Y-m-d');

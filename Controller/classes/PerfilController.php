@@ -1,5 +1,5 @@
 <?php
-    require_once( __DIR__ . '/../Model/classes/PerfilModel.php');
+    require_once( __DIR__ . '/../../Model/classes/PerfilModel.php');
 
     class PerfilController
     {

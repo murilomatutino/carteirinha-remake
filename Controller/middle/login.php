@@ -1,5 +1,5 @@
 <?php
-    require_once('../AuthController.php');
+    require_once('../classes/AuthController.php');
 
     $response = (new AuthController())->login($_POST['matricula'], $_POST['password']);
 

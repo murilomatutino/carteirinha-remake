@@ -1,5 +1,5 @@
 <?php
-    require_once( __DIR__ . '/../Model/classes/NotificationModel.php');
+    require_once( __DIR__ . '/../../Model/classes/NotificationModel.php');
 
     // Ação para exibir a página principal
     class NotificationController {

@@ -1,5 +1,5 @@
 <?php
-    require_once('../NotificationController.php');
+    require_once(__DIR__ . '/../classes/NotificationController.php');
 
     $response = (new NotificationController)->aceitarRefeicao($_POST['idDestinatario']);
     if ($response['status']) {
