@@ -40,6 +40,10 @@
                 </tbody>
             </table>
         </div>
+
+        <div id="sem-agendamento">
+            <p>Não há almoços agendados para esse dia</p>
+        </div>
     </main>
 
     <?php include('footer.php')?>

@@ -7,8 +7,6 @@ btn.addEventListener("click", function(e){
 
     if (date.length !== 0)
     {
-        document.getElementsByTagName("table")[0].style.display = "table"; // deixando tabela visivel
-
         const data = {
             date: date
         };
@@ -19,26 +17,39 @@ btn.addEventListener("click", function(e){
             container_filtro.style.display = "none"; // tira o filtro
 
             const tablebody = document.getElementById("tablebody");
-            result.forEach(element => {
-                const linha = document.createElement('tr');
-                const coluna = document.createElement('td');
-                const coluna2 = document.createElement('td');
-                
-                const dados = {
-                    id: element["id_usuario"]
-                };
+            
+            if (result.length == 0)
+            {
+                document.getElementById("container-filtro").style.display = "none";
+                document.getElementsByTagName("table")[0].style.display = "none";
+                document.getElementById("sem-agendamento").style.display = "block";
+            }
+            else
+            {
+                document.getElementsByTagName("table")[0].style.display = "table"; // deixando tabela visivel
 
-                getNameById(dados).then(retorno =>{
-                    coluna.innerHTML = retorno["nome"];
-                });
+                result.forEach(element => {
+                    const linha = document.createElement('tr');
+                    const coluna = document.createElement('td');
+                    const coluna2 = document.createElement('td');
+                    
+                    const dados = {
+                        id: element["id_usuario"]
+                    };
 
-                coluna2.innerHTML = element["hora_solicitacao"];
+                    getNameById(dados).then(retorno =>{
+                        coluna.innerHTML = retorno["nome"];
+                    });
 
-                linha.appendChild(coluna);
-                linha.appendChild(coluna2);
+                    coluna2.innerHTML = element["hora_solicitacao"];
 
-                tablebody.appendChild(linha);
+                    linha.appendChild(coluna);
+                    linha.appendChild(coluna2);
+
+                    tablebody.appendChild(linha);
             });
+            }
+            
         });
                     
     }

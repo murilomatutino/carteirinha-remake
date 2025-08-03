@@ -58,6 +58,14 @@ form #btn-submit
     padding-right: 10px;
 }
 
+#sem-agendamento
+{
+    display: none;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.5em;
+}
+
 /* Responsividade para telas menores que 768px */
 @media (max-width: 768px) {
 
