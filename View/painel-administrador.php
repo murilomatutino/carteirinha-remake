@@ -32,7 +32,7 @@ draggable='false'> </a> </header>
             <img src="assets/card-cardapio.png" alt="">
         </button></div>
         <div class="button-adm"><button class='usuarios' id='usuarios'>
-            <img src="assets/card-diario.png" alt="">
+            <img src="assets/card-adc-usuario.png" alt="">
         </button></div>
     </div>
 
