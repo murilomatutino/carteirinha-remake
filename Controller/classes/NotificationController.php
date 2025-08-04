@@ -23,21 +23,22 @@
 
             date_default_timezone_set('America/Sao_Paulo');
             $horaAtual = date("H:i:s");
+            $diaAtual = date("Y-m-d");
 
             // horario limite para fazer uma trasnferencia de almoço
-            /*if ($horaAtual > "12:00:00") {
-                $lista = [];
+            $lista = [];
 
-                foreach ($notificacoes as $n)
+            foreach ($notificacoes as $n)
+            {
+                if (($n['transferencia'] == 1 && $horaAtual > "12:00:00" )|| ($n['transferencia'] == 1 && $n['data'] != $diaAtual))
                 {
                     $n['transferencia'] = 0;
-                    array_push($lista, $n);
                 }
 
-                return $lista;
-            }*/
+                array_push($lista, $n);
+            }
 
-            return $notificacoes;
+            return $lista;
         }
 
         private function getIdRemetente($idDestinatario): int {
