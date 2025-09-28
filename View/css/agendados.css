@@ -415,7 +415,7 @@ h1.texto {
         width: 100%;
         table-layout: fixed;
         overflow-x: hidden;
-        display: block;
+        /*display: block;*/
     }
 
     th, td {
@@ -426,6 +426,21 @@ h1.texto {
     .button {
         padding: 8px 12px;
         font-size: 14px;
+    }
+
+    tr{
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+    }
+    
+    th, td
+    {
+        
+       display: flex;
+       justify-content: center;
     }
 }
 
@@ -445,7 +460,7 @@ h1.texto {
         width: 100%;
         table-layout: fixed;
         overflow-x: hidden;
-        display: block;
+        /*display: block;*/
     }
 
     th, td {

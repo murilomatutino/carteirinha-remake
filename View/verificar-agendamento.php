@@ -22,12 +22,12 @@
             $dataAtual = date('Y-m-d');
             $diaSemana = date('l', strtotime($dataAtual));
 
-            if ($hora_atual < "12:00:00" || $hora_atual > "12:50:00" || $diaSemana == "Saturday" || $diaSemana == "Sunday")
+            if ($hora_atual < "11:00:00" || $hora_atual > "16:50:00" || $diaSemana == "Saturday" || $diaSemana == "Sunday")
             {
                 echo "
                     <div class='popup-alerta aviso'>
                         <div id='popup-alerta-close'>X</div>
-                        <p>Você só pode retirar o almoço entre 12:00:00 e 12:50:00</p>
+                        <p>Você só pode retirar o almoço entre 11:00:00 e 16:50:00</p>
                     </div>";
             }
             else

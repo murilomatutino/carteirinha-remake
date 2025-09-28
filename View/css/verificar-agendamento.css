@@ -53,3 +53,11 @@ main #popup-alerta-close
 
     cursor: pointer;
 }
+
+
+@media (max-width: 430px) {
+    main .popup-alerta
+    {
+        width: 300px;
+    }
+}

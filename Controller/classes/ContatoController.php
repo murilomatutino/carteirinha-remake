@@ -3,8 +3,6 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    require_once('../config.php');
-
     // Ação para exibir a página principal
     class ContatoController {
         

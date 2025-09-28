@@ -557,6 +557,11 @@ h1 {
   .right span {
     font-size: 12px;
   }
+
+  .popup.active,  .popup2
+  {
+    width: 85%;
+  }
 }
 
 /* Para o desktop - Ajustes de exibição */
